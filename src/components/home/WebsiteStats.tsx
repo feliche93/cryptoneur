@@ -13,6 +13,8 @@ import {
 
 export const revalidate = 60 * 60 * 1; // 24 hours
 
+import React from "react";
+
 export default async function WebsiteStats() {
   const [
     activeUsers30DaysData,

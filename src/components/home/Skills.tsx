@@ -81,9 +81,9 @@ export default function Skills() {
                 <div className="flow-root bg-base-100 rounded-lg px-6 pb-8 shadow h-full">
                   <div className="-mt-6">
                     <div>
-                      <span className="inline-flex items-center justify-center p-3 bg-secondary rounded-md shadow-lg">
+                      <span className="inline-flex items-center justify-center p-3 bg-primary rounded-md shadow-lg">
                         <skill.icon
-                          className="h-6 w-6 text-white"
+                          className="h-6 w-6 text-primary-content"
                           aria-hidden="true"
                         />
                       </span>
@@ -94,7 +94,7 @@ export default function Skills() {
                     <p className="mt-5 text-base text-base-content/80">
                       {skill.description}
                     </p>
-                    <p className="mt-5 text-base font-medium text-accent">
+                    <p className="mt-5 text-base font-medium text-primary">
                       {skill.skillDescription}
                     </p>
                     <div>
@@ -102,7 +102,7 @@ export default function Skills() {
                         {skill.skillList.join(", ")}
                       </p>
                     </div>
-                    <p className="mt-5 text-base font-medium text-accent">
+                    <p className="mt-5 text-base font-medium text-primary">
                       {skill.toolDescription}
                     </p>
                     <ul>
