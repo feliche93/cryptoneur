@@ -104,8 +104,6 @@ export default async function WebsiteStats() {
             </div>
           )}
         </div>
-
-        <div></div>
       </div>
     </div>
   );

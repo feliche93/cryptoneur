@@ -1,22 +1,17 @@
-"use client";
+import GitcoinGrant from "../../../../../components/gas-fees-calculator/GitcoinGrant";
+import Header from "../../../../../components/gas-fees-calculator/Header";
+import ShareButtons from "../../../../../components/gas-fees-calculator/ShareButtons";
+import Table from "../../../../../components/gas-fees-calculator/Table";
 
-import { useState } from "react";
-import CurrencyInput from "../../components/gas-fees-calculator/CurrencyInput";
-import FeesForm from "../../components/gas-fees-calculator/FeesForm";
-import FeesFormCard from "../../components/gas-fees-calculator/FeesFormCard";
-
-import GitcoinGrant from "../../components/gas-fees-calculator/GitcoinGrant";
-import Header from "../../components/gas-fees-calculator/Header";
-import ShareButtons from "../../components/gas-fees-calculator/ShareButtons";
-import UsedGasInput from "../../components/gas-fees-calculator/UsedGasInput";
-
-export default function GasFeesCalculator(props) {
-  const { activeCurrency, networkPrices, fiatRates, currencies } = props;
+export default function GasFeesCalculator({
+  params: { currency, usedGas, gasPrice },
+}) {
+  // { params: { slug } }
+  // const [currency, usedGas, gasPrice] = slug;
 
   // STATE
-  const [selectedCurrency, setSelectedCurrency] = useState("USD");
-  const [selectedGasPrice, setSelectedGasPrice] = useState("standard");
-  const [usedGas, setUsedGas] = useState(21000);
+  // const [selectedGasPrice, setSelectedGasPrice] = useState("standard");
+  // const [usedGas, setUsedGas] = useState(21000);
 
   return (
     <>
@@ -42,29 +37,29 @@ export default function GasFeesCalculator(props) {
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <Header />
         <GitcoinGrant />
-        <ShareButtons
+        {/* <ShareButtons
           size={38}
           title={"Found the calculator helpful? Share it with others:"}
           shareTitle={
             "Calculate gas fees in your local currency for different transaction types on Mainnet, Arbitrum, Binance Smart Chain, Avalanche, Polygon, Fantom and Harmony."
           }
           shareUrl={"https://www.cryptoneur.xyz/gas-fees-calculator"}
-        />
-        <FeesForm>
+        /> */}
+        {/* <FeesForm>
           <FeesFormCard
             title="Local Currency"
             description="Select the currency you want the fees to be displayed in."
           >
-            <CurrencyInput
-              selectedCurrency={selectedCurrency}
-              setSelectedCurrency={setSelectedCurrency}
-            />
+            <CurrencyInput />
           </FeesFormCard>
-          {/* <FeesFormCard
+          <FeesFormCard
             title="Used Gas"
             description="Every transaction uses gas. Pick a common transaction type or enter a custom amount of gas used."
           >
-            <UsedGasInput usedGas={usedGas} setUsedGas={setUsedGas} />
+            <UsedGasInput
+              usedGas={usedGas}
+              // setUsedGas={setUsedGas}
+            />
           </FeesFormCard>
           <FeesFormCard
             title="Gas Price"
@@ -72,17 +67,13 @@ export default function GasFeesCalculator(props) {
           >
             <GasPriceRadio
               selectedGasPrice={selectedGasPrice}
-              setSelectedGasPrice={setSelectedGasPrice}
+              // setSelectedGasPrice={setSelectedGasPrice}
             />
-          </FeesFormCard> */}
-        </FeesForm>
-        {/* <Table
-          selectedGasPrice={selectedGasPrice}
-          usedGas={usedGas}
-          selectedCurrency={selectedCurrency}
-          networkPrices={networkPrices}
-        />
-        <div className='mt-10 flex items-center  justify-center'>
+          </FeesFormCard>
+        </FeesForm> */}
+
+        <Table currency={currency} usedGas={usedGas} gasPrice={gasPrice} />
+        {/* <div className='mt-10 flex items-center  justify-center'>
           <a href='https://zapper.fi/' target='_blank'>
             <img
               className='object-center'

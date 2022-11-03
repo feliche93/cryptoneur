@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import gitcoinGrantImage from "../../../public/logos/gitcoinGrant.svg";
 
 type Props = {};
 
@@ -17,7 +16,7 @@ export default function GitcoinGrant() {
             Support this public good through a Gitcoin Grant:
           </p>
           <Image
-            src={gitcoinGrantImage}
+            src={"/logos/gitcoinGrant.svg"}
             height={100}
             width={300}
             alt="Gitcoin Grant"

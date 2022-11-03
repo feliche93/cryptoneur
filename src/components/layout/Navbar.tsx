@@ -6,6 +6,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { Bars4Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 // TODO: Check active links working
 const navigation = [
@@ -22,6 +23,8 @@ function classNames(...classes) {
 }
 
 function Navbar() {
+  const pathname = usePathname();
+
   return (
     <div className="relative bg-gray-100 sm:overflow-hidden">
       <div className="relative pt-6 pb-16 sm:pb-24 bg-gray-100">
@@ -61,9 +64,7 @@ function Navbar() {
                 {navigation.map((item) => (
                   <Link
                     className={classNames(
-                      item.href === window.location.pathname
-                        ? "text-primary"
-                        : "",
+                      item.href === pathname ? "text-primary" : "",
                       "font-medium text-base-content/80 hover:text-primary"
                     )}
                     key={item.name}
@@ -125,9 +126,7 @@ function Navbar() {
                   {navigation.map((item) => (
                     <Link
                       className={classNames(
-                        item.href === window.location.pathname
-                          ? "text-black"
-                          : "",
+                        item.href === pathname ? "text-black" : "",
                         "block px-3 py-2 rounded-md text-base font-medium text-base-content/70 hover:text-primary hover:bg-gray-100"
                       )}
                       key={item.name}

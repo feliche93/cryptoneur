@@ -24,7 +24,10 @@ function Hero() {
           posts, or get in touch with me for freelance work.
         </p>
         <div className="flex space-y-2 sm:space-y-0 space-x-0 sm:space-x-2 flex-col sm:flex-row mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-          <Link className="btn btn-md sm:btn-lg btn-primary" href="/blog">
+          <Link
+            className="btn btn-md sm:btn-lg btn-primary"
+            href="/gas-fees-calculator"
+          >
             Gas Fees Calculator
           </Link>
           <Link className="btn btn-md sm:btn-lg btn-outline" href="/blog">
