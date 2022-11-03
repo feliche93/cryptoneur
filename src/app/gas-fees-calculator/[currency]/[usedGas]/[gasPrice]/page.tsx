@@ -1,3 +1,4 @@
+import Image from "next/image";
 import GitcoinGrant from "../../../../../components/gas-fees-calculator/GitcoinGrant";
 import Header from "../../../../../components/gas-fees-calculator/Header";
 import ShareButtons from "../../../../../components/gas-fees-calculator/ShareButtons";
@@ -73,15 +74,17 @@ export default function GasFeesCalculator({
         </FeesForm> */}
 
         <Table currency={currency} usedGas={usedGas} gasPrice={gasPrice} />
-        {/* <div className='mt-10 flex items-center  justify-center'>
-          <a href='https://zapper.fi/' target='_blank'>
-            <img
-              className='object-center'
-              src='/logos/power-zap-black.svg'
-              alt=''
+        <div className="mt-10 flex items-center  justify-center">
+          <a href="https://zapper.fi/" target="_blank" rel="noreferrer">
+            <Image
+              className="object-center rounded-lg"
+              src="/logos/power-zap-black.svg"
+              alt="Powered by Zapper"
+              width={200}
+              height={50}
             />
           </a>
-        </div> */}
+        </div>
       </div>
     </>
   );
