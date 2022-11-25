@@ -26,8 +26,8 @@ function Navbar() {
   const pathname = usePathname();
 
   return (
-    <div className="relative bg-gray-100 sm:overflow-hidden">
-      <div className="relative pt-6 pb-16 sm:pb-24 bg-gray-100">
+    <div className="relative bg-base-200 sm:overflow-hidden">
+      <div className="relative pt-6 pb-16 sm:pb-24 bg-base-200">
         <Popover>
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <nav
@@ -53,7 +53,7 @@ function Navbar() {
                     </div>
                   </Link>
                   <div className="-mr-2 flex items-center md:hidden">
-                    <Popover.Button className="bg-gray-100 rounded-md p-2 inline-flex items-center justify-center text-base-content/80 hover:text-base-content/80 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                    <Popover.Button className="bg-base-200 rounded-md p-2 inline-flex items-center justify-center text-base-content/80 hover:text-base-content/80 hover:bg-base-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                       <span className="sr-only">Open main menu</span>
                       <Bars4Icon className="h-6 w-6" aria-hidden="true" />
                     </Popover.Button>
@@ -80,7 +80,7 @@ function Navbar() {
                 <span className="inline-flex rounded-md shadow">
                   <a
                     href="#"
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-100"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-base-200"
                   >
                     Log in
                   </a>
@@ -103,7 +103,7 @@ function Navbar() {
               focus
               className="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
             >
-              <div className="rounded-lg shadow-md bg-gray-100 ring-1 ring-black ring-opacity-5 overflow-hidden">
+              <div className="rounded-lg shadow-md bg-base-200 ring-1 ring-black ring-opacity-5 overflow-hidden">
                 <div className="px-5 pt-4 flex items-center justify-between">
                   <div>
                     <Image
@@ -116,7 +116,7 @@ function Navbar() {
                     />
                   </div>
                   <div className="-mr-2">
-                    <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-base-content/80 hover:text-base-content/80 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                    <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-base-content/80 hover:text-base-content/80 hover:bg-base-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                       <span className="sr-only">Close menu</span>
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                     </Popover.Button>
@@ -127,7 +127,7 @@ function Navbar() {
                     <Link
                       className={classNames(
                         item.href === pathname ? "text-black" : "",
-                        "block px-3 py-2 rounded-md text-base font-medium text-base-content/70 hover:text-primary hover:bg-gray-100"
+                        "block px-3 py-2 rounded-md text-base font-medium text-base-content/70 hover:text-primary hover:bg-base-200"
                       )}
                       key={item.name}
                       href={item.href}
@@ -140,7 +140,7 @@ function Navbar() {
                 {/* TODO: Potentially add login button
                 <a
                   href="#"
-                  className="block w-full px-5 py-3 text-center font-medium text-blue-600 bg-gray-100 hover:bg-gray-100"
+                  className="block w-full px-5 py-3 text-center font-medium text-blue-600 bg-base-200 hover:bg-base-200"
                 >
                   Log in
                 </a> */}

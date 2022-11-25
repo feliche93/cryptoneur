@@ -1,10 +1,8 @@
-import Image from "next/image";
 import Calendar from "../components/home/Calendar";
 import CompanyCloud from "../components/home/CompanyCloud";
 import Hero from "../components/home/Hero";
 import Skills from "../components/home/Skills";
 import WebsiteStats from "../components/home/WebsiteStats";
-import styles from "./page.module.css";
 
 export default function Home() {
   return (

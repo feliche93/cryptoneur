@@ -12,11 +12,12 @@ specifiers:
   '@types/react-dom': 18.0.8
   autoprefixer: ^10.4.13
   axios: ^1.1.3
-  daisyui: ^2.33.0
+  daisyui: ^2.42.1
   encoding: ^0.1.13
   eslint: 8.26.0
   eslint-config-next: 13.0.0
   next: 13.0.1
+  next-seo: ^5.14.1
   next-share: ^0.19.0
   postcss: ^8.4.18
   react: 18.2.0
@@ -33,8 +34,9 @@ dependencies:
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.1
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.2.1
   axios: 1.1.3
-  daisyui: 2.33.0_lycaqaeny3mp632atgvyvqdgwe
+  daisyui: 2.42.1_lycaqaeny3mp632atgvyvqdgwe
   next: 13.0.1_biqbaboplfbrettd7655fr4n2y
+  next-seo: 5.14.1_cuttyyug54cjzme6dhlgj6veu4
   next-share: 0.19.0_react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -878,8 +880,8 @@ packages:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
     dev: true
 
-  /daisyui/2.33.0_lycaqaeny3mp632atgvyvqdgwe:
-    resolution: {integrity: sha512-NviwGs9oC9NW7IEZiLexHtxkpzP38AKxb9GTUCqUa0qoU8NHKQGqJUzQWZwWSZakU57KsQLblFVe0xMhqw4TlA==}
+  /daisyui/2.42.1_lycaqaeny3mp632atgvyvqdgwe:
+    resolution: {integrity: sha512-IVeEvP8gvOzHR47fMrOp2YocQJMRmYskhdt7OsuhKJNn+YzLRGOpVpY7AGXt/56pYeYy7h03THHXRTW5cVU9rQ==}
     peerDependencies:
       autoprefixer: ^10.0.2
       postcss: ^8.1.6
@@ -2172,6 +2174,18 @@ packages:
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
+
+  /next-seo/5.14.1_cuttyyug54cjzme6dhlgj6veu4:
+    resolution: {integrity: sha512-NiJeQbxYP3z+EMp52q8k3Q+OfX2+Yv2WehERDj98r2wjXxL+woKpRBdsSVYolTD0Hm8IWs42SzaISE93RoQdOw==}
+    peerDependencies:
+      next: ^8.1.1-canary.54 || >=9.0.0
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+    dependencies:
+      next: 13.0.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /next-share/0.19.0_react@18.2.0:
     resolution: {integrity: sha512-egqNtBkyoP/takhLK7yxcuXIOMnj55hQfBCdpq5iBkruqJM4JXcdtvQ7HvxYvLKrbWQ99ayKEcsv9dXwSdTd8g==}

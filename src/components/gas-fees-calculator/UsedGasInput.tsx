@@ -10,7 +10,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function UsedGasInput() {
+export default function UsedGasInput({ usedGas, setUsedGas }) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -19,23 +19,63 @@ export default function UsedGasInput() {
   const gas = pathnames[3];
   const txnSpeed = pathnames[4];
 
-  const [usedGas, setUsedGas] = useState(parseInt(gas) || 21000);
+  // const [usedGas, setUsedGas] = useState(parseInt(gas) || 21000);
 
   const txnTypes = [
-    { id: 1, name: "Standard Transfer", gas: 21000 },
-    { id: 2, name: "ERC20 Token: Approval", gas: 45000 },
-    { id: 3, name: "ERC20 Token: Transfer", gas: 65000 },
-    { id: 4, name: "ERC721 Token: Transfer", gas: 85000 },
-    { id: 5, name: "Uniswap V2: Swap", gas: 150000 },
-    { id: 6, name: "Uniswap V3: Swap", gas: 184523 },
-    { id: 7, name: "L2: Deposits", gas: 250000 },
-    { id: 8, name: "ENS Domain: Registration", gas: 265000 },
-    { id: 9, name: "OpenSea: Sale", gas: 202326 },
-    { id: 10, name: "USDT: Transfer", gas: 54128 },
-    { id: 11, name: "Gnosis Safe: Creation with 2 Owners", gas: 307126 },
-    { id: 12, name: "Gnosis Safe: Creation with 3 Owners", gas: 331341 },
-    { id: 13, name: "Gnosis Safe: Creation with 4 Owners", gas: 355556 },
-    { id: 14, name: "Custom Type", gas: usedGas },
+    { name: "Standard Transfer", gas: 21000 },
+    { name: "ERC20: Transfer", gas: 65000 },
+    { name: "ERC721: Transfer", gas: 84904 },
+    { name: "USDT: Transfer", gas: 54128 },
+    { name: "OpenSea: Sale", gas: 71645 },
+    { name: "SuperRare: Sale", gas: 130704 },
+    { name: "Rarible: Sale", gas: 245730 },
+    { name: "LooksRare: Sale", gas: 326897 },
+    { name: "SuperRare: Offer", gas: 85191 },
+    { name: "Uniswap V3: Swap", gas: 184523 },
+    { name: "SushiSwap: Swap", gas: 141225 },
+    { name: "Curve: Swap", gas: 183758 },
+    { name: "Balancer: Swap", gas: 196625 },
+    { name: "Bancor: Swap", gas: 183193 },
+    { name: "1inch: Swap", gas: 141905 },
+    { name: "KyberSwap: Swap", gas: 144389 },
+    { name: "Uniswap V2: Swap", gas: 152809 },
+    { name: "CoW Protocol: Swap", gas: 343353 },
+    { name: "Uniswap V3: Add Liquidity", gas: 216912 },
+    { name: "Curve: Add Liquidity", gas: 271909 },
+    { name: "ENS: Register Domain", gas: 266996 },
+    { name: "Arbitrum: Deposit", gas: 91101 },
+    { name: "Optimism: Deposit", gas: 150829 },
+    { name: "Polygon: Deposit", gas: 149208 },
+    { name: "Ronin: Deposit", gas: 163754 },
+    { name: "zkSync: Deposit", gas: 143430 },
+    { name: "Beacon Chain: Deposit", gas: 52933 },
+    { name: "Ribbon Finance: Deposit", gas: 93014 },
+    { name: "Ribbon Finance: Withdraw", gas: 98895 },
+    { name: "dYdX: Borrow", gas: 174271 },
+    { name: "MakerDAO: Borrow", gas: 233329 },
+    { name: "Compound: Collect", gas: 1239371 },
+    { name: "Compound: Borrow", gas: 340168 },
+    { name: "Compound: Repay", gas: 112338 },
+    { name: "KyberSwap: Stake", gas: 214835 },
+    { name: "Tornado.Cash: Deposit", gas: 1014025 },
+    { name: "Tornado.Cash: Withdraw", gas: 360831 },
+    { name: "0x: Swap", gas: 327259 },
+    { name: "Aave: Borrow", gas: 318788 },
+    { name: "Aave: Repay", gas: 199772 },
+    { name: "Convex Finance: Stake", gas: 514772 },
+    { name: "Lido: Stake", gas: 82685 },
+    { name: "Yearn Finance: Deposit", gas: 216306 },
+    { name: "Hop Protocol: Bridge", gas: 121565 },
+    { name: "Multichain: Bridge", gas: 57887 },
+    { name: "Across Protocol: Bridge", gas: 120965 },
+    { name: "Synapse: Bridge", gas: 107905 },
+    { name: "Lido: Stake", gas: 87614 },
+    { name: "Gem: Batch Buy", gas: 340926 },
+    { name: "L2: Deposits", gas: 250000 },
+    { name: "Gnosis Safe: Creation with 2 Owners", gas: 307126 },
+    { name: "Gnosis Safe: Creation with 3 Owners", gas: 331341 },
+    { name: "Gnosis Safe: Creation with 4 Owners", gas: 355556 },
+    { name: "Custom Type", gas: usedGas },
   ];
 
   const [selectedTxnType, setSelectedTxnType] = useState(txnTypes[0]);
@@ -45,22 +85,22 @@ export default function UsedGasInput() {
     setSelectedTxnType(
       txnTypes.find((txnType) => txnType.name === "Custom Type")
     );
-    router.push(
-      `/gas-fees-calculator/${currency}${gas !== undefined ? "/" + gas : ""}${
-        txnSpeed !== undefined ? "/" + txnSpeed !== undefined : ""
-      }`
-    );
+    // router.push(
+    //   `/gas-fees-calculator/${currency}${gas !== undefined ? "/" + gas : ""}${
+    //     txnSpeed !== undefined ? "/" + txnSpeed !== undefined : ""
+    //   }`
+    // );
   }
 
   function handleTxnTypeChange(event) {
     setSelectedTxnType(event);
     // console.log(event.gas);
     setUsedGas(event.gas);
-    router.push(
-      `/gas-fees-calculator/${currency}${gas !== undefined ? "/" + gas : ""}${
-        txnSpeed !== undefined ? "/" + txnSpeed !== undefined : ""
-      }`
-    );
+    // router.push(
+    //   `/gas-fees-calculator/${currency}${gas !== undefined ? "/" + gas : ""}${
+    //     txnSpeed !== undefined ? "/" + txnSpeed !== undefined : ""
+    //   }`
+    // );
   }
 
   return (
@@ -90,16 +130,16 @@ export default function UsedGasInput() {
                   leaveTo="opacity-0"
                 >
                   <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                    {txnTypes.map((person) => (
+                    {txnTypes.map((txn, i) => (
                       <Listbox.Option
-                        key={person.id}
+                        key={i}
                         className={({ active }) =>
                           classNames(
                             active ? "text-white bg-blue-600" : "text-gray-900",
                             "cursor-default select-none relative py-2 pl-3 pr-9"
                           )
                         }
-                        value={person}
+                        value={txn}
                       >
                         {({ selected, active }) => (
                           <>
@@ -109,7 +149,7 @@ export default function UsedGasInput() {
                                 "block truncate"
                               )}
                             >
-                              {person.name}
+                              {txn.name}
                             </span>
 
                             {selected ? (

@@ -9,7 +9,7 @@ import {
   activeUsers30Days,
   averageSessionDuration30Days,
   runReport,
-} from "../../lib/analytics";
+} from "@/lib/analytics";
 
 export const revalidate = 60 * 60 * 1; // 24 hours
 
