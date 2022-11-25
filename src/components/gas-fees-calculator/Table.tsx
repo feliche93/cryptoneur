@@ -11,7 +11,11 @@ function classNames(...classes) {
 
 export const revalidate = 60 * 60 * 1; // 24 hours
 
-export default async function Table({ currency, usedGas, gasPrice }) {
+export default async function Table({
+  selectedCurrency,
+  usedGas,
+  selectedGasPrice,
+}) {
   const [gasPrices, fiatRates] = await Promise.all([
     fetchGasPrices(),
     fetchFiatRates(),
@@ -124,8 +128,12 @@ export default async function Table({ currency, usedGas, gasPrice }) {
                         {network.symbol}
                       </div>
                       <div className="text-sm text-base-content/80">
-                        {network.tokenPrice[currency.toLocaleLowerCase()]}{" "}
-                        {currency}
+                        {
+                          network.tokenPrice[
+                            selectedCurrency.toLocaleLowerCase()
+                          ]
+                        }{" "}
+                        {selectedCurrency}
                       </div>
                     </td>
 
@@ -134,20 +142,22 @@ export default async function Table({ currency, usedGas, gasPrice }) {
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-base-content/80">
                       <div className="text-sm capitalize text-base-content font-semibold">
-                        {gasPrice}
+                        {selectedGasPrice}
                       </div>
                       <div className="text-sm text-base-content/80">
-                        {network.gasPrice[gasPrice]}
+                        {network.gasPrice[selectedGasPrice]}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap font-bold text-sm text-base-content">
                       {(
-                        (network.tokenPrice[currency.toLocaleLowerCase()] *
+                        (network.tokenPrice[
+                          selectedCurrency.toLocaleLowerCase()
+                        ] *
                           usedGas *
-                          network.gasPrice[gasPrice]) /
+                          network.gasPrice[selectedGasPrice]) /
                         10 ** 9
                       ).toFixed(4)}{" "}
-                      {currency}
+                      {selectedCurrency}
                     </td>
                   </tr>
                 ))}
@@ -209,15 +219,15 @@ export default async function Table({ currency, usedGas, gasPrice }) {
                       {network.symbol}{" "}
                       <span className="font-semibold">
                         {network.tokenPrice[
-                          currency.toLocaleLowerCase()
+                          selectedCurrency.toLocaleLowerCase()
                         ].toFixed(2)}{" "}
-                        {currency}
+                        {selectedCurrency}
                       </span>
                     </div>
                     <div className="px-2 text-sm uppercase text-base-content">
                       Gas Price{" "}
                       <span className="font-semibold">
-                        {network.gasPrice[gasPrice]}
+                        {network.gasPrice[selectedGasPrice]}
                       </span>
                     </div>
                     <div className="px-2 text-sm uppercase text-base-content">
@@ -227,12 +237,14 @@ export default async function Table({ currency, usedGas, gasPrice }) {
                       Cost{" "}
                       <span className="font-semibold">
                         {(
-                          (network.tokenPrice[currency.toLocaleLowerCase()] *
+                          (network.tokenPrice[
+                            selectedCurrency.toLocaleLowerCase()
+                          ] *
                             usedGas *
-                            network.gasPrice[gasPrice]) /
+                            network.gasPrice[selectedGasPrice]) /
                           10 ** 9
                         ).toFixed(4)}{" "}
-                        {currency}
+                        {selectedCurrency}
                       </span>
                     </div>
                   </div>
@@ -340,8 +352,12 @@ export default async function Table({ currency, usedGas, gasPrice }) {
                         {network.symbol}
                       </div>
                       <div className="text-sm text-base-content/80">
-                        {network.tokenPrice[currency.toLocaleLowerCase()]}{" "}
-                        {currency}
+                        {
+                          network.tokenPrice[
+                            selectedCurrency.toLocaleLowerCase()
+                          ]
+                        }{" "}
+                        {selectedCurrency}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -359,12 +375,14 @@ export default async function Table({ currency, usedGas, gasPrice }) {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap font-bold text-sm text-base-content">
                       {(
-                        (network.tokenPrice[currency.toLocaleLowerCase()] *
+                        (network.tokenPrice[
+                          selectedCurrency.toLocaleLowerCase()
+                        ] *
                           usedGas *
                           network.gasPrice[gasPrice]) /
                         10 ** 9
                       ).toFixed(4)}{" "}
-                      {currency.name}
+                      {selectedCurrency.name}
                     </td>
                   </tr>
                 ))}
@@ -422,9 +440,9 @@ export default async function Table({ currency, usedGas, gasPrice }) {
                             {network.symbol}{" "}
                             <span className="font-semibold">
                               {network.tokenPrice[
-                                currency.toLocaleLowerCase()
+                                selectedCurrency.toLocaleLowerCase()
                               ].toFixed(2)}{" "}
-                              {currency}
+                              {selectedCurrency}
                             </span>
                           </div>
                           <div className="px-2 text-sm uppercase text-base-content">
@@ -442,13 +460,13 @@ export default async function Table({ currency, usedGas, gasPrice }) {
                             <span className="font-semibold">
                               {(
                                 (network.tokenPrice[
-                                  currency.toLocaleLowerCase()
+                                  selectedCurrency.toLocaleLowerCase()
                                 ] *
                                   usedGas *
                                   network.gasPrice[gasPrice]) /
                                 10 ** 9
                               ).toFixed(4)}{" "}
-                              {currency}
+                              {selectedCurrency}
                             </span>
                           </div>
                         </div>

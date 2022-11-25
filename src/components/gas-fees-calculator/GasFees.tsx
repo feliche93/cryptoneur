@@ -6,6 +6,7 @@ import CurrencyInput from "./CurrencyInput";
 import FeesForm from "./FeesForm";
 import FeesFormCard from "./FeesFormCard";
 import GasPriceRadio from "./GasPriceRadio";
+import Table from "./Table";
 import UsedGasInput from "./UsedGasInput";
 
 export default function GasFees() {
@@ -35,14 +36,15 @@ export default function GasFees() {
           title="Gas Price"
           description="Gas fees are paid in each network's native currency."
         >
-          <GasPriceRadio
-            selectedGasPrice={selectedGasPrice}
-            setSelectedGasPrice={setSelectedGasPrice}
-          />
+          <GasPriceRadio setSelectedGasPrice={setSelectedGasPrice} />
         </FeesFormCard>
       </FeesForm>
 
-      {/* <Table currency={currency} usedGas={usedGas} gasPrice={gasPrice} /> */}
+      <Table
+        selectedCurrency={selectedCurrency}
+        usedGas={usedGas}
+        selectedGasPrice={selectedGasPrice}
+      />
       <div className="mt-10 flex items-center  justify-center">
         <a href="https://zapper.fi/" target="_blank" rel="noreferrer">
           <Image

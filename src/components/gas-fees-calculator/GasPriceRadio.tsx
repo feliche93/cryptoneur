@@ -5,10 +5,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function GasPriceRadio({
-  selectedGasPrice,
-  setSelectedGasPrice,
-}) {
+export default function GasPriceRadio({ setSelectedGasPrice }) {
   // console.log(selectedGasPrice)
   const gasPriceOption = ["standard", "fast", "instant"];
 
@@ -31,11 +28,11 @@ export default function GasPriceRadio({
                 name="gas-price-option"
                 type="radio"
                 defaultChecked={option === "standard"}
-                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
+                className="focus:ring-primary-focus h-4 w-4 text-primary border-base-200"
               />
               <label
                 htmlFor={option}
-                className="capitalize ml-3 block text-sm font-medium text-gray-700"
+                className="capitalize ml-3 block text-sm font-medium"
               >
                 {option}
               </label>
