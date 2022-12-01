@@ -1,11 +1,10 @@
-"use client";
-
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { currencies } from "@lib/gas-fees-calculator";
 // import { currencies } from "../../lib/gas-fees-calculator";
 
 function classNames(...classes) {
@@ -16,56 +15,6 @@ export default function CurrencyInput({
   selectedCurrency,
   setSelectedCurrency,
 }) {
-  const currencies = [
-    "USD",
-    "EUR",
-    "JPY",
-    "GBP",
-    "AUD",
-    "CAD",
-    "CHF",
-    "CNY",
-    "HKD",
-    "NZD",
-    "SEK",
-    "KRW",
-    "SGD",
-    "NOK",
-    "MXN",
-    "INR",
-    "RUB",
-    "ZAR",
-    "TRY",
-    "BRL",
-    "TWD",
-    "DKK",
-    "PLN",
-    "THB",
-    "IDR",
-    "HUF",
-    "CZK",
-    "ILS",
-    "CLP",
-    "PHP",
-    "AED",
-    "COP",
-    "SAR",
-    "MYR",
-    "RON",
-  ];
-
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const pathnames = pathname.split("/");
-  const currency = pathnames[2];
-  const usedGas = pathnames[3];
-  const txnSpeed = pathnames[4];
-
-  // const [selectedCurrency, setSelectedCurrency] = useState(
-  //   currencies.includes(currency) ? currency : "USD"
-  // );
-
   function handleCurrencyChange(currency) {
     setSelectedCurrency(currency);
     // console.log("Currency changed to: " + currency);

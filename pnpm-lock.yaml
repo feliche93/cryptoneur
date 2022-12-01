@@ -19,6 +19,7 @@ specifiers:
   next: 13.0.1
   next-seo: ^5.14.1
   next-share: ^0.19.0
+  next-use-posthog: ^1.16.1
   postcss: ^8.4.18
   react: 18.2.0
   react-dom: 18.2.0
@@ -38,6 +39,7 @@ dependencies:
   next: 13.0.1_biqbaboplfbrettd7655fr4n2y
   next-seo: 5.14.1_cuttyyug54cjzme6dhlgj6veu4
   next-share: 0.19.0_react@18.2.0
+  next-use-posthog: 1.16.1_react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   server-only: 0.0.1
@@ -397,6 +399,11 @@ packages:
   /@rushstack/eslint-patch/1.2.0:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: true
+
+  /@sentry/types/6.19.7:
+    resolution: {integrity: sha512-jH84pDYE+hHIbVnab3Hr+ZXr1v8QABfhx39KknxqKWr2l0oEItzepV0URvbEhB446lk/S/59230dlUUIBGsXbg==}
+    engines: {node: '>=6'}
+    dev: false
 
   /@swc/helpers/0.4.11:
     resolution: {integrity: sha512-rEUrBSGIoSFuYxwBYtlUFMlE2CwGhmW+w9355/5oduSw8e5h2+Tj4UrAGNNgP9915++wj5vkQo0UuOBqOAq4nw==}
@@ -1426,6 +1433,10 @@ packages:
     dependencies:
       reusify: 1.0.4
 
+  /fflate/0.4.8:
+    resolution: {integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==}
+    dev: false
+
   /file-entry-cache/6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -2199,6 +2210,15 @@ packages:
       - supports-color
     dev: false
 
+  /next-use-posthog/1.16.1_react@18.2.0:
+    resolution: {integrity: sha512-oHdjuaPOcXfnjUdOtirqKCdoZ239smUUGLDrsI/EeWrhpiHSzt8060hDbRdd2erqueX6TM4E7JYUNYuE+J/BoA==}
+    peerDependencies:
+      react: ^16.13.1 || ^17 || ^18
+    dependencies:
+      posthog-js: 1.16.0
+      react: 18.2.0
+    dev: false
+
   /next/13.0.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-ErCNBPIeZMKFn6hX+ZBSlqZVgJIeitEqhGTuQUNmYXJ07/A71DZ7AJI8eyHYUdBb686LUpV1/oBdTq9RpzRVPg==}
     engines: {node: '>=14.6.0'}
@@ -2490,6 +2510,14 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
+  /posthog-js/1.16.0:
+    resolution: {integrity: sha512-7gE4fDSCD7wzdr+Jb/dOIqUubsc4ahnyJYXKudDF+LcuhGX8qP8wRj8WA6JtyQDS1mqSH3Y+AwOWzfC9W8UIMQ==}
+    dependencies:
+      '@sentry/types': 6.19.7
+      fflate: 0.4.8
+      rrweb-snapshot: 1.1.14
+    dev: false
+
   /prelude-ls/1.1.2:
     resolution: {integrity: sha512-ESF23V4SKG6lVSGZgYNpbsiaAkdab6ZgOxe52p7+Kid3W3u3bxR4Vfd/o21dmN7jSt0IwgZ4v5MUd26FEtXE9w==}
     engines: {node: '>= 0.8.0'}
@@ -2681,6 +2709,10 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+
+  /rrweb-snapshot/1.1.14:
+    resolution: {integrity: sha512-eP5pirNjP5+GewQfcOQY4uBiDnpqxNRc65yKPW0eSoU1XamDfc4M8oqpXGMyUyvLyxFDB0q0+DChuxxiU2FXBQ==}
+    dev: false
 
   /run-parallel/1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}

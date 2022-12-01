@@ -1,26 +1,12 @@
-"use client";
-
-import React from "react";
-import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid";
-import { useRouter, usePathname } from "next/navigation";
+import { Fragment, useState } from "react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function UsedGasInput({ usedGas, setUsedGas }) {
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const pathnames = pathname.split("/");
-  const currency = pathnames[2];
-  const gas = pathnames[3];
-  const txnSpeed = pathnames[4];
-
-  // const [usedGas, setUsedGas] = useState(parseInt(gas) || 21000);
-
   const txnTypes = [
     { name: "Standard Transfer", gas: 21000 },
     { name: "ERC20: Transfer", gas: 65000 },
