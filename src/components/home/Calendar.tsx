@@ -18,7 +18,7 @@ export default function Calendar() {
   return (
     <div className="relative pt-16 sm:pt-24 lg:pt-32">
       <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
-        <h2 className="text-base font-semibold tracking-wider text-blue-600 uppercase">
+        <h2 className="text-base font-semibold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary uppercase">
           Book a Meeting
         </h2>
         <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">

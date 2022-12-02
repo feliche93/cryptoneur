@@ -43,11 +43,11 @@ function Navbar() {
                         //layout="fill"
                         width={60}
                         height={60}
-                        className="object-contain"
+                        className="object-contain hidden"
                         src="/logo_transparent.png"
                         alt="Cryptoneur Logo"
                       />
-                      <span className="text-base-content/80 text-xl pl-1 font-mono">
+                      <span className="hidden text-base-content/80 text-xl pl-1 font-mono">
                         Cryptoneur
                       </span>
                     </div>
@@ -106,14 +106,14 @@ function Navbar() {
               <div className="rounded-lg shadow-md bg-base-200 ring-1 ring-black ring-opacity-5 overflow-hidden">
                 <div className="px-5 pt-4 flex items-center justify-between">
                   <div>
-                    <Image
+                    {/* <Image
                       //layout="fill"
                       width={50}
                       height={50}
                       className="object-contain"
                       src="/logo_transparent.png"
                       alt="Cryptoneur Logo"
-                    />
+                    /> */}
                   </div>
                   <div className="-mr-2">
                     <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-base-content/80 hover:text-base-content/80 hover:bg-base-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">

@@ -123,6 +123,7 @@ export async function getStaticProps() {
     props: {
       networkPrices,
     },
+    revalidate: 60 * 5, // Every 5 minutes
   };
 }
 
