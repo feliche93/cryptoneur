@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <WebsiteStats />
+      {/* <WebsiteStats /> */}
       <Skills />
       <CompanyCloud />
       <Calendar />
