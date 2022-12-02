@@ -47,7 +47,7 @@ export default async function WebsiteStats() {
               Lifetime
             </p>
           </div>
-          <p className="font-bold text-4xl py-4">{activeUsersData[0].value}</p>
+          <p className="font-bold text-4xl py-4">{activeUsersData[0]?.value}</p>
         </div>
 
         <div className="bg-base-100 rounded-lg p-5">
@@ -61,17 +61,17 @@ export default async function WebsiteStats() {
             </p>
           </div>
           <p className="font-bold text-4xl py-4">
-            {activeUsers30DaysData[0].value}
+            {activeUsers30DaysData[0]?.value}
           </p>
-          {activeUsers30DaysData[2].value > 0 ? (
+          {activeUsers30DaysData[2]?.value > 0 ? (
             <div className="flex flex-row space-x-2 items-center text-success">
               <ArrowUpCircleIcon className="h-5 w-5 " />
-              <p>{`${activeUsers30DaysData[2].value.toFixed(1)} %`}</p>
+              <p>{`${activeUsers30DaysData[2]?.value.toFixed(1)} %`}</p>
             </div>
           ) : (
             <div className="flex flex-row space-x-2 items-center text-error">
               <ArrowDownCircleIcon className="h-5 w-5 " />
-              <p>{`${activeUsers30DaysData[2].value.toFixed(1)} %`}</p>
+              <p>{`${activeUsers30DaysData[2]?.value.toFixed(1)} %`}</p>
             </div>
           )}
         </div>
@@ -87,20 +87,20 @@ export default async function WebsiteStats() {
             </p>
           </div>
           <p className="font-bold text-4xl py-4">
-            {averageSessionDuration30DaysData[0].value}{" "}
+            {averageSessionDuration30DaysData[0]?.value}{" "}
             <span className=" font-normal text-base">seconds</span>
           </p>
-          {averageSessionDuration30DaysData[2].value > 0 ? (
+          {averageSessionDuration30DaysData[2]?.value > 0 ? (
             <div className="flex flex-row space-x-2 items-center text-success">
               <ArrowUpCircleIcon className="h-5 w-5 " />
-              <p>{`${averageSessionDuration30DaysData[2].value.toFixed(
+              <p>{`${averageSessionDuration30DaysData[2]?.value.toFixed(
                 1
               )} %`}</p>
             </div>
           ) : (
             <div className="flex flex-row space-x-2 items-center text-error">
               <ArrowDownCircleIcon className="h-5 w-5 " />
-              <p>{`${activeUsers30DaysData[2].value.toFixed(1)} %`}</p>
+              <p>{`${activeUsers30DaysData[2]?.value.toFixed(1)} %`}</p>
             </div>
           )}
         </div>
