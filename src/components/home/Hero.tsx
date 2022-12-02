@@ -30,9 +30,9 @@ function Hero() {
           >
             Gas Fees Calculator
           </Link>
-          <Link className="btn btn-md sm:btn-lg btn-outline" href="/blog">
+          {/* <Link className="btn btn-md sm:btn-lg btn-outline" href="/blog">
             Blog
-          </Link>
+          </Link> */}
         </div>
       </div>
     </main>
