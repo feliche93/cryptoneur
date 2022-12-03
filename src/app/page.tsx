@@ -11,7 +11,7 @@ export default function Home() {
       {/* <WebsiteStats /> */}
       <Skills />
       <CompanyCloud />
-      {/* <Calendar /> */}
+      <Calendar />
     </>
   );
 }

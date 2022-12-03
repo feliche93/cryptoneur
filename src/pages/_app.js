@@ -5,6 +5,8 @@ import { useRouter } from 'next/dist/client/router';
 import proilePic from '../../public/profilePic.jpg';
 import { usePostHog } from 'next-use-posthog'
 import Layout from "@components/layout/Layout";
+import { Analytics } from '@vercel/analytics/react';
+
 
 export default function MyApp({ Component, pageProps }) {
     // Use the layout defined at the page level, if available
@@ -64,6 +66,7 @@ export default function MyApp({ Component, pageProps }) {
             />
             <Layout>
                 <Component {...pageProps} />
+                <Analytics />
             </Layout>
 
         </>
