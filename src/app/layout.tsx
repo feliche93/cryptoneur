@@ -1,3 +1,4 @@
+import { AnalyticsWrapper } from "@components/shared/analytics";
 import { NextSeo } from "next-seo";
 import Footer from "../components/layout/Footer";
 import Navbar from "../components/layout/Navbar";
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className="bg-base-200">
         <Navbar />
         {children}
+        <AnalyticsWrapper />
         <Footer />
       </body>
     </html>
