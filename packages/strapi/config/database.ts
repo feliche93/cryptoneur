@@ -9,5 +9,10 @@ export default ({ env }) => ({
       password: env('DATABASE_PASSWORD', 'strapi'),
       ssl: env.bool('DATABASE_SSL', true),
     },
+    options: {
+      ssl: {
+        rejectUnauthorized: env.bool('DATABASE_SSL_SELF', false), // For self-signed certificates
+      }
+    }
   },
 });
