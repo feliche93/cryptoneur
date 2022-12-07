@@ -1,4 +1,6 @@
-export default {
+'use strict';
+
+module.exports = {
   /**
    * An asynchronous register function that runs before
    * your application is initialized.
