@@ -1,6 +1,5 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/gas-fees-calculator": "pages/gas-fees-calculator.js"
+  "/_document": "pages/_document.js"
 }
