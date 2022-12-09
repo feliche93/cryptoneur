@@ -1,14 +1,14 @@
 {
-  "key": "plugin_content_manager_configuration_content_types::api::post.post",
+  "key": "plugin_content_manager_configuration_content_types::api::author.author",
   "value": {
-    "uid": "api::post.post",
+    "uid": "api::author.author",
     "settings": {
       "bulkable": true,
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "title",
-      "defaultSortBy": "title",
+      "mainField": "name",
+      "defaultSortBy": "name",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -20,102 +20,59 @@
           "sortable": true
         }
       },
-      "title": {
+      "name": {
         "edit": {
-          "label": "Title",
+          "label": "Name",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "title",
+          "label": "name",
           "searchable": true,
           "sortable": true
         }
       },
-      "slug": {
+      "socials": {
         "edit": {
-          "label": "Slug",
+          "label": "Socials",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "slug",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "description": {
-        "edit": {
-          "label": "Description",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "description",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "cover": {
-        "edit": {
-          "label": "Cover",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "cover",
+          "label": "socials",
           "searchable": false,
           "sortable": false
         }
       },
-      "content": {
+      "avatar": {
         "edit": {
-          "label": "Content",
+          "label": "Avatar",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "content",
+          "label": "avatar",
           "searchable": false,
           "sortable": false
         }
       },
-      "authors": {
+      "posts": {
         "edit": {
-          "label": "Authors",
+          "label": "posts",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true,
-          "mainField": "name"
+          "mainField": "title"
         },
         "list": {
-          "label": "authors",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "tags": {
-        "edit": {
-          "label": "Tags",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true,
-          "mainField": "name"
-        },
-        "list": {
-          "label": "tags",
+          "label": "posts",
           "searchable": false,
           "sortable": false
         }
@@ -150,49 +107,35 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "name",
+        "socials",
+        "createdAt"
+      ],
       "edit": [
         [
           {
-            "name": "title",
-            "size": 6
+            "name": "name",
+            "size": 8
           },
           {
-            "name": "slug",
-            "size": 6
+            "name": "avatar",
+            "size": 4
           }
         ],
         [
           {
-            "name": "description",
-            "size": 6
-          },
-          {
-            "name": "cover",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "authors",
-            "size": 6
-          },
-          {
-            "name": "tags",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "content",
+            "name": "socials",
             "size": 12
           }
+        ],
+        [
+          {
+            "name": "posts",
+            "size": 6
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "title",
-        "createdAt",
-        "updatedAt"
       ]
     }
   },
