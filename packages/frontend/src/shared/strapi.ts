@@ -13,6 +13,11 @@ const options: StrapiOptions = {
 
 const strapi = new Strapi(options);
 
+async function getBlogPosts() {
+    const { data, meta } = await strapi.find('blog-posts', {
+        populate:
+    });
+}
 export default strapi;
 
 // async function getStrapiData() {
