@@ -1,0 +1,105 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::token.token",
+  "value": {
+    "uid": "api::token.token",
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "id",
+      "defaultSortBy": "id",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "name": {
+        "edit": {
+          "label": "Name",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "symbol": {
+        "edit": {
+          "label": "Symbol",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "symbol",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "edit": [
+        [
+          {
+            "name": "name",
+            "size": 8
+          },
+          {
+            "name": "symbol",
+            "size": 4
+          }
+        ]
+      ],
+      "list": [
+        "id",
+        "name",
+        "symbol",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

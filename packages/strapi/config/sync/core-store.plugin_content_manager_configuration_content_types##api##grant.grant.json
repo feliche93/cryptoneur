@@ -1,0 +1,263 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::grant.grant",
+  "value": {
+    "uid": "api::grant.grant",
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "name",
+      "defaultSortBy": "name",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "name": {
+        "edit": {
+          "label": "Name",
+          "description": "Name of the grant",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "logo": {
+        "edit": {
+          "label": "Logo",
+          "description": "Logo of the grant",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "logo",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "fundingMinimum": {
+        "edit": {
+          "label": "Funding Minimum",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "fundingMinimum",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "fundingMaximum": {
+        "edit": {
+          "label": "Funding Maximum",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "fundingMaximum",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "description": {
+        "edit": {
+          "label": "Description",
+          "description": "1-2 sentence description about the grant",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "active": {
+        "edit": {
+          "label": "active",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "active",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "linkApplication": {
+        "edit": {
+          "label": "Link Application",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "linkApplication",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "linkInfo": {
+        "edit": {
+          "label": "Link Info",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "linkInfo",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "socials": {
+        "edit": {
+          "label": "Socials",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "socials",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "blockchains": {
+        "edit": {
+          "label": "Blockchains",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "blockchains",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "edit": [
+        [
+          {
+            "name": "name",
+            "size": 4
+          },
+          {
+            "name": "active",
+            "size": 4
+          },
+          {
+            "name": "logo",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "fundingMinimum",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "fundingMaximum",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "linkApplication",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "linkInfo",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "socials",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "blockchains",
+            "size": 6
+          }
+        ]
+      ],
+      "list": [
+        "id",
+        "name",
+        "logo",
+        "active"
+      ]
+    }
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

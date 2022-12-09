@@ -1,0 +1,107 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::blockchain.blockchain",
+  "value": {
+    "uid": "api::blockchain.blockchain",
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "name",
+      "defaultSortBy": "name",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "name": {
+        "edit": {
+          "label": "name",
+          "description": "Name of the Blockchain",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "grants": {
+        "edit": {
+          "label": "grants",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "grants",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "name",
+        "createdAt",
+        "updatedAt"
+      ],
+      "edit": [
+        [
+          {
+            "name": "name",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "grants",
+            "size": 6
+          }
+        ]
+      ]
+    }
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

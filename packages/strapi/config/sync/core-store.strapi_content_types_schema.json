@@ -1,0 +1,2317 @@
+{
+  "key": "strapi_content_types_schema",
+  "value": {
+    "admin::permission": {
+      "collectionName": "admin_permissions",
+      "info": {
+        "name": "Permission",
+        "description": "",
+        "singularName": "permission",
+        "pluralName": "permissions",
+        "displayName": "Permission"
+      },
+      "options": {},
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        },
+        "content-type-builder": {
+          "visible": false
+        }
+      },
+      "attributes": {
+        "action": {
+          "type": "string",
+          "minLength": 1,
+          "configurable": false,
+          "required": true
+        },
+        "subject": {
+          "type": "string",
+          "minLength": 1,
+          "configurable": false,
+          "required": false
+        },
+        "properties": {
+          "type": "json",
+          "configurable": false,
+          "required": false,
+          "default": {}
+        },
+        "conditions": {
+          "type": "json",
+          "configurable": false,
+          "required": false,
+          "default": []
+        },
+        "role": {
+          "configurable": false,
+          "type": "relation",
+          "relation": "manyToOne",
+          "inversedBy": "permissions",
+          "target": "admin::role"
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "kind": "collectionType",
+      "__schema__": {
+        "collectionName": "admin_permissions",
+        "info": {
+          "name": "Permission",
+          "description": "",
+          "singularName": "permission",
+          "pluralName": "permissions",
+          "displayName": "Permission"
+        },
+        "options": {},
+        "pluginOptions": {
+          "content-manager": {
+            "visible": false
+          },
+          "content-type-builder": {
+            "visible": false
+          }
+        },
+        "attributes": {
+          "action": {
+            "type": "string",
+            "minLength": 1,
+            "configurable": false,
+            "required": true
+          },
+          "subject": {
+            "type": "string",
+            "minLength": 1,
+            "configurable": false,
+            "required": false
+          },
+          "properties": {
+            "type": "json",
+            "configurable": false,
+            "required": false,
+            "default": {}
+          },
+          "conditions": {
+            "type": "json",
+            "configurable": false,
+            "required": false,
+            "default": []
+          },
+          "role": {
+            "configurable": false,
+            "type": "relation",
+            "relation": "manyToOne",
+            "inversedBy": "permissions",
+            "target": "admin::role"
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "permission",
+      "connection": "default",
+      "uid": "admin::permission",
+      "plugin": "admin",
+      "globalId": "AdminPermission"
+    },
+    "admin::user": {
+      "collectionName": "admin_users",
+      "info": {
+        "name": "User",
+        "description": "",
+        "singularName": "user",
+        "pluralName": "users",
+        "displayName": "User"
+      },
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        },
+        "content-type-builder": {
+          "visible": false
+        }
+      },
+      "attributes": {
+        "firstname": {
+          "type": "string",
+          "unique": false,
+          "minLength": 1,
+          "configurable": false,
+          "required": false
+        },
+        "lastname": {
+          "type": "string",
+          "unique": false,
+          "minLength": 1,
+          "configurable": false,
+          "required": false
+        },
+        "username": {
+          "type": "string",
+          "unique": false,
+          "configurable": false,
+          "required": false
+        },
+        "email": {
+          "type": "email",
+          "minLength": 6,
+          "configurable": false,
+          "required": true,
+          "unique": true,
+          "private": true
+        },
+        "password": {
+          "type": "password",
+          "minLength": 6,
+          "configurable": false,
+          "required": false,
+          "private": true
+        },
+        "resetPasswordToken": {
+          "type": "string",
+          "configurable": false,
+          "private": true
+        },
+        "registrationToken": {
+          "type": "string",
+          "configurable": false,
+          "private": true
+        },
+        "isActive": {
+          "type": "boolean",
+          "default": false,
+          "configurable": false,
+          "private": true
+        },
+        "roles": {
+          "configurable": false,
+          "private": true,
+          "type": "relation",
+          "relation": "manyToMany",
+          "inversedBy": "users",
+          "target": "admin::role",
+          "collectionName": "strapi_users_roles"
+        },
+        "blocked": {
+          "type": "boolean",
+          "default": false,
+          "configurable": false,
+          "private": true
+        },
+        "preferedLanguage": {
+          "type": "string",
+          "configurable": false,
+          "required": false
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "kind": "collectionType",
+      "__schema__": {
+        "collectionName": "admin_users",
+        "info": {
+          "name": "User",
+          "description": "",
+          "singularName": "user",
+          "pluralName": "users",
+          "displayName": "User"
+        },
+        "pluginOptions": {
+          "content-manager": {
+            "visible": false
+          },
+          "content-type-builder": {
+            "visible": false
+          }
+        },
+        "attributes": {
+          "firstname": {
+            "type": "string",
+            "unique": false,
+            "minLength": 1,
+            "configurable": false,
+            "required": false
+          },
+          "lastname": {
+            "type": "string",
+            "unique": false,
+            "minLength": 1,
+            "configurable": false,
+            "required": false
+          },
+          "username": {
+            "type": "string",
+            "unique": false,
+            "configurable": false,
+            "required": false
+          },
+          "email": {
+            "type": "email",
+            "minLength": 6,
+            "configurable": false,
+            "required": true,
+            "unique": true,
+            "private": true
+          },
+          "password": {
+            "type": "password",
+            "minLength": 6,
+            "configurable": false,
+            "required": false,
+            "private": true
+          },
+          "resetPasswordToken": {
+            "type": "string",
+            "configurable": false,
+            "private": true
+          },
+          "registrationToken": {
+            "type": "string",
+            "configurable": false,
+            "private": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "default": false,
+            "configurable": false,
+            "private": true
+          },
+          "roles": {
+            "configurable": false,
+            "private": true,
+            "type": "relation",
+            "relation": "manyToMany",
+            "inversedBy": "users",
+            "target": "admin::role",
+            "collectionName": "strapi_users_roles"
+          },
+          "blocked": {
+            "type": "boolean",
+            "default": false,
+            "configurable": false,
+            "private": true
+          },
+          "preferedLanguage": {
+            "type": "string",
+            "configurable": false,
+            "required": false
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "user",
+      "connection": "default",
+      "uid": "admin::user",
+      "plugin": "admin",
+      "globalId": "AdminUser"
+    },
+    "admin::role": {
+      "collectionName": "admin_roles",
+      "info": {
+        "name": "Role",
+        "description": "",
+        "singularName": "role",
+        "pluralName": "roles",
+        "displayName": "Role"
+      },
+      "options": {},
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        },
+        "content-type-builder": {
+          "visible": false
+        }
+      },
+      "attributes": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "unique": true,
+          "configurable": false,
+          "required": true
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "unique": true,
+          "configurable": false,
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "configurable": false
+        },
+        "users": {
+          "configurable": false,
+          "type": "relation",
+          "relation": "manyToMany",
+          "mappedBy": "roles",
+          "target": "admin::user"
+        },
+        "permissions": {
+          "configurable": false,
+          "type": "relation",
+          "relation": "oneToMany",
+          "mappedBy": "role",
+          "target": "admin::permission"
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "kind": "collectionType",
+      "__schema__": {
+        "collectionName": "admin_roles",
+        "info": {
+          "name": "Role",
+          "description": "",
+          "singularName": "role",
+          "pluralName": "roles",
+          "displayName": "Role"
+        },
+        "options": {},
+        "pluginOptions": {
+          "content-manager": {
+            "visible": false
+          },
+          "content-type-builder": {
+            "visible": false
+          }
+        },
+        "attributes": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "unique": true,
+            "configurable": false,
+            "required": true
+          },
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "unique": true,
+            "configurable": false,
+            "required": true
+          },
+          "description": {
+            "type": "string",
+            "configurable": false
+          },
+          "users": {
+            "configurable": false,
+            "type": "relation",
+            "relation": "manyToMany",
+            "mappedBy": "roles",
+            "target": "admin::user"
+          },
+          "permissions": {
+            "configurable": false,
+            "type": "relation",
+            "relation": "oneToMany",
+            "mappedBy": "role",
+            "target": "admin::permission"
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "role",
+      "connection": "default",
+      "uid": "admin::role",
+      "plugin": "admin",
+      "globalId": "AdminRole"
+    },
+    "admin::api-token": {
+      "collectionName": "strapi_api_tokens",
+      "info": {
+        "name": "Api Token",
+        "singularName": "api-token",
+        "pluralName": "api-tokens",
+        "displayName": "Api Token",
+        "description": ""
+      },
+      "options": {},
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        },
+        "content-type-builder": {
+          "visible": false
+        }
+      },
+      "attributes": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "configurable": false,
+          "required": true,
+          "unique": true
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "configurable": false,
+          "required": false,
+          "default": ""
+        },
+        "type": {
+          "type": "enumeration",
+          "enum": [
+            "read-only",
+            "full-access",
+            "custom"
+          ],
+          "configurable": false,
+          "required": true,
+          "default": "read-only"
+        },
+        "accessKey": {
+          "type": "string",
+          "minLength": 1,
+          "configurable": false,
+          "required": true
+        },
+        "lastUsedAt": {
+          "type": "datetime",
+          "configurable": false,
+          "required": false
+        },
+        "permissions": {
+          "type": "relation",
+          "target": "admin::api-token-permission",
+          "relation": "oneToMany",
+          "mappedBy": "token",
+          "configurable": false,
+          "required": false
+        },
+        "expiresAt": {
+          "type": "datetime",
+          "configurable": false,
+          "required": false
+        },
+        "lifespan": {
+          "type": "biginteger",
+          "configurable": false,
+          "required": false
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "kind": "collectionType",
+      "__schema__": {
+        "collectionName": "strapi_api_tokens",
+        "info": {
+          "name": "Api Token",
+          "singularName": "api-token",
+          "pluralName": "api-tokens",
+          "displayName": "Api Token",
+          "description": ""
+        },
+        "options": {},
+        "pluginOptions": {
+          "content-manager": {
+            "visible": false
+          },
+          "content-type-builder": {
+            "visible": false
+          }
+        },
+        "attributes": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "configurable": false,
+            "required": true,
+            "unique": true
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "configurable": false,
+            "required": false,
+            "default": ""
+          },
+          "type": {
+            "type": "enumeration",
+            "enum": [
+              "read-only",
+              "full-access",
+              "custom"
+            ],
+            "configurable": false,
+            "required": true,
+            "default": "read-only"
+          },
+          "accessKey": {
+            "type": "string",
+            "minLength": 1,
+            "configurable": false,
+            "required": true
+          },
+          "lastUsedAt": {
+            "type": "datetime",
+            "configurable": false,
+            "required": false
+          },
+          "permissions": {
+            "type": "relation",
+            "target": "admin::api-token-permission",
+            "relation": "oneToMany",
+            "mappedBy": "token",
+            "configurable": false,
+            "required": false
+          },
+          "expiresAt": {
+            "type": "datetime",
+            "configurable": false,
+            "required": false
+          },
+          "lifespan": {
+            "type": "biginteger",
+            "configurable": false,
+            "required": false
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "api-token",
+      "connection": "default",
+      "uid": "admin::api-token",
+      "plugin": "admin",
+      "globalId": "AdminApiToken"
+    },
+    "admin::api-token-permission": {
+      "collectionName": "strapi_api_token_permissions",
+      "info": {
+        "name": "API Token Permission",
+        "description": "",
+        "singularName": "api-token-permission",
+        "pluralName": "api-token-permissions",
+        "displayName": "API Token Permission"
+      },
+      "options": {},
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        },
+        "content-type-builder": {
+          "visible": false
+        }
+      },
+      "attributes": {
+        "action": {
+          "type": "string",
+          "minLength": 1,
+          "configurable": false,
+          "required": true
+        },
+        "token": {
+          "configurable": false,
+          "type": "relation",
+          "relation": "manyToOne",
+          "inversedBy": "permissions",
+          "target": "admin::api-token"
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "kind": "collectionType",
+      "__schema__": {
+        "collectionName": "strapi_api_token_permissions",
+        "info": {
+          "name": "API Token Permission",
+          "description": "",
+          "singularName": "api-token-permission",
+          "pluralName": "api-token-permissions",
+          "displayName": "API Token Permission"
+        },
+        "options": {},
+        "pluginOptions": {
+          "content-manager": {
+            "visible": false
+          },
+          "content-type-builder": {
+            "visible": false
+          }
+        },
+        "attributes": {
+          "action": {
+            "type": "string",
+            "minLength": 1,
+            "configurable": false,
+            "required": true
+          },
+          "token": {
+            "configurable": false,
+            "type": "relation",
+            "relation": "manyToOne",
+            "inversedBy": "permissions",
+            "target": "admin::api-token"
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "api-token-permission",
+      "connection": "default",
+      "uid": "admin::api-token-permission",
+      "plugin": "admin",
+      "globalId": "AdminApiTokenPermission"
+    },
+    "plugin::upload.file": {
+      "collectionName": "files",
+      "info": {
+        "singularName": "file",
+        "pluralName": "files",
+        "displayName": "File",
+        "description": ""
+      },
+      "options": {},
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        },
+        "content-type-builder": {
+          "visible": false
+        }
+      },
+      "attributes": {
+        "name": {
+          "type": "string",
+          "configurable": false,
+          "required": true
+        },
+        "alternativeText": {
+          "type": "string",
+          "configurable": false
+        },
+        "caption": {
+          "type": "string",
+          "configurable": false
+        },
+        "width": {
+          "type": "integer",
+          "configurable": false
+        },
+        "height": {
+          "type": "integer",
+          "configurable": false
+        },
+        "formats": {
+          "type": "json",
+          "configurable": false
+        },
+        "hash": {
+          "type": "string",
+          "configurable": false,
+          "required": true
+        },
+        "ext": {
+          "type": "string",
+          "configurable": false
+        },
+        "mime": {
+          "type": "string",
+          "configurable": false,
+          "required": true
+        },
+        "size": {
+          "type": "decimal",
+          "configurable": false,
+          "required": true
+        },
+        "url": {
+          "type": "string",
+          "configurable": false,
+          "required": true
+        },
+        "previewUrl": {
+          "type": "string",
+          "configurable": false
+        },
+        "provider": {
+          "type": "string",
+          "configurable": false,
+          "required": true
+        },
+        "provider_metadata": {
+          "type": "json",
+          "configurable": false
+        },
+        "related": {
+          "type": "relation",
+          "relation": "morphToMany",
+          "configurable": false
+        },
+        "folder": {
+          "type": "relation",
+          "relation": "manyToOne",
+          "target": "plugin::upload.folder",
+          "inversedBy": "files",
+          "private": true
+        },
+        "folderPath": {
+          "type": "string",
+          "min": 1,
+          "required": true,
+          "private": true
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "indexes": [
+        {
+          "name": "upload_files_folder_path_index",
+          "columns": [
+            "folder_path"
+          ],
+          "type": null
+        }
+      ],
+      "kind": "collectionType",
+      "__schema__": {
+        "collectionName": "files",
+        "info": {
+          "singularName": "file",
+          "pluralName": "files",
+          "displayName": "File",
+          "description": ""
+        },
+        "options": {},
+        "pluginOptions": {
+          "content-manager": {
+            "visible": false
+          },
+          "content-type-builder": {
+            "visible": false
+          }
+        },
+        "attributes": {
+          "name": {
+            "type": "string",
+            "configurable": false,
+            "required": true
+          },
+          "alternativeText": {
+            "type": "string",
+            "configurable": false
+          },
+          "caption": {
+            "type": "string",
+            "configurable": false
+          },
+          "width": {
+            "type": "integer",
+            "configurable": false
+          },
+          "height": {
+            "type": "integer",
+            "configurable": false
+          },
+          "formats": {
+            "type": "json",
+            "configurable": false
+          },
+          "hash": {
+            "type": "string",
+            "configurable": false,
+            "required": true
+          },
+          "ext": {
+            "type": "string",
+            "configurable": false
+          },
+          "mime": {
+            "type": "string",
+            "configurable": false,
+            "required": true
+          },
+          "size": {
+            "type": "decimal",
+            "configurable": false,
+            "required": true
+          },
+          "url": {
+            "type": "string",
+            "configurable": false,
+            "required": true
+          },
+          "previewUrl": {
+            "type": "string",
+            "configurable": false
+          },
+          "provider": {
+            "type": "string",
+            "configurable": false,
+            "required": true
+          },
+          "provider_metadata": {
+            "type": "json",
+            "configurable": false
+          },
+          "related": {
+            "type": "relation",
+            "relation": "morphToMany",
+            "configurable": false
+          },
+          "folder": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "plugin::upload.folder",
+            "inversedBy": "files",
+            "private": true
+          },
+          "folderPath": {
+            "type": "string",
+            "min": 1,
+            "required": true,
+            "private": true
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "file",
+      "connection": "default",
+      "uid": "plugin::upload.file",
+      "plugin": "upload",
+      "globalId": "UploadFile"
+    },
+    "plugin::upload.folder": {
+      "collectionName": "upload_folders",
+      "info": {
+        "singularName": "folder",
+        "pluralName": "folders",
+        "displayName": "Folder"
+      },
+      "options": {},
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        },
+        "content-type-builder": {
+          "visible": false
+        }
+      },
+      "attributes": {
+        "name": {
+          "type": "string",
+          "min": 1,
+          "required": true
+        },
+        "pathId": {
+          "type": "integer",
+          "unique": true,
+          "required": true
+        },
+        "parent": {
+          "type": "relation",
+          "relation": "manyToOne",
+          "target": "plugin::upload.folder",
+          "inversedBy": "children"
+        },
+        "children": {
+          "type": "relation",
+          "relation": "oneToMany",
+          "target": "plugin::upload.folder",
+          "mappedBy": "parent"
+        },
+        "files": {
+          "type": "relation",
+          "relation": "oneToMany",
+          "target": "plugin::upload.file",
+          "mappedBy": "folder"
+        },
+        "path": {
+          "type": "string",
+          "min": 1,
+          "required": true
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "indexes": [
+        {
+          "name": "upload_folders_path_id_index",
+          "columns": [
+            "path_id"
+          ],
+          "type": "unique"
+        },
+        {
+          "name": "upload_folders_path_index",
+          "columns": [
+            "path"
+          ],
+          "type": "unique"
+        }
+      ],
+      "kind": "collectionType",
+      "__schema__": {
+        "collectionName": "upload_folders",
+        "info": {
+          "singularName": "folder",
+          "pluralName": "folders",
+          "displayName": "Folder"
+        },
+        "options": {},
+        "pluginOptions": {
+          "content-manager": {
+            "visible": false
+          },
+          "content-type-builder": {
+            "visible": false
+          }
+        },
+        "attributes": {
+          "name": {
+            "type": "string",
+            "min": 1,
+            "required": true
+          },
+          "pathId": {
+            "type": "integer",
+            "unique": true,
+            "required": true
+          },
+          "parent": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "plugin::upload.folder",
+            "inversedBy": "children"
+          },
+          "children": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "plugin::upload.folder",
+            "mappedBy": "parent"
+          },
+          "files": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "plugin::upload.file",
+            "mappedBy": "folder"
+          },
+          "path": {
+            "type": "string",
+            "min": 1,
+            "required": true
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "folder",
+      "connection": "default",
+      "uid": "plugin::upload.folder",
+      "plugin": "upload",
+      "globalId": "UploadFolder"
+    },
+    "plugin::i18n.locale": {
+      "info": {
+        "singularName": "locale",
+        "pluralName": "locales",
+        "collectionName": "locales",
+        "displayName": "Locale",
+        "description": ""
+      },
+      "options": {
+        "draftAndPublish": false
+      },
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        },
+        "content-type-builder": {
+          "visible": false
+        }
+      },
+      "attributes": {
+        "name": {
+          "type": "string",
+          "min": 1,
+          "max": 50,
+          "configurable": false
+        },
+        "code": {
+          "type": "string",
+          "unique": true,
+          "configurable": false
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "kind": "collectionType",
+      "__schema__": {
+        "info": {
+          "singularName": "locale",
+          "pluralName": "locales",
+          "collectionName": "locales",
+          "displayName": "Locale",
+          "description": ""
+        },
+        "options": {
+          "draftAndPublish": false
+        },
+        "pluginOptions": {
+          "content-manager": {
+            "visible": false
+          },
+          "content-type-builder": {
+            "visible": false
+          }
+        },
+        "attributes": {
+          "name": {
+            "type": "string",
+            "min": 1,
+            "max": 50,
+            "configurable": false
+          },
+          "code": {
+            "type": "string",
+            "unique": true,
+            "configurable": false
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "locale",
+      "connection": "default",
+      "uid": "plugin::i18n.locale",
+      "plugin": "i18n",
+      "collectionName": "i18n_locale",
+      "globalId": "I18NLocale"
+    },
+    "plugin::users-permissions.permission": {
+      "collectionName": "up_permissions",
+      "info": {
+        "name": "permission",
+        "description": "",
+        "singularName": "permission",
+        "pluralName": "permissions",
+        "displayName": "Permission"
+      },
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        },
+        "content-type-builder": {
+          "visible": false
+        }
+      },
+      "attributes": {
+        "action": {
+          "type": "string",
+          "required": true,
+          "configurable": false
+        },
+        "role": {
+          "type": "relation",
+          "relation": "manyToOne",
+          "target": "plugin::users-permissions.role",
+          "inversedBy": "permissions",
+          "configurable": false
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "kind": "collectionType",
+      "__schema__": {
+        "collectionName": "up_permissions",
+        "info": {
+          "name": "permission",
+          "description": "",
+          "singularName": "permission",
+          "pluralName": "permissions",
+          "displayName": "Permission"
+        },
+        "pluginOptions": {
+          "content-manager": {
+            "visible": false
+          },
+          "content-type-builder": {
+            "visible": false
+          }
+        },
+        "attributes": {
+          "action": {
+            "type": "string",
+            "required": true,
+            "configurable": false
+          },
+          "role": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "plugin::users-permissions.role",
+            "inversedBy": "permissions",
+            "configurable": false
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "permission",
+      "connection": "default",
+      "uid": "plugin::users-permissions.permission",
+      "plugin": "users-permissions",
+      "globalId": "UsersPermissionsPermission"
+    },
+    "plugin::users-permissions.role": {
+      "collectionName": "up_roles",
+      "info": {
+        "name": "role",
+        "description": "",
+        "singularName": "role",
+        "pluralName": "roles",
+        "displayName": "Role"
+      },
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        },
+        "content-type-builder": {
+          "visible": false
+        }
+      },
+      "attributes": {
+        "name": {
+          "type": "string",
+          "minLength": 3,
+          "required": true,
+          "configurable": false
+        },
+        "description": {
+          "type": "string",
+          "configurable": false
+        },
+        "type": {
+          "type": "string",
+          "unique": true,
+          "configurable": false
+        },
+        "permissions": {
+          "type": "relation",
+          "relation": "oneToMany",
+          "target": "plugin::users-permissions.permission",
+          "mappedBy": "role",
+          "configurable": false
+        },
+        "users": {
+          "type": "relation",
+          "relation": "oneToMany",
+          "target": "plugin::users-permissions.user",
+          "mappedBy": "role",
+          "configurable": false
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "kind": "collectionType",
+      "__schema__": {
+        "collectionName": "up_roles",
+        "info": {
+          "name": "role",
+          "description": "",
+          "singularName": "role",
+          "pluralName": "roles",
+          "displayName": "Role"
+        },
+        "pluginOptions": {
+          "content-manager": {
+            "visible": false
+          },
+          "content-type-builder": {
+            "visible": false
+          }
+        },
+        "attributes": {
+          "name": {
+            "type": "string",
+            "minLength": 3,
+            "required": true,
+            "configurable": false
+          },
+          "description": {
+            "type": "string",
+            "configurable": false
+          },
+          "type": {
+            "type": "string",
+            "unique": true,
+            "configurable": false
+          },
+          "permissions": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "plugin::users-permissions.permission",
+            "mappedBy": "role",
+            "configurable": false
+          },
+          "users": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "plugin::users-permissions.user",
+            "mappedBy": "role",
+            "configurable": false
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "role",
+      "connection": "default",
+      "uid": "plugin::users-permissions.role",
+      "plugin": "users-permissions",
+      "globalId": "UsersPermissionsRole"
+    },
+    "plugin::users-permissions.user": {
+      "collectionName": "up_users",
+      "info": {
+        "name": "user",
+        "description": "",
+        "singularName": "user",
+        "pluralName": "users",
+        "displayName": "User"
+      },
+      "options": {
+        "draftAndPublish": false,
+        "timestamps": true
+      },
+      "attributes": {
+        "username": {
+          "type": "string",
+          "minLength": 3,
+          "unique": true,
+          "configurable": false,
+          "required": true
+        },
+        "email": {
+          "type": "email",
+          "minLength": 6,
+          "configurable": false,
+          "required": true
+        },
+        "provider": {
+          "type": "string",
+          "configurable": false
+        },
+        "password": {
+          "type": "password",
+          "minLength": 6,
+          "configurable": false,
+          "private": true
+        },
+        "resetPasswordToken": {
+          "type": "string",
+          "configurable": false,
+          "private": true
+        },
+        "confirmationToken": {
+          "type": "string",
+          "configurable": false,
+          "private": true
+        },
+        "confirmed": {
+          "type": "boolean",
+          "default": false,
+          "configurable": false
+        },
+        "blocked": {
+          "type": "boolean",
+          "default": false,
+          "configurable": false
+        },
+        "role": {
+          "type": "relation",
+          "relation": "manyToOne",
+          "target": "plugin::users-permissions.role",
+          "inversedBy": "users",
+          "configurable": false
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "config": {
+        "attributes": {
+          "resetPasswordToken": {
+            "hidden": true
+          },
+          "confirmationToken": {
+            "hidden": true
+          },
+          "provider": {
+            "hidden": true
+          }
+        }
+      },
+      "kind": "collectionType",
+      "__schema__": {
+        "collectionName": "up_users",
+        "info": {
+          "name": "user",
+          "description": "",
+          "singularName": "user",
+          "pluralName": "users",
+          "displayName": "User"
+        },
+        "options": {
+          "draftAndPublish": false,
+          "timestamps": true
+        },
+        "attributes": {
+          "username": {
+            "type": "string",
+            "minLength": 3,
+            "unique": true,
+            "configurable": false,
+            "required": true
+          },
+          "email": {
+            "type": "email",
+            "minLength": 6,
+            "configurable": false,
+            "required": true
+          },
+          "provider": {
+            "type": "string",
+            "configurable": false
+          },
+          "password": {
+            "type": "password",
+            "minLength": 6,
+            "configurable": false,
+            "private": true
+          },
+          "resetPasswordToken": {
+            "type": "string",
+            "configurable": false,
+            "private": true
+          },
+          "confirmationToken": {
+            "type": "string",
+            "configurable": false,
+            "private": true
+          },
+          "confirmed": {
+            "type": "boolean",
+            "default": false,
+            "configurable": false
+          },
+          "blocked": {
+            "type": "boolean",
+            "default": false,
+            "configurable": false
+          },
+          "role": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "plugin::users-permissions.role",
+            "inversedBy": "users",
+            "configurable": false
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "user",
+      "connection": "default",
+      "uid": "plugin::users-permissions.user",
+      "plugin": "users-permissions",
+      "globalId": "UsersPermissionsUser"
+    },
+    "api::blockchain.blockchain": {
+      "kind": "collectionType",
+      "collectionName": "blockchains",
+      "info": {
+        "singularName": "blockchain",
+        "pluralName": "blockchains",
+        "displayName": "Blockchain"
+      },
+      "options": {
+        "draftAndPublish": true
+      },
+      "pluginOptions": {},
+      "attributes": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "grants": {
+          "type": "relation",
+          "relation": "manyToMany",
+          "target": "api::grant.grant",
+          "inversedBy": "blockchains"
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "publishedAt": {
+          "type": "datetime",
+          "configurable": false,
+          "writable": true,
+          "visible": false
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "__schema__": {
+        "collectionName": "blockchains",
+        "info": {
+          "singularName": "blockchain",
+          "pluralName": "blockchains",
+          "displayName": "Blockchain"
+        },
+        "options": {
+          "draftAndPublish": true
+        },
+        "pluginOptions": {},
+        "attributes": {
+          "name": {
+            "type": "string",
+            "required": true
+          },
+          "grants": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::grant.grant",
+            "inversedBy": "blockchains"
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "blockchain",
+      "connection": "default",
+      "uid": "api::blockchain.blockchain",
+      "apiName": "blockchain",
+      "globalId": "Blockchain",
+      "actions": {},
+      "lifecycles": {}
+    },
+    "api::currency.currency": {
+      "kind": "collectionType",
+      "collectionName": "currencies",
+      "info": {
+        "singularName": "currency",
+        "pluralName": "currencies",
+        "displayName": "Currency",
+        "description": ""
+      },
+      "options": {
+        "draftAndPublish": false
+      },
+      "pluginOptions": {},
+      "attributes": {
+        "name": {
+          "pluginOptions": {},
+          "type": "string",
+          "required": true
+        },
+        "symbol": {
+          "pluginOptions": {},
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "__schema__": {
+        "collectionName": "currencies",
+        "info": {
+          "singularName": "currency",
+          "pluralName": "currencies",
+          "displayName": "Currency",
+          "description": ""
+        },
+        "options": {
+          "draftAndPublish": false
+        },
+        "pluginOptions": {},
+        "attributes": {
+          "name": {
+            "pluginOptions": {},
+            "type": "string",
+            "required": true
+          },
+          "symbol": {
+            "pluginOptions": {},
+            "type": "string",
+            "required": true
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "currency",
+      "connection": "default",
+      "uid": "api::currency.currency",
+      "apiName": "currency",
+      "globalId": "Currency",
+      "actions": {},
+      "lifecycles": {}
+    },
+    "api::grant.grant": {
+      "kind": "collectionType",
+      "collectionName": "grants",
+      "info": {
+        "singularName": "grant",
+        "pluralName": "grants",
+        "displayName": "Grant",
+        "description": ""
+      },
+      "options": {
+        "draftAndPublish": true
+      },
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "attributes": {
+        "name": {
+          "pluginOptions": {
+            "i18n": {
+              "localized": false
+            }
+          },
+          "type": "string",
+          "required": true
+        },
+        "logo": {
+          "type": "media",
+          "multiple": false,
+          "required": false,
+          "allowedTypes": [
+            "images"
+          ],
+          "pluginOptions": {
+            "i18n": {
+              "localized": false
+            }
+          }
+        },
+        "fundingMinimum": {
+          "type": "component",
+          "repeatable": false,
+          "pluginOptions": {
+            "i18n": {
+              "localized": false
+            }
+          },
+          "component": "shared.currency-token-value"
+        },
+        "fundingMaximum": {
+          "type": "component",
+          "repeatable": false,
+          "pluginOptions": {
+            "i18n": {
+              "localized": true
+            }
+          },
+          "component": "shared.currency-token-value"
+        },
+        "description": {
+          "pluginOptions": {
+            "i18n": {
+              "localized": true
+            }
+          },
+          "type": "text"
+        },
+        "active": {
+          "pluginOptions": {
+            "i18n": {
+              "localized": false
+            }
+          },
+          "type": "boolean",
+          "default": true,
+          "required": true
+        },
+        "linkApplication": {
+          "pluginOptions": {
+            "i18n": {
+              "localized": false
+            }
+          },
+          "type": "string",
+          "required": true
+        },
+        "linkInfo": {
+          "pluginOptions": {
+            "i18n": {
+              "localized": false
+            }
+          },
+          "type": "string"
+        },
+        "socials": {
+          "type": "component",
+          "repeatable": false,
+          "pluginOptions": {
+            "i18n": {
+              "localized": true
+            }
+          },
+          "component": "shared.socials"
+        },
+        "blockchains": {
+          "type": "relation",
+          "relation": "manyToMany",
+          "target": "api::blockchain.blockchain",
+          "inversedBy": "grants"
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "publishedAt": {
+          "type": "datetime",
+          "configurable": false,
+          "writable": true,
+          "visible": false
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "localizations": {
+          "writable": true,
+          "private": false,
+          "configurable": false,
+          "visible": false,
+          "type": "relation",
+          "relation": "oneToMany",
+          "target": "api::grant.grant"
+        },
+        "locale": {
+          "writable": true,
+          "private": false,
+          "configurable": false,
+          "visible": false,
+          "type": "string"
+        }
+      },
+      "__schema__": {
+        "collectionName": "grants",
+        "info": {
+          "singularName": "grant",
+          "pluralName": "grants",
+          "displayName": "Grant",
+          "description": ""
+        },
+        "options": {
+          "draftAndPublish": true
+        },
+        "pluginOptions": {
+          "i18n": {
+            "localized": true
+          }
+        },
+        "attributes": {
+          "name": {
+            "pluginOptions": {
+              "i18n": {
+                "localized": false
+              }
+            },
+            "type": "string",
+            "required": true
+          },
+          "logo": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": [
+              "images"
+            ],
+            "pluginOptions": {
+              "i18n": {
+                "localized": false
+              }
+            }
+          },
+          "fundingMinimum": {
+            "type": "component",
+            "repeatable": false,
+            "pluginOptions": {
+              "i18n": {
+                "localized": false
+              }
+            },
+            "component": "shared.currency-token-value"
+          },
+          "fundingMaximum": {
+            "type": "component",
+            "repeatable": false,
+            "pluginOptions": {
+              "i18n": {
+                "localized": true
+              }
+            },
+            "component": "shared.currency-token-value"
+          },
+          "description": {
+            "pluginOptions": {
+              "i18n": {
+                "localized": true
+              }
+            },
+            "type": "text"
+          },
+          "active": {
+            "pluginOptions": {
+              "i18n": {
+                "localized": false
+              }
+            },
+            "type": "boolean",
+            "default": true,
+            "required": true
+          },
+          "linkApplication": {
+            "pluginOptions": {
+              "i18n": {
+                "localized": false
+              }
+            },
+            "type": "string",
+            "required": true
+          },
+          "linkInfo": {
+            "pluginOptions": {
+              "i18n": {
+                "localized": false
+              }
+            },
+            "type": "string"
+          },
+          "socials": {
+            "type": "component",
+            "repeatable": false,
+            "pluginOptions": {
+              "i18n": {
+                "localized": true
+              }
+            },
+            "component": "shared.socials"
+          },
+          "blockchains": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::blockchain.blockchain",
+            "inversedBy": "grants"
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "grant",
+      "connection": "default",
+      "uid": "api::grant.grant",
+      "apiName": "grant",
+      "globalId": "Grant",
+      "actions": {},
+      "lifecycles": {}
+    },
+    "api::post.post": {
+      "kind": "collectionType",
+      "collectionName": "posts",
+      "info": {
+        "singularName": "post",
+        "pluralName": "posts",
+        "displayName": "Post",
+        "description": ""
+      },
+      "options": {
+        "draftAndPublish": true
+      },
+      "pluginOptions": {},
+      "attributes": {
+        "title": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "publishedAt": {
+          "type": "datetime",
+          "configurable": false,
+          "writable": true,
+          "visible": false
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "__schema__": {
+        "collectionName": "posts",
+        "info": {
+          "singularName": "post",
+          "pluralName": "posts",
+          "displayName": "Post",
+          "description": ""
+        },
+        "options": {
+          "draftAndPublish": true
+        },
+        "pluginOptions": {},
+        "attributes": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "post",
+      "connection": "default",
+      "uid": "api::post.post",
+      "apiName": "post",
+      "globalId": "Post",
+      "actions": {},
+      "lifecycles": {}
+    },
+    "api::token.token": {
+      "kind": "collectionType",
+      "collectionName": "tokens",
+      "info": {
+        "singularName": "token",
+        "pluralName": "tokens",
+        "displayName": "Token",
+        "description": ""
+      },
+      "options": {
+        "draftAndPublish": false
+      },
+      "pluginOptions": {},
+      "attributes": {
+        "name": {
+          "pluginOptions": {},
+          "type": "string",
+          "required": true
+        },
+        "symbol": {
+          "pluginOptions": {},
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "__schema__": {
+        "collectionName": "tokens",
+        "info": {
+          "singularName": "token",
+          "pluralName": "tokens",
+          "displayName": "Token",
+          "description": ""
+        },
+        "options": {
+          "draftAndPublish": false
+        },
+        "pluginOptions": {},
+        "attributes": {
+          "name": {
+            "pluginOptions": {},
+            "type": "string",
+            "required": true
+          },
+          "symbol": {
+            "pluginOptions": {},
+            "type": "string",
+            "required": true
+          }
+        },
+        "kind": "collectionType"
+      },
+      "modelType": "contentType",
+      "modelName": "token",
+      "connection": "default",
+      "uid": "api::token.token",
+      "apiName": "token",
+      "globalId": "Token",
+      "actions": {},
+      "lifecycles": {}
+    }
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}
