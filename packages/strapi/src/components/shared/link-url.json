@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_link_urls",
+  "info": {
+    "displayName": "LinkUrl",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "target": {
+      "type": "enumeration",
+      "enum": [
+        "_blank"
+      ]
+    }
+  }
+}

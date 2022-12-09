@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blockchains",
+  "info": {
+    "singularName": "blockchain",
+    "pluralName": "blockchains",
+    "displayName": "Blockchain"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "grants": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::grant.grant",
+      "inversedBy": "blockchains"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_socials",
+  "info": {
+    "displayName": "Socials",
+    "icon": "globe",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "twitter": {
+      "type": "string",
+      "required": false
+    },
+    "discord": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "telegram": {
+      "type": "string"
+    }
+  }
+}

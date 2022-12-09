@@ -5,6 +5,191 @@
   "permissions": [
     {
       "action": "plugin::content-manager.explorer.create",
+      "subject": "api::blockchain.blockchain",
+      "properties": {
+        "fields": [
+          "name",
+          "grants"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::blockchain.blockchain",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::blockchain.blockchain",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::blockchain.blockchain",
+      "properties": {
+        "fields": [
+          "name",
+          "grants"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::blockchain.blockchain",
+      "properties": {
+        "fields": [
+          "name",
+          "grants"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "subject": "api::currency.currency",
+      "properties": {
+        "fields": [
+          "name",
+          "symbol"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::currency.currency",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::currency.currency",
+      "properties": {
+        "fields": [
+          "name",
+          "symbol"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::currency.currency",
+      "properties": {
+        "fields": [
+          "name",
+          "symbol"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "subject": "api::grant.grant",
+      "properties": {
+        "fields": [
+          "name",
+          "logo",
+          "fundingMinimum.value",
+          "fundingMinimum.currency",
+          "fundingMaximum.value",
+          "fundingMaximum.currency",
+          "description",
+          "active",
+          "linkApplication",
+          "linkInfo",
+          "socials.twitter",
+          "socials.discord",
+          "socials.website",
+          "socials.telegram",
+          "blockchains"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::grant.grant",
+      "properties": {
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::grant.grant",
+      "properties": {
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::grant.grant",
+      "properties": {
+        "fields": [
+          "name",
+          "logo",
+          "fundingMinimum.value",
+          "fundingMinimum.currency",
+          "fundingMaximum.value",
+          "fundingMaximum.currency",
+          "description",
+          "active",
+          "linkApplication",
+          "linkInfo",
+          "socials.twitter",
+          "socials.discord",
+          "socials.website",
+          "socials.telegram",
+          "blockchains"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::grant.grant",
+      "properties": {
+        "fields": [
+          "name",
+          "logo",
+          "fundingMinimum.value",
+          "fundingMinimum.currency",
+          "fundingMaximum.value",
+          "fundingMaximum.currency",
+          "description",
+          "active",
+          "linkApplication",
+          "linkInfo",
+          "socials.twitter",
+          "socials.discord",
+          "socials.website",
+          "socials.telegram",
+          "blockchains"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
       "subject": "api::post.post",
       "properties": {
         "fields": [
@@ -41,6 +226,45 @@
       "properties": {
         "fields": [
           "title"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "subject": "api::token.token",
+      "properties": {
+        "fields": [
+          "name",
+          "symbol"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::token.token",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::token.token",
+      "properties": {
+        "fields": [
+          "name",
+          "symbol"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::token.token",
+      "properties": {
+        "fields": [
+          "name",
+          "symbol"
         ]
       },
       "conditions": []
