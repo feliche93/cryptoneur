@@ -13,22 +13,26 @@ const options: StrapiOptions = {
 
 const strapi = new Strapi(options);
 
-async function getBlogPosts() {
-    const { data, meta } = await strapi.find('blog-posts', {
-        populate:
-    });
-}
-export default strapi;
+export { strapi };
+
+// async function getBlogPosts() {
+//     const { data, meta } = await strapi.find('blog-posts', {
+//         populate:
+//     });
+// }
+// export default strapi;
 
 // async function getStrapiData() {
-//     const { data, meta } = await strapi.findOne('products', 1, {
-//         populate: [
-//             "subscription",
-//             "trial",
-//             "features",
-//         ]
-//     });
-//     console.log(data);
+
+//     try {
+//         const { data, meta } = await strapi.findOne('posts', 1, {
+//             populate: "deep"
+//         });
+//         console.log(data);
+//     } catch (error) {
+//         console.log(error);
+//     }
+
 // }
 
 // getStrapiData();

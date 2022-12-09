@@ -18,7 +18,8 @@
     "@strapi/strapi": "4.5.3",
     "better-sqlite3": "7.4.6",
     "pg": "^8.8.0",
-    "strapi-plugin-config-sync": "^1.1.0"
+    "strapi-plugin-config-sync": "^1.1.0",
+    "strapi-plugin-populate-deep": "^1.1.2"
   },
   "author": {
     "name": "A Strapi developer"
@@ -29,6 +30,14 @@
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
     "npm": ">=6.0.0"
+  },
+  "quokka": {
+    "plugins": [
+      "dotenv-quokka-plugin"
+    ],
+    "dotenv": {
+      "path": "./src/.env.local"
+    }
   },
   "license": "MIT"
 }
