@@ -1,18 +1,19 @@
 'use client'
 
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/24/outline'
 import { FC } from 'react'
-import { StarIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 
-export interface ModalProps {}
-export const Modal: FC<ModalProps> = () => {
-  const [open, setOpen] = useState(true)
+export interface ModalProps {
+  index: number
+  joke: string
+  open: boolean
+  setOpen: (bool: boolean) => void
+}
 
+export const Modal: FC<ModalProps> = ({ index, joke, open, setOpen }) => {
   const cancelButtonRef = useRef(null)
-
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -41,41 +42,31 @@ export const Modal: FC<ModalProps> = () => {
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-base-200 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <div>
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-warning">
-                    <StarIcon className="h-6 w-6 text-warning-content" aria-hidden="true" />
+                  <div className="mx-auto flex items-center justify-center">
+                    <Dialog.Title as="h3" className="text-lg font-medium leading-6">
+                      Day {index}
+                    </Dialog.Title>
                   </div>
-                  <div className="flex justify-center">
+                  <div className="mt-4 flex justify-center">
                     <Image
-                      src="/logo_transparent.png"
+                      src={`/vitalik${index + 1}.png`}
                       alt="Picture of the author"
                       width={400}
                       height={400}
                     />
                   </div>
-                  <div className="mt-3 text-center sm:mt-5">
-                    <Dialog.Title as="h3" className="text-lg font-medium leading-6">
-                      Day 1
-                    </Dialog.Title>
-                    <div className="mt-2">
-                      <p className="text-sm text-base-content/80">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius aliquam
-                        laudantium explicabo pariatur iste dolorem animi vitae error totam. At
-                        sapiente aliquam accusamus facere veritatis.
-                      </p>
-                    </div>
-                  </div>
                 </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                   <button
                     type="button"
-                    className="btn-primary btn w-full sm:col-start-2"
+                    className="btn-secondary btn w-full focus:outline-none sm:col-start-2"
                     onClick={() => setOpen(false)}
                   >
                     Mint as NFT
                   </button>
                   <button
                     type="button"
-                    className="sm:col-start-2sm:col-start-1 btn-outline btn mt-3 w-full sm:mt-0"
+                    className="btn mt-3 w-full focus:outline-none sm:col-start-1 sm:mt-0"
                     onClick={() => setOpen(false)}
                     ref={cancelButtonRef}
                   >

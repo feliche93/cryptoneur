@@ -1,17 +1,64 @@
+'use client'
+
+import { useState } from 'react'
+import { Card } from '@components/adventCalendar/Card'
+import { Header } from '@components/adventCalendar/Header'
+import { Modal } from '@components/adventCalendar/Modal'
+
 export default function Home() {
+  const [open, setOpen] = useState(false)
+  const [activeIndex, setActiveIndex] = useState<number>(0)
+  const [jokes] = useState<string[]>([
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+  ])
+
   return (
-    <div className="relative px-4 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-10 lg:pb-28">
-      <div>
-        <div className="card w-96 max-w-lg bg-base-100 shadow-xl">
-          <div className="card-body">
-            <h2 className="card-title">Card title!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn-primary btn">Buy Now</button>
-            </div>
-          </div>
+    <>
+      <Header />
+      <div className="flex justify-center">
+        <div className="grid grid-cols-4 gap-12">
+          {jokes.map((joke, index) => {
+            if (index < 24) {
+              return (
+                <Card
+                  key={joke + index}
+                  index={index + 1}
+                  open={open}
+                  setOpen={setOpen}
+                  setActiveIndex={setActiveIndex}
+                />
+              )
+            }
+          })}
         </div>
       </div>
-    </div>
+      <div className="mt-12 flex justify-center">
+        <Card index={25} open={open} setOpen={setOpen} setActiveIndex={setActiveIndex} />
+      </div>
+      <Modal joke={jokes[activeIndex]} index={activeIndex} open={open} setOpen={setOpen} />
+    </>
   )
 }
