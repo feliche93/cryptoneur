@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { FC } from 'react'
+import dayjs from 'dayjs'
 
 export interface BlogPostCardProps {
   post: any
@@ -39,33 +40,33 @@ export const BlogPostCard: FC<BlogPostCardProps> = ({ post, id }) => {
             <p className="mt-3 text-base text-base-content/80">{post.description}</p>
           </a>
         </div>
-        {/* <div className="mt-6 flex items-center">
+        <div className="mt-6 flex items-center">
           <div className="flex-shrink-0">
-            <a href={post.author.href}>
-              <span className="sr-only">{post.author.name}</span>
+            <a href={post?.authors?.data[0]?.attributes?.name}>
+              <span className="sr-only">{post?.authors?.data[0]?.attributes?.name}</span>
               <Image
-                width={60}
-                height={60}
+                width={50}
+                height={50}
                 className="rounded-full object-contain"
-                src={post.author.avatar_url}
-                alt={post.author.name}
+                src={post.authors.data[0].attributes?.avatar?.data?.attributes?.url}
+                alt={post?.authors?.data[0]?.attributes?.name}
               />
             </a>
           </div>
           <div className="ml-3">
-            <p className="text-sm font-medium text-gray-900">
-              <a href={post.author.href} className="hover:underline">
-                {post.author.name}
+            <p className="text-sm font-medium">
+              <a href={post?.authors?.data[0]?.attributes?.name} className="hover:underline">
+                {post?.authors?.data[0]?.attributes?.name}
               </a>
             </p>
-            <div className="flex space-x-1 text-sm text-gray-600">
-              <time dateTime={post.datetime}>{post.date}</time>
-              TODO: Add reading time
+            <div className="flex space-x-1 text-sm text-base-content/80">
+              <time dateTime={post?.createdAt}>{post?.createdAt}</time>
+              {/* TODO: Add reading time
               <span aria-hidden="true">&middot;</span>
-              <span>{post.readingTime} read</span>
+              <span>{post.readingTime} read</span> */}
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   )
