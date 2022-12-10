@@ -55,9 +55,9 @@ export default function Home() {
           })}
         </div>
       </div>
-      <div className="mt-12 flex justify-center">
+      {/* <div className="mt-12 flex justify-center">
         <Card index={25} open={open} setOpen={setOpen} setActiveIndex={setActiveIndex} />
-      </div>
+      </div> */}
       <Modal joke={jokes[activeIndex]} index={activeIndex} open={open} setOpen={setOpen} />
     </>
   )

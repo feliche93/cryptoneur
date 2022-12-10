@@ -49,7 +49,7 @@ export const Modal: FC<ModalProps> = ({ index, joke, open, setOpen }) => {
                   </div>
                   <div className="mt-4 flex justify-center">
                     <Image
-                      src={`/vitalik${index + 1}.png`}
+                      src={`/advent-calendar/vitalik${index + 1}.png`}
                       alt="Picture of the author"
                       width={400}
                       height={400}
@@ -58,6 +58,7 @@ export const Modal: FC<ModalProps> = ({ index, joke, open, setOpen }) => {
                 </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                   <button
+                    disabled={true}
                     type="button"
                     className="btn-secondary btn w-full focus:outline-none sm:col-start-2"
                     onClick={() => setOpen(false)}
