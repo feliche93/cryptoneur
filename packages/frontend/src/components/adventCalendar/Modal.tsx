@@ -4,6 +4,7 @@ import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { FC } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export interface ModalProps {
   index: number
@@ -57,14 +58,13 @@ export const Modal: FC<ModalProps> = ({ index, joke, open, setOpen }) => {
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                  <button
-                    disabled={true}
-                    type="button"
+                  <Link
+                    href={'/advent-calendar/mint'}
                     className="btn-secondary btn w-full focus:outline-none sm:col-start-2"
                     onClick={() => setOpen(false)}
                   >
-                    Mint as NFT
-                  </button>
+                    Mint random day as NFT
+                  </Link>
                   <button
                     type="button"
                     className="btn mt-3 w-full focus:outline-none sm:col-start-1 sm:mt-0"

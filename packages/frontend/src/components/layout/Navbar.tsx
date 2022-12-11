@@ -12,6 +12,7 @@ import { usePathname } from 'next/navigation'
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Gas Fee Caculator', href: '/gas-fees-calculator' },
+  { name: 'NFT Advent Calendar', href: '/advent-calendar' },
   // { name: "Web3 Journey", href: "/web3-journey" },
   // { name: "Blog", href: "/blog" },
   // { name: "Portfolio", href: "/portfolio" },
