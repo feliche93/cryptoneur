@@ -5,6 +5,66 @@
   "permissions": [
     {
       "action": "plugin::content-manager.explorer.create",
+      "subject": "api::author.author",
+      "properties": {
+        "fields": [
+          "name",
+          "socials.twitter",
+          "socials.discord",
+          "socials.website",
+          "socials.telegram",
+          "avatar",
+          "posts"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::author.author",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::author.author",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::author.author",
+      "properties": {
+        "fields": [
+          "name",
+          "socials.twitter",
+          "socials.discord",
+          "socials.website",
+          "socials.telegram",
+          "avatar",
+          "posts"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::author.author",
+      "properties": {
+        "fields": [
+          "name",
+          "socials.twitter",
+          "socials.discord",
+          "socials.website",
+          "socials.telegram",
+          "avatar",
+          "posts"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
       "subject": "api::blockchain.blockchain",
       "properties": {
         "fields": [
@@ -193,7 +253,13 @@
       "subject": "api::post.post",
       "properties": {
         "fields": [
-          "title"
+          "title",
+          "slug",
+          "description",
+          "cover",
+          "content",
+          "authors",
+          "tags"
         ]
       },
       "conditions": []
@@ -215,7 +281,13 @@
       "subject": "api::post.post",
       "properties": {
         "fields": [
-          "title"
+          "title",
+          "slug",
+          "description",
+          "cover",
+          "content",
+          "authors",
+          "tags"
         ]
       },
       "conditions": []
@@ -225,7 +297,68 @@
       "subject": "api::post.post",
       "properties": {
         "fields": [
-          "title"
+          "title",
+          "slug",
+          "description",
+          "cover",
+          "content",
+          "authors",
+          "tags"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "subject": "api::tag.tag",
+      "properties": {
+        "fields": [
+          "name",
+          "color",
+          "posts"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::tag.tag",
+      "properties": {
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::tag.tag",
+      "properties": {
+        "fields": [
+          "name",
+          "color",
+          "posts"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::tag.tag",
+      "properties": {
+        "fields": [
+          "name",
+          "color",
+          "posts"
+        ],
+        "locales": [
+          "en"
         ]
       },
       "conditions": []

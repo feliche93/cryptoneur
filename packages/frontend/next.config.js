@@ -3,6 +3,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  images: {
+    domains: ['cryptoneur-prod.s3.us-west-2.amazonaws.com'],
+  },
   "typescript": {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if

@@ -22,7 +22,7 @@
       },
       "title": {
         "edit": {
-          "label": "title",
+          "label": "Title",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -32,6 +32,92 @@
           "label": "title",
           "searchable": true,
           "sortable": true
+        }
+      },
+      "slug": {
+        "edit": {
+          "label": "Slug",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "slug",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "description": {
+        "edit": {
+          "label": "Description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "cover": {
+        "edit": {
+          "label": "Cover",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "cover",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "content": {
+        "edit": {
+          "label": "Content",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "content",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "authors": {
+        "edit": {
+          "label": "Authors",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "authors",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "tags": {
+        "edit": {
+          "label": "Tags",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "tags",
+          "searchable": false,
+          "sortable": false
         }
       },
       "createdAt": {
@@ -64,19 +150,49 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "title",
-        "createdAt",
-        "updatedAt"
-      ],
       "edit": [
         [
           {
             "name": "title",
             "size": 6
+          },
+          {
+            "name": "slug",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "description",
+            "size": 6
+          },
+          {
+            "name": "cover",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "authors",
+            "size": 6
+          },
+          {
+            "name": "tags",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "content",
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "title",
+        "createdAt",
+        "updatedAt"
       ]
     }
   },
