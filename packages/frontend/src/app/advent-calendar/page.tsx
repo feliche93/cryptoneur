@@ -39,7 +39,7 @@ export default function Home() {
     <>
       <Header />
       <div className="flex justify-center">
-        <div className="grid grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {jokes.map((joke, index) => {
             if (index < 24) {
               return (
