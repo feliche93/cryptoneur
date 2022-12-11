@@ -22,7 +22,7 @@
       },
       "name": {
         "edit": {
-          "label": "Name",
+          "label": "name",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -36,7 +36,7 @@
       },
       "color": {
         "edit": {
-          "label": "Color",
+          "label": "color",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -97,7 +97,7 @@
         "id",
         "name",
         "color",
-        "createdAt"
+        "posts"
       ],
       "edit": [
         [

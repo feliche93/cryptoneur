@@ -36,7 +36,7 @@
       },
       "slug": {
         "edit": {
-          "label": "Slug",
+          "label": "slug",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -50,7 +50,7 @@
       },
       "description": {
         "edit": {
-          "label": "Description",
+          "label": "description",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -64,7 +64,7 @@
       },
       "cover": {
         "edit": {
-          "label": "Cover",
+          "label": "cover",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -78,7 +78,7 @@
       },
       "content": {
         "edit": {
-          "label": "Content",
+          "label": "content",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -92,7 +92,7 @@
       },
       "authors": {
         "edit": {
-          "label": "Authors",
+          "label": "authors",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -107,7 +107,7 @@
       },
       "tags": {
         "edit": {
-          "label": "Tags",
+          "label": "tags",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -150,6 +150,12 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "title",
+        "createdAt",
+        "updatedAt"
+      ],
       "edit": [
         [
           {
@@ -173,6 +179,12 @@
         ],
         [
           {
+            "name": "content",
+            "size": 12
+          }
+        ],
+        [
+          {
             "name": "authors",
             "size": 6
           },
@@ -180,19 +192,7 @@
             "name": "tags",
             "size": 6
           }
-        ],
-        [
-          {
-            "name": "content",
-            "size": 12
-          }
         ]
-      ],
-      "list": [
-        "id",
-        "title",
-        "createdAt",
-        "updatedAt"
       ]
     }
   },

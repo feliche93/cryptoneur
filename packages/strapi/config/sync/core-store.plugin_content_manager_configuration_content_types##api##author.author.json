@@ -22,7 +22,7 @@
       },
       "name": {
         "edit": {
-          "label": "Name",
+          "label": "name",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -36,7 +36,7 @@
       },
       "socials": {
         "edit": {
-          "label": "Socials",
+          "label": "socials",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -50,7 +50,7 @@
       },
       "avatar": {
         "edit": {
-          "label": "Avatar",
+          "label": "avatar",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -111,17 +111,13 @@
         "id",
         "name",
         "socials",
-        "createdAt"
+        "avatar"
       ],
       "edit": [
         [
           {
             "name": "name",
-            "size": 8
-          },
-          {
-            "name": "avatar",
-            "size": 4
+            "size": 6
           }
         ],
         [
@@ -131,6 +127,10 @@
           }
         ],
         [
+          {
+            "name": "avatar",
+            "size": 6
+          },
           {
             "name": "posts",
             "size": 6
