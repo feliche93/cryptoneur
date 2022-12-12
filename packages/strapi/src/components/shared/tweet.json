@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_tweets",
+  "info": {
+    "displayName": "Tweet",
+    "icon": "kiwi-bird"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    }
+  }
+}

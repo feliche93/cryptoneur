@@ -1,3 +1,5 @@
+import Tweet from '@components/blog/Tweet'
+import { getTweets } from '@shared/getTweets'
 import { strapi } from '@shared/strapi'
 import dayjs from 'dayjs'
 import Image from 'next/image'
@@ -7,7 +9,7 @@ const renderComponent = (component) => {
   const { __component, id } = component
   // const value = component[__component]
 
-  console.log({ component })
+  // console.log({ component })
 
   switch (__component) {
     case 'shared.rich-text':
@@ -18,6 +20,8 @@ const renderComponent = (component) => {
           dangerouslySetInnerHTML={{ __html: component?.markup }}
         />
       )
+    case 'shared.tweet':
+      return <Tweet url={component?.url} />
     // case 'paragraph':
     //   return (
     //     <p>
