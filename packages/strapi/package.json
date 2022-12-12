@@ -17,9 +17,10 @@
     "@strapi/provider-upload-aws-s3": "^4.5.3",
     "@strapi/strapi": "4.5.3",
     "better-sqlite3": "7.4.6",
-    "dayjs": "^1.11.7",
+    "immutable": "^4.1.0",
     "pg": "^8.8.0",
     "strapi-plugin-config-sync": "^1.1.0",
+    "strapi-plugin-import-export-entries": "^1.18.0",
     "strapi-plugin-populate-deep": "^1.1.2"
   },
   "author": {
