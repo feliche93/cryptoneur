@@ -16,14 +16,14 @@
         "edit": {},
         "list": {
           "label": "id",
-          "searchable": false,
-          "sortable": false
+          "searchable": true,
+          "sortable": true
         }
       },
       "markup": {
         "edit": {
-          "label": "Markup",
-          "description": "Rich text markup",
+          "label": "markup",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
