@@ -36,7 +36,8 @@
     "content": {
       "type": "dynamiczone",
       "components": [
-        "shared.rich-text"
+        "shared.rich-text",
+        "shared.tweet"
       ],
       "required": true,
       "min": 1
