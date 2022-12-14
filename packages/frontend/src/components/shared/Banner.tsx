@@ -17,9 +17,7 @@ export const Banner: FC<BannerProps> = () => {
                     <GiftIcon className="h-6 w-6 text-primary-content" aria-hidden="true" />
                   </span>
                   <p className="ml-3 truncate font-medium text-primary-content">
-                    <span className="text-sm md:hidden">
-                      Countdown to the holidays with daily crypto jokes 🎄
-                    </span>
+                    <span className="text-sm md:hidden">Live: Crypto Jokes Advent Calendar 🎄</span>
                     <span className="hidden md:inline">
                       🎅🏼🎄🎁 Unwrap a daily dose of crypto cheer with our free advent calendar!
                       🎅🏼🎄🎁 Check out our handpicked jokes 👉
