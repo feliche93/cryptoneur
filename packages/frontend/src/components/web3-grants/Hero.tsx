@@ -13,9 +13,9 @@ export const Hero: FC<HeroProps> = () => {
       /> */}
       <div className="pt-8 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-5xl">
-          <span className="block xl:inline">Easily find and apply to</span>{' '}
+          <span className="block xl:inline">Crunchbase for</span>{' '}
           <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent xl:inline">
-            web3 Grants
+            Web3 Grants
           </span>
           {/* <span className="block xl:inline">.</span>{' '} */}
         </h1>

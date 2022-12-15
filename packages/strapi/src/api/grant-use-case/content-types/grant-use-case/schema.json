@@ -37,7 +37,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::grant.grant",
-      "inversedBy": "grantUseCases"
+      "mappedBy": "grantUseCases"
     }
   }
 }

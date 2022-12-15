@@ -120,6 +120,14 @@
       "relation": "manyToMany",
       "target": "api::grant-use-case.grant-use-case",
       "inversedBy": "grants"
+    },
+    "content": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
     }
   }
 }
