@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Card } from '@components/adventCalendar/Card'
-import { Header } from '@components/adventCalendar/Header'
-import { Modal } from '@components/adventCalendar/Modal'
+import { Card } from '@components/advent-calendar/Card'
+import { Header } from '@components/advent-calendar/Header'
+import { Modal } from '@components/advent-calendar/Modal'
 
 export default function Home() {
   const [open, setOpen] = useState(false)
