@@ -108,6 +108,18 @@
       "relation": "manyToMany",
       "target": "api::blockchain.blockchain",
       "inversedBy": "grants"
+    },
+    "grantCategories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::grant-category.grant-category",
+      "inversedBy": "grants"
+    },
+    "grantUseCases": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::grant-use-case.grant-use-case",
+      "inversedBy": "grants"
     }
   }
 }
