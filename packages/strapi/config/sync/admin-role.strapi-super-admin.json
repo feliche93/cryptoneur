@@ -149,6 +149,126 @@
     },
     {
       "action": "plugin::content-manager.explorer.create",
+      "subject": "api::grant-category.grant-category",
+      "properties": {
+        "fields": [
+          "name",
+          "color",
+          "grants"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::grant-category.grant-category",
+      "properties": {
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::grant-category.grant-category",
+      "properties": {
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::grant-category.grant-category",
+      "properties": {
+        "fields": [
+          "name",
+          "color",
+          "grants"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::grant-category.grant-category",
+      "properties": {
+        "fields": [
+          "name",
+          "color",
+          "grants"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "subject": "api::grant-use-case.grant-use-case",
+      "properties": {
+        "fields": [
+          "name",
+          "color",
+          "grants"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::grant-use-case.grant-use-case",
+      "properties": {
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::grant-use-case.grant-use-case",
+      "properties": {
+        "fields": [
+          "name",
+          "color",
+          "grants"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::grant-use-case.grant-use-case",
+      "properties": {
+        "fields": [
+          "name",
+          "color",
+          "grants"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
       "subject": "api::grant.grant",
       "properties": {
         "fields": [
@@ -166,7 +286,9 @@
           "socials.discord",
           "socials.website",
           "socials.telegram",
-          "blockchains"
+          "blockchains",
+          "grantCategories",
+          "grantUseCases"
         ],
         "locales": [
           "en"
@@ -213,7 +335,9 @@
           "socials.discord",
           "socials.website",
           "socials.telegram",
-          "blockchains"
+          "blockchains",
+          "grantCategories",
+          "grantUseCases"
         ],
         "locales": [
           "en"
@@ -240,7 +364,9 @@
           "socials.discord",
           "socials.website",
           "socials.telegram",
-          "blockchains"
+          "blockchains",
+          "grantCategories",
+          "grantUseCases"
         ],
         "locales": [
           "en"

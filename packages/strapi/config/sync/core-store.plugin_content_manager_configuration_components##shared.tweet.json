@@ -1,14 +1,14 @@
 {
-  "key": "plugin_content_manager_configuration_components::shared.rich-text",
+  "key": "plugin_content_manager_configuration_components::shared.tweet",
   "value": {
-    "uid": "shared.rich-text",
+    "uid": "shared.tweet",
     "settings": {
       "bulkable": true,
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "id",
-      "defaultSortBy": "id",
+      "mainField": "url",
+      "defaultSortBy": "url",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -20,30 +20,31 @@
           "sortable": false
         }
       },
-      "markup": {
+      "url": {
         "edit": {
-          "label": "markup",
+          "label": "url",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "markup",
-          "searchable": false,
-          "sortable": false
+          "label": "url",
+          "searchable": true,
+          "sortable": true
         }
       }
     },
     "layouts": {
       "list": [
-        "id"
+        "id",
+        "url"
       ],
       "edit": [
         [
           {
-            "name": "markup",
-            "size": 12
+            "name": "url",
+            "size": 6
           }
         ]
       ]

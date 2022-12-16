@@ -19,7 +19,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::grant.grant",
-      "inversedBy": "blockchains"
+      "mappedBy": "blockchains"
     }
   }
 }

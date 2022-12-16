@@ -161,6 +161,36 @@
           "sortable": false
         }
       },
+      "grantCategories": {
+        "edit": {
+          "label": "Grant Categories",
+          "description": "To which categories does a grant belong?",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "grantCategories",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "grantUseCases": {
+        "edit": {
+          "label": "Grant Use Cases",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "grantUseCases",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -240,6 +270,16 @@
           {
             "name": "socials",
             "size": 12
+          }
+        ],
+        [
+          {
+            "name": "grantCategories",
+            "size": 6
+          },
+          {
+            "name": "grantUseCases",
+            "size": 6
           }
         ],
         [
