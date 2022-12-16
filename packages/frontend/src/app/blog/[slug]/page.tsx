@@ -192,7 +192,7 @@ export default async function BlogDetail({ params }) {
             </div>
           </div>
         </div>
-        <section className="prose prose-lg prose-blue mx-4 bg-gray-100 text-gray-600 sm:mx-auto">
+        <section className="prose prose-lg prose-blue mx-4 bg-base-200 sm:mx-auto">
           {post?.attributes?.content.map((component) => (
             <Fragment key={component?.id}>{renderComponent(component)}</Fragment>
           ))}

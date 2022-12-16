@@ -27,7 +27,7 @@ export default async function Tweet({ url }: TweetProps) {
 
   const { text, id, author, media, created_at, public_metrics, referenced_tweets } = tweet
 
-  console.log(author.profile_image_url.replace('_normal.jpg', '.jpg'))
+  console.log(author.profile_image_url.replace('_normal', ''))
 
   const authorUrl = `https://twitter.com/${author.username}`
   const likeUrl = `https://twitter.com/intent/like?tweet_id=${id}`
@@ -40,15 +40,20 @@ export default async function Tweet({ url }: TweetProps) {
   const quoteTweet = referenced_tweets && referenced_tweets.find((t) => t.type === 'quoted')
 
   return (
-    <div className="tweet my-4 w-full rounded-lg border border-gray-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-gray-900">
+    <div className="tweet my-4 w-full rounded-lg border border-base-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex items-center">
-        <a className="flex h-12 w-12" href={authorUrl} target="_blank" rel="noopener noreferrer">
+        <a
+          className="flex aspect-square"
+          href={authorUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image
+            width={60}
+            height={60}
             alt={author.username}
-            height={48}
-            width={48}
-            src={author.profile_image_url.replace('_normal.jpg', '.jpg')}
-            className="rounded-full object-contain"
+            src={author.profile_image_url.replace('_normal', '')}
+            className="m-0 rounded-full object-contain"
           />
         </a>
         <a
