@@ -163,8 +163,8 @@
       },
       "grantCategories": {
         "edit": {
-          "label": "Grant Categories",
-          "description": "To which categories does a grant belong?",
+          "label": "grantCategories",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true,
@@ -178,7 +178,7 @@
       },
       "grantUseCases": {
         "edit": {
-          "label": "Grant Use Cases",
+          "label": "grantUseCases",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -187,6 +187,20 @@
         },
         "list": {
           "label": "grantUseCases",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "content": {
+        "edit": {
+          "label": "content",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "content",
           "searchable": false,
           "sortable": false
         }
@@ -221,6 +235,12 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "name",
+        "logo",
+        "active"
+      ],
       "edit": [
         [
           {
@@ -274,9 +294,15 @@
         ],
         [
           {
-            "name": "grantCategories",
+            "name": "blockchains",
             "size": 6
           },
+          {
+            "name": "grantCategories",
+            "size": 6
+          }
+        ],
+        [
           {
             "name": "grantUseCases",
             "size": 6
@@ -284,16 +310,10 @@
         ],
         [
           {
-            "name": "blockchains",
-            "size": 6
+            "name": "content",
+            "size": 12
           }
         ]
-      ],
-      "list": [
-        "id",
-        "name",
-        "logo",
-        "active"
       ]
     }
   },

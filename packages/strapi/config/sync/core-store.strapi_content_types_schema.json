@@ -2105,6 +2105,14 @@
           "target": "api::grant-use-case.grant-use-case",
           "inversedBy": "grants"
         },
+        "content": {
+          "pluginOptions": {
+            "i18n": {
+              "localized": true
+            }
+          },
+          "type": "richtext"
+        },
         "createdAt": {
           "type": "datetime"
         },
@@ -2275,6 +2283,14 @@
             "relation": "manyToMany",
             "target": "api::grant-use-case.grant-use-case",
             "inversedBy": "grants"
+          },
+          "content": {
+            "pluginOptions": {
+              "i18n": {
+                "localized": true
+              }
+            },
+            "type": "richtext"
           }
         },
         "kind": "collectionType"
@@ -2473,7 +2489,7 @@
           "type": "relation",
           "relation": "manyToMany",
           "target": "api::grant.grant",
-          "inversedBy": "grantUseCases"
+          "mappedBy": "grantUseCases"
         },
         "createdAt": {
           "type": "datetime"
@@ -2556,7 +2572,7 @@
             "type": "relation",
             "relation": "manyToMany",
             "target": "api::grant.grant",
-            "inversedBy": "grantUseCases"
+            "mappedBy": "grantUseCases"
           }
         },
         "kind": "collectionType"
@@ -2609,7 +2625,9 @@
           "type": "dynamiczone",
           "components": [
             "shared.rich-text",
-            "shared.tweet"
+            "shared.tweet",
+            "shared.emoji-callout",
+            "shared.image"
           ],
           "required": true,
           "min": 1
@@ -2625,6 +2643,11 @@
           "relation": "manyToMany",
           "target": "api::tag.tag",
           "inversedBy": "posts"
+        },
+        "seo": {
+          "type": "component",
+          "repeatable": false,
+          "component": "shared.seo"
         },
         "createdAt": {
           "type": "datetime"
@@ -2697,7 +2720,9 @@
             "type": "dynamiczone",
             "components": [
               "shared.rich-text",
-              "shared.tweet"
+              "shared.tweet",
+              "shared.emoji-callout",
+              "shared.image"
             ],
             "required": true,
             "min": 1
@@ -2713,6 +2738,11 @@
             "relation": "manyToMany",
             "target": "api::tag.tag",
             "inversedBy": "posts"
+          },
+          "seo": {
+            "type": "component",
+            "repeatable": false,
+            "component": "shared.seo"
           }
         },
         "kind": "collectionType"

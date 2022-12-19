@@ -1,14 +1,14 @@
 {
-  "key": "plugin_content_manager_configuration_content_types::api::grant-category.grant-category",
+  "key": "plugin_content_manager_configuration_components::shared.meta-social",
   "value": {
-    "uid": "api::grant-category.grant-category",
+    "uid": "shared.meta-social",
     "settings": {
       "bulkable": true,
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "name",
-      "defaultSortBy": "name",
+      "mainField": "title",
+      "defaultSortBy": "title",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -16,108 +16,98 @@
         "edit": {},
         "list": {
           "label": "id",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "name": {
-        "edit": {
-          "label": "name",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "name",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "color": {
-        "edit": {
-          "label": "color",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "color",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "grants": {
-        "edit": {
-          "label": "grants",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true,
-          "mainField": "name"
-        },
-        "list": {
-          "label": "grants",
           "searchable": false,
           "sortable": false
         }
       },
-      "createdAt": {
+      "socialNetwork": {
         "edit": {
-          "label": "createdAt",
+          "label": "socialNetwork",
           "description": "",
           "placeholder": "",
-          "visible": false,
+          "visible": true,
           "editable": true
         },
         "list": {
-          "label": "createdAt",
+          "label": "socialNetwork",
           "searchable": true,
           "sortable": true
         }
       },
-      "updatedAt": {
+      "title": {
         "edit": {
-          "label": "updatedAt",
+          "label": "title",
           "description": "",
           "placeholder": "",
-          "visible": false,
+          "visible": true,
           "editable": true
         },
         "list": {
-          "label": "updatedAt",
+          "label": "title",
           "searchable": true,
           "sortable": true
+        }
+      },
+      "description": {
+        "edit": {
+          "label": "description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "image": {
+        "edit": {
+          "label": "image",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "image",
+          "searchable": false,
+          "sortable": false
         }
       }
     },
     "layouts": {
       "list": [
         "id",
-        "name",
-        "color",
-        "grants"
+        "socialNetwork",
+        "title",
+        "description"
       ],
       "edit": [
         [
           {
-            "name": "name",
+            "name": "socialNetwork",
             "size": 6
           },
           {
-            "name": "color",
+            "name": "title",
             "size": 6
           }
         ],
         [
           {
-            "name": "grants",
+            "name": "description",
+            "size": 6
+          },
+          {
+            "name": "image",
             "size": 6
           }
         ]
       ]
-    }
+    },
+    "isComponent": true
   },
   "type": "object",
   "environment": null,

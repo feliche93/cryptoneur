@@ -1,14 +1,14 @@
 {
-  "key": "plugin_content_manager_configuration_content_types::api::post.post",
+  "key": "plugin_content_manager_configuration_components::shared.seo",
   "value": {
-    "uid": "api::post.post",
+    "uid": "shared.seo",
     "settings": {
       "bulkable": true,
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "title",
-      "defaultSortBy": "title",
+      "mainField": "metaTitle",
+      "defaultSortBy": "metaTitle",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -16,148 +16,132 @@
         "edit": {},
         "list": {
           "label": "id",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "title": {
-        "edit": {
-          "label": "Title",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "title",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "slug": {
-        "edit": {
-          "label": "slug",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "slug",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "description": {
-        "edit": {
-          "label": "description",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "description",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "cover": {
-        "edit": {
-          "label": "cover",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "cover",
           "searchable": false,
           "sortable": false
         }
       },
-      "content": {
+      "metaTitle": {
         "edit": {
-          "label": "content",
+          "label": "metaTitle",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "content",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "authors": {
-        "edit": {
-          "label": "authors",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true,
-          "mainField": "name"
-        },
-        "list": {
-          "label": "authors",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "tags": {
-        "edit": {
-          "label": "tags",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true,
-          "mainField": "name"
-        },
-        "list": {
-          "label": "tags",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "seo": {
-        "edit": {
-          "label": "seo",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "seo",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "createdAt": {
-        "edit": {
-          "label": "createdAt",
-          "description": "",
-          "placeholder": "",
-          "visible": false,
-          "editable": true
-        },
-        "list": {
-          "label": "createdAt",
+          "label": "metaTitle",
           "searchable": true,
           "sortable": true
         }
       },
-      "updatedAt": {
+      "metaDescription": {
         "edit": {
-          "label": "updatedAt",
+          "label": "metaDescription",
           "description": "",
           "placeholder": "",
-          "visible": false,
+          "visible": true,
           "editable": true
         },
         "list": {
-          "label": "updatedAt",
+          "label": "metaDescription",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "metaImage": {
+        "edit": {
+          "label": "metaImage",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "metaImage",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "metaSocial": {
+        "edit": {
+          "label": "metaSocial",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "metaSocial",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "keywords": {
+        "edit": {
+          "label": "keywords",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "keywords",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "metaRobots": {
+        "edit": {
+          "label": "metaRobots",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "metaRobots",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "structuredData": {
+        "edit": {
+          "label": "structuredData",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "structuredData",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "metaViewport": {
+        "edit": {
+          "label": "metaViewport",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "metaViewport",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "canonicalURL": {
+        "edit": {
+          "label": "canonicalURL",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "canonicalURL",
           "searchable": true,
           "sortable": true
         }
@@ -166,55 +150,62 @@
     "layouts": {
       "list": [
         "id",
-        "title",
-        "createdAt",
-        "updatedAt"
+        "metaTitle",
+        "metaDescription",
+        "metaImage"
       ],
       "edit": [
         [
           {
-            "name": "title",
+            "name": "metaTitle",
             "size": 6
           },
           {
-            "name": "slug",
+            "name": "metaDescription",
             "size": 6
           }
         ],
         [
           {
-            "name": "description",
-            "size": 6
-          },
-          {
-            "name": "cover",
+            "name": "metaImage",
             "size": 6
           }
         ],
         [
           {
-            "name": "content",
+            "name": "metaSocial",
             "size": 12
           }
         ],
         [
           {
-            "name": "authors",
+            "name": "keywords",
             "size": 6
           },
           {
-            "name": "tags",
+            "name": "metaRobots",
             "size": 6
           }
         ],
         [
           {
-            "name": "seo",
+            "name": "structuredData",
             "size": 12
+          }
+        ],
+        [
+          {
+            "name": "metaViewport",
+            "size": 6
+          },
+          {
+            "name": "canonicalURL",
+            "size": 6
           }
         ]
       ]
-    }
+    },
+    "isComponent": true
   },
   "type": "object",
   "environment": null,
