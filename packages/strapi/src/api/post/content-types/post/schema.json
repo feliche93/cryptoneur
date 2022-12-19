@@ -37,7 +37,9 @@
       "type": "dynamiczone",
       "components": [
         "shared.rich-text",
-        "shared.tweet"
+        "shared.tweet",
+        "shared.emoji-callout",
+        "shared.image"
       ],
       "required": true,
       "min": 1

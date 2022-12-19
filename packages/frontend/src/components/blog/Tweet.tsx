@@ -12,22 +12,11 @@ import { FC } from 'react'
 import { getTweets } from '@shared/getTweets'
 
 export interface TweetProps {
-  url: string
+  tweet: any
 }
-export default async function Tweet({ url }: TweetProps) {
-  const elements = url.split('/')
-  const elementLength = elements.length
-  let tweetId = elements[elementLength - 1]
-  tweetId = tweetId.split('?')[0]
 
-  // console.log({ tweetId })
-
-  const tweets = await getTweets([tweetId])
-  const tweet = tweets[0]
-
-  const { text, id, author, media, created_at, public_metrics, referenced_tweets } = tweet
-
-  // console.log(author.profile_image_url.replace('_normal', ''))
+export default async function Tweet(tweet) {
+  const { url, text, id, author, media, created_at, public_metrics, referenced_tweets } = tweet
 
   const authorUrl = `https://twitter.com/${author.username}`
   const likeUrl = `https://twitter.com/intent/like?tweet_id=${id}`
@@ -40,15 +29,15 @@ export default async function Tweet({ url }: TweetProps) {
   const quoteTweet = referenced_tweets && referenced_tweets.find((t) => t.type === 'quoted')
 
   return (
-    <div className="tweet my-4 w-full rounded-lg border border-base-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-gray-900">
+    <div className="tweet my-4 w-full rounded-lg border border-gray-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex items-center">
-        <a className="flex" href={authorUrl} target="_blank" rel="noopener noreferrer">
+        <a className="flex h-12 w-12" href={authorUrl} target="_blank" rel="noopener noreferrer">
           <Image
-            width={48}
-            height={48}
             alt={author.username}
-            src={author.profile_image_url.replace('_normal', '')}
-            className="m-0 rounded-full object-contain"
+            height={48}
+            width={48}
+            src={author.profile_image_url.replace('_normal.jpg', '.jpg')}
+            className="rounded-full object-contain"
           />
         </a>
         <a
@@ -118,7 +107,7 @@ export default async function Tweet({ url }: TweetProps) {
         rel="noopener noreferrer"
       >
         <time title={`Time Posted: ${createdAt.toUTCString()}`} dateTime={createdAt.toISOString()}>
-          {dayjs(createdAt).format('h:mm a - MMM D, YYYY')}
+          {dayjs(createdAt).format('h:mm a - MMM d, y')}
         </time>
       </a>
       <div className="mt-2 flex !text-gray-700 dark:!text-gray-300">

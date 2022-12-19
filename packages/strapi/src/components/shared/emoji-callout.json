@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_shared_emoji_callouts",
+  "info": {
+    "displayName": "EmojiCallout",
+    "icon": "address-card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "emoji": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "richtext"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "primary",
+        "secondary",
+        "info",
+        "error",
+        "success",
+        "warning"
+      ],
+      "required": true,
+      "default": "primary"
+    }
+  }
+}
