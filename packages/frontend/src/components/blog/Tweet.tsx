@@ -43,17 +43,17 @@ export default async function Tweet({ url }: TweetProps) {
     <div className="tweet my-4 w-full rounded-lg border border-base-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex items-center">
         <a
-          className="flex aspect-square"
+          className="flex aspect-square h-20"
           href={authorUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
           <Image
-            width={60}
-            height={60}
+            width={48}
+            height={48}
             alt={author.username}
             src={author.profile_image_url.replace('_normal', '')}
-            className="m-0 rounded-full object-contain"
+            className="rounded-full"
           />
         </a>
         <a
