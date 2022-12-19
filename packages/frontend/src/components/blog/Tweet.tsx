@@ -1,22 +1,14 @@
-import Image from 'next/image'
 import dayjs from 'dayjs'
-
-/**
- * Supports plain text, images, quote tweets.
- *
- * Needs support for images, GIFs, and replies maybe?
- * Styles use !important to override Tailwind .prose inside MDX.
- */
-
+import Image from 'next/image'
 import { FC } from 'react'
-import { getTweets } from '@shared/getTweets'
 
 export interface TweetProps {
   tweet: any
 }
+export const Tweet: FC<TweetProps> = ({ tweet }) => {
+  // console.log({ tweet })
 
-export default async function Tweet(tweet) {
-  const { url, text, id, author, media, created_at, public_metrics, referenced_tweets } = tweet
+  const { text, id, author, media, created_at, public_metrics, referenced_tweets } = tweet
 
   const authorUrl = `https://twitter.com/${author.username}`
   const likeUrl = `https://twitter.com/intent/like?tweet_id=${id}`
@@ -31,13 +23,13 @@ export default async function Tweet(tweet) {
   return (
     <div className="tweet my-4 w-full rounded-lg border border-gray-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex items-center">
-        <a className="flex h-12 w-12" href={authorUrl} target="_blank" rel="noopener noreferrer">
+        <a className="flex" href={authorUrl} target="_blank" rel="noopener noreferrer">
           <Image
             alt={author.username}
             height={48}
             width={48}
             src={author.profile_image_url.replace('_normal.jpg', '.jpg')}
-            className="rounded-full object-contain"
+            className="m-0 rounded-full object-contain"
           />
         </a>
         <a
@@ -99,7 +91,7 @@ export default async function Tweet(tweet) {
           ))}
         </div>
       ) : null}
-      {quoteTweet ? <Tweet {...quoteTweet} /> : null}
+      {quoteTweet ? <Tweet tweet={quoteTweet} /> : null}
       <a
         className="text-sm !text-gray-600 hover:!underline"
         href={tweetUrl}
@@ -107,7 +99,7 @@ export default async function Tweet(tweet) {
         rel="noopener noreferrer"
       >
         <time title={`Time Posted: ${createdAt.toUTCString()}`} dateTime={createdAt.toISOString()}>
-          {dayjs(createdAt).format('h:mm a - MMM d, y')}
+          {dayjs(createdAt).format('h:mm a - MMM D, YYYY')}
         </time>
       </a>
       <div className="mt-2 flex !text-gray-700 dark:!text-gray-300">

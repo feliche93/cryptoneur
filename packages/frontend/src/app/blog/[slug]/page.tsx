@@ -53,7 +53,7 @@ export default async function BlogDetail({ params }) {
         </div>
         <section className="prose prose-lg prose-blue mx-4 bg-base-200 sm:mx-auto">
           {post?.attributes?.content.map((component) => {
-            console.log(`${component.id}-${component['__component']}`)
+            // console.log(`${component.id}-${component['__component']}`)
             return (
               <Fragment key={`${component.id}-${component['__component']}`}>
                 <RenderComponent component={component} />

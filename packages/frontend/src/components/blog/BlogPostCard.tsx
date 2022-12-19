@@ -8,7 +8,7 @@ export interface BlogPostCardProps {
   id: string
 }
 export const BlogPostCard: FC<BlogPostCardProps> = ({ post, id }) => {
-  console.log(post)
+  // console.log(post)
 
   return (
     <div key={post?.title} className="flex flex-col overflow-hidden rounded-lg shadow-lg">
