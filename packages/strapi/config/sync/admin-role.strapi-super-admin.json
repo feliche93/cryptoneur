@@ -288,7 +288,8 @@
           "socials.telegram",
           "blockchains",
           "grantCategories",
-          "grantUseCases"
+          "grantUseCases",
+          "content"
         ],
         "locales": [
           "en"
@@ -337,7 +338,8 @@
           "socials.telegram",
           "blockchains",
           "grantCategories",
-          "grantUseCases"
+          "grantUseCases",
+          "content"
         ],
         "locales": [
           "en"
@@ -366,7 +368,8 @@
           "socials.telegram",
           "blockchains",
           "grantCategories",
-          "grantUseCases"
+          "grantUseCases",
+          "content"
         ],
         "locales": [
           "en"
@@ -385,7 +388,19 @@
           "cover",
           "content",
           "authors",
-          "tags"
+          "tags",
+          "seo.metaTitle",
+          "seo.metaDescription",
+          "seo.metaImage",
+          "seo.metaSocial.socialNetwork",
+          "seo.metaSocial.title",
+          "seo.metaSocial.description",
+          "seo.metaSocial.image",
+          "seo.keywords",
+          "seo.metaRobots",
+          "seo.structuredData",
+          "seo.metaViewport",
+          "seo.canonicalURL"
         ]
       },
       "conditions": []
@@ -413,7 +428,19 @@
           "cover",
           "content",
           "authors",
-          "tags"
+          "tags",
+          "seo.metaTitle",
+          "seo.metaDescription",
+          "seo.metaImage",
+          "seo.metaSocial.socialNetwork",
+          "seo.metaSocial.title",
+          "seo.metaSocial.description",
+          "seo.metaSocial.image",
+          "seo.keywords",
+          "seo.metaRobots",
+          "seo.structuredData",
+          "seo.metaViewport",
+          "seo.canonicalURL"
         ]
       },
       "conditions": []
@@ -429,7 +456,19 @@
           "cover",
           "content",
           "authors",
-          "tags"
+          "tags",
+          "seo.metaTitle",
+          "seo.metaDescription",
+          "seo.metaImage",
+          "seo.metaSocial.socialNetwork",
+          "seo.metaSocial.title",
+          "seo.metaSocial.description",
+          "seo.metaSocial.image",
+          "seo.keywords",
+          "seo.metaRobots",
+          "seo.structuredData",
+          "seo.metaViewport",
+          "seo.canonicalURL"
         ]
       },
       "conditions": []

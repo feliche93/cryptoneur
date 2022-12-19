@@ -1,33 +1,14 @@
-import Image from 'next/image'
 import dayjs from 'dayjs'
-
-/**
- * Supports plain text, images, quote tweets.
- *
- * Needs support for images, GIFs, and replies maybe?
- * Styles use !important to override Tailwind .prose inside MDX.
- */
-
+import Image from 'next/image'
 import { FC } from 'react'
-import { getTweets } from '@shared/getTweets'
 
 export interface TweetProps {
-  url: string
+  tweet: any
 }
-export default async function Tweet({ url }: TweetProps) {
-  const elements = url.split('/')
-  const elementLength = elements.length
-  let tweetId = elements[elementLength - 1]
-  tweetId = tweetId.split('?')[0]
-
-  console.log({ tweetId })
-
-  const tweets = await getTweets([tweetId])
-  const tweet = tweets[0]
+export const Tweet: FC<TweetProps> = ({ tweet }) => {
+  // console.log({ tweet })
 
   const { text, id, author, media, created_at, public_metrics, referenced_tweets } = tweet
-
-  console.log(author.profile_image_url.replace('_normal.jpg', '.jpg'))
 
   const authorUrl = `https://twitter.com/${author.username}`
   const likeUrl = `https://twitter.com/intent/like?tweet_id=${id}`
@@ -42,13 +23,13 @@ export default async function Tweet({ url }: TweetProps) {
   return (
     <div className="tweet my-4 w-full rounded-lg border border-gray-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex items-center">
-        <a className="flex h-12 w-12" href={authorUrl} target="_blank" rel="noopener noreferrer">
+        <a className="flex" href={authorUrl} target="_blank" rel="noopener noreferrer">
           <Image
             alt={author.username}
             height={48}
             width={48}
             src={author.profile_image_url.replace('_normal.jpg', '.jpg')}
-            className="rounded-full object-contain"
+            className="m-0 rounded-full object-contain"
           />
         </a>
         <a
@@ -110,7 +91,7 @@ export default async function Tweet({ url }: TweetProps) {
           ))}
         </div>
       ) : null}
-      {quoteTweet ? <Tweet {...quoteTweet} /> : null}
+      {quoteTweet ? <Tweet tweet={quoteTweet} /> : null}
       <a
         className="text-sm !text-gray-600 hover:!underline"
         href={tweetUrl}

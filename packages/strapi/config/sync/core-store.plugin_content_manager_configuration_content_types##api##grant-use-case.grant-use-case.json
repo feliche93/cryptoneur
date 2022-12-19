@@ -22,7 +22,7 @@
       },
       "name": {
         "edit": {
-          "label": "Name",
+          "label": "name",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -36,7 +36,7 @@
       },
       "color": {
         "edit": {
-          "label": "Color",
+          "label": "color",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -50,7 +50,7 @@
       },
       "grants": {
         "edit": {
-          "label": "Grants",
+          "label": "grants",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -93,15 +93,21 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "name",
+        "color",
+        "grants"
+      ],
       "edit": [
         [
           {
             "name": "name",
-            "size": 8
+            "size": 6
           },
           {
             "name": "color",
-            "size": 4
+            "size": 6
           }
         ],
         [
@@ -110,12 +116,6 @@
             "size": 6
           }
         ]
-      ],
-      "list": [
-        "id",
-        "name",
-        "color",
-        "createdAt"
       ]
     }
   },

@@ -54,4 +54,6 @@ Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/
 
 ---
 
+pnpm run strapi ts:generate-types --verbose -o ./../frontend/src/types
+
 <sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
