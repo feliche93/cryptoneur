@@ -20,14 +20,14 @@ export default async function Tweet({ url }: TweetProps) {
   let tweetId = elements[elementLength - 1]
   tweetId = tweetId.split('?')[0]
 
-  console.log({ tweetId })
+  // console.log({ tweetId })
 
   const tweets = await getTweets([tweetId])
   const tweet = tweets[0]
 
   const { text, id, author, media, created_at, public_metrics, referenced_tweets } = tweet
 
-  console.log(author.profile_image_url.replace('_normal', ''))
+  // console.log(author.profile_image_url.replace('_normal', ''))
 
   const authorUrl = `https://twitter.com/${author.username}`
   const likeUrl = `https://twitter.com/intent/like?tweet_id=${id}`
