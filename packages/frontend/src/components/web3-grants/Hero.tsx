@@ -25,7 +25,7 @@ export const Hero: FC<HeroProps> = () => {
           category, amount, and more.
         </p>
         <div className="mx-auto mt-5 flex max-w-md flex-col space-y-2 space-x-0 sm:flex sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-2 md:mt-8">
-          <Link className="btn-primary btn-md btn sm:btn-lg" href="/web3-grants#">
+          <Link className="btn-primary btn-md btn sm:btn-lg" href="/web3-grants/search">
             Find a grant
           </Link>
           {/* <Link className="btn btn-md sm:btn-lg btn-outline" href="/blog">
