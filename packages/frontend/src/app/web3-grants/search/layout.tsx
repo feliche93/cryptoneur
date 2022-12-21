@@ -118,11 +118,11 @@ export default function Searchayout({ children }: { children: React.ReactNode })
 
   //   console.log({ filters2 })
 
-  if (isLoadingGrantCategories && isLoadingBlockchains && isLoadingGrantUseCases)
-    return <div>Loading...</div>
+  //   if (isLoadingGrantCategories && isLoadingBlockchains && isLoadingGrantUseCases)
+  //     return <div>Loading...</div>
 
-  if (isValidatingGrantCategories && isValidatingBlockchains && isLoadingGrantUseCases)
-    return <div>Validating...</div>
+  //   if (isValidatingGrantCategories && isValidatingBlockchains && isLoadingGrantUseCases)
+  //     return <div>Validating...</div>
 
   return (
     <div>
