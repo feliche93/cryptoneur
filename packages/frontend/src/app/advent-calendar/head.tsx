@@ -5,17 +5,6 @@ import cover from '@/../public/advent-calendar/cover.png'
 import { NEXT_SEO_DEFAULT } from '@/../next-seo.config' // your path will vary
 
 export default async function Head() {
-  const { data: posts, meta } = await strapi.find<Strapi.Schemas['api::post.post'][]>('posts', {
-    populate: 'deep',
-    filters: {
-      slug: {
-        $eq: slug,
-      },
-    },
-  })
-
-  const [post] = posts
-
   const updateMeta: NextSeoProps = {
     ...NEXT_SEO_DEFAULT,
     title: 'NFT Advent Calendar 2022',
