@@ -31,7 +31,11 @@ export default async function BlogDetail({ params: { slug } }: { params: { slug:
         images={[post?.attributes?.cover?.data?.attributes?.url]}
         datePublished={post?.attributes?.createdAt}
         dateModified={post?.attributes?.updatedAt}
-        authorName={post?.attributes?.authors?.name}
+        authorName={post?.attributes?.authors?.data.map((author: any) => {
+          return {
+            name: author.attributes.name,
+          }
+        })}
         publisherName="Cryptoneur"
         publisherLogo="https://cryptoneur.io/favicon.ico"
         description={post?.attributes?.seo?.description}
@@ -56,7 +60,10 @@ export default async function BlogDetail({ params: { slug } }: { params: { slug:
             height={80}
             className="rounded-full object-contain"
             src={post?.attributes?.authors?.data[0].attributes?.avatar?.data?.attributes?.url}
-            alt={post?.attributes?.authors?.name}
+            alt={
+              post?.attributes?.authors?.data[0].attributes?.avatar?.data?.attributes
+                ?.alternativeText
+            }
           />
           <div className="ml-3">
             <div className="block text-xl font-medium text-gray-700">

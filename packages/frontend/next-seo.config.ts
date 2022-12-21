@@ -1,5 +1,5 @@
 import type { NextSeoProps } from 'next-seo';
-import profilePic from "./public/profilePicc.jpg"
+import profilePic from '../frontend/public/profilePic.jpg';
 
 // get current window url
 
@@ -12,13 +12,13 @@ export const NEXT_SEO_DEFAULT: NextSeoProps = {
         locale: 'en_US',
         // url: `${window.location.href}`,
         site_name: 'Cryptoneur',
-        // images: [
-        //     {
-        //         url: `${profilePic.src}`,
-        //         width: profilePic.width,
-        //         height: profilePic.height,
-        //         alt: 'Cryptoneur Pfofile',
-        //     }]
+        images: [
+            {
+                url: `${profilePic.src}`,
+                width: profilePic.width,
+                height: profilePic.height,
+                alt: 'Cryptoneur Pfofile',
+            }]
     },
     twitter:
     {
