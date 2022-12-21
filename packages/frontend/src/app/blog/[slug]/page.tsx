@@ -1,13 +1,13 @@
 import { RenderComponent } from '@components/blog/RenderComponent'
 import { strapi } from '@shared/strapi'
 import dayjs from 'dayjs'
+import { ArticleJsonLd } from 'next-seo'
 import Image from 'next/image'
 import { Fragment } from 'react'
+import { headers } from 'next/headers'
 
-export default async function BlogDetail({ params }) {
-  const { slug } = params
-
-  const { data: posts, meta } = await strapi.find('posts', {
+export default async function BlogDetail({ params: { slug } }: { params: { slug: string } }) {
+  const { data: posts, meta } = await strapi.find<Strapi.Schemas['api::post.post'][]>('posts', {
     populate: 'deep',
     filters: {
       slug: {
@@ -17,9 +17,25 @@ export default async function BlogDetail({ params }) {
   })
 
   const [post] = posts
+  const headerList = headers()
+  const referer = headerList.get('referer')
+
+  // console.log({ referer })
 
   return (
     <>
+      <ArticleJsonLd
+        useAppDir={true}
+        url={referer || 'https://cryptoneur.xyz/blog/' + slug}
+        title={post?.attributes?.title}
+        images={[post?.attributes?.cover?.data?.attributes?.url]}
+        datePublished={post?.attributes?.createdAt}
+        dateModified={post?.attributes?.updatedAt}
+        authorName={post?.attributes?.authors?.name}
+        publisherName="Cryptoneur"
+        publisherLogo="https://cryptoneur.io/favicon.ico"
+        description={post?.attributes?.seo?.description}
+      />
       <article className="mx-4 sm:mx-auto">
         <div className="flex items-center justify-center">
           <Image
@@ -47,12 +63,12 @@ export default async function BlogDetail({ params }) {
               {post?.attributes?.authors?.name}
             </div>
             <div className="block text-base font-medium text-gray-600">
-              {dayjs(post?.updatedAt).format('MMMM DD, YYYY')}
+              {dayjs(post?.attributes?.updatedAt).format('MMMM DD, YYYY')}
             </div>
           </div>
         </div>
         <section className="prose prose-lg prose-blue mx-4 bg-base-200 sm:mx-auto">
-          {post?.attributes?.content.map((component) => {
+          {post?.attributes?.content.map((component: any) => {
             // console.log(`${component.id}-${component['__component']}`)
             return (
               <Fragment key={`${component.id}-${component['__component']}`}>

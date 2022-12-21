@@ -936,7 +936,14 @@ export interface ApiPostPost extends CollectionTypeSchema {
     slug: UIDAttribute<'api::post.post', 'title'>;
     description: TextAttribute;
     cover: MediaAttribute;
-    content: DynamicZoneAttribute<['shared.rich-text', 'shared.tweet']> &
+    content: DynamicZoneAttribute<
+      [
+        'shared.rich-text',
+        'shared.tweet',
+        'shared.emoji-callout',
+        'shared.image'
+      ]
+    > &
       RequiredAttribute &
       SetMinMax<{
         min: 1;
@@ -947,6 +954,7 @@ export interface ApiPostPost extends CollectionTypeSchema {
       'api::author.author'
     >;
     tags: RelationAttribute<'api::post.post', 'manyToMany', 'api::tag.tag'>;
+    seo: ComponentAttribute<'shared.seo'>;
     createdAt: DateTimeAttribute;
     updatedAt: DateTimeAttribute;
     publishedAt: DateTimeAttribute;
@@ -1051,6 +1059,34 @@ export interface SharedCurrencyTokenValue extends ComponentSchema {
   };
 }
 
+export interface SharedEmojiCallout extends ComponentSchema {
+  info: {
+    displayName: 'EmojiCallout';
+    icon: 'address-card';
+    description: '';
+  };
+  attributes: {
+    emoji: StringAttribute & RequiredAttribute;
+    text: RichTextAttribute;
+    type: EnumerationAttribute<
+      ['primary', 'secondary', 'info', 'error', 'success', 'warning']
+    > &
+      RequiredAttribute &
+      DefaultTo<'primary'>;
+  };
+}
+
+export interface SharedImage extends ComponentSchema {
+  info: {
+    displayName: 'Image';
+    icon: 'file-image';
+    description: '';
+  };
+  attributes: {
+    media: MediaAttribute & RequiredAttribute;
+  };
+}
+
 export interface SharedLinkUrl extends ComponentSchema {
   info: {
     displayName: 'LinkUrl';
@@ -1063,6 +1099,42 @@ export interface SharedLinkUrl extends ComponentSchema {
   };
 }
 
+export interface SharedMetaSocial extends ComponentSchema {
+  info: {
+    displayName: 'metaSocial';
+    icon: 'project-diagram';
+  };
+  attributes: {
+    socialNetwork: EnumerationAttribute<['Facebook', 'Twitter']> &
+      RequiredAttribute;
+    title: StringAttribute &
+      RequiredAttribute &
+      SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    description: StringAttribute &
+      RequiredAttribute &
+      SetMinMaxLength<{
+        maxLength: 65;
+      }>;
+    image: MediaAttribute;
+  };
+}
+
+export interface SharedOpenGraph extends ComponentSchema {
+  info: {
+    displayName: 'OpenGraph';
+    icon: 'paragraph';
+  };
+  attributes: {
+    title: StringAttribute;
+    description: StringAttribute;
+    url: StringAttribute;
+    type: EnumerationAttribute<['website', 'article', 'profile']>;
+    images: MediaAttribute & RequiredAttribute;
+  };
+}
+
 export interface SharedRichText extends ComponentSchema {
   info: {
     displayName: 'RichText';
@@ -1070,6 +1142,22 @@ export interface SharedRichText extends ComponentSchema {
   };
   attributes: {
     markup: RichTextAttribute;
+  };
+}
+
+export interface SharedSeo extends ComponentSchema {
+  info: {
+    displayName: 'Seo';
+    icon: 'search';
+    description: '';
+  };
+  attributes: {
+    title: StringAttribute & RequiredAttribute;
+    description: StringAttribute & RequiredAttribute;
+    noIndex: BooleanAttribute & RequiredAttribute & DefaultTo<false>;
+    noFollow: BooleanAttribute & RequiredAttribute & DefaultTo<false>;
+    canonical: StringAttribute;
+    openGraph: ComponentAttribute<'shared.open-graph'>;
   };
 }
 
@@ -1140,8 +1228,13 @@ declare global {
       'api::tag.tag': ApiTagTag;
       'api::token.token': ApiTokenToken;
       'shared.currency-token-value': SharedCurrencyTokenValue;
+      'shared.emoji-callout': SharedEmojiCallout;
+      'shared.image': SharedImage;
       'shared.link-url': SharedLinkUrl;
+      'shared.meta-social': SharedMetaSocial;
+      'shared.open-graph': SharedOpenGraph;
       'shared.rich-text': SharedRichText;
+      'shared.seo': SharedSeo;
       'shared.socials': SharedSocials;
       'shared.tweet': SharedTweet;
       'shared.value-token': SharedValueToken;
