@@ -1,3 +1,4 @@
+import { strapi } from '@shared/strapi'
 import Link from 'next/link'
 
 import { FC } from 'react'
