@@ -27,6 +27,7 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.2.1
   react: 18.2.0
   react-dom: 18.2.0
+  react-hook-form: ^7.41.0
   server-only: ^0.0.1
   strapi-sdk-js: ^2.2.0
   swr: ^2.0.0
@@ -50,6 +51,7 @@ dependencies:
   next-use-posthog: 1.16.4_react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.41.0_react@18.2.0
   server-only: 0.0.1
   strapi-sdk-js: 2.2.0
   swr: 2.0.0_react@18.2.0
@@ -2766,6 +2768,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form/7.41.0_react@18.2.0:
+    resolution: {integrity: sha512-u1cHOXujr+AsNBoeCtcCuRwPh87mXAgKtXqd3qTCBgNFYzVZLXjYgLcynORpAgqhe24r5scucR8+6gfWaXBtHQ==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

@@ -1,14 +1,13 @@
 import { FC, PropsWithChildren } from 'react'
-import { Fragment, use, useState } from 'react'
-import { Dialog, Disclosure, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, PlusIcon } from '@heroicons/react/20/solid'
+import { FieldValues, RegisterOptions, useForm, UseFormRegister } from 'react-hook-form'
+import { DesktopFilterOption } from './DesktopFilterOption'
 
 export interface DesktopFiltersProps extends PropsWithChildren {
   setMobileFiltersOpen: (open: boolean) => void
   isLoading: boolean
   isRevalidating: boolean
   filters: any
+  register: UseFormRegister<FieldValues>
 }
 export const DeskltopFilters: FC<DesktopFiltersProps> = ({
   children,
@@ -16,20 +15,25 @@ export const DeskltopFilters: FC<DesktopFiltersProps> = ({
   isLoading,
   isRevalidating,
   filters,
+  register,
 }) => {
   return (
     <div className="pt-12 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
       <aside>
         <h2 className="sr-only">Filters</h2>
 
-        <button
+        {/* Mobile filter button */}
+        {/* <button
           type="button"
           className="inline-flex items-center lg:hidden"
           onClick={() => setMobileFiltersOpen(true)}
         >
           <span className="text-sm font-medium text-base-content/80">Filters</span>
-          <PlusIcon className="ml-1 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-        </button>
+          <PlusIcon
+            className="ml-1 h-5 w-5 flex-shrink-0 text-base-content/80"
+            aria-hidden="true"
+          />
+        </button> */}
 
         <div className="hidden lg:block">
           <form className="space-y-10 divide-y divide-gray-200">
@@ -42,23 +46,18 @@ export const DeskltopFilters: FC<DesktopFiltersProps> = ({
                     <div className="space-y-3 pt-6">
                       {!isLoading &&
                         !isRevalidating &&
-                        section?.options?.map((option, optionIdx) => (
-                          <div key={option.value} className="flex items-center">
-                            <input
-                              id={`${section.id}-${optionIdx}`}
-                              name={`${section.id}[]`}
-                              defaultValue={option.value}
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-base-300 text-primary focus:ring-primary-focus"
+                        section?.options?.map((option: any, optionIdx: number) => {
+                          // console.log({ option, optionIdx })
+                          return (
+                            <DesktopFilterOption
+                              key={optionIdx}
+                              optionIdx={optionIdx}
+                              option={option}
+                              section={section}
+                              register={register}
                             />
-                            <label
-                              htmlFor={`${section.id}-${optionIdx}`}
-                              className="ml-3 text-sm text-base-content/80"
-                            >
-                              {option.label}
-                            </label>
-                          </div>
-                        ))}
+                          )
+                        })}
                     </div>
                   </fieldset>
                 </div>
