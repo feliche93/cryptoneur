@@ -70,13 +70,14 @@ export default function Search() {
         //   limit: 1,
         // },
         filters: {
-          ...(watch('blockchains').length !== 0 && {
-            blockchains: {
-              id: {
-                $in: watch('blockchains'),
+          ...(watch('blockchains') &&
+            watch('blockchains').length !== 0 && {
+              blockchains: {
+                id: {
+                  $in: watch('blockchains'),
+                },
               },
-            },
-          }),
+            }),
           // grantCategories: {
           //   id: {
           //     $eq: '1',
