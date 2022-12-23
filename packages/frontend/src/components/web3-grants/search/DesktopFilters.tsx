@@ -69,8 +69,10 @@ export const DeskltopFilters: FC<DesktopFiltersProps> = ({
       {/* Product grid */}
       <div className="mt-6 lg:col-span-2 lg:mt-0 xl:col-span-3">
         {/* Replace with your content */}
-        {children}
-        <div className="h-96 rounded-lg border-4 border-dashed border-gray-200 lg:h-full" />
+
+        <div className="h-96 rounded-lg border-4 border-dashed border-gray-200 lg:h-full">
+          {children}
+        </div>
         {/* /End replace */}
       </div>
     </div>
