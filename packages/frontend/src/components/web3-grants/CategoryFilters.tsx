@@ -4,51 +4,57 @@ import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PlusIcon } from '@heroicons/react/20/solid'
+import { strapi } from '@shared/strapi'
 
-const filters = [
-  {
-    id: 'color',
-    name: 'Color',
-    options: [
-      { value: 'white', label: 'White' },
-      { value: 'beige', label: 'Beige' },
-      { value: 'blue', label: 'Blue' },
-      { value: 'brown', label: 'Brown' },
-      { value: 'green', label: 'Green' },
-      { value: 'purple', label: 'Purple' },
-    ],
-  },
-  {
-    id: 'category',
-    name: 'Category',
-    options: [
-      { value: 'new-arrivals', label: 'All New Arrivals' },
-      { value: 'tees', label: 'Tees' },
-      { value: 'crewnecks', label: 'Crewnecks' },
-      { value: 'sweatshirts', label: 'Sweatshirts' },
-      { value: 'pants-shorts', label: 'Pants & Shorts' },
-    ],
-  },
-  {
-    id: 'sizes',
-    name: 'Sizes',
-    options: [
-      { value: 'xs', label: 'XS' },
-      { value: 's', label: 'S' },
-      { value: 'm', label: 'M' },
-      { value: 'l', label: 'L' },
-      { value: 'xl', label: 'XL' },
-      { value: '2xl', label: '2XL' },
-    ],
-  },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function CategoryFilters() {
+export default async function CategoryFilters() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
+
+  // const { data: grantCategories, meta } = await strapi.find('grant-categories', {
+  //   populate: 'deep',
+  // })
+  // console.log({ grantCategories })
+
+  const filters = [
+    {
+      id: 'color',
+      name: 'Color',
+      options: [
+        { value: 'white', label: 'White' },
+        { value: 'beige', label: 'Beige' },
+        { value: 'blue', label: 'Blue' },
+        { value: 'brown', label: 'Brown' },
+        { value: 'green', label: 'Green' },
+        { value: 'purple', label: 'Purple' },
+      ],
+    },
+    {
+      id: 'category',
+      name: 'Category',
+      options: [
+        { value: 'new-arrivals', label: 'All New Arrivals' },
+        { value: 'tees', label: 'Tees' },
+        { value: 'crewnecks', label: 'Crewnecks' },
+        { value: 'sweatshirts', label: 'Sweatshirts' },
+        { value: 'pants-shorts', label: 'Pants & Shorts' },
+      ],
+    },
+    {
+      id: 'sizes',
+      name: 'Sizes',
+      options: [
+        { value: 'xs', label: 'XS' },
+        { value: 's', label: 'S' },
+        { value: 'm', label: 'M' },
+        { value: 'l', label: 'L' },
+        { value: 'xl', label: 'XL' },
+        { value: '2xl', label: '2XL' },
+      ],
+    },
+  ]
 
   return (
     <div className="bg-base-200">

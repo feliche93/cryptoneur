@@ -13,7 +13,7 @@ const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Gas Fee Caculator', href: '/gas-fees-calculator' },
   { name: 'Blog', href: '/blog' },
-  { name: 'NFT Advent Calendar', href: '/advent-calendar' },
+  { name: 'Web 3 Grants', href: '/web3-grants' },
   // { name: "Web3 Journey", href: "/web3-journey" },
   // { name: "Portfolio", href: "/portfolio" },
   // { name: 'Freelancing', href: '/freelancing' },

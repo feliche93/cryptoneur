@@ -13,7 +13,6 @@ export default function Web3Grants() {
       <Hero />
       <Testimonials />
       <Features />
-      <CategoryFilters />
     </>
   )
 }

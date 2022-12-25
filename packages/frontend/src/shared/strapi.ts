@@ -6,7 +6,7 @@ const options: StrapiOptions = {
     axiosOptions: {
         headers: {
             'accept': 'application/json',
-            'Authorization': `Bearer ${process.env.STRAPI_API_TOKEN}`
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
         },
     }
 };
