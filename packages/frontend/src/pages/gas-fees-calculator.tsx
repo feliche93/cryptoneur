@@ -93,7 +93,7 @@ const GasFeesCalculator: NextPage = ({ networkPrices }) => {
           </a>
         </div>
       </div>
-      <Banner />
+      {/* <Banner /> */}
     </>
   )
 }
