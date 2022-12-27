@@ -37,31 +37,37 @@ export const DeskltopFilters: FC<DesktopFiltersProps> = ({
 
         <div className="hidden lg:block">
           <form className="space-y-10 divide-y divide-gray-200">
-            {!isLoading &&
-              !isRevalidating &&
-              filters.map((section, sectionIdx) => (
-                <div key={section.name} className={sectionIdx === 0 ? null : 'pt-10'}>
-                  <fieldset>
-                    <legend className="block text-sm font-medium">{section.name}</legend>
-                    <div className="space-y-3 pt-6">
-                      {!isLoading &&
-                        !isRevalidating &&
-                        section?.options?.map((option: any, optionIdx: number) => {
-                          // console.log({ option, optionIdx })
-                          return (
-                            <DesktopFilterOption
-                              key={optionIdx}
-                              optionIdx={optionIdx}
-                              option={option}
-                              section={section}
-                              register={register}
-                            />
-                          )
-                        })}
-                    </div>
-                  </fieldset>
-                </div>
-              ))}
+            {filters.map((section, sectionIdx) => (
+              <div key={section.name} className={sectionIdx === 0 ? null : 'pt-10'}>
+                <fieldset>
+                  <legend className="block text-sm font-medium">{section.name}</legend>
+                  <div className="space-y-3 pt-6">
+                    {isLoading || isRevalidating ? (
+                      // true
+                      <>
+                        {/* Animated pulse loading bars based on filters?.loadinbBars */}
+                        {Array.from({ length: section?.loadingBars }).map((_, idx) => (
+                          <div className="h-4 w-full rounded bg-base-300" />
+                        ))}
+                      </>
+                    ) : (
+                      section?.options?.map((option: any, optionIdx: number) => {
+                        // console.log({ option, optionIdx })
+                        return (
+                          <DesktopFilterOption
+                            key={optionIdx}
+                            optionIdx={optionIdx}
+                            option={option}
+                            section={section}
+                            register={register}
+                          />
+                        )
+                      })
+                    )}
+                  </div>
+                </fieldset>
+              </div>
+            ))}
           </form>
         </div>
       </aside>

@@ -1,21 +1,27 @@
 import { strapi } from '@shared/strapi'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FC } from 'react'
 
 export interface TestimonialsProps {}
 export const Testimonials: FC<TestimonialsProps> = async () => {
   const { data: grants } = await strapi.find<any>('grants', {
     populate: 'deep',
+    pagination: {
+      start: 0,
+      limit: 6,
+    },
   })
 
   const grantImages = grants.map((grant: any) => {
-    console.log({ grant })
+    // console.log({ grant })
     return {
       id: grant?.id,
       url: grant?.attributes?.logo?.data?.attributes?.url,
       width: grant?.attributes?.logo?.data?.attributes?.width,
       height: grant?.attributes?.logo?.data?.attributes?.height,
       alt: grant?.attributes?.logo?.data?.attributes?.alternativeText,
+      href: grant?.attributes?.slug || '/web3-grants',
     }
   })
 
@@ -30,13 +36,15 @@ export const Testimonials: FC<TestimonialsProps> = async () => {
             key={grant?.id}
             className="col-span-1 flex justify-center rounded-lg bg-base-100 py-8 px-8"
           >
-            <Image
-              className="max-h-24 object-contain"
-              src={grant.url}
-              width={grant.width}
-              height={grant.height}
-              alt={grant.alt}
-            />
+            <Link href={grant?.href}>
+              <Image
+                className="max-h-24 object-contain"
+                src={grant.url}
+                width={grant.width}
+                height={grant.height}
+                alt={grant.alt}
+              />
+            </Link>
           </div>
         ))}
       </div>

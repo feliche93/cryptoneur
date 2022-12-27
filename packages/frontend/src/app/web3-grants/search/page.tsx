@@ -10,7 +10,7 @@ import useSWR from 'swr'
 
 async function fetchStrapiData(key: any[]) {
   const [url, params] = key
-  console.log({ url, params })
+  // console.log({ url, params })
 
   if (!params) {
     const { data } = await strapi.find(url, {
@@ -55,7 +55,7 @@ export default function Search() {
     isValidating: isValidatingGrantUseCases,
   } = useSWR(['grant-use-cases'], fetchStrapiData)
 
-  console.log('blockchains', watch('blockchains'))
+  // console.log('blockchains', watch('blockchains'))
 
   const {
     data: grants,
@@ -99,6 +99,7 @@ export default function Search() {
     {
       id: 'blockchains',
       name: 'Blockchains',
+      loadingBars: 3,
       options: blockchains?.map((blockchain: any) => ({
         value: blockchain.id,
         label: blockchain?.attributes?.name,
@@ -107,6 +108,7 @@ export default function Search() {
     {
       id: 'grant-categories',
       name: 'Grant Categories',
+      loadingBars: 15,
       options: grantCategories?.map((grantCategory: any) => ({
         value: grantCategory.id,
         label: grantCategory?.attributes?.name,
@@ -115,6 +117,7 @@ export default function Search() {
     {
       id: 'grant-use-cases',
       name: 'Grant Use Cases',
+      loadingBars: 2,
       options: grantUseCases?.map((grantUseCase: any) => ({
         value: grantUseCase.id,
         label: grantUseCase?.attributes?.name,
@@ -124,14 +127,12 @@ export default function Search() {
 
   // console.log({ filters })
 
-  const isLoading =
-    isLoadingGrantCategories && isLoadingBlockchains && isLoadingGrantUseCases && isLoadingGrants
+  const isLoading = isLoadingGrantCategories && isLoadingBlockchains && isLoadingGrantUseCases
   const isRevalidating =
-    isValidatingGrantCategories &&
-    isValidatingBlockchains &&
-    isValidatingGrantUseCases &&
-    isValidatingGrants
-  console.log({ grants })
+    isValidatingGrantCategories && isValidatingBlockchains && isValidatingGrantUseCases
+  // console.log({ grants })
+
+  console.log({ isLoading, isRevalidating })
 
   return (
     <div>
