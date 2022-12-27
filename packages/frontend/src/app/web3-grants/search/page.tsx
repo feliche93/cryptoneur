@@ -245,9 +245,18 @@ export default function Search() {
           setMobileFiltersOpen={setMobileFiltersOpen}
           register={register}
         >
-          {grants?.map((grant: any) => (
-            <GrantCard key={grant.id} grant={grant} />
-          ))}
+          <div className="overflow-hidden bg-base-100 shadow sm:rounded-md">
+            <ul role="list" className="divide-y divide-base-300">
+              {grants?.map((grant: any) => (
+                <GrantCard
+                  key={grant.id}
+                  grant={grant}
+                  isLoadingGrants={isLoadingGrants}
+                  isValidatingGrants={isValidatingGrants}
+                />
+              ))}
+            </ul>
+          </div>
         </DeskltopFilters>
       </main>
     </div>
