@@ -247,14 +247,36 @@ export default function Search() {
         >
           <div className="overflow-hidden bg-base-100 shadow sm:rounded-md">
             <ul role="list" className="divide-y divide-base-300">
-              {grants?.map((grant: any) => (
-                <GrantCard
-                  key={grant.id}
-                  grant={grant}
-                  isLoadingGrants={isLoadingGrants}
-                  isValidatingGrants={isValidatingGrants}
-                />
-              ))}
+              {isLoadingGrants || isValidatingGrants ? (
+                <>
+                  {Array.from({ length: 10 }).map((_, i) => (
+                    <li key={i}>
+                      <div className="flex items-center px-4 py-4 sm:px-6">
+                        <div className="flex min-w-0 flex-1 items-center">
+                          <div className="flex-shrink-0">
+                            <div className="h-12 w-12 animate-pulse rounded-full bg-base-200" />
+                          </div>
+                        </div>
+                        <div className="h-full w-full flex-col space-y-3">
+                          <div className="ml-20 h-4 w-2/5 animate-pulse rounded-full bg-base-200" />
+                          <div className="ml-20 h-4 w-2/5 animate-pulse rounded-full bg-base-200" />
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {grants?.map((grant: any) => (
+                    <GrantCard
+                      key={grant.id}
+                      grant={grant}
+                      isLoadingGrants={isLoadingGrants}
+                      isValidatingGrants={isValidatingGrants}
+                    />
+                  ))}
+                </>
+              )}
             </ul>
           </div>
         </DeskltopFilters>
