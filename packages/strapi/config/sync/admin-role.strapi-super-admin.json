@@ -289,7 +289,8 @@
           "blockchains",
           "grantCategories",
           "grantUseCases",
-          "content"
+          "content",
+          "slug"
         ],
         "locales": [
           "en"
@@ -339,7 +340,8 @@
           "blockchains",
           "grantCategories",
           "grantUseCases",
-          "content"
+          "content",
+          "slug"
         ],
         "locales": [
           "en"
@@ -369,7 +371,8 @@
           "blockchains",
           "grantCategories",
           "grantUseCases",
-          "content"
+          "content",
+          "slug"
         ],
         "locales": [
           "en"
@@ -389,18 +392,16 @@
           "content",
           "authors",
           "tags",
-          "seo.metaTitle",
-          "seo.metaDescription",
-          "seo.metaImage",
-          "seo.metaSocial.socialNetwork",
-          "seo.metaSocial.title",
-          "seo.metaSocial.description",
-          "seo.metaSocial.image",
-          "seo.keywords",
-          "seo.metaRobots",
-          "seo.structuredData",
-          "seo.metaViewport",
-          "seo.canonicalURL"
+          "seo.title",
+          "seo.description",
+          "seo.noIndex",
+          "seo.noFollow",
+          "seo.canonical",
+          "seo.openGraph.title",
+          "seo.openGraph.description",
+          "seo.openGraph.url",
+          "seo.openGraph.type",
+          "seo.openGraph.images"
         ]
       },
       "conditions": []
@@ -429,18 +430,16 @@
           "content",
           "authors",
           "tags",
-          "seo.metaTitle",
-          "seo.metaDescription",
-          "seo.metaImage",
-          "seo.metaSocial.socialNetwork",
-          "seo.metaSocial.title",
-          "seo.metaSocial.description",
-          "seo.metaSocial.image",
-          "seo.keywords",
-          "seo.metaRobots",
-          "seo.structuredData",
-          "seo.metaViewport",
-          "seo.canonicalURL"
+          "seo.title",
+          "seo.description",
+          "seo.noIndex",
+          "seo.noFollow",
+          "seo.canonical",
+          "seo.openGraph.title",
+          "seo.openGraph.description",
+          "seo.openGraph.url",
+          "seo.openGraph.type",
+          "seo.openGraph.images"
         ]
       },
       "conditions": []
@@ -457,18 +456,16 @@
           "content",
           "authors",
           "tags",
-          "seo.metaTitle",
-          "seo.metaDescription",
-          "seo.metaImage",
-          "seo.metaSocial.socialNetwork",
-          "seo.metaSocial.title",
-          "seo.metaSocial.description",
-          "seo.metaSocial.image",
-          "seo.keywords",
-          "seo.metaRobots",
-          "seo.structuredData",
-          "seo.metaViewport",
-          "seo.canonicalURL"
+          "seo.title",
+          "seo.description",
+          "seo.noIndex",
+          "seo.noFollow",
+          "seo.canonical",
+          "seo.openGraph.title",
+          "seo.openGraph.description",
+          "seo.openGraph.url",
+          "seo.openGraph.type",
+          "seo.openGraph.images"
         ]
       },
       "conditions": []
@@ -563,6 +560,78 @@
         "fields": [
           "name",
           "symbol"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "subject": "api::web-3-grants-landing.web-3-grants-landing",
+      "properties": {
+        "fields": [
+          "testimonialGrants",
+          "seo.title",
+          "seo.description",
+          "seo.noIndex",
+          "seo.noFollow",
+          "seo.canonical",
+          "seo.openGraph.title",
+          "seo.openGraph.description",
+          "seo.openGraph.url",
+          "seo.openGraph.type",
+          "seo.openGraph.images"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::web-3-grants-landing.web-3-grants-landing",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::web-3-grants-landing.web-3-grants-landing",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::web-3-grants-landing.web-3-grants-landing",
+      "properties": {
+        "fields": [
+          "testimonialGrants",
+          "seo.title",
+          "seo.description",
+          "seo.noIndex",
+          "seo.noFollow",
+          "seo.canonical",
+          "seo.openGraph.title",
+          "seo.openGraph.description",
+          "seo.openGraph.url",
+          "seo.openGraph.type",
+          "seo.openGraph.images"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::web-3-grants-landing.web-3-grants-landing",
+      "properties": {
+        "fields": [
+          "testimonialGrants",
+          "seo.title",
+          "seo.description",
+          "seo.noIndex",
+          "seo.noFollow",
+          "seo.canonical",
+          "seo.openGraph.title",
+          "seo.openGraph.description",
+          "seo.openGraph.url",
+          "seo.openGraph.type",
+          "seo.openGraph.images"
         ]
       },
       "conditions": []
@@ -851,6 +920,12 @@
     },
     {
       "action": "plugin::upload.assets.update",
+      "subject": null,
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::upload.configure-view",
       "subject": null,
       "properties": {},
       "conditions": []

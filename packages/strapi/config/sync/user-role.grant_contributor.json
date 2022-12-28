@@ -1,0 +1,10 @@
+{
+  "name": "Grant Contributor",
+  "description": "Allows someone to contribute to grants",
+  "type": "grant_contributor",
+  "permissions": [
+    {
+      "action": "api::grant.grant.create"
+    }
+  ]
+}

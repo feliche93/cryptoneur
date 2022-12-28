@@ -1,7 +1,7 @@
 {
-  "key": "plugin_content_manager_configuration_components::shared.seo",
+  "key": "plugin_content_manager_configuration_components::shared.open-graph",
   "value": {
-    "uid": "shared.seo",
+    "uid": "shared.open-graph",
     "settings": {
       "bulkable": true,
       "filterable": true,
@@ -23,7 +23,7 @@
       "title": {
         "edit": {
           "label": "Title",
-          "description": "Set the meta title of the page",
+          "description": "The open graph title, this can be different than your meta title.",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -37,7 +37,7 @@
       "description": {
         "edit": {
           "label": "Description",
-          "description": "Set the page meta description",
+          "description": "The open graph description, this can be different than your meta description.",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -48,58 +48,44 @@
           "sortable": true
         }
       },
-      "noIndex": {
+      "url": {
         "edit": {
-          "label": "No Index",
-          "description": "Sets whether page should be indexed or not",
+          "label": "Url",
+          "description": "The canonical URL of your object that will be used as its permanent ID in the graph",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "noIndex",
+          "label": "url",
           "searchable": true,
           "sortable": true
         }
       },
-      "noFollow": {
+      "type": {
         "edit": {
-          "label": "No Follow",
-          "description": "Sets whether page should be followed or not",
+          "label": "Type",
+          "description": "The type of your object.",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "noFollow",
+          "label": "type",
           "searchable": true,
           "sortable": true
         }
       },
-      "canonical": {
+      "images": {
         "edit": {
-          "label": "Canonical",
-          "description": "Set the page canonical url",
+          "label": "Images",
+          "description": "An array of images (object) to be used by social media platforms, slack etc as a preview. If multiple supplied you can choose one when sharing.",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "canonical",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "openGraph": {
-        "edit": {
-          "label": "openGraph",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "openGraph",
+          "label": "images",
           "searchable": false,
           "sortable": false
         }
@@ -110,7 +96,7 @@
         "id",
         "title",
         "description",
-        "noIndex"
+        "url"
       ],
       "edit": [
         [
@@ -127,23 +113,19 @@
         ],
         [
           {
-            "name": "noIndex",
-            "size": 6
-          },
-          {
-            "name": "noFollow",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "canonical",
+            "name": "url",
             "size": 12
           }
         ],
         [
           {
-            "name": "openGraph",
+            "name": "type",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "images",
             "size": 12
           }
         ]

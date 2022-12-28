@@ -913,6 +913,41 @@
             "folder_path"
           ],
           "type": null
+        },
+        {
+          "name": "upload_files_created_at_index",
+          "columns": [
+            "created_at"
+          ],
+          "type": null
+        },
+        {
+          "name": "upload_files_updated_at_index",
+          "columns": [
+            "updated_at"
+          ],
+          "type": null
+        },
+        {
+          "name": "upload_files_name_index",
+          "columns": [
+            "name"
+          ],
+          "type": null
+        },
+        {
+          "name": "upload_files_size_index",
+          "columns": [
+            "size"
+          ],
+          "type": null
+        },
+        {
+          "name": "upload_files_ext_index",
+          "columns": [
+            "ext"
+          ],
+          "type": null
         }
       ],
       "kind": "collectionType",
@@ -2113,6 +2148,15 @@
           },
           "type": "richtext"
         },
+        "slug": {
+          "pluginOptions": {
+            "i18n": {
+              "localized": true
+            }
+          },
+          "type": "uid",
+          "targetField": "name"
+        },
         "createdAt": {
           "type": "datetime"
         },
@@ -2291,6 +2335,15 @@
               }
             },
             "type": "richtext"
+          },
+          "slug": {
+            "pluginOptions": {
+              "i18n": {
+                "localized": true
+              }
+            },
+            "type": "uid",
+            "targetField": "name"
           }
         },
         "kind": "collectionType"
@@ -2975,6 +3028,96 @@
       "uid": "api::token.token",
       "apiName": "token",
       "globalId": "Token",
+      "actions": {},
+      "lifecycles": {}
+    },
+    "api::web-3-grants-landing.web-3-grants-landing": {
+      "kind": "singleType",
+      "collectionName": "web_3_grants_landings",
+      "info": {
+        "singularName": "web-3-grants-landing",
+        "pluralName": "web-3-grants-landings",
+        "displayName": "Web 3 Grants Landing"
+      },
+      "options": {
+        "draftAndPublish": true
+      },
+      "pluginOptions": {},
+      "attributes": {
+        "testimonialGrants": {
+          "type": "relation",
+          "relation": "oneToMany",
+          "target": "api::grant.grant"
+        },
+        "seo": {
+          "type": "component",
+          "repeatable": false,
+          "component": "shared.seo"
+        },
+        "createdAt": {
+          "type": "datetime"
+        },
+        "updatedAt": {
+          "type": "datetime"
+        },
+        "publishedAt": {
+          "type": "datetime",
+          "configurable": false,
+          "writable": true,
+          "visible": false
+        },
+        "createdBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        },
+        "updatedBy": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "admin::user",
+          "configurable": false,
+          "writable": false,
+          "visible": false,
+          "useJoinTable": false,
+          "private": true
+        }
+      },
+      "__schema__": {
+        "collectionName": "web_3_grants_landings",
+        "info": {
+          "singularName": "web-3-grants-landing",
+          "pluralName": "web-3-grants-landings",
+          "displayName": "Web 3 Grants Landing"
+        },
+        "options": {
+          "draftAndPublish": true
+        },
+        "pluginOptions": {},
+        "attributes": {
+          "testimonialGrants": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::grant.grant"
+          },
+          "seo": {
+            "type": "component",
+            "repeatable": false,
+            "component": "shared.seo"
+          }
+        },
+        "kind": "singleType"
+      },
+      "modelType": "contentType",
+      "modelName": "web-3-grants-landing",
+      "connection": "default",
+      "uid": "api::web-3-grants-landing.web-3-grants-landing",
+      "apiName": "web-3-grants-landing",
+      "globalId": "Web3GrantsLanding",
       "actions": {},
       "lifecycles": {}
     }
