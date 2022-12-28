@@ -5,11 +5,31 @@
   "permissions": [
     {
       "action": "plugin::content-manager.explorer.create",
-      "subject": "api::post.post",
+      "subject": "api::grant.grant",
       "properties": {
         "fields": [
-          "title",
-          "content"
+          "active",
+          "blockchains",
+          "content",
+          "description",
+          "fundingMaximum.currency",
+          "fundingMaximum.value",
+          "fundingMinimum.currency",
+          "fundingMinimum.value",
+          "grantCategories",
+          "grantUseCases",
+          "linkApplication",
+          "linkInfo",
+          "logo",
+          "name",
+          "slug",
+          "socials.discord",
+          "socials.telegram",
+          "socials.twitter",
+          "socials.website"
+        ],
+        "locales": [
+          "en"
         ]
       },
       "conditions": [
@@ -18,19 +38,43 @@
     },
     {
       "action": "plugin::content-manager.explorer.delete",
-      "subject": "api::post.post",
-      "properties": {},
+      "subject": "api::grant.grant",
+      "properties": {
+        "locales": [
+          "en"
+        ]
+      },
       "conditions": [
         "admin::is-creator"
       ]
     },
     {
       "action": "plugin::content-manager.explorer.read",
-      "subject": "api::post.post",
+      "subject": "api::grant.grant",
       "properties": {
         "fields": [
-          "title",
-          "content"
+          "active",
+          "blockchains",
+          "content",
+          "description",
+          "fundingMaximum.currency",
+          "fundingMaximum.value",
+          "fundingMinimum.currency",
+          "fundingMinimum.value",
+          "grantCategories",
+          "grantUseCases",
+          "linkApplication",
+          "linkInfo",
+          "logo",
+          "name",
+          "slug",
+          "socials.discord",
+          "socials.telegram",
+          "socials.twitter",
+          "socials.website"
+        ],
+        "locales": [
+          "en"
         ]
       },
       "conditions": [
@@ -39,11 +83,31 @@
     },
     {
       "action": "plugin::content-manager.explorer.update",
-      "subject": "api::post.post",
+      "subject": "api::grant.grant",
       "properties": {
         "fields": [
-          "title",
-          "content"
+          "active",
+          "blockchains",
+          "content",
+          "description",
+          "fundingMaximum.currency",
+          "fundingMaximum.value",
+          "fundingMinimum.currency",
+          "fundingMinimum.value",
+          "grantCategories",
+          "grantUseCases",
+          "linkApplication",
+          "linkInfo",
+          "logo",
+          "name",
+          "slug",
+          "socials.discord",
+          "socials.telegram",
+          "socials.twitter",
+          "socials.website"
+        ],
+        "locales": [
+          "en"
         ]
       },
       "conditions": [

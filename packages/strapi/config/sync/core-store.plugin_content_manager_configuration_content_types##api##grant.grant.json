@@ -92,7 +92,7 @@
       },
       "active": {
         "edit": {
-          "label": "active",
+          "label": "Active",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -163,7 +163,7 @@
       },
       "grantCategories": {
         "edit": {
-          "label": "grantCategories",
+          "label": "Grant Categories",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -178,7 +178,7 @@
       },
       "grantUseCases": {
         "edit": {
-          "label": "grantUseCases",
+          "label": "Grant Use Cases",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -193,7 +193,7 @@
       },
       "content": {
         "edit": {
-          "label": "content",
+          "label": "Content",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -203,6 +203,20 @@
           "label": "content",
           "searchable": false,
           "sortable": false
+        }
+      },
+      "slug": {
+        "edit": {
+          "label": "Slug",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "slug",
+          "searchable": true,
+          "sortable": true
         }
       },
       "createdAt": {
@@ -235,25 +249,25 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "name",
-        "logo",
-        "active"
-      ],
       "edit": [
         [
           {
             "name": "name",
-            "size": 4
+            "size": 6
+          },
+          {
+            "name": "slug",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "logo",
+            "size": 6
           },
           {
             "name": "active",
-            "size": 4
-          },
-          {
-            "name": "logo",
-            "size": 4
+            "size": 6
           }
         ],
         [
@@ -314,6 +328,12 @@
             "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "name",
+        "logo",
+        "active"
       ]
     }
   },
