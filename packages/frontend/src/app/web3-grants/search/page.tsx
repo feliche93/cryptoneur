@@ -65,13 +65,13 @@ export default function Search() {
     [
       'grants',
       {
-        populate: 'socials,blockchains,logo',
+        populate: 'socials,logo,blockchains,grantCategories',
         // populate: 'deep',
         // pagination: {
         //   limit: 1,
         // },
         filters: {
-          ...(watch('blockchains') &&
+          ...(!!watch('blockchains') &&
             watch('blockchains').length !== 0 && {
               blockchains: {
                 id: {
@@ -79,11 +79,19 @@ export default function Search() {
                 },
               },
             }),
-          ...(watch('grant-categories') &&
+          ...(!!watch('grant-categories') &&
             watch('grant-categories').length !== 0 && {
               grantCategories: {
                 id: {
-                  $in: watch('blockchains'),
+                  $in: watch('grant-categories'),
+                },
+              },
+            }),
+          ...(!!watch('grant-use-cases') &&
+            watch('grant-use-cases').length !== 0 && {
+              grantUseCases: {
+                id: {
+                  $in: watch('grant-use-cases'),
                 },
               },
             }),
@@ -96,6 +104,7 @@ export default function Search() {
   // console.log({ grants })
 
   const data = watch()
+  // console.log({ data })
 
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
