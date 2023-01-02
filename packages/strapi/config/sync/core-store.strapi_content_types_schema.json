@@ -2157,6 +2157,12 @@
           "type": "uid",
           "targetField": "name"
         },
+        "grantProjects": {
+          "type": "relation",
+          "relation": "manyToMany",
+          "target": "api::grant-project.grant-project",
+          "inversedBy": "grants"
+        },
         "createdAt": {
           "type": "datetime"
         },
@@ -2344,6 +2350,12 @@
             },
             "type": "uid",
             "targetField": "name"
+          },
+          "grantProjects": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::grant-project.grant-project",
+            "inversedBy": "grants"
           }
         },
         "kind": "collectionType"
@@ -2572,6 +2584,12 @@
             }
           }
         },
+        "grants": {
+          "type": "relation",
+          "relation": "manyToMany",
+          "target": "api::grant.grant",
+          "mappedBy": "grantProjects"
+        },
         "createdAt": {
           "type": "datetime"
         },
@@ -2688,6 +2706,12 @@
                 "localized": false
               }
             }
+          },
+          "grants": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::grant.grant",
+            "mappedBy": "grantProjects"
           }
         },
         "kind": "collectionType"

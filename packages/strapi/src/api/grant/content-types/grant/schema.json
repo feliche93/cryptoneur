@@ -137,6 +137,12 @@
       },
       "type": "uid",
       "targetField": "name"
+    },
+    "grantProjects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::grant-project.grant-project",
+      "inversedBy": "grants"
     }
   }
 }

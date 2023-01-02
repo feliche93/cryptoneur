@@ -66,6 +66,12 @@
           "localized": false
         }
       }
+    },
+    "grants": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::grant.grant",
+      "mappedBy": "grantProjects"
     }
   }
 }

@@ -219,6 +219,21 @@
           "sortable": true
         }
       },
+      "grantProjects": {
+        "edit": {
+          "label": "Grant Projects",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "grantProjects",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -319,6 +334,10 @@
         [
           {
             "name": "grantUseCases",
+            "size": 6
+          },
+          {
+            "name": "grantProjects",
             "size": 6
           }
         ],
