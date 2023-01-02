@@ -214,6 +214,80 @@
     },
     {
       "action": "plugin::content-manager.explorer.create",
+      "subject": "api::grant-project.grant-project",
+      "properties": {
+        "fields": [
+          "name",
+          "description",
+          "link",
+          "grantAmount.value",
+          "grantAmount.currency",
+          "logo"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::grant-project.grant-project",
+      "properties": {
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::grant-project.grant-project",
+      "properties": {
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::grant-project.grant-project",
+      "properties": {
+        "fields": [
+          "name",
+          "description",
+          "link",
+          "grantAmount.value",
+          "grantAmount.currency",
+          "logo"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::grant-project.grant-project",
+      "properties": {
+        "fields": [
+          "name",
+          "description",
+          "link",
+          "grantAmount.value",
+          "grantAmount.currency",
+          "logo"
+        ],
+        "locales": [
+          "en"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
       "subject": "api::grant-use-case.grant-use-case",
       "properties": {
         "fields": [
