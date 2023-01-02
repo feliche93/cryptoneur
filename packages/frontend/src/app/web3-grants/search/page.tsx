@@ -10,14 +10,16 @@ import useSWR from 'swr'
 
 async function fetchStrapiData(key: any[]) {
   const [url, params] = key
+
+  // console.log({ params })
   // console.log({ url, params })
 
-  if (!params) {
-    const { data } = await strapi.find(url, {
-      populate: 'deep',
-    })
-    return data
-  }
+  // if (!params) {
+  //   const { data } = await strapi.find(url, {
+  //     populate: 'deep',
+  //   })
+  //   return data
+  // }
 
   const { data } = await strapi.find(url, {
     ...params,
@@ -55,8 +57,6 @@ export default function Search() {
     isValidating: isValidatingGrantUseCases,
   } = useSWR(['grant-use-cases'], fetchStrapiData)
 
-  // console.log('blockchains', watch('blockchains'))
-
   const {
     data: grants,
     isLoading: isLoadingGrants,
@@ -65,12 +65,13 @@ export default function Search() {
     [
       'grants',
       {
-        populate: 'deep',
+        populate: 'socials,logo,blockchains,grantCategories',
+        // populate: 'deep',
         // pagination: {
         //   limit: 1,
         // },
         filters: {
-          ...(watch('blockchains') &&
+          ...(!!watch('blockchains') &&
             watch('blockchains').length !== 0 && {
               blockchains: {
                 id: {
@@ -78,18 +79,32 @@ export default function Search() {
                 },
               },
             }),
-          // grantCategories: {
-          //   id: {
-          //     $eq: '1',
-          //   },
-          // },
+          ...(!!watch('grant-categories') &&
+            watch('grant-categories').length !== 0 && {
+              grantCategories: {
+                id: {
+                  $in: watch('grant-categories'),
+                },
+              },
+            }),
+          ...(!!watch('grant-use-cases') &&
+            watch('grant-use-cases').length !== 0 && {
+              grantUseCases: {
+                id: {
+                  $in: watch('grant-use-cases'),
+                },
+              },
+            }),
         },
       },
     ],
     fetchStrapiData,
   )
 
+  // console.log({ grants })
+
   const data = watch()
+  // console.log({ data })
 
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -99,7 +114,7 @@ export default function Search() {
     {
       id: 'blockchains',
       name: 'Blockchains',
-      loadingBars: 3,
+      loadingBars: 22,
       options: blockchains?.map((blockchain: any) => ({
         value: blockchain.id,
         label: blockchain?.attributes?.name,
@@ -117,7 +132,7 @@ export default function Search() {
     {
       id: 'grant-use-cases',
       name: 'Grant Use Cases',
-      loadingBars: 2,
+      loadingBars: 10,
       options: grantUseCases?.map((grantUseCase: any) => ({
         value: grantUseCase.id,
         label: grantUseCase?.attributes?.name,
@@ -132,7 +147,7 @@ export default function Search() {
     isValidatingGrantCategories && isValidatingBlockchains && isValidatingGrantUseCases
   // console.log({ grants })
 
-  console.log({ isLoading, isRevalidating })
+  // console.log({ isLoading, isRevalidating })
 
   return (
     <div>

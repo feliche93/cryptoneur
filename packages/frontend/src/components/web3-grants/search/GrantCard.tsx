@@ -50,7 +50,7 @@ export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
     },
   ]
 
-  console.log({ grant })
+  // console.log({ grant })
 
   return (
     <>
