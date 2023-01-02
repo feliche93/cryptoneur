@@ -90,6 +90,21 @@
           "sortable": false
         }
       },
+      "grants": {
+        "edit": {
+          "label": "grants",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "grants",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -120,6 +135,12 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "name",
+        "description",
+        "link"
+      ],
       "edit": [
         [
           {
@@ -148,13 +169,13 @@
             "name": "grantAmount",
             "size": 12
           }
+        ],
+        [
+          {
+            "name": "grants",
+            "size": 6
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "name",
-        "description",
-        "link"
       ]
     }
   },

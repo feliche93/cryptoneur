@@ -222,7 +222,8 @@
           "link",
           "grantAmount.value",
           "grantAmount.currency",
-          "logo"
+          "logo",
+          "grants"
         ],
         "locales": [
           "en"
@@ -260,7 +261,8 @@
           "link",
           "grantAmount.value",
           "grantAmount.currency",
-          "logo"
+          "logo",
+          "grants"
         ],
         "locales": [
           "en"
@@ -278,7 +280,8 @@
           "link",
           "grantAmount.value",
           "grantAmount.currency",
-          "logo"
+          "logo",
+          "grants"
         ],
         "locales": [
           "en"
@@ -364,7 +367,8 @@
           "grantCategories",
           "grantUseCases",
           "content",
-          "slug"
+          "slug",
+          "grantProjects"
         ],
         "locales": [
           "en"
@@ -415,7 +419,8 @@
           "grantCategories",
           "grantUseCases",
           "content",
-          "slug"
+          "slug",
+          "grantProjects"
         ],
         "locales": [
           "en"
@@ -446,7 +451,8 @@
           "grantCategories",
           "grantUseCases",
           "content",
-          "slug"
+          "slug",
+          "grantProjects"
         ],
         "locales": [
           "en"
