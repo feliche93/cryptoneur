@@ -1,14 +1,14 @@
 {
-  "key": "plugin_content_manager_configuration_content_types::api::web-3-grants-landing.web-3-grants-landing",
+  "key": "plugin_content_manager_configuration_content_types::api::grant-project.grant-project",
   "value": {
-    "uid": "api::web-3-grants-landing.web-3-grants-landing",
+    "uid": "api::grant-project.grant-project",
     "settings": {
       "bulkable": true,
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "id",
-      "defaultSortBy": "id",
+      "mainField": "name",
+      "defaultSortBy": "name",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -20,31 +20,72 @@
           "sortable": true
         }
       },
-      "testimonialGrants": {
+      "name": {
         "edit": {
-          "label": "Testimonial Grants",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true,
-          "mainField": "name"
-        },
-        "list": {
-          "label": "testimonialGrants",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "seo": {
-        "edit": {
-          "label": "Seo",
+          "label": "Name",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "seo",
+          "label": "name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "description": {
+        "edit": {
+          "label": "Description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "link": {
+        "edit": {
+          "label": "Link",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "link",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "grantAmount": {
+        "edit": {
+          "label": "Grant Amount",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "grantAmount",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "logo": {
+        "edit": {
+          "label": "Logo",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "logo",
           "searchable": false,
           "sortable": false
         }
@@ -82,22 +123,38 @@
       "edit": [
         [
           {
-            "name": "testimonialGrants",
+            "name": "name",
+            "size": 6
+          },
+          {
+            "name": "link",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "logo",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "description",
             "size": 12
           }
         ],
         [
           {
-            "name": "seo",
+            "name": "grantAmount",
             "size": 12
           }
         ]
       ],
       "list": [
         "id",
-        "testimonialGrants",
-        "seo",
-        "createdAt"
+        "name",
+        "description",
+        "link"
       ]
     }
   },

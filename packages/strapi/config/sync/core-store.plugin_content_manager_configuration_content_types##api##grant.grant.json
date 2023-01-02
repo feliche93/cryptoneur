@@ -79,7 +79,7 @@
       "description": {
         "edit": {
           "label": "Description",
-          "description": "1-2 sentence description about the protocol or company that is offering the grant. Do not fill the grant description in here.",
+          "description": "1-2 sentence description about the protocol or grant provider. Do not put a description about the grant here.",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -163,7 +163,7 @@
       },
       "grantCategories": {
         "edit": {
-          "label": "grantCategories",
+          "label": "Grant Categories",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -178,7 +178,7 @@
       },
       "grantUseCases": {
         "edit": {
-          "label": "grantUseCases",
+          "label": "Grant Use Cases",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -193,7 +193,7 @@
       },
       "content": {
         "edit": {
-          "label": "content",
+          "label": "Content",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -207,7 +207,7 @@
       },
       "slug": {
         "edit": {
-          "label": "slug",
+          "label": "Slug",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -249,16 +249,14 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "name",
-        "logo",
-        "active"
-      ],
       "edit": [
         [
           {
             "name": "name",
+            "size": 6
+          },
+          {
+            "name": "slug",
             "size": 6
           }
         ],
@@ -329,13 +327,13 @@
             "name": "content",
             "size": 12
           }
-        ],
-        [
-          {
-            "name": "slug",
-            "size": 6
-          }
         ]
+      ],
+      "list": [
+        "id",
+        "name",
+        "logo",
+        "active"
       ]
     }
   },

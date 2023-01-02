@@ -8,21 +8,25 @@
       "subject": "api::grant.grant",
       "properties": {
         "fields": [
-          "name",
-          "logo",
-          "fundingMinimum.value",
-          "fundingMinimum.currency",
-          "fundingMaximum.value",
-          "fundingMaximum.currency",
-          "description",
           "active",
+          "blockchains",
+          "content",
+          "description",
+          "fundingMaximum.currency",
+          "fundingMaximum.value",
+          "fundingMinimum.currency",
+          "fundingMinimum.value",
+          "grantCategories",
+          "grantUseCases",
           "linkApplication",
           "linkInfo",
-          "socials.twitter",
+          "logo",
+          "name",
+          "slug",
           "socials.discord",
-          "socials.website",
           "socials.telegram",
-          "blockchains"
+          "socials.twitter",
+          "socials.website"
         ],
         "locales": [
           "en"
@@ -49,21 +53,25 @@
       "subject": "api::grant.grant",
       "properties": {
         "fields": [
-          "name",
-          "logo",
-          "fundingMinimum.value",
-          "fundingMinimum.currency",
-          "fundingMaximum.value",
-          "fundingMaximum.currency",
-          "description",
           "active",
+          "blockchains",
+          "content",
+          "description",
+          "fundingMaximum.currency",
+          "fundingMaximum.value",
+          "fundingMinimum.currency",
+          "fundingMinimum.value",
+          "grantCategories",
+          "grantUseCases",
           "linkApplication",
           "linkInfo",
-          "socials.twitter",
+          "logo",
+          "name",
+          "slug",
           "socials.discord",
-          "socials.website",
           "socials.telegram",
-          "blockchains"
+          "socials.twitter",
+          "socials.website"
         ],
         "locales": [
           "en"
@@ -78,21 +86,25 @@
       "subject": "api::grant.grant",
       "properties": {
         "fields": [
-          "name",
-          "logo",
-          "fundingMinimum.value",
-          "fundingMinimum.currency",
-          "fundingMaximum.value",
-          "fundingMaximum.currency",
-          "description",
           "active",
+          "blockchains",
+          "content",
+          "description",
+          "fundingMaximum.currency",
+          "fundingMaximum.value",
+          "fundingMinimum.currency",
+          "fundingMinimum.value",
+          "grantCategories",
+          "grantUseCases",
           "linkApplication",
           "linkInfo",
-          "socials.twitter",
+          "logo",
+          "name",
+          "slug",
           "socials.discord",
-          "socials.website",
           "socials.telegram",
-          "blockchains"
+          "socials.twitter",
+          "socials.website"
         ],
         "locales": [
           "en"
