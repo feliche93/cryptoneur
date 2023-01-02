@@ -22,7 +22,7 @@
       },
       "url": {
         "edit": {
-          "label": "Url",
+          "label": "url",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -44,7 +44,7 @@
         [
           {
             "name": "url",
-            "size": 12
+            "size": 6
           }
         ]
       ]

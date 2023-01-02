@@ -79,7 +79,7 @@
       "description": {
         "edit": {
           "label": "Description",
-          "description": "1-2 sentence description about the grant",
+          "description": "1-2 sentence description about the protocol or company that is offering the grant. Do not fill the grant description in here.",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -163,7 +163,7 @@
       },
       "grantCategories": {
         "edit": {
-          "label": "Grant Categories",
+          "label": "grantCategories",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -178,7 +178,7 @@
       },
       "grantUseCases": {
         "edit": {
-          "label": "Grant Use Cases",
+          "label": "grantUseCases",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -193,7 +193,7 @@
       },
       "content": {
         "edit": {
-          "label": "Content",
+          "label": "content",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -207,7 +207,7 @@
       },
       "slug": {
         "edit": {
-          "label": "Slug",
+          "label": "slug",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -249,14 +249,16 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "name",
+        "logo",
+        "active"
+      ],
       "edit": [
         [
           {
             "name": "name",
-            "size": 6
-          },
-          {
-            "name": "slug",
             "size": 6
           }
         ],
@@ -327,13 +329,13 @@
             "name": "content",
             "size": 12
           }
+        ],
+        [
+          {
+            "name": "slug",
+            "size": 6
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "name",
-        "logo",
-        "active"
       ]
     }
   },

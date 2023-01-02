@@ -22,8 +22,8 @@
       },
       "title": {
         "edit": {
-          "label": "Title",
-          "description": "The open graph title, this can be different than your meta title.",
+          "label": "title",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -36,8 +36,8 @@
       },
       "description": {
         "edit": {
-          "label": "Description",
-          "description": "The open graph description, this can be different than your meta description.",
+          "label": "description",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -50,8 +50,8 @@
       },
       "url": {
         "edit": {
-          "label": "Url",
-          "description": "The canonical URL of your object that will be used as its permanent ID in the graph",
+          "label": "url",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -64,8 +64,8 @@
       },
       "type": {
         "edit": {
-          "label": "Type",
-          "description": "The type of your object.",
+          "label": "type",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -78,8 +78,8 @@
       },
       "images": {
         "edit": {
-          "label": "Images",
-          "description": "An array of images (object) to be used by social media platforms, slack etc as a preview. If multiple supplied you can choose one when sharing.",
+          "label": "images",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -102,31 +102,27 @@
         [
           {
             "name": "title",
-            "size": 12
-          }
-        ],
-        [
+            "size": 6
+          },
           {
             "name": "description",
-            "size": 12
+            "size": 6
           }
         ],
         [
           {
             "name": "url",
-            "size": 12
-          }
-        ],
-        [
+            "size": 6
+          },
           {
             "name": "type",
-            "size": 12
+            "size": 6
           }
         ],
         [
           {
             "name": "images",
-            "size": 12
+            "size": 6
           }
         ]
       ]

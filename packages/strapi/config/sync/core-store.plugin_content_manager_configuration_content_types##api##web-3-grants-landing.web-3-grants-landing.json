@@ -22,7 +22,7 @@
       },
       "testimonialGrants": {
         "edit": {
-          "label": "Testimonial Grants",
+          "label": "testimonialGrants",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -37,7 +37,7 @@
       },
       "seo": {
         "edit": {
-          "label": "Seo",
+          "label": "seo",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -79,11 +79,17 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "testimonialGrants",
+        "seo",
+        "createdAt"
+      ],
       "edit": [
         [
           {
             "name": "testimonialGrants",
-            "size": 12
+            "size": 6
           }
         ],
         [
@@ -92,12 +98,6 @@
             "size": 12
           }
         ]
-      ],
-      "list": [
-        "id",
-        "testimonialGrants",
-        "seo",
-        "createdAt"
       ]
     }
   },
