@@ -13,6 +13,8 @@ export const DesktopFilterOption: FC<DesktopFilterOptionProps> = ({
   optionIdx,
   register,
 }) => {
+  // console.log({ option, optionIdx, section })
+
   return (
     <div key={option.value} className="flex items-center">
       <input
