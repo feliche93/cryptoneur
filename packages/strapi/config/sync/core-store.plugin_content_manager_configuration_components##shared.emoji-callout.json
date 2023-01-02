@@ -22,7 +22,7 @@
       },
       "emoji": {
         "edit": {
-          "label": "Emoji",
+          "label": "emoji",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -36,7 +36,7 @@
       },
       "text": {
         "edit": {
-          "label": "Text",
+          "label": "text",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -50,7 +50,7 @@
       },
       "type": {
         "edit": {
-          "label": "Type",
+          "label": "type",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -74,16 +74,18 @@
           {
             "name": "emoji",
             "size": 6
-          },
-          {
-            "name": "type",
-            "size": 6
           }
         ],
         [
           {
             "name": "text",
             "size": 12
+          }
+        ],
+        [
+          {
+            "name": "type",
+            "size": 6
           }
         ]
       ]

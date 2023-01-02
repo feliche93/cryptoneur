@@ -22,8 +22,8 @@
       },
       "title": {
         "edit": {
-          "label": "Title",
-          "description": "Set the meta title of the page",
+          "label": "title",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -36,8 +36,8 @@
       },
       "description": {
         "edit": {
-          "label": "Description",
-          "description": "Set the page meta description",
+          "label": "description",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -50,8 +50,8 @@
       },
       "noIndex": {
         "edit": {
-          "label": "No Index",
-          "description": "Sets whether page should be indexed or not",
+          "label": "noIndex",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -64,8 +64,8 @@
       },
       "noFollow": {
         "edit": {
-          "label": "No Follow",
-          "description": "Sets whether page should be followed or not",
+          "label": "noFollow",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -78,8 +78,8 @@
       },
       "canonical": {
         "edit": {
-          "label": "Canonical",
-          "description": "Set the page canonical url",
+          "label": "canonical",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -116,29 +116,27 @@
         [
           {
             "name": "title",
-            "size": 12
-          }
-        ],
-        [
+            "size": 6
+          },
           {
             "name": "description",
-            "size": 12
+            "size": 6
           }
         ],
         [
           {
             "name": "noIndex",
-            "size": 6
+            "size": 4
           },
           {
             "name": "noFollow",
-            "size": 6
+            "size": 4
           }
         ],
         [
           {
             "name": "canonical",
-            "size": 12
+            "size": 6
           }
         ],
         [
