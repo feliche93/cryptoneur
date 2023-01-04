@@ -1,21 +1,10 @@
+export const revalidate = 60
+
+import { GrantInfoCard } from '@components/web3-grants/grant/GrantInfoCard'
+import { Header } from '@components/web3-grants/grant/Header'
+import { CheckIcon, HandThumbUpIcon, UserIcon } from '@heroicons/react/20/solid'
 import { NextPage } from 'next'
 import { NextParsedUrlQuery } from 'next/dist/server/request-meta'
-import { Fragment } from 'react'
-import { Menu, Popover, Transition } from '@headlessui/react'
-import {
-  ArrowLongLeftIcon,
-  CheckIcon,
-  HandThumbUpIcon,
-  HomeIcon,
-  MagnifyingGlassIcon,
-  PaperClipIcon,
-  QuestionMarkCircleIcon,
-  UserIcon,
-} from '@heroicons/react/20/solid'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { classNames } from '@lib/utils'
-import { Header } from '@components/web3-grants/grant/Header'
-import { GrantInfoCard } from '@components/web3-grants/grant/GrantInfoCard'
 
 const Web3GrantPage: NextPage<NextParsedUrlQuery> = ({ params }) => {
   const { slug } = params
