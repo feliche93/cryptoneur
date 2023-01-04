@@ -18,10 +18,10 @@ export interface GrantInfoCardProps {
 export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, description }) => {
   const grant = await getGrantbySlug(
     slug,
-    'socials,blockchains,grantUseCases,grantCategories,fundingMinimum,fundingMaximum',
+    'socials,blockchains,grantUseCases,grantCategories,fundingMinimum,fundingMaximum,fundingMinimum.currency,fundingMaximum.currency',
   )
 
-  console.log({ ...grant })
+  console.log(grant?.attributes?.fundingMaximum?.currency)
 
   const attachments = [
     { name: 'resume_front_end_developer.pdf', href: '#' },
@@ -116,7 +116,9 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
                 <dt className="text-sm font-medium text-base-content/80">Minimum Funding</dt>
                 <dd className="mt-1 text-sm text-base-content">
                   {grant?.attributes?.fundingMinimum ? (
-                    grant?.attributes?.fundingMinimum
+                    grant?.attributes?.fundingMinimum?.value +
+                    ' ' +
+                    grant?.attributes?.fundingMinimum?.currency?.data?.attributes?.symbol
                   ) : (
                     <NoInfo />
                   )}
@@ -127,7 +129,9 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
                 <dt className="text-sm font-medium text-base-content/80">Maximum Funding</dt>
                 <dd className="mt-1 text-sm text-base-content">
                   {grant?.attributes?.fundingMaximum ? (
-                    grant?.attributes?.fundingMaximum
+                    grant?.attributes?.fundingMaximum?.value +
+                    ' ' +
+                    grant?.attributes?.fundingMaximum?.currency?.data?.attributes?.symbol
                   ) : (
                     <NoInfo />
                   )}
