@@ -17,16 +17,13 @@ export const Header: FC<HeaderProps> = async ({ slug }) => {
     <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
       <div className="flex items-center space-x-5">
         <div className="flex-shrink-0">
-          <div className="relative">
-            <Image
-              className="h-16 w-16 rounded-full"
-              src={grant?.attributes?.logo?.data?.attributes?.url}
-              alt={grant?.attributes?.logo?.data?.attributes?.alternativeText}
-              width={grant?.attributes?.logo?.data?.attributes?.width}
-              height={grant?.attributes?.logo?.data?.attributes?.height}
-            />
-            <span className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true" />
-          </div>
+          <Image
+            className="h-16 w-full rounded-lg object-contain"
+            src={grant?.attributes?.logo?.data?.attributes?.url}
+            alt={grant?.attributes?.logo?.data?.attributes?.alternativeText}
+            width={grant?.attributes?.logo?.data?.attributes?.width}
+            height={grant?.attributes?.logo?.data?.attributes?.height}
+          />
         </div>
         <div>
           <h1 className="text-2xl font-bold">{grant?.attributes?.name}</h1>
