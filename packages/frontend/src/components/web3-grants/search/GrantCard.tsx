@@ -50,12 +50,19 @@ export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
     },
   ]
 
-  // console.log({ grant })
+  console.log({ ...grant })
 
   return (
     <>
       <li key={grant?.id}>
-        <Link href={'/web3-grants/search'} className="block hover:bg-base-300/10">
+        <Link
+          href={
+            grant?.attributes?.slug
+              ? `/web3-grants/${grant?.attributes?.slug}`
+              : '/web3-grants/search'
+          }
+          className="block hover:bg-base-300/10"
+        >
           <div className="flex items-center px-4 py-4 sm:px-6">
             <div className="flex min-w-0 flex-1 items-center">
               <div className="flex-shrink-0">

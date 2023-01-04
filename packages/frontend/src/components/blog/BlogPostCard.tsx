@@ -24,7 +24,7 @@ export const BlogPostCard: FC<BlogPostCardProps> = ({ post, id }) => {
       <div className="flex flex-1 flex-col justify-between bg-base-100 p-6">
         <div className="flex-1">
           <p className="text-sm font-medium text-primary">
-            {post?.tags?.data.map((tag) => {
+            {post?.tags?.data.map((tag: any) => {
               return (
                 <Link
                   key={tag?.id}
