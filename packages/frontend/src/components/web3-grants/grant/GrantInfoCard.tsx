@@ -21,7 +21,7 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
     'socials,blockchains,grantUseCases,grantCategories,fundingMinimum,fundingMaximum,fundingMinimum.currency,fundingMaximum.currency',
   )
 
-  console.log(grant?.attributes?.fundingMaximum?.currency)
+  // console.log(grant?.attributes?.fundingMaximum?.currency)
 
   const attachments = [
     { name: 'resume_front_end_developer.pdf', href: '#' },
