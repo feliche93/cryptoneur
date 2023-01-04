@@ -1,15 +1,13 @@
 import { strapi } from '@shared/strapi'
 import dayjs from 'dayjs'
 import Image from 'next/image'
-import Link from 'next/link'
-import { FC } from 'react'
-
 import { FC } from 'react'
 
 export interface HeaderProps {
   slug: string
 }
 
+// @ts-expect-error Server Component
 export const Header: FC<HeaderProps> = async ({ slug }) => {
   console.log({ slug })
 
