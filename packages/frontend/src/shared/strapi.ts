@@ -13,7 +13,27 @@ const options: StrapiOptions = {
 
 const strapi = new Strapi(options);
 
-export { strapi };
+
+const getGrantbySlug = async (slug: string, populate: string) => {
+    const { data: grants } = await strapi.find<any>('grants', {
+        populate,
+        filters: {
+            slug: {
+                $eq: slug,
+            },
+        },
+    })
+
+    if (!grants?.length) {
+        return null
+    }
+
+    const grant = grants[0]
+
+    return grant
+}
+
+export { strapi, getGrantbySlug };
 
 // async function getBlogPosts() {
 //     const { data, meta } = await strapi.find('blog-posts', {

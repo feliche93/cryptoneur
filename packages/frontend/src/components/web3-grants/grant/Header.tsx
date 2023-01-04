@@ -1,4 +1,4 @@
-import { strapi } from '@shared/strapi'
+import { getGrantbySlug, strapi } from '@shared/strapi'
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import { FC } from 'react'
@@ -11,22 +11,7 @@ export interface HeaderProps {
 export const Header: FC<HeaderProps> = async ({ slug }) => {
   console.log({ slug })
 
-  const { data: grants } = await strapi.find<any>('grants', {
-    populate: 'logo',
-    filters: {
-      slug: {
-        $eq: slug,
-      },
-    },
-  })
-
-  if (!grants?.length) {
-    return null
-  }
-
-  const grant = grants[0]
-
-  console.log({ ...grant })
+  const grant = await getGrantbySlug(slug, 'logo')
 
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
