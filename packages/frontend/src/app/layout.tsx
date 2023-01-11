@@ -1,14 +1,26 @@
-import { AnalyticsWrapper } from "@components/shared/analytics";
-import { NextSeo } from "next-seo";
-import Footer from "../components/layout/Footer";
-import Navbar from "../components/layout/Navbar";
-import "./globals.css";
+import 'server-only'
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import { AnalyticsWrapper } from '@components/shared/analytics'
+import SupabaseProvider from '@components/supabase-provider'
+import { Database } from '@lib/database.types'
+import type { SupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { createServerClient } from '@utils/supabase-server'
+import { NextSeo } from 'next-seo'
+import Footer from '../components/layout/Footer'
+import Navbar from '../components/layout/Navbar'
+import './globals.css'
+
+export type TypedSupabaseClient = SupabaseClient<Database>
+
+export const revalidate = 0
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const supabase = createServerClient()
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
   return (
     <html lang="en">
       <head>
@@ -23,12 +35,14 @@ export default function RootLayout({
         // themeColor="#73fa97"
         titleTemplate="Cryptoneur | %s"
       />
-      <body className="bg-base-200">
-        <Navbar />
-        {children}
-        <AnalyticsWrapper />
-        <Footer />
-      </body>
+      <SupabaseProvider session={session}>
+        <body className="bg-base-200">
+          <Navbar />
+          {children}
+          <AnalyticsWrapper />
+          <Footer />
+        </body>
+      </SupabaseProvider>
     </html>
-  );
+  )
 }

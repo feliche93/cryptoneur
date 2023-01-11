@@ -6,7 +6,7 @@ import { FC } from 'react'
 export interface HeroProps {}
 export const Hero: FC<HeroProps> = () => {
   return (
-    <main className="mx-auto flex max-w-7xl flex-col items-center px-4 pt-16 sm:pt-10">
+    <main className="mx-auto flex max-w-7xl flex-col items-center px-4 pt-8">
       {/* <Image
         className="h-44 w-44 rounded-full object-contain sm:h-64 sm:w-64"
         alt="Felix Vemmer"

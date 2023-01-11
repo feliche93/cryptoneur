@@ -11,7 +11,7 @@ export default function Web3Grants() {
   return (
     <>
       <Hero />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Features />
     </>
   )

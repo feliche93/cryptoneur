@@ -1,13 +1,9 @@
-'use client'
-
-import React from 'react'
-import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { Bars4Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
-import { useSupabase } from '@components/supabase-provider'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Fragment } from 'react'
 
 // TODO: Check active links working
 const navigation = [
@@ -24,18 +20,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-function Navbar() {
+function NavbarPage() {
   const pathname = usePathname()
-  const router = useRouter()
-  const { supabase, session } = useSupabase()
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut()
-
-    if (error) {
-      console.log({ error })
-    }
-  }
 
   return (
     <div className="relative bg-base-200 md:overflow-hidden">
@@ -86,17 +72,6 @@ function Navbar() {
                   </Link>
                 ))}
               </div>
-              <div className="hidden md:absolute md:inset-y-0 md:right-0 md:flex md:items-center md:justify-end">
-                {session ? (
-                  <button className="btn-outline btn-primary btn" onClick={handleLogout}>
-                    Ausloggen
-                  </button>
-                ) : (
-                  <Link className="btn-primary btn" href={'/sign-in'}>
-                    Einloggen
-                  </Link>
-                )}
-              </div>
             </nav>
           </div>
 
@@ -146,17 +121,6 @@ function Navbar() {
                     </Link>
                   ))}
                 </div>
-                <div className="hidden md:absolute md:inset-y-0 md:right-0 md:flex md:items-center md:justify-end">
-                  {session ? (
-                    <button className="btn-outline btn-primary btn" onClick={handleLogout}>
-                      Ausloggen
-                    </button>
-                  ) : (
-                    <Link className="btn-primary btn" href={'/sign-in'}>
-                      Einloggen
-                    </Link>
-                  )}
-                </div>
               </div>
             </Popover.Panel>
           </Transition>
@@ -166,4 +130,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default NavbarPage
