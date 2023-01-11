@@ -4,7 +4,16 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ['cryptoneur-prod.s3.us-west-2.amazonaws.com', "pbs.twimg.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      }
+    ],
   },
   "typescript": {
     // !! WARN !!

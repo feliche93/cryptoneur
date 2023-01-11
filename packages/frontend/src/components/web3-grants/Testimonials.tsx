@@ -8,29 +8,11 @@ export interface TestimonialsProps {}
 
 export const Testimonials: FC<TestimonialsProps> = async () => {
   const supabase = createServerClient()
-  const { data, error } = await supabase.from('grants').select('grant,logo(url)')
-  console.log({ data, error })
-
-  return null
-  const { data: grants } = await strapi.find<any>('grants', {
-    populate: 'deep',
-    pagination: {
-      start: 0,
-      limit: 6,
-    },
-  })
-
-  const grantImages = grants.map((grant: any) => {
-    // console.log({ grant })
-    return {
-      id: grant?.id,
-      url: grant?.attributes?.logo?.data?.attributes?.url,
-      width: grant?.attributes?.logo?.data?.attributes?.width,
-      height: grant?.attributes?.logo?.data?.attributes?.height,
-      alt: grant?.attributes?.logo?.data?.attributes?.alternativeText,
-      href: grant?.attributes?.slug || '/web3-grants',
-    }
-  })
+  const { data, error } = await supabase
+    .from('grants')
+    .select('grant,logo,id,slug')
+    .in('id', [1, 2, 3, 4, 5, 6])
+  // console.log({ data, error })
 
   return (
     <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
@@ -38,22 +20,25 @@ export const Testimonials: FC<TestimonialsProps> = async () => {
         Working with the biggest web3 projects
       </p>
       <div className="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3 lg:mt-8">
-        {grantImages.map((grant: any) => (
-          <div
-            key={grant?.id}
-            className="col-span-1 flex justify-center rounded-lg bg-base-100 py-8 px-8"
-          >
-            <Link href={grant?.href}>
-              <Image
-                className="max-h-24 object-contain"
-                src={grant.url}
-                width={grant.width}
-                height={grant.height}
-                alt={grant.alt}
-              />
-            </Link>
-          </div>
-        ))}
+        {data &&
+          data.map((grant) => (
+            <div
+              key={grant?.id}
+              className="col-span-1 flex justify-center rounded-lg bg-base-100 py-8 px-8"
+            >
+              {grant?.logo && grant?.slug && (
+                <Link href={`web3-grants/${grant?.slug}`}>
+                  <Image
+                    className="max-h-24 object-contain"
+                    src={grant.logo}
+                    width={200}
+                    height={200}
+                    alt={grant?.grant}
+                  />
+                </Link>
+              )}
+            </div>
+          ))}
       </div>
     </div>
   )
