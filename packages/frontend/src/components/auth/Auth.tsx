@@ -24,12 +24,6 @@ export const Auth: FC<AuthProps> = () => {
   const pathname = usePathname()
   const router = useRouter()
 
-  useEffect(() => {
-    if (session) {
-      router.push('/')
-    }
-  }, [session])
-
   const signIn = pathname === '/sign-in'
 
   //   console.log({ pathname })
@@ -73,6 +67,7 @@ export const Auth: FC<AuthProps> = () => {
       toast.success('Registration successful. Please confirm your email address in your mailbox.')
     }
     reset()
+    router.refresh()
   }
 
   return (

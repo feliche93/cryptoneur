@@ -137,21 +137,27 @@ for grant in data:
     logo_path = seed_data_path / "logos" / logo_name
     logo_url = logo.get("url")
 
+    # get mime type from logo url
+    r = requests.head(logo_url)
+    logo["mime"] = r.headers.get("content-type")
+
     # download logo to logo path
 
     r = requests.get(logo_url, allow_redirects=True)
     open(logo_path, "wb").write(r.content)
 
-    try:
-        result = storage_client.from_(bucket_name).upload(
-            path=f"{logo_name}",
-            file=logo_path,
-        )
-    except Exception as e:
-        print(e)
+    result = storage_client.from_(bucket_name).upload(
+        path=f"{logo_name}",
+        file=logo_path,
+        # file_options={
+        #     "Content-Type": logo.get("mime"),
+        #     "upsert": "true",
+        # },
+    )
 
-    files = storage_client.from_(bucket_name).list()
-    file_id = [file.get("id") for file in files if file.get("name") == logo_name][0]
+    file_key = result.json().get("Key").split("/")[-1]
+
+    file_url = storage_client.from_(bucket_name).get_public_url(file_key)
 
     # delete logo from local storage
     os.remove(logo_path)
@@ -191,7 +197,7 @@ for grant in data:
         "discord": grant.get("discord"),
         "telegram": grant.get("telegram"),
         "website": grant.get("website"),
-        "logo": file_id,
+        "logo": file_url,
     }
 
     supabase.table("grants").upsert(grant).execute()

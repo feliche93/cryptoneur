@@ -35,6 +35,7 @@ function Navbar() {
     if (error) {
       console.log({ error })
     }
+    router.refresh()
   }
 
   return (

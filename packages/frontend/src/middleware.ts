@@ -24,19 +24,26 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl)
   }
 
-  if (!session && req.nextUrl.pathname.startsWith('/web3-grants')) {
-    console.log('redirecting to sign-in')
+  if (session && req.nextUrl.pathname.startsWith('/register')) {
     // Auth condition not met, redirect to home page.
     const redirectUrl = req.nextUrl.clone()
-    console.log({ redirectUrl })
     redirectUrl.pathname = '/'
     redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname)
     return NextResponse.redirect(redirectUrl)
   }
 
+  // if (!session && req.nextUrl.pathname.startsWith('/web3-grants')) {
+  //   console.log('redirecting to sign-in')
+  //   // Auth condition not met, redirect to home page.
+  //   const redirectUrl = req.nextUrl.clone()
+  //   redirectUrl.pathname = '/sign-in'
+  //   redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname)
+  //   return NextResponse.redirect(redirectUrl)
+  // }
+
   return res
 }
 
 export const config = {
-  matcher: ['/web3-grants'],
+  matcher: ['/sign-in', '/register'],
 }

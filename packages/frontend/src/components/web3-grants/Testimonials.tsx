@@ -1,10 +1,17 @@
 import { strapi } from '@shared/strapi'
+import { createServerClient } from '@utils/supabase-server'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
 export interface TestimonialsProps {}
+
 export const Testimonials: FC<TestimonialsProps> = async () => {
+  const supabase = createServerClient()
+  const { data, error } = await supabase.from('grants').select('grant,logo(url)')
+  console.log({ data, error })
+
+  return null
   const { data: grants } = await strapi.find<any>('grants', {
     populate: 'deep',
     pagination: {
