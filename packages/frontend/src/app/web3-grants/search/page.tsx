@@ -4,26 +4,19 @@ import { DeskltopFilters } from '@components/web3-grants/search/DesktopFilters'
 import { GrantCard } from '@components/web3-grants/search/GrantCard'
 import { Header } from '@components/web3-grants/search/Header'
 import { strapi } from '@shared/strapi'
+import { createBrowserClient } from '@utils/supabase-browser'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import useSWR from 'swr'
 
-async function fetchStrapiData(key: any[]) {
-  const [url, params] = key
+const supabase = createBrowserClient()
 
-  // console.log({ params })
-  // console.log({ url, params })
+async function getData(key: any[]) {
+  const [table, columns, filters] = key
 
-  // if (!params) {
-  //   const { data } = await strapi.find(url, {
-  //     populate: 'deep',
-  //   })
-  //   return data
-  // }
+  const { data, error } = await supabase.from(table).select(columns)
 
-  const { data } = await strapi.find(url, {
-    ...params,
-  })
+  error && console.log({ error })
 
   return data
 }
@@ -38,70 +31,32 @@ export default function Search() {
   } = useForm()
 
   const {
-    data: grantCategories,
-    isLoading: isLoadingGrantCategories,
-    isValidating: isValidatingGrantCategories,
-  } = useSWR(['grant-categories'], fetchStrapiData)
+    data: categories,
+    isLoading: isLoadingCategories,
+    isValidating: isValidatingCategories,
+  } = useSWR(['categories', 'id,category'], getData)
 
   // blockchains
   const {
     data: blockchains,
     isLoading: isLoadingBlockchains,
     isValidating: isValidatingBlockchains,
-  } = useSWR(['blockchains'], fetchStrapiData)
+  } = useSWR(['blockchains', 'id,blockchain'], getData)
 
   // grant-use-cases
   const {
-    data: grantUseCases,
-    isLoading: isLoadingGrantUseCases,
-    isValidating: isValidatingGrantUseCases,
-  } = useSWR(['grant-use-cases'], fetchStrapiData)
+    data: useCases,
+    isLoading: isLoadingUseCases,
+    isValidating: isValidatingUseCases,
+  } = useSWR(['use_cases', 'id,use_case'], getData)
 
   const {
     data: grants,
     isLoading: isLoadingGrants,
     isValidating: isValidatingGrants,
-  } = useSWR(
-    [
-      'grants',
-      {
-        populate: 'socials,logo,blockchains,grantCategories',
-        // populate: 'deep',
-        // pagination: {
-        //   limit: 1,
-        // },
-        filters: {
-          ...(!!watch('blockchains') &&
-            watch('blockchains').length !== 0 && {
-              blockchains: {
-                id: {
-                  $in: watch('blockchains'),
-                },
-              },
-            }),
-          ...(!!watch('grant-categories') &&
-            watch('grant-categories').length !== 0 && {
-              grantCategories: {
-                id: {
-                  $in: watch('grant-categories'),
-                },
-              },
-            }),
-          ...(!!watch('grant-use-cases') &&
-            watch('grant-use-cases').length !== 0 && {
-              grantUseCases: {
-                id: {
-                  $in: watch('grant-use-cases'),
-                },
-              },
-            }),
-        },
-      },
-    ],
-    fetchStrapiData,
-  )
+  } = useSWR(['grants', 'id,logo,twitter,discord,github,telegram,updated_at,slug,grant'], getData)
 
-  // console.log({ grants })
+  console.log({ grants })
 
   const data = watch()
   // console.log({ data })
@@ -117,34 +72,33 @@ export default function Search() {
       loadingBars: 22,
       options: blockchains?.map((blockchain: any) => ({
         value: blockchain.id,
-        label: blockchain?.attributes?.name,
+        label: blockchain?.blockchain,
       })),
     },
     {
       id: 'grant-categories',
       name: 'Grant Categories',
       loadingBars: 15,
-      options: grantCategories?.map((grantCategory: any) => ({
-        value: grantCategory.id,
-        label: grantCategory?.attributes?.name,
+      options: categories?.map((category: any) => ({
+        value: category.id,
+        label: category?.category,
       })),
     },
     {
       id: 'grant-use-cases',
       name: 'Grant Use Cases',
       loadingBars: 10,
-      options: grantUseCases?.map((grantUseCase: any) => ({
-        value: grantUseCase.id,
-        label: grantUseCase?.attributes?.name,
+      options: useCases?.map((useCase: any) => ({
+        value: useCase.id,
+        label: useCase?.use_case,
       })),
     },
   ]
 
   // console.log({ filters })
 
-  const isLoading = isLoadingGrantCategories && isLoadingBlockchains && isLoadingGrantUseCases
-  const isRevalidating =
-    isValidatingGrantCategories && isValidatingBlockchains && isValidatingGrantUseCases
+  const isLoading = isLoadingCategories && isLoadingBlockchains && isLoadingUseCases
+  const isRevalidating = isValidatingCategories && isValidatingBlockchains && isValidatingUseCases
   // console.log({ grants })
 
   // console.log({ isLoading, isRevalidating })

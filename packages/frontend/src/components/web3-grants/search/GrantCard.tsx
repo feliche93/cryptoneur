@@ -11,68 +11,25 @@ export interface GrantCardProps {
   isValidatingGrants: boolean
 }
 export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
-  const applications = [
-    {
-      applicant: {
-        name: 'Ricardo Cooper',
-        email: 'ricardo.cooper@example.com',
-        imageUrl:
-          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      date: '2020-01-07',
-      dateFull: 'January 7, 2020',
-      stage: 'Completed phone screening',
-      href: '#',
-    },
-    {
-      applicant: {
-        name: 'Kristen Ramos',
-        email: 'kristen.ramos@example.com',
-        imageUrl:
-          'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      date: '2020-01-07',
-      dateFull: 'January 7, 2020',
-      stage: 'Completed phone screening',
-      href: '#',
-    },
-    {
-      applicant: {
-        name: 'Ted Fox',
-        email: 'ted.fox@example.com',
-        imageUrl:
-          'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-      date: '2020-01-07',
-      dateFull: 'January 7, 2020',
-      stage: 'Completed phone screening',
-      href: '#',
-    },
-  ]
-
   console.log({ ...grant })
 
   return (
     <>
       <li key={grant?.id}>
         <Link
-          href={
-            grant?.attributes?.slug
-              ? `/web3-grants/${grant?.attributes?.slug}`
-              : '/web3-grants/search'
-          }
+          href={grant?.slug ? `/web3-grants/${grant?.slug}` : '/web3-grants/search'}
           className="block hover:bg-base-300/10"
         >
           <div className="flex items-center px-4 py-4 sm:px-6">
             <div className="flex min-w-0 flex-1 items-center">
               <div className="flex-shrink-0">
-                {grant?.attributes?.logo?.data?.attributes?.url ? (
+                {grant?.logo ? (
                   <Image
                     className="h-12 w-12 object-contain"
-                    src={grant?.attributes?.logo?.data?.attributes?.url}
-                    width={grant?.attributes?.logo?.data?.attributes?.width}
-                    height={grant?.attributes?.logo?.data?.attributes?.height}
-                    alt={grant?.attributes?.name}
+                    src={grant?.logo}
+                    width={50}
+                    height={50}
+                    alt={grant?.grant}
                   />
                 ) : (
                   <div className="h-12 w-12 rounded-full bg-base-100/80" />
@@ -80,12 +37,10 @@ export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
               </div>
               <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                 <div>
-                  <p className="truncate text-sm font-medium text-primary">
-                    {grant?.attributes?.name}
-                  </p>
+                  <p className="truncate text-sm font-medium text-primary">{grant?.grant}</p>
                   <div className="mt-2 flex items-center space-x-2 text-sm text-gray-500">
-                    {grant?.attributes?.socials?.twitter && (
-                      <a href={grant?.attributes?.socials?.twitter} rel="" target={'_blank'}>
+                    {grant?.twitter && (
+                      <a href={grant?.twitter} rel="" target={'_blank'}>
                         <svg
                           fill="currentColor"
                           viewBox="0 0 24 24"
@@ -95,8 +50,8 @@ export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
                         </svg>
                       </a>
                     )}
-                    {grant?.attributes?.socials?.discord && (
-                      <a href={grant?.attributes?.socials?.discord} rel="" target={'_blank'}>
+                    {grant?.discord && (
+                      <a href={grant?.discord} rel="" target={'_blank'}>
                         <svg
                           fill="currentColor"
                           viewBox="0 0 24 24"
@@ -108,8 +63,8 @@ export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
                         </svg>
                       </a>
                     )}
-                    {/* {grant?.attributes?.socials?.telegram && (
-                      <a href={grant?.attributes?.socials?.telegram} rel="" target={'_blank'}>
+                    {grant?.telegram && (
+                      <a href={grant?.telegram} rel="" target={'_blank'}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-brand-telegram"
@@ -125,7 +80,7 @@ export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
                           <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />{' '}
                         </svg>
                       </a>
-                    )} */}
+                    )}
                   </div>
                 </div>
                 <div className="hidden md:block">

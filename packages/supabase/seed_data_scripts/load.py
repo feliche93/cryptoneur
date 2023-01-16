@@ -11,7 +11,7 @@ import requests
 
 dotenv.load_dotenv()
 
-env: str = "prod"
+env: str = "dev"
 dev_api_url: str = "http://localhost:54321"
 dev_api_key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU"
 dev_api_bucket_url: str = "http://localhost:54321/storage/v1"
