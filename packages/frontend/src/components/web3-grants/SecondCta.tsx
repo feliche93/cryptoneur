@@ -68,7 +68,10 @@ export const SecondCta: FC = async () => {
           ecosystem&quot;
         </p>
       </div>
-      <Link className="btn-primary btn-md btn w-10/12 sm:w-fit sm:btn-lg" href={'/register'}>
+      <Link
+        className="btn-primary btn-md btn w-10/12 sm:w-fit sm:btn-lg"
+        href={'/web3-grants/search'}
+      >
         Explore Grants
       </Link>
     </div>

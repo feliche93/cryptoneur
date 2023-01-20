@@ -90,11 +90,11 @@ function Navbar() {
               <div className="hidden md:absolute md:inset-y-0 md:right-0 md:flex md:items-center md:justify-end">
                 {session ? (
                   <button className="btn-outline btn-primary btn" onClick={handleLogout}>
-                    Ausloggen
+                    Log Out
                   </button>
                 ) : (
                   <Link className="btn-primary btn" href={'/sign-in'}>
-                    Einloggen
+                    Log In
                   </Link>
                 )}
               </div>
@@ -150,11 +150,11 @@ function Navbar() {
                 <div className="hidden md:absolute md:inset-y-0 md:right-0 md:flex md:items-center md:justify-end">
                   {session ? (
                     <button className="btn-outline btn-primary btn" onClick={handleLogout}>
-                      Ausloggen
+                      Log Out
                     </button>
                   ) : (
                     <Link className="btn-primary btn" href={'/sign-in'}>
-                      Einloggen
+                      Log In
                     </Link>
                   )}
                 </div>
