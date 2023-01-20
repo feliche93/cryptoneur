@@ -44,7 +44,6 @@ grant_use_cases = grant_use_cases[
 
 grant_use_cases.rename(
     columns={
-        "name": "use_case",
         "createdAt": "created_at",
         "updatedAt": "updated_at",
     },
@@ -65,7 +64,6 @@ grant_categories = grant_categories[
 ]
 grant_categories.rename(
     columns={
-        "name": "category",
         "createdAt": "created_at",
         "updatedAt": "updated_at",
     },
@@ -86,7 +84,6 @@ blockchains = blockchains[
 ]
 blockchains.rename(
     columns={
-        "name": "blockchain",
         "createdAt": "created_at",
         "updatedAt": "updated_at",
     },
@@ -175,7 +172,7 @@ for grant in data:
 
     grant = {
         "id": grant.get("id"),
-        "grant": grant.get("name"),
+        "name": grant.get("name"),
         "created_at": grant.get("createdAt"),
         "updated_at": grant.get("updatedAt"),
         "description": grant.get("description"),

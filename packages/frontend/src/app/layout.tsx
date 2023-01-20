@@ -9,6 +9,7 @@ import { NextSeo } from 'next-seo'
 import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/Navbar'
 import './globals.css'
+import { QueryClientWrapper } from '@components/query-client-wrapper'
 
 export type TypedSupabaseClient = SupabaseClient<Database>
 
@@ -36,12 +37,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         titleTemplate="Cryptoneur | %s"
       />
       <SupabaseProvider session={session}>
-        <body className="bg-base-200">
-          <Navbar />
-          {children}
-          <AnalyticsWrapper />
-          <Footer />
-        </body>
+        <QueryClientWrapper>
+          <body className="bg-base-200">
+            <Navbar />
+            {children}
+            <AnalyticsWrapper />
+            <Footer />
+          </body>
+        </QueryClientWrapper>
       </SupabaseProvider>
     </html>
   )

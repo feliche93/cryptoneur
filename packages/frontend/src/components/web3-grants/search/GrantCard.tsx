@@ -8,10 +8,10 @@ import dayjs from 'dayjs'
 export interface GrantCardProps {
   grant: any
   isLoadingGrants: boolean
-  isValidatingGrants: boolean
+  isFetchingGrants: boolean
 }
 export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
-  console.log({ ...grant })
+  // console.log({ ...grant })
 
   return (
     <>

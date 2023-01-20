@@ -4,21 +4,51 @@ import { DeskltopFilters } from '@components/web3-grants/search/DesktopFilters'
 import { GrantCard } from '@components/web3-grants/search/GrantCard'
 import { Header } from '@components/web3-grants/search/Header'
 import { strapi } from '@shared/strapi'
+import { useQuery } from '@tanstack/react-query'
 import { createBrowserClient } from '@utils/supabase-browser'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import useSWR from 'swr'
 
+// TODO: Continue filtering
+
 const supabase = createBrowserClient()
 
-async function getData(key: any[]) {
-  const [table, columns, filters] = key
+async function getData(table, columns, queryFilters) {
+  let query = supabase.from(table).select(columns)
 
-  const { data, error } = await supabase.from(table).select(columns)
+  console.log({ queryFilters })
+
+  const blockchains = queryFilters?.blockchains?.map((b) => parseInt(b))
+
+  if (queryFilters?.categories) {
+    query = query.filter('categories(id)', 'in', queryFilters?.categories)
+  }
+
+  if (queryFilters?.useCases) {
+    query = query.gte('use_cases(id)', queryFilters?.useCases)
+  }
+
+  if (queryFilters?.blockchains) {
+    query = query.in(
+      'blockchains(id)',
+
+      blockchains,
+    )
+  }
+
+  const { data, error } = await query
 
   error && console.log({ error })
 
   return data
+}
+
+function useGrants(table, columns, queryFilters) {
+  return useQuery({
+    queryKey: [table, columns, queryFilters],
+    queryFn: () => getData(table, columns, queryFilters),
+  })
 }
 
 export default function Search() {
@@ -31,32 +61,38 @@ export default function Search() {
   } = useForm()
 
   const {
+    status,
+    data: grants,
+    error,
+    isFetching: isFetchingGrants,
+    isLoading: isLoadingGrants,
+  } = useGrants(
+    'grants',
+    'id,logo,twitter,discord,github,telegram,updated_at,slug,grant,blockchains(id)',
+    {
+      ...watch(),
+    },
+  )
+
+  const {
     data: categories,
     isLoading: isLoadingCategories,
-    isValidating: isValidatingCategories,
-  } = useSWR(['categories', 'id,category'], getData)
+    isFetching: isFetchingCategories,
+  } = useGrants('categories', 'id,category', {})
 
   // blockchains
   const {
     data: blockchains,
     isLoading: isLoadingBlockchains,
-    isValidating: isValidatingBlockchains,
-  } = useSWR(['blockchains', 'id,blockchain'], getData)
+    isFetching: isFetchingBlockchains,
+  } = useGrants('blockchains', 'id,blockchain', {})
 
   // grant-use-cases
   const {
     data: useCases,
     isLoading: isLoadingUseCases,
-    isValidating: isValidatingUseCases,
-  } = useSWR(['use_cases', 'id,use_case'], getData)
-
-  const {
-    data: grants,
-    isLoading: isLoadingGrants,
-    isValidating: isValidatingGrants,
-  } = useSWR(['grants', 'id,logo,twitter,discord,github,telegram,updated_at,slug,grant'], getData)
-
-  console.log({ grants })
+    isFetching: isFetchingUseCases,
+  } = useGrants('use_cases', 'id,use_case', {})
 
   const data = watch()
   // console.log({ data })
@@ -64,6 +100,8 @@ export default function Search() {
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
   }
+
+  // console.log({ ...watch() })
 
   const filters = [
     {
@@ -76,7 +114,7 @@ export default function Search() {
       })),
     },
     {
-      id: 'grant-categories',
+      id: 'grantCategories',
       name: 'Grant Categories',
       loadingBars: 15,
       options: categories?.map((category: any) => ({
@@ -85,7 +123,7 @@ export default function Search() {
       })),
     },
     {
-      id: 'grant-use-cases',
+      id: 'grantUseCases',
       name: 'Grant Use Cases',
       loadingBars: 10,
       options: useCases?.map((useCase: any) => ({
@@ -96,9 +134,10 @@ export default function Search() {
   ]
 
   // console.log({ filters })
+  // console.log({ useCases, blockchains, categories })
 
   const isLoading = isLoadingCategories && isLoadingBlockchains && isLoadingUseCases
-  const isRevalidating = isValidatingCategories && isValidatingBlockchains && isValidatingUseCases
+  const isRevalidating = isFetchingCategories && isFetchingBlockchains && isFetchingUseCases
   // console.log({ grants })
 
   // console.log({ isLoading, isRevalidating })
@@ -216,7 +255,7 @@ export default function Search() {
         >
           <div className="overflow-hidden bg-base-100 shadow sm:rounded-md">
             <ul role="list" className="divide-y divide-base-300">
-              {isLoadingGrants || isValidatingGrants ? (
+              {isLoadingGrants || isFetchingGrants ? (
                 <>
                   {Array.from({ length: 10 }).map((_, i) => (
                     <li key={i}>
@@ -241,7 +280,7 @@ export default function Search() {
                       key={grant.id}
                       grant={grant}
                       isLoadingGrants={isLoadingGrants}
-                      isValidatingGrants={isValidatingGrants}
+                      isFetchingGrants={isFetchingGrants}
                     />
                   ))}
                 </>
