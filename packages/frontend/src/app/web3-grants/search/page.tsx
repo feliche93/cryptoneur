@@ -78,21 +78,21 @@ export default function Search() {
     data: categories,
     isLoading: isLoadingCategories,
     isFetching: isFetchingCategories,
-  } = useGrants('categories', 'id,category', {})
+  } = useGrants('categories', 'id,name', {})
 
   // blockchains
   const {
     data: blockchains,
     isLoading: isLoadingBlockchains,
     isFetching: isFetchingBlockchains,
-  } = useGrants('blockchains', 'id,blockchain', {})
+  } = useGrants('blockchains', 'id,name', {})
 
   // grant-use-cases
   const {
     data: useCases,
     isLoading: isLoadingUseCases,
     isFetching: isFetchingUseCases,
-  } = useGrants('use_cases', 'id,use_case', {})
+  } = useGrants('use_cases', 'id,name', {})
 
   const data = watch()
   // console.log({ data })
@@ -110,7 +110,7 @@ export default function Search() {
       loadingBars: 22,
       options: blockchains?.map((blockchain: any) => ({
         value: blockchain.id,
-        label: blockchain?.blockchain,
+        label: blockchain?.name,
       })),
     },
     {
@@ -119,7 +119,7 @@ export default function Search() {
       loadingBars: 15,
       options: categories?.map((category: any) => ({
         value: category.id,
-        label: category?.category,
+        label: category?.name,
       })),
     },
     {
@@ -128,13 +128,13 @@ export default function Search() {
       loadingBars: 10,
       options: useCases?.map((useCase: any) => ({
         value: useCase.id,
-        label: useCase?.use_case,
+        label: useCase?.name,
       })),
     },
   ]
 
   // console.log({ filters })
-  // console.log({ useCases, blockchains, categories })
+  console.log({ useCases, blockchains, categories })
 
   const isLoading = isLoadingCategories && isLoadingBlockchains && isLoadingUseCases
   const isRevalidating = isFetchingCategories && isFetchingBlockchains && isFetchingUseCases
