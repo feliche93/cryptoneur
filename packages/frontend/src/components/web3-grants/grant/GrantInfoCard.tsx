@@ -64,7 +64,7 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
               <div className="sm:col-span-2">
                 <dt className="text-sm font-medium text-base-content/80">Suported Blockchains</dt>
                 <dd className="mt-1 flex flex-wrap gap-2 text-sm text-base-content">
-                  {!!grant?.blockchains ? (
+                  {!!grant?.blockchains && grant?.blockchains.length > 0 ? (
                     <>
                       {grant?.blockchains.map((blockchain: any) => (
                         <span
@@ -84,7 +84,7 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
               <div className="sm:col-span-2">
                 <dt className="text-sm font-medium text-base-content/80">Grant Category</dt>
                 <dd className="mt-1 flex flex-wrap gap-2 text-sm text-base-content">
-                  {!!grant?.categories ? (
+                  {!!grant?.categories && grant?.categories.length > 0 ? (
                     <>
                       {grant?.categories.map((category: any) => (
                         <span
@@ -104,7 +104,7 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
               <div className="sm:col-span-2">
                 <dt className="text-sm font-medium text-base-content/80">Grant Use Cases</dt>
                 <dd className="mt-1 flex flex-wrap gap-2 text-sm text-base-content">
-                  {!!grant?.use_cases ? (
+                  {!!grant?.use_cases && grant?.use_cases.length > 0 ? (
                     <>
                       {grant?.use_cases.map((useCase: any) => (
                         <span
