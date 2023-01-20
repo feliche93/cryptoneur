@@ -17,10 +17,10 @@ const supabase = createBrowserClient()
 async function getData(table, columns, queryFilters) {
   let query = supabase.from(table).select(columns).order('name', { ascending: true })
 
-  console.log({ queryFilters })
+  // console.log({ queryFilters })
 
   if (queryFilters?.categories && queryFilters?.categories.length > 0) {
-    console.log({ ...queryFilters })
+    // console.log({ ...queryFilters })
 
     query = query.in('categories.id', queryFilters?.categories)
   }
@@ -30,7 +30,7 @@ async function getData(table, columns, queryFilters) {
   }
 
   if (queryFilters?.blockchains && queryFilters?.blockchains.length > 0) {
-    console.log({ queryFilters })
+    // console.log({ queryFilters })
     query = query.in('blockchains.id', queryFilters?.blockchains)
   }
 
