@@ -10,7 +10,7 @@ export const Testimonials: FC<TestimonialsProps> = async () => {
   const supabase = createServerClient()
   const { data, error } = await supabase
     .from('grants')
-    .select('grant,logo,id,slug')
+    .select('name,logo,id,slug')
     .in('id', [1, 2, 3, 4, 5, 6])
   // console.log({ data, error })
 
