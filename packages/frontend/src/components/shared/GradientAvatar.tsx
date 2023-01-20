@@ -14,7 +14,7 @@ export const GraidentAvatar: FC<GraidentAvatarProps> = ({ image, size, alt }) =>
         width={size}
         height={size}
         alt={alt}
-        className={`aspect-square rounded-full object-cover p-1`}
+        className={`aspect-square rounded-full object-contain p-1`}
       />
     </div>
   )

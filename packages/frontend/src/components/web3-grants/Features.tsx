@@ -1,5 +1,7 @@
 import { FC } from 'react'
 import {
+  AcademicCapIcon,
+  BellAlertIcon,
   BoltIcon,
   ChartBarIcon,
   CheckBadgeIcon,
@@ -14,28 +16,40 @@ export interface FeaturesProps {}
 export const Features: FC<FeaturesProps> = () => {
   const features = [
     {
-      name: 'Filters',
+      name: 'Customized Filters',
       description:
-        'Filter by category, blockchain eco system, funding amount or use cases to find grants that match your idea.',
+        'Easily find grants that align with your idea by using our advanced filtering options, including categories, blockchain ecosystem, funding amount, and use cases.',
       icon: FunnelIcon,
     },
     {
-      name: 'Up to date & Complete',
+      name: 'Up-to-Date and Comprehensive',
       description:
-        'We work with grant programs as well as individual contributors together to have the most up to date and complete dataset.',
+        'By collaborating with both grant programs and individual contributors, we are able to maintain an up-to-date and comprehensive dataset.',
       icon: CheckBadgeIcon,
     },
     {
-      name: 'Past Applications',
+      name: 'Access to Previous Applications',
       description:
-        'We collect both failed and succesful previous applications to grants. This way you can learn from others.',
+        'We provide access to a vast database of previous grant applications, both successful and unsuccessful, allowing you to learn from the experiences of others and improve your own grant application.',
       icon: DocumentDuplicateIcon,
     },
     {
-      name: 'Data Driven',
+      name: 'Data-Driven Insights',
       description:
-        'We collect data on the applciation process, failed and succesful grants as well as average funding size.',
+        'Our data-driven approach provides valuable insights on the grant application process, successful grants, and average funding amounts. By analyzing data on past grants, you can make informed decisions and increase your chances of success.',
       icon: ChartBarIcon,
+    },
+    {
+      name: 'Customizable Grant Alerts',
+      description:
+        'Stay informed of new grant opportunities that align with your specific criteria by setting up customizable alerts on our platform.',
+      icon: BellAlertIcon,
+    },
+    {
+      name: 'Mentorship Program',
+      description:
+        'Connect with experienced grant writers or other experts through our mentorship program to receive guidance and feedback on your applications.',
+      icon: AcademicCapIcon,
     },
   ]
   return (
