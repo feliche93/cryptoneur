@@ -5,6 +5,7 @@ import {
   PlusCircleIcon,
 } from '@heroicons/react/24/outline'
 import { getGrantbySlug } from '@shared/strapi'
+import { createServerClient } from '@utils/supabase-server'
 import { FC } from 'react'
 import { NoInfo } from './NoInfo'
 
@@ -16,12 +17,23 @@ export interface GrantInfoCardProps {
 
 // @ts-expect-error Server Component
 export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, description }) => {
-  const grant = await getGrantbySlug(
-    slug,
-    'socials,blockchains,grantUseCases,grantCategories,fundingMinimum,fundingMaximum,fundingMinimum.currency,fundingMaximum.currency',
-  )
+  const supabase = createServerClient()
+  const { data: grant, error } = await supabase
+    .from('grants')
+    .select(
+      `
+      *,
+      blockchains(*),
+      categories(*),
+      use_cases(*),
+      funding_minimum_currency(symbol),
+      funding_maximum_currency(symbol)
+      `,
+    )
+    .eq('slug', slug)
+    .single()
 
-  // console.log(grant?.attributes?.fundingMaximum?.currency)
+  console.log({ ...grant, ...error })
 
   const attachments = [
     { name: 'resume_front_end_developer.pdf', href: '#' },
@@ -45,22 +57,21 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
               {/* About */}
               <div className="sm:col-span-2">
                 <dt className="text-sm font-medium text-base-content/80">About</dt>
-                <dd className="mt-1 text-sm text-base-content">{grant?.attributes?.description}</dd>
+                <dd className="mt-1 text-sm text-base-content">{grant?.description}</dd>
               </div>
 
               {/* Supported Blockchains */}
               <div className="sm:col-span-2">
                 <dt className="text-sm font-medium text-base-content/80">Suported Blockchains</dt>
                 <dd className="mt-1 flex flex-wrap gap-2 text-sm text-base-content">
-                  {!!grant?.attributes?.blockchains?.data &&
-                  grant?.attributes?.blockchains?.data.length > 0 ? (
+                  {!!grant?.blockchains ? (
                     <>
-                      {grant?.attributes?.blockchains?.data.map((blockchain: any) => (
+                      {grant?.blockchains.map((blockchain: any) => (
                         <span
                           key={blockchain.id}
                           className="inline-flex items-center rounded-full bg-primary px-3 py-0.5 text-sm font-medium text-primary-content"
                         >
-                          {blockchain.attributes.name}
+                          {blockchain.name}
                         </span>
                       ))}
                     </>
@@ -73,15 +84,14 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
               <div className="sm:col-span-2">
                 <dt className="text-sm font-medium text-base-content/80">Grant Category</dt>
                 <dd className="mt-1 flex flex-wrap gap-2 text-sm text-base-content">
-                  {!!grant?.attributes?.grantCategories?.data &&
-                  grant?.attributes?.grantCategories?.data.length > 0 ? (
+                  {!!grant?.categories ? (
                     <>
-                      {grant?.attributes?.grantCategories?.data.map((category: any) => (
+                      {grant?.categories.map((category: any) => (
                         <span
                           key={category.id}
                           className="inline-flex items-center rounded-full bg-primary px-3 py-0.5 text-sm font-medium text-primary-content"
                         >
-                          {category.attributes.name}
+                          {category.name}
                         </span>
                       ))}
                     </>
@@ -94,15 +104,14 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
               <div className="sm:col-span-2">
                 <dt className="text-sm font-medium text-base-content/80">Grant Use Cases</dt>
                 <dd className="mt-1 flex flex-wrap gap-2 text-sm text-base-content">
-                  {!!grant?.attributes?.grantUseCases?.data &&
-                  grant?.attributes?.grantUseCases?.data.length > 0 ? (
+                  {!!grant?.use_cases ? (
                     <>
-                      {grant?.attributes?.grantUseCases?.data.map((useCase: any) => (
+                      {grant?.use_cases.map((useCase: any) => (
                         <span
                           key={useCase.id}
                           className="inline-flex items-center rounded-full bg-primary px-3 py-0.5 text-sm font-medium text-primary-content"
                         >
-                          {useCase.attributes.name}
+                          {useCase.name}
                         </span>
                       ))}
                     </>
@@ -115,10 +124,11 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
               <div className="sm:col-span-1">
                 <dt className="text-sm font-medium text-base-content/80">Minimum Funding</dt>
                 <dd className="mt-1 text-sm text-base-content">
-                  {grant?.attributes?.fundingMinimum ? (
-                    grant?.attributes?.fundingMinimum?.value +
-                    ' ' +
-                    grant?.attributes?.fundingMinimum?.currency?.data?.attributes?.symbol
+                  {grant?.funding_minimum && grant?.funding_minimum_currency?.symbol ? (
+                    // print formatted number wiht currency
+                    `${grant?.funding_minimum.toLocaleString()} ${
+                      grant?.funding_minimum_currency?.symbol
+                    }`
                   ) : (
                     <NoInfo />
                   )}
@@ -128,10 +138,11 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
               <div className="sm:col-span-1">
                 <dt className="text-sm font-medium text-base-content/80">Maximum Funding</dt>
                 <dd className="mt-1 text-sm text-base-content">
-                  {grant?.attributes?.fundingMaximum ? (
-                    grant?.attributes?.fundingMaximum?.value +
-                    ' ' +
-                    grant?.attributes?.fundingMaximum?.currency?.data?.attributes?.symbol
+                  {grant?.funding_maximum && grant?.funding_maximum_currency?.symbol ? (
+                    // print formatted number wiht currency
+                    `${grant?.funding_maximum.toLocaleString()} ${
+                      grant?.funding_maximum_currency?.symbol
+                    }`
                   ) : (
                     <NoInfo />
                   )}

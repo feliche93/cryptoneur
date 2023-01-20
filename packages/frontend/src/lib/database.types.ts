@@ -31,43 +31,66 @@ export interface Database {
   }
   public: {
     Tables: {
+      authors: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_following: boolean | null
+          provider_id: number
+          username: string
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          is_following?: boolean | null
+          provider_id: number
+          username: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_following?: boolean | null
+          provider_id?: number
+          username?: string
+        }
+      }
       blockchains: {
         Row: {
-          blockchain: string | null
           created_at: string | null
           id: number
+          name: string | null
           updated_at: string | null
         }
         Insert: {
-          blockchain?: string | null
           created_at?: string | null
           id?: number
+          name?: string | null
           updated_at?: string | null
         }
         Update: {
-          blockchain?: string | null
           created_at?: string | null
           id?: number
+          name?: string | null
           updated_at?: string | null
         }
       }
       categories: {
         Row: {
-          category: string
           created_at: string | null
           id: number
+          name: string
           updated_at: string | null
         }
         Insert: {
-          category: string
           created_at?: string | null
           id?: number
+          name: string
           updated_at?: string | null
         }
         Update: {
-          category?: string
           created_at?: string | null
           id?: number
+          name?: string
           updated_at?: string | null
         }
       }
@@ -166,9 +189,9 @@ export interface Database {
           funding_minimum: number | null
           funding_minimum_currency: number | null
           github: string | null
-          grant: string
           id: number
           logo: string | null
+          name: string
           slug: string | null
           telegram: string | null
           twitter: string | null
@@ -188,9 +211,9 @@ export interface Database {
           funding_minimum?: number | null
           funding_minimum_currency?: number | null
           github?: string | null
-          grant: string
           id?: number
           logo?: string | null
+          name: string
           slug?: string | null
           telegram?: string | null
           twitter?: string | null
@@ -210,9 +233,9 @@ export interface Database {
           funding_minimum?: number | null
           funding_minimum_currency?: number | null
           github?: string | null
-          grant?: string
           id?: number
           logo?: string | null
+          name?: string
           slug?: string | null
           telegram?: string | null
           twitter?: string | null
@@ -222,24 +245,110 @@ export interface Database {
           website?: string | null
         }
       }
-      use_cases: {
+      posts: {
+        Row: {
+          author_id: string
+          created_at: string | null
+          id: string
+          is_relevant: boolean | null
+          reply_id: number | null
+          text: string
+        }
+        Insert: {
+          author_id: string
+          created_at?: string | null
+          id: string
+          is_relevant?: boolean | null
+          reply_id?: number | null
+          text: string
+        }
+        Update: {
+          author_id?: string
+          created_at?: string | null
+          id?: string
+          is_relevant?: boolean | null
+          reply_id?: number | null
+          text?: string
+        }
+      }
+      providers: {
         Row: {
           created_at: string | null
           id: number
-          updated_at: string | null
-          use_case: string
+          name: string
         }
         Insert: {
           created_at?: string | null
           id?: number
-          updated_at?: string | null
-          use_case: string
+          name: string
         }
         Update: {
           created_at?: string | null
           id?: number
+          name?: string
+        }
+      }
+      queries: {
+        Row: {
+          created_at: string | null
+          id: number
+          limit: number
+          name: string | null
+          provider_id: number
+          query: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          limit: number
+          name?: string | null
+          provider_id: number
+          query: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          limit?: number
+          name?: string | null
+          provider_id?: number
+          query?: string
+        }
+      }
+      replies: {
+        Row: {
+          created_at: string | null
+          id: number
+          reply: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          reply: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          reply?: string
+        }
+      }
+      use_cases: {
+        Row: {
+          created_at: string | null
+          id: number
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          name: string
           updated_at?: string | null
-          use_case?: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          name?: string
+          updated_at?: string | null
         }
       }
     }
