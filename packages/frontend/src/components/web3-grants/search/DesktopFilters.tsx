@@ -17,6 +17,7 @@ export const DeskltopFilters: FC<DesktopFiltersProps> = ({
   filters,
   register,
 }) => {
+  // console.log({ filters })
   return (
     <div className="pt-12 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
       <aside>
@@ -38,7 +39,10 @@ export const DeskltopFilters: FC<DesktopFiltersProps> = ({
         <div className="hidden lg:block">
           <form className="space-y-10 divide-y divide-gray-200">
             {filters.map((section, sectionIdx) => (
-              <div key={section?.id} className={sectionIdx === 0 ? null : 'pt-10'}>
+              <div
+                key={`${sectionIdx}-${section?.id}`}
+                className={sectionIdx === 0 ? null : 'pt-10'}
+              >
                 <fieldset>
                   <legend className="block text-sm font-medium">{section.name}</legend>
                   <div className="space-y-3 pt-6">
@@ -55,7 +59,7 @@ export const DeskltopFilters: FC<DesktopFiltersProps> = ({
                         // console.log({ option, optionIdx })
                         return (
                           <DesktopFilterOption
-                            key={optionIdx}
+                            key={`${option?.id}-${option?.label}`}
                             optionIdx={optionIdx}
                             option={option}
                             section={section}

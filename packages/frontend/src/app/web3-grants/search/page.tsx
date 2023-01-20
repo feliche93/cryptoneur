@@ -19,22 +19,19 @@ async function getData(table, columns, queryFilters) {
 
   console.log({ queryFilters })
 
-  const blockchains = queryFilters?.blockchains?.map((b) => parseInt(b))
+  if (queryFilters?.categories && queryFilters?.categories.length > 0) {
+    console.log({ ...queryFilters })
 
-  if (queryFilters?.categories) {
-    query = query.filter('categories(id)', 'in', queryFilters?.categories)
+    query = query.in('categories.id', queryFilters?.categories)
   }
 
-  if (queryFilters?.useCases) {
-    query = query.gte('use_cases(id)', queryFilters?.useCases)
+  if (queryFilters?.use_cases && queryFilters?.use_cases.length > 0) {
+    query = query.in('use_cases.id', queryFilters?.use_cases)
   }
 
-  if (queryFilters?.blockchains) {
-    query = query.in(
-      'blockchains(id)',
-
-      blockchains,
-    )
+  if (queryFilters?.blockchains && queryFilters?.blockchains.length > 0) {
+    console.log({ queryFilters })
+    query = query.in('blockchains.id', queryFilters?.blockchains)
   }
 
   const { data, error } = await query
@@ -68,7 +65,7 @@ export default function Search() {
     isLoading: isLoadingGrants,
   } = useGrants(
     'grants',
-    'id,logo,twitter,discord,github,telegram,updated_at,slug,grant,blockchains(id)',
+    'id,logo,twitter,discord,github,telegram,updated_at,slug,name,blockchains!inner(id),categories!inner(id),use_cases!inner(id)',
     {
       ...watch(),
     },
@@ -101,12 +98,12 @@ export default function Search() {
     return classes.filter(Boolean).join(' ')
   }
 
-  // console.log({ ...watch() })
+  // console.log({ blockchains })
 
   const filters = [
     {
       id: 'blockchains',
-      name: 'Blockchains',
+      name: 'Grant Blockchains',
       loadingBars: 22,
       options: blockchains?.map((blockchain: any) => ({
         value: blockchain.id,
@@ -114,7 +111,7 @@ export default function Search() {
       })),
     },
     {
-      id: 'grantCategories',
+      id: 'categories',
       name: 'Grant Categories',
       loadingBars: 15,
       options: categories?.map((category: any) => ({
@@ -123,7 +120,7 @@ export default function Search() {
       })),
     },
     {
-      id: 'grantUseCases',
+      id: 'use_cases',
       name: 'Grant Use Cases',
       loadingBars: 10,
       options: useCases?.map((useCase: any) => ({
@@ -134,7 +131,7 @@ export default function Search() {
   ]
 
   // console.log({ filters })
-  console.log({ useCases, blockchains, categories })
+  // console.log({ useCases, blockchains, categories })
 
   const isLoading = isLoadingCategories && isLoadingBlockchains && isLoadingUseCases
   const isRevalidating = isFetchingCategories && isFetchingBlockchains && isFetchingUseCases

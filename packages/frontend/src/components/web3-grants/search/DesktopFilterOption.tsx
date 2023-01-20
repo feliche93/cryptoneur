@@ -6,17 +6,19 @@ export interface DesktopFilterOptionProps {
   optionIdx: number
   section: any
   register: UseFormRegister<FieldValues>
+  key: string
 }
 export const DesktopFilterOption: FC<DesktopFilterOptionProps> = ({
   option,
   section,
   optionIdx,
   register,
+  key,
 }) => {
   // console.log({ option, optionIdx, section })
 
   return (
-    <div key={option.value} className="flex items-center">
+    <div key={key} className="flex items-center">
       <input
         {...register(`${section.id}`)}
         id={`${section.id}-${optionIdx}`}

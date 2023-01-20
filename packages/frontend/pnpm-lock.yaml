@@ -6,7 +6,7 @@ specifiers:
   '@headlessui/react': ^1.7.7
   '@heroicons/react': ^2.0.13
   '@hookform/resolvers': ^2.9.10
-  '@supabase/auth-helpers-nextjs': ^0.5.2
+  '@supabase/auth-helpers-nextjs': ^0.5.4
   '@tailwindcss/forms': ^0.5.3
   '@tailwindcss/typography': ^0.5.8
   '@tanstack/react-query': ^4.22.0
@@ -38,7 +38,6 @@ specifiers:
   server-only: ^0.0.1
   sharp: ^0.31.3
   strapi-sdk-js: ^2.2.0
-  swr: ^2.0.0
   tailwindcss: ^3.2.4
   typescript: 4.9.4
   zod: ^3.20.2
@@ -49,7 +48,7 @@ dependencies:
   '@headlessui/react': 1.7.7_biqbaboplfbrettd7655fr4n2y
   '@heroicons/react': 2.0.13_react@18.2.0
   '@hookform/resolvers': 2.9.10_react-hook-form@7.42.1
-  '@supabase/auth-helpers-nextjs': 0.5.2_fjsejuhspb6db5pg2h5ujso754
+  '@supabase/auth-helpers-nextjs': 0.5.4_fjsejuhspb6db5pg2h5ujso754
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.4
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.4
   '@tanstack/react-query': 4.22.0_biqbaboplfbrettd7655fr4n2y
@@ -71,7 +70,6 @@ dependencies:
   server-only: 0.0.1
   sharp: 0.31.3
   strapi-sdk-js: 2.2.0
-  swr: 2.0.0_react@18.2.0
   zod: 3.20.2
 
 devDependencies:
@@ -449,17 +447,17 @@ packages:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: true
 
-  /@supabase/auth-helpers-nextjs/0.5.2_fjsejuhspb6db5pg2h5ujso754:
-    resolution: {integrity: sha512-B+sQFVEImAYOJKyyNX1DWqTF2qVf9SocOM1GD4eGHon6ulvLOo2a8V+v1jZAuLOBF6yzVIYnZucuYKZCiNP/Eg==}
+  /@supabase/auth-helpers-nextjs/0.5.4_fjsejuhspb6db5pg2h5ujso754:
+    resolution: {integrity: sha512-Xm3BMDOYPbNyuh8UXDRgBDc3JkeM5S2PfuC1jFJ73CCay4YiH1YxTz06Cvtp+vLH432qdjnqH+49ehVvUehPnQ==}
     peerDependencies:
       '@supabase/supabase-js': ^2.0.4
     dependencies:
-      '@supabase/auth-helpers-shared': 0.2.3_fjsejuhspb6db5pg2h5ujso754
+      '@supabase/auth-helpers-shared': 0.2.4_fjsejuhspb6db5pg2h5ujso754
       '@supabase/supabase-js': 2.4.0_encoding@0.1.13
     dev: false
 
-  /@supabase/auth-helpers-shared/0.2.3_fjsejuhspb6db5pg2h5ujso754:
-    resolution: {integrity: sha512-Xwnd2UQ/VTjTKIuVg1Xl/ryrElbSccOJhC11jbVPHOs7Y6yxzy9APxQs//jj4IpbDH4uOEDCdpMIJ0tzRxj9DQ==}
+  /@supabase/auth-helpers-shared/0.2.4_fjsejuhspb6db5pg2h5ujso754:
+    resolution: {integrity: sha512-c+hi3N6DhjPTzjXGOokre4gmMZOqt0f1ORrwZwi2s07pk3cbkmn77DwwVtlYMNi3oZNYRQqAfxJu83UzpJrrmg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.0.4
     dependencies:
@@ -3675,16 +3673,6 @@ packages:
   /supports-preserve-symlinks-flag/1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
-
-  /swr/2.0.0_react@18.2.0:
-    resolution: {integrity: sha512-IhUx5yPkX+Fut3h0SqZycnaNLXLXsb2ECFq0Y29cxnK7d8r7auY2JWNbCW3IX+EqXUg3rwNJFlhrw5Ye/b6k7w==}
-    engines: {pnpm: '7'}
-    peerDependencies:
-      react: ^16.11.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      react: 18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
-    dev: false
 
   /synckit/0.8.4:
     resolution: {integrity: sha512-Dn2ZkzMdSX827QbowGbU/4yjWuvNaCoScLLoMo/yKbu+P4GBR6cRGKZH27k6a9bRzdqcyd1DE96pQtQ6uNkmyw==}
