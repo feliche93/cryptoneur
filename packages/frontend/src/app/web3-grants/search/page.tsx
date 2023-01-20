@@ -63,13 +63,9 @@ export default function Search() {
     error,
     isFetching: isFetchingGrants,
     isLoading: isLoadingGrants,
-  } = useGrants(
-    'grants',
-    'id,logo,twitter,discord,github,telegram,updated_at,slug,name,blockchains!inner(id),categories!inner(id),use_cases!inner(id)',
-    {
-      ...watch(),
-    },
-  )
+  } = useGrants('grants', '*,blockchains!inner(id),categories!inner(id),use_cases!inner(id)', {
+    ...watch(),
+  })
 
   const {
     data: categories,

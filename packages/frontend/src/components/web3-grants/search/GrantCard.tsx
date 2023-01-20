@@ -13,6 +13,8 @@ export interface GrantCardProps {
 export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
   // console.log({ ...grant })
 
+  console.log({ ...grant })
+
   return (
     <>
       <li key={grant?.id}>
@@ -37,7 +39,7 @@ export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
               </div>
               <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                 <div>
-                  <p className="truncate text-sm font-medium text-primary">{grant?.grant}</p>
+                  <p className="truncate text-sm font-medium text-primary">{grant?.name}</p>
                   <div className="mt-2 flex items-center space-x-2 text-sm text-gray-500">
                     {grant?.twitter && (
                       <a href={grant?.twitter} rel="" target={'_blank'}>
@@ -91,8 +93,8 @@ export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
                         className="mr-1.5 h-5 w-5 flex-shrink-0 text-secondary"
                         aria-hidden="true"
                       />
-                      <time dateTime={grant?.attributes?.updatedAt}>
-                        {dayjs(grant?.attributes?.updatedAt).format('MMMM DD, YYYY')}
+                      <time dateTime={grant?.updated_at}>
+                        {dayjs(grant?.updated_at).format('MMMM DD, YYYY')}
                       </time>
                     </p>
                   </div>
