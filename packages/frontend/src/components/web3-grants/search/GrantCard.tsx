@@ -13,8 +13,6 @@ export interface GrantCardProps {
 export const GrantCard: FC<GrantCardProps> = ({ grant }) => {
   // console.log({ ...grant })
 
-  console.log({ ...grant })
-
   return (
     <>
       <li key={grant?.id}>

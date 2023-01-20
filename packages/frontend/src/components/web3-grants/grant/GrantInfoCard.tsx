@@ -33,7 +33,7 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
     .eq('slug', slug)
     .single()
 
-  console.log({ ...grant, ...error })
+  // console.log({ ...grant, ...error })
 
   const attachments = [
     { name: 'resume_front_end_developer.pdf', href: '#' },

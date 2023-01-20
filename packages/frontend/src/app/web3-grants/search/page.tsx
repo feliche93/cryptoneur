@@ -15,7 +15,7 @@ import useSWR from 'swr'
 const supabase = createBrowserClient()
 
 async function getData(table, columns, queryFilters) {
-  let query = supabase.from(table).select(columns)
+  let query = supabase.from(table).select(columns).order('name', { ascending: true })
 
   console.log({ queryFilters })
 
@@ -131,7 +131,7 @@ export default function Search() {
 
   const isLoading = isLoadingCategories && isLoadingBlockchains && isLoadingUseCases
   const isRevalidating = isFetchingCategories && isFetchingBlockchains && isFetchingUseCases
-  // console.log({ grants })
+  console.log({ grants })
 
   // console.log({ isLoading, isRevalidating })
 

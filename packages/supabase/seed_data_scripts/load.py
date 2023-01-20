@@ -11,7 +11,7 @@ import requests
 
 dotenv.load_dotenv()
 
-env: str = "dev"
+env: str = "prod"
 dev_api_url: str = "http://localhost:54321"
 dev_api_key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU"
 dev_api_bucket_url: str = "http://localhost:54321/storage/v1"
@@ -143,21 +143,27 @@ for grant in data:
     r = requests.get(logo_url, allow_redirects=True)
     open(logo_path, "wb").write(r.content)
 
-    result = storage_client.from_(bucket_name).upload(
-        path=f"{logo_name}",
-        file=logo_path,
-        # file_options={
-        #     "Content-Type": logo.get("mime"),
-        #     "upsert": "true",
-        # },
-    )
+    try:
+        result = storage_client.from_(bucket_name).upload(
+            path=f"{logo_name}",
+            file=logo_path,
+            # file_options={
+            #     "Content-Type": logo.get("mime"),
+            #     "upsert": "true",
+            # },
+        )
 
-    file_key = result.json().get("Key").split("/")[-1]
+        file_key = result.json().get("Key").split("/")[-1]
 
-    file_url = storage_client.from_(bucket_name).get_public_url(file_key)
+        file_url = storage_client.from_(bucket_name).get_public_url(file_key)
 
-    # delete logo from local storage
-    os.remove(logo_path)
+        # delete logo from local storage
+        os.remove(logo_path)
+
+    except Exception as e:
+        print(e)
+
+        file_url = storage_client.get_bucket(bucket_name).get_public_url(logo_name)
 
     # lookup fiat
     def lookup_fiat(fiat_symbol):
@@ -189,15 +195,16 @@ for grant in data:
         "funding_maximum_currency": lookup_fiat(grant.get("fundingMaximum").get("currency").get("symbol"))
         if grant.get("fundingMaximum")
         else None,
-        "twitter": grant.get("twitter"),
-        "github": grant.get("github"),
-        "discord": grant.get("discord"),
-        "telegram": grant.get("telegram"),
-        "website": grant.get("website"),
+        "twitter": grant.get("socials").get("twitter"),
+        "github": grant.get("socials").get("github"),
+        "discord": grant.get("socials").get("discord"),
+        "telegram": grant.get("socials").get("telegram"),
+        "website": grant.get("socials").get("website"),
         "logo": file_url,
     }
 
     supabase.table("grants").upsert(grant).execute()
+
 
 # load grants blockchains
 blockchains = pd.read_csv(seed_data_path / "blockchains.csv")
