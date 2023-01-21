@@ -5,6 +5,7 @@ import { Header } from '@components/web3-grants/grant/Header'
 import { CheckIcon, HandThumbUpIcon, UserIcon } from '@heroicons/react/20/solid'
 import { NextPage } from 'next'
 import { NextParsedUrlQuery } from 'next/dist/server/request-meta'
+import Link from 'next/link'
 
 const Web3GrantPage: NextPage<NextParsedUrlQuery> = ({ params }) => {
   const { slug } = params
@@ -118,6 +119,10 @@ const Web3GrantPage: NextPage<NextParsedUrlQuery> = ({ params }) => {
               description="All high-level infromation about the grant."
               slug={slug}
             />
+
+            <Link className="btn" href={`/web3-grants/${slug}/edit`}>
+              Edit Grant
+            </Link>
 
             {/* Comments*/}
             {/* <section aria-labelledby="notes-title">
