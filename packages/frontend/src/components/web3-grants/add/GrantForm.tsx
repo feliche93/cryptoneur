@@ -10,8 +10,7 @@ export interface GrantFormProps {
 export const GrantForm: FC<GrantFormProps> = ({ grant }) => {
   const pathname = usePathname()
 
-  // console.log({ pathname })
-
+  console.log({ pathname })
   let tallyUrl =
     'https://tally.so/embed/mOQgD7?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1'
 
@@ -24,7 +23,7 @@ export const GrantForm: FC<GrantFormProps> = ({ grant }) => {
 
     console.log({ ...filteredGrant })
     tallyUrl = `${tallyUrl}&${new URLSearchParams({
-      edit: 'true',
+      edit: pathname === '/web3-grants/add' ? 'false' : 'true',
       ...filteredGrant,
     }).toString()}`
   }
