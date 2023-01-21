@@ -11,9 +11,9 @@ export const Header: FC = () => {
             Up-to-date and complete collection of web3 grants.
           </p>
         </div>
-        <Link className="btn-primary btn w-full sm:w-fit" href={'/web3-grants/add'}>
+        <a className="btn-primary btn w-full sm:w-fit" href={'/web3-grants/add'}>
           Add new Grant
-        </Link>
+        </a>
       </div>
     </div>
   )

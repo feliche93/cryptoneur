@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Script from 'next/script'
 import { FC, useEffect } from 'react'
 
@@ -9,19 +9,14 @@ export interface GrantFormProps {
 }
 export const GrantForm: FC<GrantFormProps> = ({ grant }) => {
   const pathname = usePathname()
+  const router = useRouter()
 
-  useEffect(() => {
-    // console.log('GrantForm mounted')
-    // console.log({ localStorage })
-    // console.log(Object.keys(localStorage))
-    // clear localStorage item where key starts with FORM_DATA
-    // Object.keys(localStorage)
-    //   .filter((key) => key.startsWith('FORM_DATA'))
-    //   .forEach((key) => {
-    //     console.log({ key })
-    //     localStorage.removeItem(key)
-    //   })
-  }, [])
+  // useEffect(() => {
+  //   if (pathname !== '/web3-grants/add') {
+  //     router.refresh()
+  //   }
+
+  // }, [])
 
   // console.log({ pathname })
   let tallyUrl = '/web3-grants/add'
@@ -53,12 +48,10 @@ export const GrantForm: FC<GrantFormProps> = ({ grant }) => {
           `,
         }}
         src="https://tally.so/widgets/embed.js"
-        onLoad={() => {
-          const iframe = document.querySelector('iframe[data-tally-src]')
-
-          console.log('Script has loaded')
-          console.log(localStorage)
-        }}
+        // onReady={() => {
+        //   console.log('router refresh')
+        //   router.refresh()
+        // }}
       ></Script>
       <div className="mx-auto max-w-5xl">
         <iframe
