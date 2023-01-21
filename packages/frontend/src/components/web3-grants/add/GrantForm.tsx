@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import Script from 'next/script'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 
 export interface GrantFormProps {
   grant?: any
@@ -10,9 +10,23 @@ export interface GrantFormProps {
 export const GrantForm: FC<GrantFormProps> = ({ grant }) => {
   const pathname = usePathname()
 
-  console.log({ pathname })
-  let tallyUrl =
-    'https://tally.so/embed/mOQgD7?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1'
+  useEffect(() => {
+    // console.log('GrantForm mounted')
+    // console.log({ localStorage })
+    // console.log(Object.keys(localStorage))
+    // clear localStorage item where key starts with FORM_DATA
+    // Object.keys(localStorage)
+    //   .filter((key) => key.startsWith('FORM_DATA'))
+    //   .forEach((key) => {
+    //     console.log({ key })
+    //     localStorage.removeItem(key)
+    //   })
+  }, [])
+
+  // console.log({ pathname })
+  let tallyUrl = '/web3-grants/add'
+    ? 'https://tally.so/embed/m6D0VN?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1'
+    : 'https://tally.so/embed/mOQgD7?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&edit=true'
 
   if (grant) {
     const filteredGrant = {
@@ -28,17 +42,22 @@ export const GrantForm: FC<GrantFormProps> = ({ grant }) => {
     }).toString()}`
   }
 
-  console.log({ tallyUrl })
+  // console.log({ tallyUrl })
   return (
     <>
       <Script
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
-          __html: 'Tally.loadEmbeds();',
+          __html: `
+          Tally.loadEmbeds();
+          `,
         }}
         src="https://tally.so/widgets/embed.js"
         onLoad={() => {
+          const iframe = document.querySelector('iframe[data-tally-src]')
+
           console.log('Script has loaded')
+          console.log(localStorage)
         }}
       ></Script>
       <div className="mx-auto max-w-5xl">
