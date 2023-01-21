@@ -50,7 +50,7 @@ export const GrantForm: FC<GrantFormProps> = ({ grant }) => {
         src="https://tally.so/widgets/embed.js"
         // onReady={() => {
         //   console.log('router refresh')
-        //   router.refresh()
+        //   router.
         // }}
       ></Script>
       <div className="mx-auto max-w-5xl">
@@ -59,6 +59,7 @@ export const GrantForm: FC<GrantFormProps> = ({ grant }) => {
           loading="lazy"
           width="100%"
           height="1697"
+          scrolling="no"
           frameBorder="0"
           marginHeight="0"
           marginWidth="0"
