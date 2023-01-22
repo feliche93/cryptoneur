@@ -120,9 +120,11 @@ const Web3GrantPage: NextPage<NextParsedUrlQuery> = ({ params }) => {
               slug={slug}
             />
 
-            <a className="btn" href={`/web3-grants/${slug}/edit`}>
-              Edit Grant
-            </a>
+            <div className="px-4 sm:px-0">
+              <a className="btn w-full sm:w-fit" href={`/web3-grants/${slug}/edit`}>
+                Edit Grant
+              </a>
+            </div>
 
             {/* Comments*/}
             {/* <section aria-labelledby="notes-title">

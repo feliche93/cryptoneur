@@ -1,8 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { Database } from '@lib/database.types'
-import { createServerComponentSupabaseClient, createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { createBrowserClient } from '@utils/supabase-browser'
-import { createServerClient } from '@utils/supabase-server'
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import slugify from 'slugify'
 
@@ -37,17 +35,20 @@ export default async function handler(
     let grantBlockchainValues = fields.filter((field: any) => field.label === 'Grant Blockchains')[0]?.value
     let grantCategoryValues = fields.filter((field: any) => field.label === 'Grant Categories')[0]?.value
     let grantUseCases = fields.filter((field: any) => field.label === 'Grant Use Cases')[0]?.value
-    let fileUpload = fields.filter((field: any) => field.type === 'FILE_UPLOAD')[0]?.value
+    let fileUpload = fields.filter((field: any) => field.type === 'FILE_UPLOAD')[0]?.value?.[0]?.url
     let logo = fields.filter((field: any) => field.label === 'logo')[0]?.value
     let edit = fields.filter((field: any) => field.label === 'edit')[0]?.value
     let id = fields.filter((field: any) => field.label === 'id')[0]?.value
     let fundingMinimum = fields.filter((field: any) => field.label === 'Funding Minimum')[0]?.value
     let fundingMaximum = fields.filter((field: any) => field.label === 'Funding Maximum')[0]?.value
-    console.log({ id })
+    let slug = fields.filter((field: any) => field.label === 'slug')[0]?.value
+    let name = fields.filter((field: any) => field.label === 'Name')[0]?.value
+    // console.log({ slug })
 
     const grant = {
-        id: id,
-        name: fields.filter((field: any) => field.label === 'Name')[0].value,
+        id: id || undefined,
+        slug: slug || slugify(name, { lower: true }),
+        name: name,
         logo: fileUpload || logo,
         description: fields.filter((field: any) => field.label === 'Description')[0].value,
         funding_minimum: fundingMinimum,
@@ -63,7 +64,9 @@ export default async function handler(
         website: fields.filter((field: any) => field.label === 'Website')[0].value,
     }
 
-    if (!!grant?.logo) {
+    // console.log({ logo, fileUpload })
+
+    if (fileUpload) {
 
         // retrieve logo url as file body
         const logo = await fetch(grant.logo)
@@ -84,12 +87,17 @@ export default async function handler(
         grant.logo = publicUrl
     }
 
-    if (!!grant?.funding_minimum && !!grant?.funding_maximum) {
-        const { data: fiats, error: fiatsError } = await supabaseServerClient.from('fiats').select('*').in('symbol', [grant.funding_minimum_currency, grant.funding_maximum_currency])
+    if (!!grant?.funding_minimum) {
+        const { data: fiats, error: fiatsError } = await supabaseServerClient.from('fiats').select('*').in('symbol', [grant.funding_minimum_currency])
         const fiatMinimum = fiats && fiats.filter((fiat: any) => fiat.symbol === grant.funding_minimum_currency)[0]
-        const fiatMaximum = fiats && fiats.filter((fiat: any) => fiat.symbol === grant.funding_maximum_currency)[0]
 
         grant.funding_minimum_currency = fiatMinimum?.id
+    }
+
+    if (!!grant?.funding_maximum) {
+        const { data: fiats, error: fiatsError } = await supabaseServerClient.from('fiats').select('*').in('symbol', [grant.funding_maximum_currency])
+        const fiatMaximum = fiats && fiats.filter((fiat: any) => fiat.symbol === grant.funding_maximum_currency)[0]
+
         grant.funding_maximum_currency = fiatMaximum?.id
     }
 
@@ -97,23 +105,29 @@ export default async function handler(
     let categories = fields.filter((field: any) => field.label === 'Grant Categories')[0].options.filter((option: any) => grantCategoryValues.includes(option.id)).map((option: any) => option.text)
     let useCases = fields.filter((field: any) => field.label === 'Grant Use Cases')[0].options.filter((option: any) => grantUseCases.includes(option.id)).map((option: any) => option.text)
 
+    // console.log({ blockchains, categories, useCases })
+
     const { data: grantResponse, error: grantResponseError } = await supabaseServerClient.from('grants').upsert(
         {
             ...grant,
             active: true,
             content: '',
-            slug: slugify(grant.name)
+            updated_at: new Date().toUTCString()
         },
         {
-            'onConflict': 'name'
+            'onConflict': id ? 'id' : 'name',
         }
     ).select('id').single()
 
     const grantId = grantResponse?.id
 
+    console.log({ grantResponse, grantResponseError, grantId })
+
     const { data: blockchainData, error: blockchainError } = await supabaseServerClient.from('blockchains').select('*').in('name', blockchains)
     const { data: categoryData, error: categoryError } = await supabaseServerClient.from('categories').select('*').in('name', categories)
     const { data: useCaseData, error: useCaseError } = await supabaseServerClient.from('use_cases').select('*').in('name', useCases)
+
+    console.log({ blockchainData, categoryData, useCaseData })
 
     blockchains = blockchainData && blockchainData.map((blockchainValue: any) => {
         return {
@@ -136,14 +150,30 @@ export default async function handler(
         }
     })
 
+    console.log({ blockchains, categories, useCases })
+
+    // delete existing grant blockchains, categories, and use cases for blockchain id
+
+    console.log({ id })
+    if (!!id) {
+        console.log('deleting existing grant blockchains, categories, and use cases for blockchain id')
+        const { data: grantBlockchainData, error: grantBlockchainError } = await supabaseServerClient.from('grant_blockchains').delete().eq('grant_id', id)
+        const { data: grantCategoryData, error: grantCategoryError } = await supabaseServerClient.from('grant_categories').delete().eq('grant_id', id)
+        const { data: grantUseCaseData, error: grantUseCaseError } = await supabaseServerClient.from('grant_use_cases').delete().eq('grant_id', id)
+    }
+
     const { data: blockchainResponse, error: blockchainResponseError } = await supabaseServerClient.from('grant_blockchains').insert(blockchains)
     const { data: categoryResponse, error: categoryResponseError } = await supabaseServerClient.from('grant_categories').insert(categories)
     const { data: useCaseResponse, error: useCaseResponseError } = await supabaseServerClient.from('grant_use_cases').insert(useCases)
 
-    console.log({
-        grantResponse,
-        grantResponseError,
-    })
+
+    console.log({ blockchainResponse, categoryResponse, useCaseResponse })
+    console.log({ blockchainResponseError, categoryResponseError, useCaseResponseError })
+
+    // console.log({
+    //     grantResponse,
+    //     grantResponseError,
+    // })
 
     // console.log({
     //     blockchainResponse,

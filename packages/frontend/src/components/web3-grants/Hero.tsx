@@ -28,6 +28,9 @@ export const Hero: FC<HeroProps> = () => {
           <Link className="btn-primary btn-md btn sm:btn-lg" href="/web3-grants/search">
             Find a grant
           </Link>
+          <a className="btn-outline btn-primary btn-md btn sm:btn-lg" href="web3-grants/add">
+            Add a grant
+          </a>
           {/* <Link className="btn btn-md sm:btn-lg btn-outline" href="/blog">
             Blog
           </Link> */}
