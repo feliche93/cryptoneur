@@ -140,7 +140,7 @@ export const Auth: FC<AuthProps> = () => {
                   type="submit"
                   className={classNames(isSubmitting ? 'loading' : '', 'btn-primary btn w-full')}
                 >
-                  {signIn ? 'Log In' : 'Registrieren'}
+                  {signIn ? 'Log In' : 'Register'}
                 </button>
               </div>
             </form>
