@@ -36,6 +36,7 @@
     "react-hot-toast": "^2.4.0",
     "server-only": "^0.0.1",
     "sharp": "^0.31.3",
+    "slugify": "^1.6.5",
     "strapi-sdk-js": "^2.2.0",
     "zod": "^3.20.2"
   },

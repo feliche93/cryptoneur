@@ -4,6 +4,7 @@ import { createServerComponentSupabaseClient, createServerSupabaseClient } from 
 import { createBrowserClient } from '@utils/supabase-browser'
 import { createServerClient } from '@utils/supabase-server'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import slugify from 'slugify'
 
 type Data = {
     name: string
@@ -38,6 +39,7 @@ export default async function handler(
     let grantUseCases = fields.filter((field: any) => field.label === 'Grant Use Cases')[0].value
 
     const grant = {
+        id: undefined,
         name: fields.filter((field: any) => field.label === 'Name')[0].value,
         logo: fields.filter((field: any) => field.type === 'FILE_UPLOAD')[0].value[0].url,
         description: fields.filter((field: any) => field.label === 'Description')[0].value,
@@ -54,8 +56,8 @@ export default async function handler(
         twitter: fields.filter((field: any) => field.label === 'Twitter')[0].value,
         telegram: fields.filter((field: any) => field.label === 'Telegram')[0].value,
         github: fields.filter((field: any) => field.label === 'GitHub')[0].value,
+        website: fields.filter((field: any) => field.label === 'Website')[0].value,
     }
-
 
     if (!!grant?.logo) {
 
@@ -69,7 +71,8 @@ export default async function handler(
         const { data: logoData, error: logoError } = await supabaseServerClient.storage.from('grant-logos').upload(logoName, logoBlob, {
             contentType: logoMimeType,
             upsert: true,
-        })
+        },
+        )
 
         // get public url for logo
         const { data: { publicUrl } } = await supabaseServerClient.storage.from('grant-logos').getPublicUrl(logoName)
@@ -86,17 +89,67 @@ export default async function handler(
         grant.funding_maximum_currency = fiatMaximum?.id
     }
 
-    const { data: grantResponse, error: grantResponseError } = await supabaseServerClient.from('grants').upsert({
-        ...grant,
-        active: true,
-        content: ''
+    let blockchains = fields.filter((field: any) => field.label === 'Grant Blockchains')[0].options.filter((option: any) => grantBlockchainValues.includes(option.id)).map((option: any) => option.text)
+    let categories = fields.filter((field: any) => field.label === 'Grant Categories')[0].options.filter((option: any) => grantCategoryValues.includes(option.id)).map((option: any) => option.text)
+    let useCases = fields.filter((field: any) => field.label === 'Grant Use Cases')[0].options.filter((option: any) => grantUseCases.includes(option.id)).map((option: any) => option.text)
+
+    const { data: grantResponse, error: grantResponseError } = await supabaseServerClient.from('grants').upsert(
+        {
+            ...grant,
+            active: true,
+            content: '',
+            slug: slugify(grant.name)
+        },
+        {
+            'onConflict': 'name'
+        }
+    ).select('id').single()
+
+    const grantId = grantResponse?.id
+
+    const { data: blockchainData, error: blockchainError } = await supabaseServerClient.from('blockchains').select('*').in('name', blockchains)
+    const { data: categoryData, error: categoryError } = await supabaseServerClient.from('categories').select('*').in('name', categories)
+    const { data: useCaseData, error: useCaseError } = await supabaseServerClient.from('use_cases').select('*').in('name', useCases)
+
+    blockchains = blockchainData && blockchainData.map((blockchainValue: any) => {
+        return {
+            blockchain_id: blockchainValue?.id,
+            grant_id: grantId
+        }
     })
 
+    categories = categoryData && categoryData.map((categoryValue: any) => {
+        return {
+            category_id: categoryValue?.id,
+            grant_id: grantId
+        }
+    })
 
-    // console.log({ logoData, logoError, logoBlob, logoMimeType, logoName })
+    useCases = useCaseData && useCaseData.map((useCaseValue: any) => {
+        return {
+            use_case_id: useCaseValue?.id,
+            grant_id: grantId
+        }
+    })
 
-    console.log({ grantResponse, grantResponseError })
-    console.log({ ...grant })
+    const { data: blockchainResponse, error: blockchainResponseError } = await supabaseServerClient.from('grant_blockchains').insert(blockchains)
+    const { data: categoryResponse, error: categoryResponseError } = await supabaseServerClient.from('grant_categories').insert(categories)
+    const { data: useCaseResponse, error: useCaseResponseError } = await supabaseServerClient.from('grant_use_cases').insert(useCases)
+
+    console.log({
+        grantResponse,
+        grantResponseError,
+    })
+
+    // console.log({
+    //     blockchainResponse,
+    //     blockchainResponseError,
+    //     categoryResponse,
+    //     categoryResponseError,
+    //     useCaseResponse,
+    //     useCaseResponseError
+    // })
+
 
     // console.log({ ...body })
     res.status(200).json({ name: 'John Doe' })
