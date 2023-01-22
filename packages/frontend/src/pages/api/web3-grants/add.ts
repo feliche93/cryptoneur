@@ -32,26 +32,30 @@ export default async function handler(
     const { eventId, createdAt, data } = body
     const { responseId, submissionId, formId, formName, fields } = data
 
-    let fundingMinimumCurrencyId = fields.filter((field: any) => field.label === 'Funding Minimum Currency')[0].value
-    let fundingMaximumCurrencyId = fields.filter((field: any) => field.label === 'Funding Maximum Currency')[0].value
-    let grantBlockchainValues = fields.filter((field: any) => field.label === 'Grant Blockchains')[0].value
-    let grantCategoryValues = fields.filter((field: any) => field.label === 'Grant Categories')[0].value
-    let grantUseCases = fields.filter((field: any) => field.label === 'Grant Use Cases')[0].value
+    let fundingMinimumCurrencyId = fields.filter((field: any) => field.label === 'Funding Minimum Currency')[0]?.value
+    let fundingMaximumCurrencyId = fields.filter((field: any) => field.label === 'Funding Maximum Currency')[0]?.value
+    let grantBlockchainValues = fields.filter((field: any) => field.label === 'Grant Blockchains')[0]?.value
+    let grantCategoryValues = fields.filter((field: any) => field.label === 'Grant Categories')[0]?.value
+    let grantUseCases = fields.filter((field: any) => field.label === 'Grant Use Cases')[0]?.value
+    let fileUpload = fields.filter((field: any) => field.type === 'FILE_UPLOAD')[0]?.value
+    let logo = fields.filter((field: any) => field.label === 'logo')[0]?.value
+    let edit = fields.filter((field: any) => field.label === 'edit')[0]?.value
+    let id = fields.filter((field: any) => field.label === 'id')[0]?.value
+    let fundingMinimum = fields.filter((field: any) => field.label === 'Funding Minimum')[0]?.value
+    let fundingMaximum = fields.filter((field: any) => field.label === 'Funding Maximum')[0]?.value
+    console.log({ id })
 
     const grant = {
-        id: undefined,
+        id: id,
         name: fields.filter((field: any) => field.label === 'Name')[0].value,
-        logo: fields.filter((field: any) => field.type === 'FILE_UPLOAD')[0].value[0].url,
+        logo: fileUpload || logo,
         description: fields.filter((field: any) => field.label === 'Description')[0].value,
-        funding_minimum: fields.filter((field: any) => field.label === 'Funding Minimum')[0].value,
-        funding_maximum: fields.filter((field: any) => field.label === 'Funding Maximum')[0].value,
-        funding_minimum_currency: fields.filter((field: any) => field.label === 'Funding Minimum Currency')[0].options.filter((option: any) => option.id === fundingMinimumCurrencyId)[0].text,
-        funding_maximum_currency: fields.filter((field: any) => field.label === 'Funding Maximum Currency')[0].options.filter((option: any) => option.id === fundingMaximumCurrencyId)[0].text,
+        funding_minimum: fundingMinimum,
+        funding_maximum: fundingMaximum,
+        funding_minimum_currency: fundingMinimumCurrencyId ? fields.filter((field: any) => field.label === 'Funding Minimum Currency')[0].options.filter((option: any) => option.id === fundingMinimumCurrencyId)[0].text : undefined,
+        funding_maximum_currency: fundingMaximumCurrencyId ? fields.filter((field: any) => field.label === 'Funding Maximum Currency')[0].options.filter((option: any) => option.id === fundingMaximumCurrencyId)[0].text : undefined,
         url_info: fields.filter((field: any) => field.label === 'Link Grant Info')[0].value,
         url_application: fields.filter((field: any) => field.label === 'Link Grant Application')[0].value,
-        // blockchains: fields.filter((field: any) => field.label === 'Grant Blockchains')[0].options.filter((option: any) => grantBlockchainValues.includes(option.id)).map((option: any) => option.text),
-        // categories: fields.filter((field: any) => field.label === 'Grant Categories')[0].options.filter((option: any) => grantCategoryValues.includes(option.id)).map((option: any) => option.text),
-        // use_cases: fields.filter((field: any) => field.label === 'Grant Use Cases')[0].options.filter((option: any) => grantUseCases.includes(option.id)).map((option: any) => option.text),
         discord: fields.filter((field: any) => field.label === 'Discord')[0].value,
         twitter: fields.filter((field: any) => field.label === 'Twitter')[0].value,
         telegram: fields.filter((field: any) => field.label === 'Telegram')[0].value,

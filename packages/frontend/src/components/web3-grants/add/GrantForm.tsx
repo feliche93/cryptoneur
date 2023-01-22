@@ -19,9 +19,8 @@ export const GrantForm: FC<GrantFormProps> = ({ grant }) => {
   // }, [])
 
   // console.log({ pathname })
-  let tallyUrl = '/web3-grants/add'
-    ? 'https://tally.so/embed/m6D0VN?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1'
-    : 'https://tally.so/embed/mOQgD7?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&edit=true'
+  let tallyUrl =
+    'https://tally.so/embed/m6D0VN?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1'
 
   if (grant) {
     const filteredGrant = {
