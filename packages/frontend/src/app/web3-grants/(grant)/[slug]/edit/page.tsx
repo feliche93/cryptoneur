@@ -1,4 +1,6 @@
 import { GrantForm } from '@components/web3-grants/add/GrantForm'
+import { Modal } from '@components/web3-grants/edit/Modal'
+import { ModalWrapper } from '@components/web3-grants/edit/ModalWrapper'
 import { createServerClient } from '@utils/supabase-server'
 import { NextPage } from 'next'
 import { headers } from 'next/headers'
@@ -35,6 +37,7 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
 
   return (
     <>
+      <ModalWrapper />
       <GrantForm grant={grant} />
     </>
   )

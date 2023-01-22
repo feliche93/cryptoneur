@@ -38,7 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       />
       <SupabaseProvider session={session}>
         <QueryClientWrapper>
-          <body className="bg-base-200">
+          <body className="min-h-screen bg-base-200">
             <Navbar />
             {children}
             <AnalyticsWrapper />
