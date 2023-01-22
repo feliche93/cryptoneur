@@ -170,5 +170,5 @@ export default async function handler(
     console.log({ blockchainResponse, categoryResponse, useCaseResponse })
     console.log({ blockchainResponseError, categoryResponseError, useCaseResponseError })
 
-    res.status(200)
+    res.status(200).json({ grantResponse })
 }
