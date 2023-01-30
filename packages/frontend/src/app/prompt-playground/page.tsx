@@ -1,6 +1,15 @@
+import { ApiKeyForm } from '@components/prompt-playground/ApiKeyForm'
+import { ApiKeyInput } from '@components/prompt-playground/ApiKeyInput'
+import { InputForm } from '@components/prompt-playground/InputForm'
+import { MatrixSelect } from '@components/prompt-playground/MatrixSelect'
+import { ToasterWrapper } from '@components/shared/ToasterWrapper'
+import { Form } from '@shared/Form'
+import { z } from 'zod'
+
 const PromptPlayground = () => {
   return (
     <>
+      <ToasterWrapper />
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
         {/* Title */}
         <div>
@@ -11,30 +20,7 @@ const PromptPlayground = () => {
             Open AI Playground
           </h1>
         </div>
-        <div className="grid w-full grid-cols-4">
-          <div className="col-span-2">
-            <div className="flex flex-row">
-              <div className="form-control w-full pt-8">
-                <label className="label">
-                  <span className="label-text">Open AI API Key</span>
-                </label>
-                <div className="flex flex-row space-x-2">
-                  <input
-                    type="password"
-                    placeholder="Fill in your openAI API key"
-                    className="input-bordered input w-full "
-                  />
-                  <button className="btn-primary btn">Validate</button>
-                </div>
-                <label className="label">
-                  <span className="label-text-alt">
-                    Don't Worry we will not store or leak your key.
-                  </span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
+        <InputForm />
       </div>
     </>
   )
