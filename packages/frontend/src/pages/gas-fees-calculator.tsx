@@ -82,7 +82,11 @@ const GasFeesCalculator: NextPage = ({ networkPrices }) => {
           networkPrices={networkPrices}
         />
         <div className="mt-10 flex items-center  justify-center">
-          <a href="https://zapper.fi/" target="_blank" rel="noreferrer">
+          <a
+            href="https://zapper.fi/?utmsource=cryptoneur.xyz&utmmedium=gas-fees-calcualtor"
+            target="_blank"
+            rel="noreferrer"
+          >
             <Image
               className="rounded-lg object-center"
               src="/logos/power-zap-black.svg"
