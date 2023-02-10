@@ -93,9 +93,14 @@ function Navbar() {
                     Log Out
                   </button>
                 ) : (
-                  <Link className="btn-primary btn" href={'/sign-in'}>
-                    Log In
-                  </Link>
+                  <div className="space-x-2">
+                    <Link className="btn-primary btn" href={'/sign-in'}>
+                      Log In
+                    </Link>
+                    <Link className="btn-outline btn-primary btn" href={'/register'}>
+                      Sign Up
+                    </Link>
+                  </div>
                 )}
               </div>
             </nav>
@@ -135,16 +140,17 @@ function Navbar() {
                 </div>
                 <div className="px-2 pt-2 pb-3">
                   {navigation.map((item) => (
-                    <Link
+                    <Popover.Button
+                      as={Link}
+                      key={item.name}
+                      href={item.href}
                       className={classNames(
                         item.href === pathname ? 'text-black' : '',
                         'block rounded-md px-3 py-2 text-base font-medium text-base-content/80 hover:bg-base-200 hover:text-primary',
                       )}
-                      key={item.name}
-                      href={item.href}
                     >
                       {item.name}
-                    </Link>
+                    </Popover.Button>
                   ))}
                 </div>
                 <div className="hidden md:absolute md:inset-y-0 md:right-0 md:flex md:items-center md:justify-end">

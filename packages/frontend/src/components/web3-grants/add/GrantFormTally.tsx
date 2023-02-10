@@ -4,10 +4,10 @@ import { usePathname, useRouter } from 'next/navigation'
 import Script from 'next/script'
 import { FC, useEffect } from 'react'
 
-export interface GrantFormProps {
+export interface GrantFormTallyProps {
   grant?: any
 }
-export const GrantForm: FC<GrantFormProps> = ({ grant }) => {
+export const GrantFormTally: FC<GrantFormTallyProps> = ({ grant }) => {
   const pathname = usePathname()
   const router = useRouter()
 
