@@ -1,7 +1,6 @@
-import { classNames } from '@utils/helpers'
-import { type } from 'os'
+import clsx from 'clsx'
 import { FC } from 'react'
-import { FieldValues, UseFormRegister } from 'react-hook-form'
+import { FieldValues, useFormContext, UseFormRegister } from 'react-hook-form'
 
 export interface InputSelectProps {
   id: string
@@ -9,10 +8,16 @@ export interface InputSelectProps {
   type: string
   secondaryLabel?: string
   placeholder?: string
-  options: { id: string; label: string }[]
-  register: UseFormRegister<FieldValues>
-  errors: any
+  options:
+    | {
+        label: string | undefined
+        value: string | number | undefined
+      }[]
+    | any[]
+    | undefined
   className?: string
+  valueAsNumber?: boolean
+  isLoading?: boolean
 }
 export const InputSelect: FC<InputSelectProps> = ({
   id,
@@ -20,23 +25,36 @@ export const InputSelect: FC<InputSelectProps> = ({
   secondaryLabel,
   placeholder,
   options,
-  register,
-  errors,
   className,
+  isLoading = false,
 }) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext() // retrieve all hook methods
+
   return (
-    <div className={classNames(className ? className : '', 'form-control')}>
+    <div className={clsx(className ? className : '', 'form-control')}>
       <label className="label">
         <span className="label-text">{primaryLabel}</span>
       </label>
-      <select {...register(id)} className="select-bordered select w-full">
-        {/* {placeholder && <option value="">{placeholder}</option>} */}
-        {options.map((option, index) => (
-          <option key={index} value={option.id}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+      {isLoading ? (
+        <div className="h-12 w-full animate-pulse rounded-lg bg-base-300" />
+      ) : (
+        <select {...register(id)} className="select-bordered select w-full">
+          {placeholder && (
+            <option key={'all'} value={''}>
+              {placeholder}
+            </option>
+          )}
+          {options &&
+            options.map((option, idx) => (
+              <option key={idx} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+        </select>
+      )}
       {secondaryLabel && <label className="label">{secondaryLabel}</label>}
       {errors?.[id] && <label className="pt-2 text-sm text-error">{errors[id].message}</label>}
     </div>

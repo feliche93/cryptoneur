@@ -3,12 +3,12 @@
 import { InputText } from '@components/shared/InputText'
 import { useSupabase } from '@components/supabase-provider'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { classNames } from '@utils/helpers'
+import clsx from 'clsx'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
-import { FC, useEffect } from 'react'
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
-import toast, { Toaster } from 'react-hot-toast'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { FC } from 'react'
+import { FieldValues, FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import * as z from 'zod'
 
 const schema = z.object({
@@ -22,26 +22,23 @@ export interface AuthProps {}
 export const Auth: FC<AuthProps> = () => {
   const { supabase, session } = useSupabase()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
   const router = useRouter()
-
   const signIn = pathname === '/sign-in'
+  const redirectedFrom = searchParams.get('redirectedFrom')
 
   //   console.log({ pathname })
+  // console.log({ redirectedFrom })
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm({
+  const methods = useForm({
     resolver: zodResolver(schema),
   })
 
-  //   console.log({ errors })
+  console.log(methods.formState.errors)
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (signIn) {
-      // console.log({ ...data })
+      console.log({ ...data })
       const { error } = await supabase.auth.signInWithPassword({
         email: data.email,
         password: data.password,
@@ -50,7 +47,16 @@ export const Auth: FC<AuthProps> = () => {
       if (error) {
         console.log({ ...error })
         toast.error('Email or password incorrect, or login not yet confirmed.')
+        return
       }
+
+      if (redirectedFrom) {
+        router.push(redirectedFrom)
+        return
+      }
+
+      router.push('/web3-grants')
+      router.refresh()
     } else {
       // console.log({ ...data })
 
@@ -64,15 +70,14 @@ export const Auth: FC<AuthProps> = () => {
         toast.error('Email address already registered.')
       }
 
-      toast.success('Registration successful. Please confirm your email address in your mailbox.')
+      toast.success('Sign up successful. Please confirm your email address in your mailbox.')
+      methods.reset()
+      router.refresh()
     }
-    reset()
-    router.refresh()
   }
 
   return (
     <>
-      <Toaster position="top-right" reverseOrder={false} />
       <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           {/* TODO: Add Logo */}
@@ -82,7 +87,7 @@ export const Auth: FC<AuthProps> = () => {
             alt="Your Company"
           /> */}
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight">
-            {signIn ? 'Log in' : 'Sign up'}
+            {signIn ? 'Log In' : 'Register'}
           </h2>
           <p className="mt-2 text-center text-sm text-base-content/80">
             or{' '}
@@ -90,31 +95,24 @@ export const Auth: FC<AuthProps> = () => {
               href={signIn ? '/register' : '/sign-in'}
               className="font-medium text-primary hover:text-primary-focus"
             >
-              {signIn ? 'sign up' : 'log in'}
+              {signIn ? 'register now' : 'log In now'}
             </Link>
           </p>
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-base-300 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <InputText
-                id="email"
-                primaryLabel="E-mail"
-                placeholder="E-Mail"
-                register={register}
-                errors={errors}
-                type="email"
-              />
-              <InputText
-                errors={errors}
-                id="password"
-                primaryLabel="Password"
-                register={register}
-                type="password"
-              />
-              <div className="flex items-center justify-between">
-                {/* <div className="flex items-center">
+            <FormProvider {...methods}>
+              <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
+                <InputText id="email" primaryLabel="E-mail" placeholder="E-Mail" type="email" />
+                <InputText
+                  id="password"
+                  placeholder="Password"
+                  primaryLabel="Password"
+                  type="password"
+                />
+                <div className="flex items-center justify-between">
+                  {/* <div className="flex items-center">
                   <input
                     id="remember-me"
                     name="remember-me"
@@ -126,24 +124,28 @@ export const Auth: FC<AuthProps> = () => {
                   </label>
                 </div> */}
 
-                {signIn && (
-                  <div className="text-sm">
-                    <Link href="#" className="font-medium text-primary hover:text-primary-focus">
-                      Forgot your password?
-                    </Link>
-                  </div>
-                )}
-              </div>
+                  {signIn && (
+                    <div className="text-sm">
+                      <Link href="#" className="font-medium text-primary hover:text-primary-focus">
+                        Forgot your password?
+                      </Link>
+                    </div>
+                  )}
+                </div>
 
-              <div>
-                <button
-                  type="submit"
-                  className={classNames(isSubmitting ? 'loading' : '', 'btn-primary btn w-full')}
-                >
-                  {signIn ? 'Log In' : 'Register'}
-                </button>
-              </div>
-            </form>
+                <div>
+                  <button
+                    type="submit"
+                    className={clsx(
+                      methods.formState.isSubmitting ? 'loading' : '',
+                      'btn-primary btn w-full',
+                    )}
+                  >
+                    {signIn ? 'Log In' : 'Register'}
+                  </button>
+                </div>
+              </form>
+            </FormProvider>
 
             {/* <div className="mt-6">
               <div className="relative">

@@ -2,20 +2,18 @@ import clsx from 'clsx'
 import { FC, HTMLInputTypeAttribute } from 'react'
 import { FieldValues, useFormContext, UseFormRegister } from 'react-hook-form'
 
-export interface InputTextProps {
+export interface InputNumberProps {
   id: string
   primaryLabel: string
   secondaryLabel?: string
   placeholder?: string | undefined
-  type?: HTMLInputTypeAttribute | undefined
   className?: string
 }
-export const InputText: FC<InputTextProps> = ({
+export const InputNumber: FC<InputNumberProps> = ({
   id,
   primaryLabel,
   secondaryLabel,
   placeholder,
-  type,
   className,
 }) => {
   const {
@@ -23,18 +21,17 @@ export const InputText: FC<InputTextProps> = ({
     formState: { errors },
   } = useFormContext() // retrieve all hook methods
 
-  if (errors) {
-    console.log({ errors })
-  }
-
   return (
     <div className={clsx(className ? className : '', 'form-control')}>
       <label className="label">
         <span className="label-text">{primaryLabel}</span>
       </label>
       <input
-        {...register(id)}
-        type={type}
+        {...(register(id),
+        {
+          valueAsNumber: true,
+        })}
+        type="number"
         placeholder={placeholder}
         className="input-bordered input w-full"
       />

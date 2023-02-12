@@ -10,6 +10,7 @@ import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/Navbar'
 import './globals.css'
 import { QueryClientWrapper } from '@components/query-client-wrapper'
+import { ToasterWrapper } from '@components/shared/ToasterWrapper'
 
 export type TypedSupabaseClient = SupabaseClient<Database>
 
@@ -39,6 +40,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <SupabaseProvider session={session}>
         <QueryClientWrapper>
           <body className="min-h-screen bg-base-200">
+            <ToasterWrapper />
             <Navbar />
             {children}
             <AnalyticsWrapper />

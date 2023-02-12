@@ -1,16 +1,16 @@
 import clsx from 'clsx'
-import { FC, HTMLInputTypeAttribute } from 'react'
+import { FC } from 'react'
 import { FieldValues, useFormContext, UseFormRegister } from 'react-hook-form'
 
-export interface InputTextProps {
+export interface InputTextAreaProps {
   id: string
   primaryLabel: string
   secondaryLabel?: string
-  placeholder?: string | undefined
-  type?: HTMLInputTypeAttribute | undefined
+  placeholder?: string
+  type?: 'text' | 'email' | 'password' | 'number'
   className?: string
 }
-export const InputText: FC<InputTextProps> = ({
+export const InputTextArea: FC<InputTextAreaProps> = ({
   id,
   primaryLabel,
   secondaryLabel,
@@ -23,21 +23,16 @@ export const InputText: FC<InputTextProps> = ({
     formState: { errors },
   } = useFormContext() // retrieve all hook methods
 
-  if (errors) {
-    console.log({ errors })
-  }
-
   return (
     <div className={clsx(className ? className : '', 'form-control')}>
       <label className="label">
         <span className="label-text">{primaryLabel}</span>
       </label>
-      <input
+      <textarea
         {...register(id)}
-        type={type}
+        className="textarea-bordered textarea"
         placeholder={placeholder}
-        className="input-bordered input w-full"
-      />
+      ></textarea>
       {secondaryLabel && <label className="label">{secondaryLabel}</label>}
       {errors[id]?.message && (
         <label className="pt-2 text-sm text-error">{errors[id].message}</label>

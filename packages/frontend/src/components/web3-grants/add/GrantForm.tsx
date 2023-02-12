@@ -1,0 +1,163 @@
+'use client'
+
+import { InputCheckbox } from '@components/shared/InputCheckbox'
+import { InputNumber } from '@components/shared/InputNumber'
+import { InputReactSelect } from '@components/shared/InputReactSelect'
+import { InputSelect } from '@components/shared/InputSelect'
+import { InputText } from '@components/shared/InputText'
+import { InputTextArea } from '@components/shared/InputTextArea'
+import { useSupabase } from '@components/supabase-provider'
+import { Database } from '@lib/database.types'
+import { Form } from '@shared/Form'
+import { useRouter } from 'next/navigation'
+import { FC, useState } from 'react'
+import { FieldValues, SubmitHandler } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
+import * as z from 'zod'
+
+const grantSchema = z.object({
+  name: z.string(), //.min(2),
+  description: z.string(), // min(120),
+  funding_minimum: z.number().int().optional(),
+  funding_maximum: z.number().int().optional(),
+  // url_application: z.string().url(),
+  // url_info: z.string().url(),
+  twitter: z
+    .string()
+    .regex(/^https:\/\/twitter\.com\/[a-zA-Z0-9_]+$/)
+    .nullable()
+    .optional(),
+})
+
+type ProfileSchema = z.infer<typeof grantSchema>
+
+interface GrantFormProps {
+  // any or null
+  blockchains: Database['public']['Tables']['blockchains']['Row'][] | null
+  categories: Database['public']['Tables']['categories']['Row'][] | null
+  use_cases: Database['public']['Tables']['use_cases']['Row'][] | null
+  grant_blokchains: Database['public']['Tables']['grant_blockchains']['Row'][] | null
+  grant_categories: Database['public']['Tables']['grant_categories']['Row'][] | null
+  grant_use_cases: Database['public']['Tables']['grant_use_cases']['Row'][] | null
+  title: string
+  description: string
+}
+
+export const GrantForm: FC<GrantFormProps> = ({
+  blockchains,
+  categories,
+  use_cases,
+  grant_blokchains,
+  grant_categories,
+  grant_use_cases,
+  title,
+  description,
+}) => {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const router = useRouter()
+  const { supabase, session } = useSupabase()
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    if (!session) {
+      // console.log('no session')
+      return
+    }
+    // const { user } = session
+    // console.log({ user })
+    // console.log({ ...data, user_id: user?.id, country_id: parseInt(data?.country_id) })
+
+    // const { data: profiles, error } = await supabase.from('profiles').upsert(
+    //   {
+    //     ...data,
+    //     user_id: user?.id,
+    //     country_id: parseInt(data?.country_id),
+    //   },
+    //   {
+    //     onConflict: 'user_id',
+    //   },
+    // )
+
+    // router.refresh()
+
+    // if (error) {
+    //   toast.error('Error saving your data')
+    //   console.log({ error })
+    //   return
+    // }
+
+    toast.success('Your data was successfully saved')
+
+    router.refresh()
+
+    console.log({ data })
+
+    // supabase.from('profiles').update(data).match({ id: session?.user?.id })
+  }
+
+  // return <h1>Hello</h1>
+
+  return (
+    <>
+      <Form title={title} description={description} schema={grantSchema} onSubmit={onSubmit}>
+        <InputText
+          primaryLabel="Name *"
+          placeholder="Aweseom Grant Name"
+          id="name"
+          type="text"
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputTextArea
+          primaryLabel="Description *"
+          id="description"
+          placeholder="Short grant Description not more than two sentences"
+          className="col-span-6 sm:col-span-6"
+        />
+        <InputText
+          primaryLabel="Twitter"
+          placeholder="https://twitter.com/username"
+          id="twitter"
+          type="url"
+          className="col-span-6 sm:col-span-3"
+        />
+        {/*
+        <InputNumber
+          primaryLabel="Funding Minimum"
+          placeholder="100"
+          id="funding_minimum"
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputNumber
+          primaryLabel="Funding Minimum"
+          placeholder="100"
+          id="funding_maximum"
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputText
+          primaryLabel="Link Grant Application *"
+          // placeholder="10000"
+          id="url_application"
+          type="url"
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputText
+          primaryLabel="Link Application Info *"
+          // placeholder="10000"
+          id="url_info"
+          type="url"
+          className="col-span-6 sm:col-span-3"
+        />
+
+        <InputReactSelect
+          primaryLabel="Blockchain"
+          id="blockchain"
+          options={blockchains?.map((blockchain) => ({
+            label: blockchain.name,
+            value: blockchain.id,
+          }))}
+          className="col-span-6 sm:col-span-3"
+        /> */}
+      </Form>
+    </>
+  )
+}
