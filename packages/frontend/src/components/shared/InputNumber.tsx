@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import { FC, HTMLInputTypeAttribute } from 'react'
-import { FieldValues, useFormContext, UseFormRegister } from 'react-hook-form'
+import { FC } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 export interface InputNumberProps {
   id: string

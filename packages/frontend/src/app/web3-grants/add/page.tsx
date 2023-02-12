@@ -29,7 +29,6 @@ const AddGrant = async () => {
 
   return (
     <>
-      <h1>HELLO</h1>
       <GrantForm
         title="Add a Grant"
         description="Add a grant to the Directory"

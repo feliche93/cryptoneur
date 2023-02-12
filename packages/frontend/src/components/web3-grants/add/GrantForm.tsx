@@ -16,17 +16,48 @@ import { toast } from 'react-hot-toast'
 import * as z from 'zod'
 
 const grantSchema = z.object({
-  name: z.string(), //.min(2),
-  description: z.string(), // min(120),
+  name: z.string().trim(), //.min(2),
+  description: z.string().trim(), // min(120),
   funding_minimum: z.number().int().optional(),
   funding_maximum: z.number().int().optional(),
-  // url_application: z.string().url(),
-  // url_info: z.string().url(),
-  twitter: z
-    .string()
-    .regex(/^https:\/\/twitter\.com\/[a-zA-Z0-9_]+$/)
-    .nullable()
-    .optional(),
+  url_application: z.string().url(),
+  url_info: z.string().url(),
+  twitter: z.union([
+    z.literal(''),
+    z
+      .string()
+      .trim()
+      .url()
+      .regex(/^https:\/\/twitter\.com\/[a-zA-Z0-9_]+$/),
+  ]),
+  discord: z.union([
+    z.literal(''),
+    z
+      .string()
+      .trim()
+      .url()
+      .regex(/^https:\/\/discord\.com\/invite\/[a-zA-Z0-9]+$/),
+  ]),
+
+  website: z.union([z.literal(''), z.string().trim().url()]),
+
+  telegram: z.union([
+    z.literal(''),
+    z
+      .string()
+      .trim()
+      .url()
+      .regex(/^https:\/\/t\.me\/[a-zA-Z0-9_]+$/),
+  ]),
+
+  github: z.union([
+    z.literal(''),
+    z
+      .string()
+      .trim()
+      .url()
+      .regex(/^https:\/\/github\.com\/[a-zA-Z0-9_-]+$/),
+  ]),
 })
 
 type ProfileSchema = z.infer<typeof grantSchema>
@@ -113,14 +144,6 @@ export const GrantForm: FC<GrantFormProps> = ({
           placeholder="Short grant Description not more than two sentences"
           className="col-span-6 sm:col-span-6"
         />
-        <InputText
-          primaryLabel="Twitter"
-          placeholder="https://twitter.com/username"
-          id="twitter"
-          type="url"
-          className="col-span-6 sm:col-span-3"
-        />
-        {/*
         <InputNumber
           primaryLabel="Funding Minimum"
           placeholder="100"
@@ -128,7 +151,7 @@ export const GrantForm: FC<GrantFormProps> = ({
           className="col-span-6 sm:col-span-3"
         />
         <InputNumber
-          primaryLabel="Funding Minimum"
+          primaryLabel="Funding Maximum"
           placeholder="100"
           id="funding_maximum"
           className="col-span-6 sm:col-span-3"
@@ -147,8 +170,43 @@ export const GrantForm: FC<GrantFormProps> = ({
           type="url"
           className="col-span-6 sm:col-span-3"
         />
+        <InputText
+          primaryLabel="Twitter"
+          placeholder="https://twitter.com/username"
+          id="twitter"
+          type="url"
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputText
+          primaryLabel="Discord"
+          placeholder="https://discord.com/invite/invitationcode"
+          id="discord"
+          type="url"
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputText
+          primaryLabel="Website"
+          placeholder="https://www.example.com"
+          id="website"
+          type="url"
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputText
+          primaryLabel="Telegram"
+          placeholder="https://t.me/username"
+          id="telegram"
+          type="url"
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputText
+          primaryLabel="Github"
+          placeholder="https://github.com/username"
+          id="github"
+          type="url"
+          className="col-span-6 sm:col-span-3"
+        />
 
-        <InputReactSelect
+        {/* <InputReactSelect
           primaryLabel="Blockchain"
           id="blockchain"
           options={blockchains?.map((blockchain) => ({
