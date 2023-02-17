@@ -34,7 +34,11 @@ export const InputNumber: FC<InputNumberProps> = ({
         placeholder={placeholder}
         className="input-bordered input w-full"
       />
-      {secondaryLabel && <label className="label">{secondaryLabel}</label>}
+      {secondaryLabel && (
+        <label className="label">
+          <span className="label-text-alt">{secondaryLabel}</span>
+        </label>
+      )}
       {errors[id]?.message && (
         <label className="pt-2 text-sm text-error">{errors[id].message}</label>
       )}

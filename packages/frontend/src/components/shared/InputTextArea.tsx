@@ -33,7 +33,11 @@ export const InputTextArea: FC<InputTextAreaProps> = ({
         className="textarea-bordered textarea"
         placeholder={placeholder}
       ></textarea>
-      {secondaryLabel && <label className="label">{secondaryLabel}</label>}
+      {secondaryLabel && (
+        <label className="label">
+          <span className="label-text-alt">{secondaryLabel}</span>
+        </label>
+      )}
       {errors[id]?.message && (
         <label className="pt-2 text-sm text-error">{errors[id].message}</label>
       )}

@@ -1,5 +1,6 @@
 'use client'
 
+import { InputFile } from '@components/shared/InputFile'
 import { InputNumber } from '@components/shared/InputNumber'
 import { InputReactSelect } from '@components/shared/InputReactSelect'
 import { InputText } from '@components/shared/InputText'
@@ -12,11 +13,15 @@ import { FC, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import * as z from 'zod'
+import { AuthAlert } from '../AuthAlert'
 
 const grantSchema = z
   .object({
-    name: z.string().trim(), //.min(2),
-    description: z.string().trim(), // min(120),
+    name: z.string().trim().min(2),
+    image: z.instanceof(FileList).refine((v) => v.length > 0, {
+      message: 'Please upload an image',
+    }),
+    description: z.string().trim().min(120),
     funding_minimum: z.number().optional(),
     funding_minimum_currency: z
       .object({
@@ -125,23 +130,52 @@ export const GrantForm: FC<GrantFormProps> = ({
       return
     }
 
-    const { data: grantData, error: grantError } = await supabase.from('grants').upsert({
-      name: data.name,
-      description: data.description,
-      funding_minimum: data.funding_minimum,
-      funding_minimum_currency: data.funding_minimum_currency?.value,
-      funding_maximum: data.funding_maximum,
-      funding_maximum_currency: data.funding_maximum_currency?.value,
-      url_application: data.url_application,
-      url_info: data.url_info,
-      twitter: data.twitter,
-      discord: data.discord,
-      website: data.website,
-      telegram: data.telegram,
-      github: data.github,
-      active: true,
-      content: '',
-    })
+    console.log({ data })
+
+    if (!!data.image && data.image.length === 0)
+      return toast.error('Could not find image to upload.')
+
+    const file = data.image[0]
+    const fileName = file.name
+    const fileOptions = {
+      // upsert: true,
+    }
+
+    const { data: logoData, error: logoError } = await supabase.storage
+      .from('grant-logos')
+      .upload(fileName, file, fileOptions)
+
+    if (logoError) {
+      console.log('Error uploading logo', logoError)
+      toast.error(`Error uploading image. ${logoError?.message}.`)
+      return
+    }
+
+    console.log({ logoData })
+    const {
+      data: { publicUrl },
+    } = await supabase.storage.from('grant-logos').getPublicUrl(fileName)
+
+    const logo = publicUrl
+
+    // const { data: grantData, error: grantError } = await supabase.from('grants').upsert({
+    //   name: data.name,
+    //   description: data.description,
+    //   funding_minimum: data.funding_minimum,
+    //   funding_minimum_currency: data.funding_minimum_currency?.value,
+    //   funding_maximum: data.funding_maximum,
+    //   funding_maximum_currency: data.funding_maximum_currency?.value,
+    //   url_application: data.url_application,
+    //   url_info: data.url_info,
+    //   twitter: data.twitter,
+    //   discord: data.discord,
+    //   website: data.website,
+    //   telegram: data.telegram,
+    //   github: data.github,
+    //   active: true,
+    //   content: '',
+    //   logo,
+    // })
 
     // const { user } = session
     // console.log({ user })
@@ -160,11 +194,11 @@ export const GrantForm: FC<GrantFormProps> = ({
 
     // router.refresh()
 
-    if (grantError) {
-      toast.error('Error saving your data')
-      console.log({ grantError })
-      return
-    }
+    // if (grantError) {
+    //   toast.error('Error saving your data')
+    //   console.log({ grantError })
+    //   return
+    // }
 
     toast.success('Your data was successfully saved')
 
@@ -186,18 +220,22 @@ export const GrantForm: FC<GrantFormProps> = ({
           id="name"
           type="text"
           className="col-span-6 sm:col-span-3"
+          secondaryLabel="The official name of the grant."
         />
+        <InputFile primaryLabel="Image *" id="image" className="col-span-6 sm:col-span-3" />
         <InputTextArea
           primaryLabel="Description *"
           id="description"
           placeholder="Short grant Description not more than two sentences"
           className="col-span-6 sm:col-span-6"
+          secondaryLabel='A short description of the grant. This will be displayed on the grant card. If you want to add more information, you can do so in the "Grant Details" section.'
         />
         <InputNumber
           primaryLabel="Funding Minimum"
           placeholder="100"
           id="funding_minimum"
           className="col-span-6 sm:col-span-3"
+          secondaryLabel="The minimum amount of funding the grant can receive. Leave blank if there is no minimum."
         />
         <InputReactSelect
           primaryLabel="Funding Minimum Currency"
@@ -206,13 +244,14 @@ export const GrantForm: FC<GrantFormProps> = ({
             label: fiat.symbol,
             value: fiat.id,
           }))}
-          className="col-span-1 sm:col-span-3"
+          className="col-span-6 sm:col-span-3"
         />
         <InputNumber
           primaryLabel="Funding Maximum"
           placeholder="100"
           id="funding_maximum"
           className="col-span-6 sm:col-span-3"
+          secondaryLabel="The maximum amount of funding the grant can receive. Leave blank if there is no maximum."
         />
         <InputReactSelect
           primaryLabel="Funding Maximum Currency"
@@ -229,6 +268,7 @@ export const GrantForm: FC<GrantFormProps> = ({
           id="url_application"
           type="url"
           className="col-span-6 sm:col-span-3"
+          secondaryLabel="The link to the grant application. This can be a link to a Google Form, Typeform, or any other link that allows users to apply for the grant."
         />
         <InputText
           primaryLabel="Link Application Info *"
@@ -236,6 +276,7 @@ export const GrantForm: FC<GrantFormProps> = ({
           id="url_info"
           type="url"
           className="col-span-6 sm:col-span-3"
+          secondaryLabel="The link to the grant application info. The link should point to dedicated info about the grant."
         />
         <InputReactSelect
           primaryLabel="Blockchains *"
@@ -246,6 +287,7 @@ export const GrantForm: FC<GrantFormProps> = ({
             value: blockchain.id,
           }))}
           className="col-span-6 sm:col-span-3"
+          secondaryLabel="The blockchains the grant is available on. If the grant is available on multiple blockchains, select all of them."
         />
         <InputReactSelect
           primaryLabel="Grant Use Cases *"
@@ -256,6 +298,7 @@ export const GrantForm: FC<GrantFormProps> = ({
             value: use_case.id,
           }))}
           className="col-span-6 sm:col-span-3"
+          secondaryLabel="The use cases the grant is available for. If the grant is available for multiple use cases, select all of them."
         />
         <InputReactSelect
           primaryLabel="Grant Categories *"
@@ -266,6 +309,7 @@ export const GrantForm: FC<GrantFormProps> = ({
             value: category.id,
           }))}
           className="col-span-6 sm:col-span-3"
+          secondaryLabel="The categories the grant is available for. If the grant is available for multiple categories, select all of them."
         />
         <InputText
           primaryLabel="Twitter"

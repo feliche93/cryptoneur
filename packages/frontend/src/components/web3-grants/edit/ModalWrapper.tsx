@@ -3,13 +3,14 @@
 import { FC, useState } from 'react'
 import { Modal } from './Modal'
 
+
+function
+
 export const ModalWrapper: FC = () => {
   const [open, setOpen] = useState(true)
 
   return (
     <Modal
-      open={open}
-      setOpen={setOpen}
       primaryButtonLabel="Log in"
       primaryButtonLink="/sign-in"
       secondaryButtonLabel="Cancel"

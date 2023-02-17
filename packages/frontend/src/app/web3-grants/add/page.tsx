@@ -1,4 +1,7 @@
 import { GrantForm } from '@components/web3-grants/add/GrantForm'
+import { AuthAlert } from '@components/web3-grants/AuthAlert'
+import { Modal } from '@components/web3-grants/edit/Modal'
+import { ModalWrapper } from '@components/web3-grants/edit/ModalWrapper'
 import { createServerClient } from '@utils/supabase-server'
 
 const AddGrant = async () => {
@@ -28,6 +31,12 @@ const AddGrant = async () => {
 
   return (
     <>
+      <Modal
+        title="Log in to add a grant"
+        description="Please create an account or log into your existing account to create a grant."
+        primaryButtonLabel="Login"
+        primaryButtonLink="/sign-in"
+      />
       <GrantForm
         title="Add a Grant"
         description="Add a grant to the Directory"

@@ -11,21 +11,15 @@ import { useSupabase } from '@components/supabase-provider'
 export interface ModalProps {
   primaryButtonLabel: string
   primaryButtonLink: string
-  secondaryButtonLabel: string
   title: string
   description: string
-  open: boolean
-  setOpen: (bool: boolean) => void
 }
 
 export const Modal: FC<ModalProps> = ({
   title,
   description,
-  secondaryButtonLabel,
   primaryButtonLabel,
   primaryButtonLink,
-  open,
-  setOpen,
 }) => {
   const cancelButtonRef = useRef(false)
 
@@ -33,7 +27,7 @@ export const Modal: FC<ModalProps> = ({
 
   return (
     <Transition.Root show={!session} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+      <Dialog as="div" className="relative z-10" onClose={() => {}}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

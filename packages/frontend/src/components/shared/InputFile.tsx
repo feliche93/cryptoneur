@@ -4,24 +4,13 @@ import clsx from 'clsx'
 import { FC, HTMLInputTypeAttribute } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-export interface InputTextProps {
+export interface InputFileProps {
   id: string
   primaryLabel: string
   secondaryLabel?: string
-  placeholder?: string | undefined
-  type?: HTMLInputTypeAttribute | undefined
   className?: string
-  helpText?: string
 }
-export const InputText: FC<InputTextProps> = ({
-  id,
-  primaryLabel,
-  secondaryLabel,
-  placeholder,
-  type,
-  className,
-  helpText,
-}) => {
+export const InputFile: FC<InputFileProps> = ({ id, primaryLabel, secondaryLabel, className }) => {
   const {
     register,
     formState: { errors },
@@ -38,12 +27,7 @@ export const InputText: FC<InputTextProps> = ({
           <span className="label-text">{primaryLabel}</span>
         </label>
       </div>
-      <input
-        {...register(id)}
-        type={type}
-        placeholder={placeholder}
-        className="input-bordered input w-full"
-      />
+      <input {...register(id)} type="file" className="file-input-bordered file-input" />
       {secondaryLabel && (
         <label className="label">
           <span className="label-text-alt">{secondaryLabel}</span>
