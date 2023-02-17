@@ -33,6 +33,9 @@ export const Form: FC<FormProps> = ({
     }
   }, [prefilledValues])
 
+  console.log({ ...methods.watch() })
+  console.log({ ...methods.formState.errors })
+
   return (
     <>
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">

@@ -23,9 +23,9 @@ export const InputText: FC<InputTextProps> = ({
     formState: { errors },
   } = useFormContext() // retrieve all hook methods
 
-  if (errors) {
-    console.log({ errors })
-  }
+  // if (errors) {
+  //   console.log({ errors })
+  // }
 
   return (
     <div className={clsx(className ? className : '', 'form-control')}>

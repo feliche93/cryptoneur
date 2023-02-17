@@ -11,7 +11,7 @@ export const Testimonials: FC<TestimonialsProps> = async () => {
   const { data, error } = await supabase
     .from('grants')
     .select('name,logo,id,slug')
-    .in('id', [1, 2, 3, 4, 5, 6])
+    .in('id', [1, 2, 6, 20, 29, 7])
   // console.log({ data, error })
 
   return (
@@ -33,7 +33,7 @@ export const Testimonials: FC<TestimonialsProps> = async () => {
                     src={grant.logo}
                     width={200}
                     height={200}
-                    alt={grant?.grant}
+                    alt={grant?.name}
                   />
                 </Link>
               )}

@@ -10,55 +10,89 @@ import { useSupabase } from '@components/supabase-provider'
 import { Database } from '@lib/database.types'
 import { Form } from '@shared/Form'
 import { useRouter } from 'next/navigation'
+import path from 'path'
 import { FC, useState } from 'react'
 import { FieldValues, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import * as z from 'zod'
 
-const grantSchema = z.object({
-  name: z.string().trim(), //.min(2),
-  description: z.string().trim(), // min(120),
-  funding_minimum: z.number().int().optional(),
-  funding_maximum: z.number().int().optional(),
-  url_application: z.string().url(),
-  url_info: z.string().url(),
-  twitter: z.union([
-    z.literal(''),
-    z
-      .string()
-      .trim()
-      .url()
-      .regex(/^https:\/\/twitter\.com\/[a-zA-Z0-9_]+$/),
-  ]),
-  discord: z.union([
-    z.literal(''),
-    z
-      .string()
-      .trim()
-      .url()
-      .regex(/^https:\/\/discord\.com\/invite\/[a-zA-Z0-9]+$/),
-  ]),
+const grantSchema = z
+  .object({
+    name: z.string().trim(), //.min(2),
+    description: z.string().trim(), // min(120),
+    funding_minimum: z.number().optional(),
+    funding_minimum_currency: z
+      .object({
+        label: z.string(),
+        value: z.number(),
+      })
+      .optional()
+      .nullable()
+      .nullish(),
+    // funding_maximum: z.number().optional(),
+    // funding_maximum_currency: z
+    //   .object({
+    //     label: z.string(),
+    //     value: z.string(),
+    //   })
+    //   .optional(),
+    url_application: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
+    url_info: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
+    twitter: z.union([
+      z.literal(''),
+      z
+        .string()
+        .trim()
+        .url()
+        .regex(/^https:\/\/twitter\.com\/[a-zA-Z0-9_]+$/),
+    ]),
+    discord: z.union([
+      z.literal(''),
+      z
+        .string()
+        .trim()
+        .url()
+        .regex(/^https:\/\/discord\.com\/invite\/[a-zA-Z0-9]+$/),
+    ]),
+    website: z.union([z.literal(''), z.string().trim().url()]),
+    telegram: z.union([
+      z.literal(''),
+      z
+        .string()
+        .trim()
+        .url()
+        .regex(/^https:\/\/t\.me\/[a-zA-Z0-9_]+$/),
+    ]),
+    github: z.union([
+      z.literal(''),
+      z
+        .string()
+        .trim()
+        .url()
+        .regex(/^https:\/\/github\.com\/[a-zA-Z0-9_-]+$/),
+    ]),
+    // grant_blockchains,
+  })
+  .refine(
+    (input) => input.funding_minimum_currency !== undefined || input.funding_minimum === undefined,
+    {
+      message: 'A currency needs to be selected if funding minimum is set.',
+      path: ['funding_minimum_currency'],
+    },
+  )
 
-  website: z.union([z.literal(''), z.string().trim().url()]),
-
-  telegram: z.union([
-    z.literal(''),
-    z
-      .string()
-      .trim()
-      .url()
-      .regex(/^https:\/\/t\.me\/[a-zA-Z0-9_]+$/),
-  ]),
-
-  github: z.union([
-    z.literal(''),
-    z
-      .string()
-      .trim()
-      .url()
-      .regex(/^https:\/\/github\.com\/[a-zA-Z0-9_-]+$/),
-  ]),
-})
+// .superRefine(({ funding_minimum, funding_minimum_currency }, ctx) => {
+//   console.log(funding_minimum !== undefined)
+//   console.log(funding_minimum_currency === undefined)
+//   if (funding_minimum !== undefined && funding_minimum_currency !== undefined && isNaN(funding_minimum_currency)) {
+//     ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//       message: 'A currency needs to be selected if funding minimum is set.',
+//       path: ['funding_minimum_currency'],
+//     })
+//   }
+//   return true
+// })
 
 type ProfileSchema = z.infer<typeof grantSchema>
 
@@ -70,6 +104,7 @@ interface GrantFormProps {
   grant_blokchains: Database['public']['Tables']['grant_blockchains']['Row'][] | null
   grant_categories: Database['public']['Tables']['grant_categories']['Row'][] | null
   grant_use_cases: Database['public']['Tables']['grant_use_cases']['Row'][] | null
+  fiats: Database['public']['Tables']['fiats']['Row'][] | null
   title: string
   description: string
 }
@@ -83,6 +118,7 @@ export const GrantForm: FC<GrantFormProps> = ({
   grant_use_cases,
   title,
   description,
+  fiats,
 }) => {
   const [isLoading, setIsLoading] = useState(false)
 
@@ -150,12 +186,30 @@ export const GrantForm: FC<GrantFormProps> = ({
           id="funding_minimum"
           className="col-span-6 sm:col-span-3"
         />
-        <InputNumber
+        <InputReactSelect
+          primaryLabel="Funding Minimum Currency"
+          id="funding_minimum_currency"
+          options={fiats?.map((fiat) => ({
+            label: fiat.symbol,
+            value: fiat.id,
+          }))}
+          className="col-span-1 sm:col-span-3"
+        />
+        {/* <InputNumber
           primaryLabel="Funding Maximum"
           placeholder="100"
           id="funding_maximum"
           className="col-span-6 sm:col-span-3"
         />
+        <InputReactSelect
+          primaryLabel="Funding Maximum Currency"
+          id="funding_maximum_currency"
+          options={fiats?.map((fiat) => ({
+            label: fiat.symbol,
+            value: fiat.id,
+          }))}
+          className="col-span-1 sm:col-span-3"
+        /> */}
         <InputText
           primaryLabel="Link Grant Application *"
           // placeholder="10000"
@@ -205,10 +259,9 @@ export const GrantForm: FC<GrantFormProps> = ({
           type="url"
           className="col-span-6 sm:col-span-3"
         />
-
         {/* <InputReactSelect
           primaryLabel="Blockchain"
-          id="blockchain"
+          id="grant_blockchains"
           options={blockchains?.map((blockchain) => ({
             label: blockchain.name,
             value: blockchain.id,

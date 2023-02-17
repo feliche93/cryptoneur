@@ -25,6 +25,8 @@ const AddGrant = async () => {
     .from('grant_use_cases')
     .select('*')
 
+  const { data: fiats, error: fiatsError } = await supabase.from('fiats').select('*')
+
   // console.log({ blockchains, blockchainsError })
 
   return (
@@ -38,6 +40,7 @@ const AddGrant = async () => {
         grant_blokchains={grant_blokchains}
         grant_categories={grant_categories}
         grant_use_cases={grant_use_cases}
+        fiats={fiats}
       />
       {/* <GrantFormTally /> */}
     </>

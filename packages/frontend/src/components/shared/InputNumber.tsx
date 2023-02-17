@@ -18,6 +18,7 @@ export const InputNumber: FC<InputNumberProps> = ({
 }) => {
   const {
     register,
+    watch,
     formState: { errors },
   } = useFormContext() // retrieve all hook methods
 
@@ -27,11 +28,9 @@ export const InputNumber: FC<InputNumberProps> = ({
         <span className="label-text">{primaryLabel}</span>
       </label>
       <input
-        {...(register(id),
-        {
-          valueAsNumber: true,
+        {...register(id, {
+          setValueAs: (v) => (v === '' ? undefined : parseInt(v, 10)),
         })}
-        type="number"
         placeholder={placeholder}
         className="input-bordered input w-full"
       />

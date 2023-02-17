@@ -10,7 +10,7 @@ export const SecondCta: FC = async () => {
   const { data, error } = await supabase
     .from('grants')
     .select('id,name,logo')
-    .in('id', [11, 2, 17, 15, 19, 14, 1, 6, 20])
+    .in('id', [7, 2, 17, 15, 19, 14, 1, 6, 20])
 
   // console.log({ ...data })
 
@@ -69,7 +69,7 @@ export const SecondCta: FC = async () => {
         </p>
       </div>
       <Link
-        className="btn-primary btn-md btn w-10/12 sm:w-fit sm:btn-lg"
+        className="btn-primary btn-md btn w-10/12 sm:btn-lg sm:w-fit"
         href={'/web3-grants/search'}
       >
         Explore Grants

@@ -12,8 +12,8 @@ export interface InputReactSelectProps {
   isMulti?: boolean
   options:
     | {
-        value: string
-        label: string
+        value: number | undefined
+        label: string | null | undefined
       }[]
     | undefined
 }
@@ -28,11 +28,19 @@ export const InputReactSelect: FC<InputReactSelectProps> = ({
   const {
     register,
     control,
+    watch,
     formState: { errors },
   } = useFormContext() // retrieve all hook methods
 
+  // console.log({ options, errors, watch: watch() })
+  const watchValues = watch()
+  console.log({ ...watchValues })
+
   if (!options) return null
-  const default_value = options[0] // you can replace with your default value
+  const default_value = {
+    label: 'Select',
+    value: undefined,
+  } // you can replace with your default value
 
   return (
     <div className={clsx(className ? className : '', 'form-control')}>
@@ -41,12 +49,15 @@ export const InputReactSelect: FC<InputReactSelectProps> = ({
       </label>
       <Controller
         control={control}
-        // defaultValue={options.map((c) => c.value)}
         name={id}
-        render={({ field }) => (
+        render={({ field: { onChange, onBlur, value, name, ref } }) => (
           <Select
             // defaultValue={options[0]}
-            {...field}
+            onChange={onChange}
+            onBlur={onBlur}
+            value={value}
+            name={name}
+            ref={ref}
             isMulti={isMulti}
             isClearable
             isSearchable={false}
