@@ -32,9 +32,9 @@ export const InputReactSelect: FC<InputReactSelectProps> = ({
     formState: { errors },
   } = useFormContext() // retrieve all hook methods
 
-  console.log({ ...errors })
+  // console.log({ ...errors })
   const watchValues = watch()
-  console.log({ ...watchValues })
+  // console.log({ ...watchValues })
 
   if (!options) return null
   const default_value = {

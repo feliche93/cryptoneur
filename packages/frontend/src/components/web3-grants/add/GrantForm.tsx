@@ -122,11 +122,30 @@ export const GrantForm: FC<GrantFormProps> = ({
   const router = useRouter()
   const { supabase, session } = useSupabase()
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmit: SubmitHandler<ProfileSchema> = async (data) => {
     if (!session) {
       // console.log('no session')
       return
     }
+
+    const { data: grantData, error: grantError } = await supabase.from('grants').upsert({
+      name: data.name,
+      description: data.description,
+      funding_minimum: data.funding_minimum,
+      funding_minimum_currency: data.funding_minimum_currency?.value,
+      funding_maximum: data.funding_maximum,
+      funding_maximum_currency: data.funding_maximum_currency?.value,
+      url_application: data.url_application,
+      url_info: data.url_info,
+      twitter: data.twitter,
+      discord: data.discord,
+      website: data.website,
+      telegram: data.telegram,
+      github: data.github,
+      active: true,
+      content: '',
+    })
+
     // const { user } = session
     // console.log({ user })
     // console.log({ ...data, user_id: user?.id, country_id: parseInt(data?.country_id) })
@@ -144,11 +163,11 @@ export const GrantForm: FC<GrantFormProps> = ({
 
     // router.refresh()
 
-    // if (error) {
-    //   toast.error('Error saving your data')
-    //   console.log({ error })
-    //   return
-    // }
+    if (grantError) {
+      toast.error('Error saving your data')
+      console.log({ grantError })
+      return
+    }
 
     toast.success('Your data was successfully saved')
 
