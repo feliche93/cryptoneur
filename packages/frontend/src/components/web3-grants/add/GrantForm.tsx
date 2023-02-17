@@ -14,6 +14,7 @@ import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import * as z from 'zod'
 import { AuthAlert } from '../AuthAlert'
+import slugify from 'slugify'
 
 const grantSchema = z
   .object({
@@ -158,47 +159,93 @@ export const GrantForm: FC<GrantFormProps> = ({
 
     const logo = publicUrl
 
-    // const { data: grantData, error: grantError } = await supabase.from('grants').upsert({
-    //   name: data.name,
-    //   description: data.description,
-    //   funding_minimum: data.funding_minimum,
-    //   funding_minimum_currency: data.funding_minimum_currency?.value,
-    //   funding_maximum: data.funding_maximum,
-    //   funding_maximum_currency: data.funding_maximum_currency?.value,
-    //   url_application: data.url_application,
-    //   url_info: data.url_info,
-    //   twitter: data.twitter,
-    //   discord: data.discord,
-    //   website: data.website,
-    //   telegram: data.telegram,
-    //   github: data.github,
-    //   active: true,
-    //   content: '',
-    //   logo,
-    // })
+    const { data: grantData, error: grantError } = await supabase
+      .from('grants')
+      .upsert({
+        name: data.name,
+        slug: slugify(data.name),
+        description: data.description,
+        funding_minimum: data.funding_minimum,
+        funding_minimum_currency: data.funding_minimum_currency?.value,
+        funding_maximum: data.funding_maximum,
+        funding_maximum_currency: data.funding_maximum_currency?.value,
+        url_application: data.url_application,
+        url_info: data.url_info,
+        twitter: data.twitter,
+        discord: data.discord,
+        website: data.website,
+        telegram: data.telegram,
+        github: data.github,
+        active: true,
+        content: '',
+        logo,
+      })
+      .select('*')
+      .maybeSingle()
 
-    // const { user } = session
-    // console.log({ user })
-    // console.log({ ...data, user_id: user?.id, country_id: parseInt(data?.country_id) })
+    const grant_id = grantData?.id
 
-    // const { data: profiles, error } = await supabase.from('profiles').upsert(
-    //   {
-    //     ...data,
-    //     user_id: user?.id,
-    //     country_id: parseInt(data?.country_id),
-    //   },
-    //   {
-    //     onConflict: 'user_id',
-    //   },
-    // )
+    if (grantError || !grant_id) {
+      console.log('Error creating grant', grantError)
+      toast.error(`Error creating grant. ${grantError?.message}.`)
+      return
+    }
 
-    // router.refresh()
+    const grant_blockchains = data.grant_blockchains.map((item) => ({
+      grant_id,
+      blockchain_id: item.value,
+    }))
 
-    // if (grantError) {
-    //   toast.error('Error saving your data')
-    //   console.log({ grantError })
-    //   return
-    // }
+    const grant_categories = data.grant_categories.map((item) => ({
+      grant_id,
+      category_id: item.value,
+    }))
+
+    const grant_use_cases = data.grant_use_cases.map((item) => ({
+      grant_id,
+      use_case_id: item.value,
+    }))
+
+    const { data: grantBlockchainsDataDelete, error: grantBlockchainsErrorDelete } = await supabase
+      .from('grant_blockchains')
+      .delete()
+      .match({ grant_id })
+    const { data: grantCategoriesDataDelete, error: grantCategoriesErrorDelete } = await supabase
+      .from('grant_categories')
+      .delete()
+      .match({ grant_id })
+    const { data: grantUseCasesDataDelete, error: grantUseCasesErrorDelete } = await supabase
+      .from('grant_use_cases')
+      .delete()
+      .match({ grant_id })
+
+    const { data: grantBlockchainsDataInsert, error: grantBlockchainsErrorInsert } = await supabase
+      .from('grant_blockchains')
+      .insert(grant_blockchains)
+      .select('*')
+    const { data: grantCategoriesDataInsert, error: grantCategoriesErrorInsert } = await supabase
+      .from('grant_categories')
+      .insert(grant_categories)
+      .select('*')
+    const { data: grantUseCasesDataInsert, error: grantUseCasesErrorInsert } = await supabase
+      .from('grant_use_cases')
+      .insert(grant_use_cases)
+      .select('*')
+
+    if (
+      grantBlockchainsErrorDelete ||
+      grantCategoriesErrorDelete ||
+      grantUseCasesErrorDelete ||
+      grantBlockchainsErrorInsert ||
+      grantCategoriesErrorInsert ||
+      grantUseCasesErrorInsert
+    ) {
+      console.log('Error creating grant relationships', grantError)
+      toast.error(`Error creating grant relationships.`)
+      return
+    }
+
+    console.log({ grantBlockchainsDataInsert, grantCategoriesDataInsert, grantUseCasesDataInsert })
 
     toast.success('Your data was successfully saved')
 
