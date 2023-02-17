@@ -32,7 +32,7 @@ export const InputReactSelect: FC<InputReactSelectProps> = ({
     formState: { errors },
   } = useFormContext() // retrieve all hook methods
 
-  // console.log({ options, errors, watch: watch() })
+  console.log({ ...errors })
   const watchValues = watch()
   console.log({ ...watchValues })
 
@@ -60,7 +60,7 @@ export const InputReactSelect: FC<InputReactSelectProps> = ({
             ref={ref}
             isMulti={isMulti}
             isClearable
-            isSearchable={false}
+            isSearchable={true}
             className="react-dropdown"
             classNamePrefix="dropdown"
             options={options}

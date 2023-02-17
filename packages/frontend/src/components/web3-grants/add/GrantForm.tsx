@@ -29,15 +29,18 @@ const grantSchema = z
       .optional()
       .nullable()
       .nullish(),
-    // funding_maximum: z.number().optional(),
-    // funding_maximum_currency: z
-    //   .object({
-    //     label: z.string(),
-    //     value: z.string(),
-    //   })
-    //   .optional(),
+    funding_maximum: z.number().optional(),
+    funding_maximum_currency: z
+      .object({
+        label: z.string(),
+        value: z.number(),
+      })
+      .optional(),
     url_application: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
     url_info: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
+    grant_blockchains: z.array(z.object({ label: z.string(), value: z.number() })).min(1),
+    grant_use_cases: z.array(z.object({ label: z.string(), value: z.number() })).min(1),
+    grant_categories: z.array(z.object({ label: z.string(), value: z.number() })).min(1),
     twitter: z.union([
       z.literal(''),
       z
@@ -74,27 +77,19 @@ const grantSchema = z
     // grant_blockchains,
   })
   .refine(
-    (input) =>
-      (input.funding_minimum_currency !== undefined && input.funding_minimum_currency !== null) ||
-      input.funding_minimum === undefined,
+    (input) => input.funding_minimum_currency !== undefined || input.funding_minimum === undefined,
     {
       message: 'A currency needs to be selected if funding minimum is set.',
       path: ['funding_minimum_currency'],
     },
   )
-
-// .superRefine(({ funding_minimum, funding_minimum_currency }, ctx) => {
-//   console.log(funding_minimum !== undefined)
-//   console.log(funding_minimum_currency === undefined)
-//   if (funding_minimum !== undefined && funding_minimum_currency !== undefined && isNaN(funding_minimum_currency)) {
-//     ctx.addIssue({
-//       code: z.ZodIssueCode.custom,
-//       message: 'A currency needs to be selected if funding minimum is set.',
-//       path: ['funding_minimum_currency'],
-//     })
-//   }
-//   return true
-// })
+  .refine(
+    (input) => input.funding_maximum_currency !== undefined || input.funding_maximum === undefined,
+    {
+      message: 'A currency needs to be selected if funding maximum is set.',
+      path: ['funding_maximum_currency'],
+    },
+  )
 
 type ProfileSchema = z.infer<typeof grantSchema>
 
@@ -197,7 +192,7 @@ export const GrantForm: FC<GrantFormProps> = ({
           }))}
           className="col-span-1 sm:col-span-3"
         />
-        {/* <InputNumber
+        <InputNumber
           primaryLabel="Funding Maximum"
           placeholder="100"
           id="funding_maximum"
@@ -210,8 +205,8 @@ export const GrantForm: FC<GrantFormProps> = ({
             label: fiat.symbol,
             value: fiat.id,
           }))}
-          className="col-span-1 sm:col-span-3"
-        /> */}
+          className="col-span-6 sm:col-span-3"
+        />
         <InputText
           primaryLabel="Link Grant Application *"
           // placeholder="10000"
@@ -224,6 +219,36 @@ export const GrantForm: FC<GrantFormProps> = ({
           // placeholder="10000"
           id="url_info"
           type="url"
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputReactSelect
+          primaryLabel="Blockchains *"
+          isMulti={true}
+          id="grant_blockchains"
+          options={blockchains?.map((blockchain) => ({
+            label: blockchain.name,
+            value: blockchain.id,
+          }))}
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputReactSelect
+          primaryLabel="Grant Use Cases *"
+          isMulti={true}
+          id="grant_use_cases"
+          options={use_cases?.map((use_case) => ({
+            label: use_case.name,
+            value: use_case.id,
+          }))}
+          className="col-span-6 sm:col-span-3"
+        />
+        <InputReactSelect
+          primaryLabel="Grant Categories *"
+          isMulti={true}
+          id="grant_categories"
+          options={categories?.map((category) => ({
+            label: category.name,
+            value: category.id,
+          }))}
           className="col-span-6 sm:col-span-3"
         />
         <InputText
