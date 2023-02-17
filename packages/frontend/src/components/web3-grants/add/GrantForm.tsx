@@ -74,7 +74,9 @@ const grantSchema = z
     // grant_blockchains,
   })
   .refine(
-    (input) => input.funding_minimum_currency !== undefined || input.funding_minimum === undefined,
+    (input) =>
+      (input.funding_minimum_currency !== undefined && input.funding_minimum_currency !== null) ||
+      input.funding_minimum === undefined,
     {
       message: 'A currency needs to be selected if funding minimum is set.',
       path: ['funding_minimum_currency'],
