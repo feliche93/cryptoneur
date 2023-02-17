@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { DevTool } from '@hookform/devtools'
 
 export interface FormProps extends PropsWithChildren {
   onSubmit: (data: any) => void

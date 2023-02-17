@@ -1,8 +1,7 @@
-import { FC } from 'react'
-import React from 'react'
-import Select from 'react-select'
 import clsx from 'clsx'
+import { FC } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
+import Select from 'react-select'
 
 export interface InputReactSelectProps {
   id: string

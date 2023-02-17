@@ -1,4 +1,3 @@
-import { strapi } from '@shared/strapi'
 import { createServerClient } from '@utils/supabase-server'
 import Image from 'next/image'
 import Link from 'next/link'

@@ -1,8 +1,5 @@
 import { GrantForm } from '@components/web3-grants/add/GrantForm'
 import { createServerClient } from '@utils/supabase-server'
-import { NextPage } from 'next'
-import { headers } from 'next/headers'
-import Script from 'next/script'
 
 const AddGrant = async () => {
   const supabase = createServerClient()
