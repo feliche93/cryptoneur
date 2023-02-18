@@ -15,7 +15,7 @@ import { toast } from 'react-hot-toast'
 import slugify from 'slugify'
 import * as z from 'zod'
 
-const IntegerPositiveOptional = z.number().int().positive().nullable()
+const IntegerPositiveOptional = z.number().int().positive().nullish()
 const Option = z.object({
   label: z.string(),
   value: z.number(),
@@ -30,12 +30,12 @@ const grantSchema = z
     name: z.string().trim().min(2),
     logo: z
       .custom<FileList>()
-      .refine((input) => input.length === 1, {
-        message: 'Please select a file.',
-      })
-      .refine((input) => input[0].type.startsWith('image/'), {
-        message: 'Please select an image.',
-      })
+      // .refine((input) => typeof Array && input.length === 1, {
+      //   message: 'Please select a file.',
+      // })
+      // .refine((input) => typeof Array && input[0].type.startsWith('image/'), {
+      //   message: 'Please select an image.',
+      // })
       .or(z.string().url()),
     description: z.string().trim().min(100),
     funding_minimum: IntegerPositiveOptional,
@@ -252,9 +252,9 @@ export const GrantForm: FC<GrantFormProps> = ({
           secondaryLabel="The official name of the grant."
         />
         <InputFile
-          primaryLabel="Image *"
+          primaryLabel="Image"
           accept="image/*"
-          id="image"
+          id="logo"
           className="col-span-6 sm:col-span-3"
         />
         <InputTextArea

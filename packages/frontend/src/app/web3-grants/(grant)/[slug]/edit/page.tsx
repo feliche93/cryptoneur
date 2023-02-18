@@ -13,6 +13,8 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
 
   const { data: use_cases, error: useCasesError } = await supabase.from('use_cases').select('*')
 
+  const { data: fiats, error: fiatsError } = await supabase.from('fiats').select('*')
+
   let { data: grant, error: grantError } = await supabase
     .from('grants')
     .select('*')
@@ -27,7 +29,9 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
     blockchainsError ||
     !blockchains ||
     !categories ||
-    !use_cases
+    !use_cases ||
+    fiatsError ||
+    !fiats
   ) {
     notFound()
   }
@@ -92,6 +96,18 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
     }
   })
 
+  const funding_minimum_option = {
+    label: fiats.find((fiat) => fiat.id === grant?.funding_minimum_currency)?.name,
+    value: grant?.funding_minimum_currency,
+  }
+
+  const funding_maximum_option = {
+    label: fiats.find((fiat) => fiat.id === grant?.funding_maximum_currency)?.name,
+    value: grant?.funding_maximum_currency,
+  }
+
+  console.log({ funding_minimum_option, funding_maximum_option })
+
   let {
     funding_maximum_currency,
     funding_minimum_currency,
@@ -106,14 +122,14 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
 
   const prefetchedGrant = {
     ...existingGrantData,
+    funding_minimum_currency: funding_maximum_currency && funding_minimum_option,
+    funding_maximum_currency: funding_maximum_currency && funding_maximum_option,
     grant_blockchains: grant_blokchain_options,
     grant_categories: grant_category_options,
     grant_use_cases: grant_use_case_options,
   } as GrantSchema
 
   console.log({ grant })
-
-  const { data: fiats, error: fiatsError } = await supabase.from('fiats').select('*')
 
   // console.log({ blockchains, blockchainsError })
 

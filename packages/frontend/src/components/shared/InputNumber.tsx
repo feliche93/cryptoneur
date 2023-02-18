@@ -29,7 +29,7 @@ export const InputNumber: FC<InputNumberProps> = ({
       </label>
       <input
         {...register(id, {
-          setValueAs: (v) => (v === '' ? undefined : parseInt(v, 10)),
+          valueAsNumber: true,
         })}
         placeholder={placeholder}
         className="input-bordered input w-full"
