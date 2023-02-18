@@ -1,7 +1,7 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@components/ui/Tooltip'
 import { QuestionMarkCircleIcon, QueueListIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { FC, HTMLInputTypeAttribute } from 'react'
+import { FC, HTMLInputTypeAttribute, InputHTMLAttributes } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 export interface InputFileProps {
@@ -9,8 +9,15 @@ export interface InputFileProps {
   primaryLabel: string
   secondaryLabel?: string
   className?: string
+  accept?: 'image/*' | 'video/*' | 'audio/*' | 'application/pdf'
 }
-export const InputFile: FC<InputFileProps> = ({ id, primaryLabel, secondaryLabel, className }) => {
+export const InputFile: FC<InputFileProps> = ({
+  id,
+  primaryLabel,
+  secondaryLabel,
+  className,
+  accept,
+}) => {
   const {
     register,
     formState: { errors },
@@ -27,7 +34,12 @@ export const InputFile: FC<InputFileProps> = ({ id, primaryLabel, secondaryLabel
           <span className="label-text">{primaryLabel}</span>
         </label>
       </div>
-      <input {...register(id)} type="file" className="file-input-bordered file-input" />
+      <input
+        {...register(id)}
+        type="file"
+        accept={accept}
+        className="file-input-bordered file-input"
+      />
       {secondaryLabel && (
         <label className="label">
           <span className="label-text-alt">{secondaryLabel}</span>

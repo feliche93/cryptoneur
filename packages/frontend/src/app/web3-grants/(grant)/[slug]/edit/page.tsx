@@ -96,13 +96,24 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
     }
   })
 
-  grant = {
-    ...grant,
+  let {
+    funding_maximum_currency,
+    funding_minimum_currency,
+    active,
+    content,
+    created_at,
+    id,
+    slug: existingSlug,
+    updated_at,
+    ...existingGrantData
+  } = grant
+
+  const prefetchedGrant = {
+    ...existingGrantData,
     grant_blockchains: grant_blokchain_options,
     grant_categories: grant_category_options,
     grant_use_cases: grant_use_case_options,
-    image: grant.logo,
-  }
+  } as GrantSchema
 
   console.log({ grant })
 
@@ -119,15 +130,12 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
         primaryButtonLink="/sign-in"
       />
       <GrantForm
-        grant={grant}
+        grant={prefetchedGrant}
         title="Add a Grant"
         description="Add a grant to the Directory"
         blockchains={blockchains}
         categories={categories}
         use_cases={use_cases}
-        grant_blokchains={grant_blokchains}
-        grant_categories={grant_categories}
-        grant_use_cases={grant_use_cases}
         fiats={fiats}
       />
     </>

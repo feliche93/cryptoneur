@@ -32,8 +32,8 @@ export const Form: FC<FormProps> = ({
     }
   }, [prefilledValues])
 
-  // console.log({ ...methods.watch() })
-  // console.log({ ...methods.formState.errors })
+  console.log({ ...methods.watch() })
+  console.log({ ...methods.formState.errors })
 
   return (
     <>

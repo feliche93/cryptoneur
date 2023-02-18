@@ -8,20 +8,18 @@ import { InputTextArea } from '@components/shared/InputTextArea'
 import { useSupabase } from '@components/supabase-provider'
 import { Database } from '@lib/database.types'
 import { Form } from '@shared/Form'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import slugify from 'slugify'
 import * as z from 'zod'
 
-const IntegerPositiveOptional = z.number().int().positive().nullish()
-const Option = z
-  .object({
-    label: z.string(),
-    value: z.number(),
-  })
-  .nullish()
+const IntegerPositiveOptional = z.number().int().positive().nullable()
+const Option = z.object({
+  label: z.string(),
+  value: z.number(),
+})
 
 const Options = z.array(Option).min(1)
 
@@ -30,20 +28,20 @@ type Test = z.infer<typeof Option>
 const grantSchema = z
   .object({
     name: z.string().trim().min(2),
-    image: z
-      .instanceof(FileList)
-      .refine((v) => v.length > 0, {
-        message: 'Please upload an image',
+    logo: z
+      .custom<FileList>()
+      .refine((input) => input.length === 1, {
+        message: 'Please select a file.',
       })
-      .refine((v) => v[0].type.includes('image'), {
-        message: `Please upload an image file type`,
+      .refine((input) => input[0].type.startsWith('image/'), {
+        message: 'Please select an image.',
       })
       .or(z.string().url()),
     description: z.string().trim().min(100),
     funding_minimum: IntegerPositiveOptional,
-    funding_minimum_currency: Option,
+    funding_minimum_currency: Option.nullable(),
     funding_maximum: IntegerPositiveOptional,
-    funding_maximum_currency: Option,
+    funding_maximum_currency: Option.nullable(),
     url_application: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
     url_info: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
     grant_blockchains: Options,
@@ -106,11 +104,8 @@ interface GrantFormProps {
   blockchains: Database['public']['Tables']['blockchains']['Row'][] | null
   categories: Database['public']['Tables']['categories']['Row'][] | null
   use_cases: Database['public']['Tables']['use_cases']['Row'][] | null
-  grant_blokchains: Database['public']['Tables']['grant_blockchains']['Row'][] | null
-  grant_categories: Database['public']['Tables']['grant_categories']['Row'][] | null
-  grant_use_cases: Database['public']['Tables']['grant_use_cases']['Row'][] | null
   fiats: Database['public']['Tables']['fiats']['Row'][] | null
-  grant?: Database['public']['Tables']['grants']['Row'] | null | undefined
+  grant?: GrantSchema
   title: string
   description: string
 }
@@ -119,151 +114,122 @@ export const GrantForm: FC<GrantFormProps> = ({
   blockchains,
   categories,
   use_cases,
-  grant_blokchains,
-  grant_categories,
-  grant_use_cases,
   title,
   description,
   fiats,
   grant,
 }) => {
-  const [isLoading, setIsLoading] = useState(false)
-
+  const pathname = usePathname()
   const router = useRouter()
   const { supabase, session } = useSupabase()
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit: SubmitHandler<GrantSchema> = async (data) => {
-    if (!session) {
-      // console.log('no session')
-      return
+    const { logo, funding_minimum_currency, funding_maximum_currency, ...restData } = data
+
+    if (pathname?.endsWith('edit')) {
+    } else {
+      if (typeof data.logo === 'string') {
+        toast.error('Could not find image to upload.')
+        return
+      }
+
+      const { data: logoData, error: logoError } = await supabase.storage
+        .from('grant-logos')
+        .upload(data.logo[0].name, data.logo[0])
+
+      if (logoError || !logoData) {
+        console.log('Error uploading logo', logoError)
+        toast.error(`Error uploading image. ${logoError?.message}.`)
+        return
+      }
+
+      const {
+        data: { publicUrl: logo },
+      } = supabase.storage.from('grant-logos').getPublicUrl(data.logo[0].name)
+
+      if (!logo) {
+        toast.error('Could not find public URL from uploaded image.')
+        return
+      }
+
+      const { data: grantData, error: grantError } = await supabase
+        .from('grants')
+        .upsert({
+          ...restData,
+          slug: slugify(data.name),
+          active: true,
+          content: '',
+          logo,
+        })
+        .select('*')
+        .maybeSingle()
+
+      if (grantError || !grantData) {
+        console.log('Error creating grant', grantError)
+        toast.error(`Error creating grant. ${grantError?.message}.`)
+        return
+      }
+
+      const grant_blockchains = data.grant_blockchains.map((item) => ({
+        grant_id: grantData.id,
+        blockchain_id: item.value,
+      }))
+
+      const grant_categories = data.grant_categories.map((item) => ({
+        grant_id: grantData.id,
+        category_id: item.value,
+      }))
+
+      const grant_use_cases = data.grant_use_cases.map((item) => ({
+        grant_id: grantData.id,
+        use_case_id: item.value,
+      }))
+
+      const { data: grantBlockchainsDataDelete, error: grantBlockchainsErrorDelete } =
+        await supabase.from('grant_blockchains').delete().eq('grant_id', grantData.id)
+
+      const { data: grantCategoriesDataDelete, error: grantCategoriesErrorDelete } = await supabase
+        .from('grant_categories')
+        .delete()
+        .eq('grant_id', grantData.id)
+
+      const { data: grantUseCasesDataDelete, error: grantUseCasesErrorDelete } = await supabase
+        .from('grant_use_cases')
+        .delete()
+        .eq('grant_id', grantData.id)
+
+      const { data: grantBlockchainsDataInsert, error: grantBlockchainsErrorInsert } =
+        await supabase.from('grant_blockchains').insert(grant_blockchains).select('*')
+
+      const { data: grantCategoriesDataInsert, error: grantCategoriesErrorInsert } = await supabase
+        .from('grant_categories')
+        .insert(grant_categories)
+        .select('*')
+
+      const { data: grantUseCasesDataInsert, error: grantUseCasesErrorInsert } = await supabase
+        .from('grant_use_cases')
+        .insert(grant_use_cases)
+        .select('*')
+
+      if (
+        grantBlockchainsErrorDelete ||
+        grantCategoriesErrorDelete ||
+        grantUseCasesErrorDelete ||
+        grantBlockchainsErrorInsert ||
+        grantCategoriesErrorInsert ||
+        grantUseCasesErrorInsert
+      ) {
+        console.log('Error creating grant relationships', grantError)
+        toast.error(`Error creating grant relationships.`)
+        return
+      }
+
+      toast.success(`Grant ${grantData.name} created.`)
+      router.refresh()
+      router.push(`/grants/${grantData.slug}`)
     }
-
-    console.log({ data })
-
-    if (!!data.image && data.image.length === 0)
-      return toast.error('Could not find image to upload.')
-
-    const file = data.image[0]
-    const fileName = file.name
-    const fileOptions = {
-      // upsert: true,
-    }
-
-    const { data: logoData, error: logoError } = await supabase.storage
-      .from('grant-logos')
-      .upload(fileName, file, fileOptions)
-
-    if (logoError) {
-      console.log('Error uploading logo', logoError)
-      toast.error(`Error uploading image. ${logoError?.message}.`)
-      return
-    }
-
-    console.log({ logoData })
-    const {
-      data: { publicUrl },
-    } = await supabase.storage.from('grant-logos').getPublicUrl(fileName)
-
-    const logo = publicUrl
-
-    const { data: grantData, error: grantError } = await supabase
-      .from('grants')
-      .upsert({
-        name: data.name,
-        slug: slugify(data.name),
-        description: data.description,
-        funding_minimum: data.funding_minimum,
-        funding_minimum_currency: data.funding_minimum_currency?.value,
-        funding_maximum: data.funding_maximum,
-        funding_maximum_currency: data.funding_maximum_currency?.value,
-        url_application: data.url_application,
-        url_info: data.url_info,
-        twitter: data.twitter,
-        discord: data.discord,
-        website: data.website,
-        telegram: data.telegram,
-        github: data.github,
-        active: true,
-        content: '',
-        logo,
-      })
-      .select('*')
-      .maybeSingle()
-
-    const grant_id = grantData?.id
-
-    if (grantError || !grant_id) {
-      console.log('Error creating grant', grantError)
-      toast.error(`Error creating grant. ${grantError?.message}.`)
-      return
-    }
-
-    const grant_blockchains = data.grant_blockchains.map((item) => ({
-      grant_id,
-      blockchain_id: item.value,
-    }))
-
-    const grant_categories = data.grant_categories.map((item) => ({
-      grant_id,
-      category_id: item.value,
-    }))
-
-    const grant_use_cases = data.grant_use_cases.map((item) => ({
-      grant_id,
-      use_case_id: item.value,
-    }))
-
-    const { data: grantBlockchainsDataDelete, error: grantBlockchainsErrorDelete } = await supabase
-      .from('grant_blockchains')
-      .delete()
-      .match({ grant_id })
-    const { data: grantCategoriesDataDelete, error: grantCategoriesErrorDelete } = await supabase
-      .from('grant_categories')
-      .delete()
-      .match({ grant_id })
-    const { data: grantUseCasesDataDelete, error: grantUseCasesErrorDelete } = await supabase
-      .from('grant_use_cases')
-      .delete()
-      .match({ grant_id })
-
-    const { data: grantBlockchainsDataInsert, error: grantBlockchainsErrorInsert } = await supabase
-      .from('grant_blockchains')
-      .insert(grant_blockchains)
-      .select('*')
-    const { data: grantCategoriesDataInsert, error: grantCategoriesErrorInsert } = await supabase
-      .from('grant_categories')
-      .insert(grant_categories)
-      .select('*')
-    const { data: grantUseCasesDataInsert, error: grantUseCasesErrorInsert } = await supabase
-      .from('grant_use_cases')
-      .insert(grant_use_cases)
-      .select('*')
-
-    if (
-      grantBlockchainsErrorDelete ||
-      grantCategoriesErrorDelete ||
-      grantUseCasesErrorDelete ||
-      grantBlockchainsErrorInsert ||
-      grantCategoriesErrorInsert ||
-      grantUseCasesErrorInsert
-    ) {
-      console.log('Error creating grant relationships', grantError)
-      toast.error(`Error creating grant relationships.`)
-      return
-    }
-
-    console.log({ grantBlockchainsDataInsert, grantCategoriesDataInsert, grantUseCasesDataInsert })
-
-    toast.success('Your data was successfully saved')
-
-    router.refresh()
-
-    console.log({ data })
-
-    // supabase.from('profiles').update(data).match({ id: session?.user?.id })
   }
-
-  // return <h1>Hello</h1>
 
   return (
     <>
@@ -282,7 +248,12 @@ export const GrantForm: FC<GrantFormProps> = ({
           className="col-span-6 sm:col-span-3"
           secondaryLabel="The official name of the grant."
         />
-        <InputFile primaryLabel="Image *" id="image" className="col-span-6 sm:col-span-3" />
+        <InputFile
+          primaryLabel="Image *"
+          accept="image/*"
+          id="image"
+          className="col-span-6 sm:col-span-3"
+        />
         <InputTextArea
           primaryLabel="Description *"
           id="description"
