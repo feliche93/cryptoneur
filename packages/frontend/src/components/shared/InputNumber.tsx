@@ -33,6 +33,8 @@ export const InputNumber: FC<InputNumberProps> = ({
             console.log({ value })
             if (isNaN(value)) return null
             if (value === '') return null
+            if (value === undefined) return null
+            if (value === null) return null
             return parseInt(value)
           },
         })}

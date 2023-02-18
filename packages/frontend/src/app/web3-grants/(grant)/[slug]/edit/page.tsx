@@ -121,7 +121,7 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
 
   const prefetchedGrant = {
     ...existingGrantData,
-    funding_minimum_currency: funding_maximum_currency && funding_minimum_option,
+    funding_minimum_currency: funding_minimum_currency && funding_minimum_option,
     funding_maximum_currency: funding_maximum_currency && funding_maximum_option,
     grant_blockchains: grant_blokchain_options,
     grant_categories: grant_category_options,
@@ -142,8 +142,8 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
       />
       <GrantForm
         grant={prefetchedGrant}
-        title="Add a Grant"
-        description="Add a grant to the Directory"
+        title="Edit a Grant"
+        description="Edit an existing grant"
         blockchains={blockchains}
         categories={categories}
         use_cases={use_cases}

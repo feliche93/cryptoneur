@@ -25,77 +25,65 @@ const Options = z.array(Option).min(1)
 
 type Test = z.infer<typeof Option>
 
-const grantSchema = z
-  .object({
-    name: z.string().trim().min(2),
-    logo: z
-      .custom<FileList>()
-      // .refine((input) => typeof Array && input.length === 1, {
-      //   message: 'Please select a file.',
-      // })
-      // .refine((input) => typeof Array && input[0].type.startsWith('image/'), {
-      //   message: 'Please select an image.',
-      // })
-      .or(z.string().url()),
-    description: z.string().trim().min(100),
-    funding_minimum: IntegerPositiveOptional,
-    funding_minimum_currency: Option.nullable(),
-    funding_maximum: IntegerPositiveOptional,
-    funding_maximum_currency: Option.nullable(),
-    url_application: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
-    url_info: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
-    grant_blockchains: Options,
-    grant_use_cases: Options,
-    grant_categories: Options,
-    twitter: z.union([
-      z.literal(''),
-      z
-        .string()
-        .trim()
-        .url()
-        .regex(/^https:\/\/twitter\.com\/[a-zA-Z0-9_]+$/),
-    ]),
-    discord: z.union([
-      z.literal(''),
-      z
-        .string()
-        .trim()
-        .url()
-        .regex(/^https:\/\/discord\.com\/invite\/[a-zA-Z0-9]+$/),
-    ]),
-    website: z.union([z.literal(''), z.string().trim().url()]),
-    telegram: z.union([
-      z.literal(''),
-      z
-        .string()
-        .trim()
-        .url()
-        .regex(/^https:\/\/t\.me\/[a-zA-Z0-9_]+$/),
-    ]),
-    github: z.union([
-      z.literal(''),
-      z
-        .string()
-        .trim()
-        .url()
-        .regex(/^https:\/\/github\.com\/[a-zA-Z0-9_-]+$/),
-    ]),
-    // grant_blockchains,
-  })
-  .refine(
-    (input) => input.funding_minimum_currency !== undefined || input.funding_minimum === undefined,
-    {
-      message: 'A currency needs to be selected if funding minimum is set.',
-      path: ['funding_minimum_currency'],
-    },
-  )
-  .refine(
-    (input) => input.funding_maximum_currency !== undefined || input.funding_maximum === undefined,
-    {
-      message: 'A currency needs to be selected if funding maximum is set.',
-      path: ['funding_maximum_currency'],
-    },
-  )
+const grantSchema = z.object({
+  name: z.string().trim().min(2),
+  logo: z
+    .custom<FileList>()
+    .refine((input) => typeof Array && input.length === 1, {
+      message: 'Please select an image.',
+    })
+    // .refine((input) => typeof Array && input.length === 1, {
+    //   message: 'Please select a file.',
+    // })
+    // .refine((input) => typeof Array && input[0].type.startsWith('image/'), {
+    //   message: 'Please select an image.',
+    // })
+    .or(z.string().url()),
+  description: z.string().trim().min(100),
+  funding_minimum: IntegerPositiveOptional,
+  funding_minimum_currency: Option.nullable(),
+  funding_maximum: IntegerPositiveOptional,
+  funding_maximum_currency: Option.nullable(),
+  url_application: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
+  url_info: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
+  grant_blockchains: Options,
+  grant_use_cases: Options,
+  grant_categories: Options,
+  twitter: z.union([
+    z.literal(''),
+    z
+      .string()
+      .trim()
+      .url()
+      .regex(/^https:\/\/twitter\.com\/[a-zA-Z0-9_]+$/),
+  ]),
+  discord: z.union([
+    z.literal(''),
+    z
+      .string()
+      .trim()
+      .url()
+      .regex(/^https:\/\/discord\.com\/invite\/[a-zA-Z0-9]+$/),
+  ]),
+  website: z.union([z.literal(''), z.string().trim().url()]),
+  telegram: z.union([
+    z.literal(''),
+    z
+      .string()
+      .trim()
+      .url()
+      .regex(/^https:\/\/t\.me\/[a-zA-Z0-9_]+$/),
+  ]),
+  github: z.union([
+    z.literal(''),
+    z
+      .string()
+      .trim()
+      .url()
+      .regex(/^https:\/\/github\.com\/[a-zA-Z0-9_-]+$/),
+  ]),
+  // grant_blockchains,
+})
 
 export type GrantSchema = z.infer<typeof grantSchema>
 
