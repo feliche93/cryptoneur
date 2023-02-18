@@ -121,8 +121,7 @@ export const GrantForm: FC<GrantFormProps> = ({
 }) => {
   const pathname = usePathname()
   const router = useRouter()
-  const { supabase, session } = useSupabase()
-  const [isLoading, setIsLoading] = useState(false)
+  const { supabase } = useSupabase()
 
   const onSubmit: SubmitHandler<GrantSchema> = async (data) => {
     const { logo, funding_minimum_currency, funding_maximum_currency, ...restData } = data
@@ -186,28 +185,32 @@ export const GrantForm: FC<GrantFormProps> = ({
         use_case_id: item.value,
       }))
 
-      const { data: grantBlockchainsDataDelete, error: grantBlockchainsErrorDelete } =
-        await supabase.from('grant_blockchains').delete().eq('grant_id', grantData.id)
+      const { error: grantBlockchainsErrorDelete } = await supabase
+        .from('grant_blockchains')
+        .delete()
+        .eq('grant_id', grantData.id)
 
-      const { data: grantCategoriesDataDelete, error: grantCategoriesErrorDelete } = await supabase
+      const { error: grantCategoriesErrorDelete } = await supabase
         .from('grant_categories')
         .delete()
         .eq('grant_id', grantData.id)
 
-      const { data: grantUseCasesDataDelete, error: grantUseCasesErrorDelete } = await supabase
+      const { error: grantUseCasesErrorDelete } = await supabase
         .from('grant_use_cases')
         .delete()
         .eq('grant_id', grantData.id)
 
-      const { data: grantBlockchainsDataInsert, error: grantBlockchainsErrorInsert } =
-        await supabase.from('grant_blockchains').insert(grant_blockchains).select('*')
+      const { error: grantBlockchainsErrorInsert } = await supabase
+        .from('grant_blockchains')
+        .insert(grant_blockchains)
+        .select('*')
 
-      const { data: grantCategoriesDataInsert, error: grantCategoriesErrorInsert } = await supabase
+      const { error: grantCategoriesErrorInsert } = await supabase
         .from('grant_categories')
         .insert(grant_categories)
         .select('*')
 
-      const { data: grantUseCasesDataInsert, error: grantUseCasesErrorInsert } = await supabase
+      const { error: grantUseCasesErrorInsert } = await supabase
         .from('grant_use_cases')
         .insert(grant_use_cases)
         .select('*')
