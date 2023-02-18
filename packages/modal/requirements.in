@@ -11,4 +11,4 @@ modal-client
 pandas
 beautifulsoup4
 gender-guesser
-airtable-python-wrapper
+pyairtable
