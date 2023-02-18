@@ -1,11 +1,10 @@
 import { GrantForm } from '@components/web3-grants/add/GrantForm'
-import { AuthAlert } from '@components/web3-grants/AuthAlert'
 import { Modal } from '@components/web3-grants/edit/Modal'
-import { ModalWrapper } from '@components/web3-grants/edit/ModalWrapper'
 import { createServerClient } from '@utils/supabase-server'
 
 const AddGrant = async () => {
   const supabase = createServerClient()
+
   const { data: blockchains, error: blockchainsError } = await supabase
     .from('blockchains')
     .select('*')
@@ -13,6 +12,7 @@ const AddGrant = async () => {
   const { data: categories, error: categoriesError } = await supabase.from('categories').select('*')
 
   const { data: use_cases, error: useCasesError } = await supabase.from('use_cases').select('*')
+
   const { data: grant_blokchains, error: grantBlokchainsError } = await supabase
     .from('grant_blokchains')
     .select('*')
@@ -48,7 +48,6 @@ const AddGrant = async () => {
         grant_use_cases={grant_use_cases}
         fiats={fiats}
       />
-      {/* <GrantFormTally /> */}
     </>
   )
 }

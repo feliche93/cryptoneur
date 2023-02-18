@@ -117,6 +117,32 @@ export interface Database {
           symbol?: string
         }
       }
+      followers: {
+        Row: {
+          created_at: string | null
+          id: number
+          is_following: boolean
+          is_sent: boolean
+          provider_id: number | null
+          username: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          is_following?: boolean
+          is_sent?: boolean
+          provider_id?: number | null
+          username: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          is_following?: boolean
+          is_sent?: boolean
+          provider_id?: number | null
+          username?: string
+        }
+      }
       grant_blockchains: {
         Row: {
           blockchain_id: number
@@ -190,9 +216,9 @@ export interface Database {
           funding_minimum_currency: number | null
           github: string | null
           id: number
-          logo: string | null
+          logo: string
           name: string
-          slug: string | null
+          slug: string
           telegram: string | null
           twitter: string | null
           updated_at: string
@@ -212,9 +238,9 @@ export interface Database {
           funding_minimum_currency?: number | null
           github?: string | null
           id?: number
-          logo?: string | null
+          logo: string
           name: string
-          slug?: string | null
+          slug: string
           telegram?: string | null
           twitter?: string | null
           updated_at?: string
@@ -234,9 +260,9 @@ export interface Database {
           funding_minimum_currency?: number | null
           github?: string | null
           id?: number
-          logo?: string | null
+          logo?: string
           name?: string
-          slug?: string | null
+          slug?: string
           telegram?: string | null
           twitter?: string | null
           updated_at?: string
@@ -251,6 +277,7 @@ export interface Database {
           created_at: string | null
           id: string
           is_relevant: boolean | null
+          media: string | null
           reply_id: number | null
           text: string
         }
@@ -259,6 +286,7 @@ export interface Database {
           created_at?: string | null
           id: string
           is_relevant?: boolean | null
+          media?: string | null
           reply_id?: number | null
           text: string
         }
@@ -267,6 +295,7 @@ export interface Database {
           created_at?: string | null
           id?: string
           is_relevant?: boolean | null
+          media?: string | null
           reply_id?: number | null
           text?: string
         }
@@ -292,6 +321,7 @@ export interface Database {
         Row: {
           created_at: string | null
           id: number
+          is_active: boolean
           limit: number
           name: string | null
           provider_id: number
@@ -300,6 +330,7 @@ export interface Database {
         Insert: {
           created_at?: string | null
           id?: number
+          is_active?: boolean
           limit: number
           name?: string | null
           provider_id: number
@@ -308,6 +339,7 @@ export interface Database {
         Update: {
           created_at?: string | null
           id?: number
+          is_active?: boolean
           limit?: number
           name?: string | null
           provider_id?: number
@@ -318,16 +350,19 @@ export interface Database {
         Row: {
           created_at: string | null
           id: number
+          is_generated: boolean | null
           reply: string
         }
         Insert: {
           created_at?: string | null
           id?: number
+          is_generated?: boolean | null
           reply: string
         }
         Update: {
           created_at?: string | null
           id?: number
+          is_generated?: boolean | null
           reply?: string
         }
       }

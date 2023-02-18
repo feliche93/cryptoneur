@@ -12,38 +12,43 @@ import { useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
-import * as z from 'zod'
-import { AuthAlert } from '../AuthAlert'
 import slugify from 'slugify'
+import * as z from 'zod'
+
+const IntegerPositiveOptional = z.number().int().positive().nullish()
+const Option = z
+  .object({
+    label: z.string(),
+    value: z.number(),
+  })
+  .nullish()
+
+const Options = z.array(Option).min(1)
+
+type Test = z.infer<typeof Option>
 
 const grantSchema = z
   .object({
     name: z.string().trim().min(2),
-    image: z.instanceof(FileList).refine((v) => v.length > 0, {
-      message: 'Please upload an image',
-    }),
-    description: z.string().trim().min(120),
-    funding_minimum: z.number().optional(),
-    funding_minimum_currency: z
-      .object({
-        label: z.string(),
-        value: z.number(),
+    image: z
+      .instanceof(FileList)
+      .refine((v) => v.length > 0, {
+        message: 'Please upload an image',
       })
-      .optional()
-      .nullable()
-      .nullish(),
-    funding_maximum: z.number().optional(),
-    funding_maximum_currency: z
-      .object({
-        label: z.string(),
-        value: z.number(),
+      .refine((v) => v[0].type.includes('image'), {
+        message: `Please upload an image file type`,
       })
-      .optional(),
+      .or(z.string().url()),
+    description: z.string().trim().min(100),
+    funding_minimum: IntegerPositiveOptional,
+    funding_minimum_currency: Option,
+    funding_maximum: IntegerPositiveOptional,
+    funding_maximum_currency: Option,
     url_application: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
     url_info: z.union([z.literal(''), z.string().trim().url()]), // z.string().url(),
-    grant_blockchains: z.array(z.object({ label: z.string(), value: z.number() })).min(1),
-    grant_use_cases: z.array(z.object({ label: z.string(), value: z.number() })).min(1),
-    grant_categories: z.array(z.object({ label: z.string(), value: z.number() })).min(1),
+    grant_blockchains: Options,
+    grant_use_cases: Options,
+    grant_categories: Options,
     twitter: z.union([
       z.literal(''),
       z
@@ -94,7 +99,7 @@ const grantSchema = z
     },
   )
 
-type ProfileSchema = z.infer<typeof grantSchema>
+export type GrantSchema = z.infer<typeof grantSchema>
 
 interface GrantFormProps {
   // any or null
@@ -105,6 +110,7 @@ interface GrantFormProps {
   grant_categories: Database['public']['Tables']['grant_categories']['Row'][] | null
   grant_use_cases: Database['public']['Tables']['grant_use_cases']['Row'][] | null
   fiats: Database['public']['Tables']['fiats']['Row'][] | null
+  grant?: Database['public']['Tables']['grants']['Row'] | null | undefined
   title: string
   description: string
 }
@@ -119,13 +125,14 @@ export const GrantForm: FC<GrantFormProps> = ({
   title,
   description,
   fiats,
+  grant,
 }) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const router = useRouter()
   const { supabase, session } = useSupabase()
 
-  const onSubmit: SubmitHandler<ProfileSchema> = async (data) => {
+  const onSubmit: SubmitHandler<GrantSchema> = async (data) => {
     if (!session) {
       // console.log('no session')
       return
@@ -260,7 +267,13 @@ export const GrantForm: FC<GrantFormProps> = ({
 
   return (
     <>
-      <Form title={title} description={description} schema={grantSchema} onSubmit={onSubmit}>
+      <Form
+        prefilledValues={grant}
+        title={title}
+        description={description}
+        schema={grantSchema}
+        onSubmit={onSubmit}
+      >
         <InputText
           primaryLabel="Name *"
           placeholder="Aweseom Grant Name"
