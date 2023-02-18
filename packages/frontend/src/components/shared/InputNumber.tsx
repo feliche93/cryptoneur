@@ -29,7 +29,12 @@ export const InputNumber: FC<InputNumberProps> = ({
       </label>
       <input
         {...register(id, {
-          valueAsNumber: true,
+          setValueAs: (value) => {
+            console.log({ value })
+            if (isNaN(value)) return null
+            if (value === '') return null
+            return parseInt(value)
+          },
         })}
         placeholder={placeholder}
         className="input-bordered input w-full"

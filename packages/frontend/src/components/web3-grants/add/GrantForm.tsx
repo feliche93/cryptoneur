@@ -168,8 +168,10 @@ export const GrantForm: FC<GrantFormProps> = ({
         active: true,
         content: '',
         logo: restData.logo as string,
-        funding_minimum_currency: funding_minimum_currency?.value,
-        funding_maximum_currency: funding_maximum_currency?.value,
+        funding_minimum_currency:
+          funding_minimum_currency !== null ? funding_minimum_currency?.value : null,
+        funding_maximum_currency:
+          funding_maximum_currency !== null ? funding_maximum_currency?.value : null,
       })
       .select('*')
       .maybeSingle()
