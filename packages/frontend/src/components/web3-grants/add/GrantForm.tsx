@@ -380,15 +380,6 @@ export const GrantForm: FC<GrantFormProps> = ({
           type="url"
           className="col-span-6 sm:col-span-3"
         />
-        {/* <InputReactSelect
-          primaryLabel="Blockchain"
-          id="grant_blockchains"
-          options={blockchains?.map((blockchain) => ({
-            label: blockchain.name,
-            value: blockchain.id,
-          }))}
-          className="col-span-6 sm:col-span-3"
-        /> */}
       </Form>
     </>
   )
