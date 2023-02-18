@@ -105,7 +105,7 @@ interface GrantFormProps {
   categories: Database['public']['Tables']['categories']['Row'][] | null
   use_cases: Database['public']['Tables']['use_cases']['Row'][] | null
   fiats: Database['public']['Tables']['fiats']['Row'][] | null
-  grant?: GrantSchema
+  grant?: GrantSchema & Pick<Database['public']['Tables']['grants']['Row'], 'slug' | 'id'>
   title: string
   description: string
 }
@@ -124,15 +124,16 @@ export const GrantForm: FC<GrantFormProps> = ({
   const { supabase } = useSupabase()
 
   const onSubmit: SubmitHandler<GrantSchema> = async (data) => {
-    const { logo, funding_minimum_currency, funding_maximum_currency, ...restData } = data
+    let {
+      funding_minimum_currency,
+      funding_maximum_currency,
+      grant_blockchains: gB,
+      grant_use_cases: gU,
+      grant_categories: gC,
+      ...restData
+    } = data
 
-    if (pathname?.endsWith('edit')) {
-    } else {
-      if (typeof data.logo === 'string') {
-        toast.error('Could not find image to upload.')
-        return
-      }
-
+    if (typeof data.logo !== 'string') {
       const { data: logoData, error: logoError } = await supabase.storage
         .from('grant-logos')
         .upload(data.logo[0].name, data.logo[0])
@@ -144,94 +145,111 @@ export const GrantForm: FC<GrantFormProps> = ({
       }
 
       const {
-        data: { publicUrl: logo },
+        data: { publicUrl },
       } = supabase.storage.from('grant-logos').getPublicUrl(data.logo[0].name)
 
-      if (!logo) {
+      if (!publicUrl) {
         toast.error('Could not find public URL from uploaded image.')
         return
       }
 
-      const { data: grantData, error: grantError } = await supabase
-        .from('grants')
-        .upsert({
-          ...restData,
-          slug: slugify(data.name),
-          active: true,
-          content: '',
-          logo,
-        })
-        .select('*')
-        .maybeSingle()
-
-      if (grantError || !grantData) {
-        console.log('Error creating grant', grantError)
-        toast.error(`Error creating grant. ${grantError?.message}.`)
-        return
-      }
-
-      const grant_blockchains = data.grant_blockchains.map((item) => ({
-        grant_id: grantData.id,
-        blockchain_id: item.value,
-      }))
-
-      const grant_categories = data.grant_categories.map((item) => ({
-        grant_id: grantData.id,
-        category_id: item.value,
-      }))
-
-      const grant_use_cases = data.grant_use_cases.map((item) => ({
-        grant_id: grantData.id,
-        use_case_id: item.value,
-      }))
-
-      const { error: grantBlockchainsErrorDelete } = await supabase
-        .from('grant_blockchains')
-        .delete()
-        .eq('grant_id', grantData.id)
-
-      const { error: grantCategoriesErrorDelete } = await supabase
-        .from('grant_categories')
-        .delete()
-        .eq('grant_id', grantData.id)
-
-      const { error: grantUseCasesErrorDelete } = await supabase
-        .from('grant_use_cases')
-        .delete()
-        .eq('grant_id', grantData.id)
-
-      const { error: grantBlockchainsErrorInsert } = await supabase
-        .from('grant_blockchains')
-        .insert(grant_blockchains)
-        .select('*')
-
-      const { error: grantCategoriesErrorInsert } = await supabase
-        .from('grant_categories')
-        .insert(grant_categories)
-        .select('*')
-
-      const { error: grantUseCasesErrorInsert } = await supabase
-        .from('grant_use_cases')
-        .insert(grant_use_cases)
-        .select('*')
-
-      if (
-        grantBlockchainsErrorDelete ||
-        grantCategoriesErrorDelete ||
-        grantUseCasesErrorDelete ||
-        grantBlockchainsErrorInsert ||
-        grantCategoriesErrorInsert ||
-        grantUseCasesErrorInsert
-      ) {
-        console.log('Error creating grant relationships', grantError)
-        toast.error(`Error creating grant relationships.`)
-        return
-      }
-
-      toast.success(`Grant ${grantData.name} created.`)
-      router.refresh()
-      router.push(`/grants/${grantData.slug}`)
+      restData.logo = publicUrl
     }
+
+    const { data: grantData, error: grantError } = await supabase
+      .from('grants')
+      .upsert({
+        ...restData,
+        id: grant?.id,
+        slug:
+          pathname?.endsWith('edit') && !!grant
+            ? grant.slug
+            : slugify(restData.name, { lower: true }),
+        active: true,
+        content: '',
+        logo: restData.logo as string,
+        funding_minimum_currency: funding_minimum_currency?.value,
+        funding_maximum_currency: funding_maximum_currency?.value,
+      })
+      .select('*')
+      .maybeSingle()
+
+    if (grantError || !grantData) {
+      console.log('Error creating grant', grantError)
+      toast.error(`Error creating grant. ${grantError?.message}.`)
+      return
+    }
+
+    const grant_blockchains = data.grant_blockchains.map((item) => ({
+      grant_id: grantData.id,
+      blockchain_id: item.value,
+    }))
+
+    const grant_categories = data.grant_categories.map((item) => ({
+      grant_id: grantData.id,
+      category_id: item.value,
+    }))
+
+    const grant_use_cases = data.grant_use_cases.map((item) => ({
+      grant_id: grantData.id,
+      use_case_id: item.value,
+    }))
+
+    const { error: grantBlockchainsErrorDelete } = await supabase
+      .from('grant_blockchains')
+      .delete()
+      .eq('grant_id', grantData.id)
+
+    console.log({ grantBlockchainsErrorDelete })
+
+    const { error: grantCategoriesErrorDelete } = await supabase
+      .from('grant_categories')
+      .delete()
+      .eq('grant_id', grantData.id)
+
+    const { error: grantUseCasesErrorDelete } = await supabase
+      .from('grant_use_cases')
+      .delete()
+      .eq('grant_id', grantData.id)
+
+    const { error: grantBlockchainsErrorInsert } = await supabase
+      .from('grant_blockchains')
+      .insert(grant_blockchains)
+      .select('*')
+
+    const { error: grantCategoriesErrorInsert } = await supabase
+      .from('grant_categories')
+      .insert(grant_categories)
+      .select('*')
+
+    const { error: grantUseCasesErrorInsert } = await supabase
+      .from('grant_use_cases')
+      .insert(grant_use_cases)
+      .select('*')
+
+    if (
+      grantBlockchainsErrorDelete ||
+      grantCategoriesErrorDelete ||
+      grantUseCasesErrorDelete ||
+      grantBlockchainsErrorInsert ||
+      grantCategoriesErrorInsert ||
+      grantUseCasesErrorInsert
+    ) {
+      console.error({
+        grantBlockchainsErrorDelete,
+        grantCategoriesErrorDelete,
+        grantUseCasesErrorDelete,
+        grantBlockchainsErrorInsert,
+        grantCategoriesErrorInsert,
+        grantUseCasesErrorInsert,
+      })
+      toast.error(`Error creating grant relationships.`)
+      return
+    }
+
+    toast.success(`Grant ${grantData.name} ${pathname?.endsWith('edit') ? 'updated' : 'created'}.`)
+    router.refresh()
+    router.push(`/web3-grants/${grantData.slug}`)
   }
 
   return (

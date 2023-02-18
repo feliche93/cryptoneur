@@ -1,5 +1,6 @@
 import { GrantForm, GrantSchema } from '@components/web3-grants/add/GrantForm'
 import { Modal } from '@components/web3-grants/edit/Modal'
+import { Database } from '@lib/database.types'
 import { createServerClient } from '@utils/supabase-server'
 import { notFound } from 'next/navigation'
 
@@ -97,12 +98,12 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
   })
 
   const funding_minimum_option = {
-    label: fiats.find((fiat) => fiat.id === grant?.funding_minimum_currency)?.name,
+    label: fiats.find((fiat) => fiat.id === grant?.funding_minimum_currency)?.symbol,
     value: grant?.funding_minimum_currency,
   }
 
   const funding_maximum_option = {
-    label: fiats.find((fiat) => fiat.id === grant?.funding_maximum_currency)?.name,
+    label: fiats.find((fiat) => fiat.id === grant?.funding_maximum_currency)?.symbol,
     value: grant?.funding_maximum_currency,
   }
 
@@ -114,8 +115,6 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
     active,
     content,
     created_at,
-    id,
-    slug: existingSlug,
     updated_at,
     ...existingGrantData
   } = grant
@@ -127,7 +126,7 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
     grant_blockchains: grant_blokchain_options,
     grant_categories: grant_category_options,
     grant_use_cases: grant_use_case_options,
-  } as GrantSchema
+  } as GrantSchema & Pick<Database['public']['Tables']['grants']['Row'], 'slug' | 'id'>
 
   console.log({ grant })
 
