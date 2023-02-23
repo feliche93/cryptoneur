@@ -40,21 +40,21 @@ export const metadata: Metadata = {
     ],
     locale: 'en-US',
     type: 'website',
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Cryptoneur',
-      description:
-        'Welcome to my personal website! Check out my portofolio projects, browse through my blog posts or get in touch with me for freelance work.',
-      creator: '@cryptoneur_eth',
-      creatorId: '1229504037495746560',
-      images: [
-        {
-          url: profilePic.src,
-          width: profilePic.width,
-          height: profilePic.height,
-        },
-      ],
-    },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Cryptoneur',
+    description:
+      'Welcome to my personal website! Check out my portofolio projects, browse through my blog posts or get in touch with me for freelance work.',
+    creator: '@cryptoneur_eth',
+    creatorId: '1229504037495746560',
+    images: [
+      {
+        url: profilePic.src,
+        width: profilePic.width,
+        height: profilePic.height,
+      },
+    ],
   },
 }
 
