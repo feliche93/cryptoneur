@@ -11,12 +11,13 @@ import { UsedGasInput } from '@components/gas-fees-calculator/UsedGasInput'
 import { fetchFiatRates, fetchGasPrices, networks } from '@lib/gas-fees-calculator'
 import image1 from '@public/gas-fees-calculator/ogImag1.jpg'
 import image2 from '@public/gas-fees-calculator/ogImage2.jpg'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
 export const revalidate = 300
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Gas Fees Calculator (Multi Currency, Network & Txn Types)',
   description:
     'Calculate gas fees in your local currency for different transaction types on Mainnet, Arbitrum, Optimism, Binance Smart Chain, Avalanche, Polygon, Gnosis, Celo, Moonriver, Fantom and Harmony.',
