@@ -135,8 +135,8 @@ const EditGrant = async ({ params: { slug } }: { params: { slug: string } }) => 
   return (
     <>
       <Modal
-        title="Log in to add a grant"
-        description="Please create an account or log into your existing account to create a grant."
+        title="Log in to edit a grant"
+        description="Please create an account or log into your existing account to edit a grant."
         primaryButtonLabel="Login"
         primaryButtonLink="/sign-in"
       />
