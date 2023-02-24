@@ -4,6 +4,7 @@ import {
   PaperClipIcon,
   PlusCircleIcon,
 } from '@heroicons/react/24/outline'
+import { Database } from '@lib/database.types'
 import { getGrantbySlug } from '@shared/strapi'
 import { createServerClient } from '@utils/supabase-server'
 import { FC } from 'react'
@@ -121,75 +122,37 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
                 </dd>
               </div>
               {/* Minimum Funding */}
-              <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-base-content/80">Minimum Funding</dt>
-                <dd className="mt-1 text-sm text-base-content">
-                  {grant?.funding_minimum && grant?.funding_minimum_currency?.symbol ? (
-                    // print formatted number wiht currency
-                    `${grant?.funding_minimum.toLocaleString()} ${
+              {!!grant?.funding_minimum && !!grant?.funding_minimum_currency && (
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-base-content/80">Minimum Funding</dt>
+                  <dd className="mt-1 text-sm text-base-content">
+                    {`${grant?.funding_minimum.toLocaleString()} ${
                       grant?.funding_minimum_currency?.symbol
-                    }`
-                  ) : (
-                    <NoInfo />
-                  )}
-                </dd>
-              </div>
+                    }`}
+                  </dd>
+                </div>
+              )}
               {/* Maximum Funding */}
-              <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-base-content/80">Maximum Funding</dt>
-                <dd className="mt-1 text-sm text-base-content">
-                  {grant?.funding_maximum && grant?.funding_maximum_currency?.symbol ? (
-                    // print formatted number wiht currency
-                    `${grant?.funding_maximum.toLocaleString()} ${
+              {!!grant?.funding_maximum && !!grant?.funding_maximum_currency && (
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-base-content/80">Maximum Funding</dt>
+                  <dd className="mt-1 text-sm text-base-content">
+                    {`${grant?.funding_maximum.toLocaleString()} ${
                       grant?.funding_maximum_currency?.symbol
-                    }`
-                  ) : (
-                    <NoInfo />
-                  )}
-                </dd>
-              </div>
-              {/* <div className="sm:col-span-2">
-                <dt className="text-sm font-medium text-base-content/80">Attachments</dt>
-                <dd className="mt-1 text-sm text-base-content">
-                  <ul
-                    role="list"
-                    className="divide-y divide-gray-200 rounded-md border border-gray-200"
-                  >
-                    {attachments.map((attachment) => (
-                      <li
-                        key={attachment.name}
-                        className="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
-                      >
-                        <div className="flex w-0 flex-1 items-center">
-                          <PaperClipIcon
-                            className="h-5 w-5 flex-shrink-0 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          <span className="ml-2 w-0 flex-1 truncate">{attachment.name}</span>
-                        </div>
-                        <div className="ml-4 flex-shrink-0">
-                          <a
-                            href={attachment.href}
-                            className="font-medium text-blue-600 hover:text-blue-500"
-                          >
-                            Download
-                          </a>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </dd>
-              </div> */}
+                    }`}
+                  </dd>
+                </div>
+              )}
             </dl>
           </div>
-          {/* <div>
+          <div>
             <a
-              href="#"
-              className="block bg-gray-50 px-4 py-4 text-center text-sm font-medium text-base-content/80 hover:text-gray-700 sm:rounded-b-lg"
+              href={`/web3-grants/${slug}/edit`}
+              className="block bg-base-300 px-4 py-4 text-center text-sm font-medium text-base-content/80 hover:text-base-content sm:rounded-b-lg"
             >
-              Read full application
+              Edit Grant Info
             </a>
-          </div> */}
+          </div>
         </div>
       </section>
     </>
