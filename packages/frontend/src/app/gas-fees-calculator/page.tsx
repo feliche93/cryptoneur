@@ -28,16 +28,16 @@ export const metadata: Metadata = {
       'Calculate gas fees in your local currency for different transaction types on Mainnet, Arbitrum, Optimism, Binance Smart Chain, Avalanche, Polygon, Gnosis, Celo, Moonriver, Fantom and Harmony.',
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_URL}/${image1.src}`,
+        url: `${process.env.NEXT_PUBLIC_URL}${image1.src}`,
         width: image1.width,
         height: image1.height,
-        alt: 'Gas Fees Calculator (Multi Currency, Network & Txn Types)',
+        alt: 'Gas Fees Calculator (Multi Currency, Network & Txn Types) UI',
       },
       {
-        url: `${process.env.NEXT_PUBLIC_URL}/${image2.src}`,
+        url: `${process.env.NEXT_PUBLIC_URL}${image2.src}`,
         width: image2.width,
         height: image2.height,
-        alt: 'Gas Fees Calculator (Multi Currency, Network & Txn Types)',
+        alt: 'Gas Fees Calculator (Multi Currency, Network & Txn Types) UX',
       },
     ],
     type: 'website',

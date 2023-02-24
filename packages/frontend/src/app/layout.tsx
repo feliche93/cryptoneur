@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: 'Cryptoneur.xyz',
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_URL}/${profilePic.src}`,
+        url: `${process.env.NEXT_PUBLIC_URL}${profilePic.src}`,
         width: profilePic.width,
         height: profilePic.height,
         alt: 'Cryptoneur.xyz profile picture',

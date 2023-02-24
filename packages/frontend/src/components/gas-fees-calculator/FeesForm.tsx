@@ -15,10 +15,6 @@ export const FeesForm: FC<FeesFormProps> = ({ children }) => {
     },
   })
 
-  const values = methods.watch()
-
-  console.log({ values })
-
   return (
     <FormProvider {...methods}>
       <form>
