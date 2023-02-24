@@ -85,13 +85,17 @@ export const UsedGasInput: FC = () => {
 
   function handleGasInputChange(event: ChangeEvent<HTMLInputElement>): void {
     setUsedGas(event.target.value)
+    input.onChange(event.target.value)
     setSelectedTxnType({ name: 'Custom', gas: Number(event.target.value) })
+    selectField.onChange({ name: 'Custom', gas: Number(event.target.value) })
   }
 
   function handleTxnTypeChange(event: TxnType) {
     console.log('event', event)
     setSelectedTxnType(event)
+    selectField.onChange(event)
     setUsedGas(event.gas)
+    input.onChange(event.gas)
   }
 
   const txnTypesWithCustom = [...txnTypes, { name: 'Custom', gas: usedGas }]
@@ -99,7 +103,11 @@ export const UsedGasInput: FC = () => {
   return (
     <>
       <div className="col-span-1 sm:col-span-1">
-        <Listbox value={selectedTxnType} onChange={handleTxnTypeChange}>
+        <Listbox
+          value={selectedTxnType}
+          refName={selectField.ref.name}
+          onChange={handleTxnTypeChange}
+        >
           {({ open }) => (
             <>
               <Listbox.Label className="block text-sm font-medium text-gray-700">
@@ -166,6 +174,8 @@ export const UsedGasInput: FC = () => {
           Used Gas
         </label>
         <input
+          ref={input.ref}
+          onBlur={input.onBlur}
           value={usedGas}
           onChange={handleGasInputChange}
           type="number"
