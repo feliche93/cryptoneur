@@ -1,28 +1,28 @@
+'use client'
+
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid'
 import { currencies } from '@lib/gas-fees-calculator'
+import clsx from 'clsx'
 import { Fragment } from 'react'
-// import { currencies } from "../../lib/gas-fees-calculator";
+import { useController, useFormContext } from 'react-hook-form'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+interface CurrencyInputProps {
+  currencies: string[]
 }
 
-export default function CurrencyInput({ selectedCurrency, setSelectedCurrency }) {
-  function handleCurrencyChange(currency) {
-    setSelectedCurrency(currency)
-    // console.log("Currency changed to: " + currency);
-    // router.push(
-    //   `/gas-fees-calculator/${currency}${
-    //     usedGas !== undefined ? "/" + usedGas : ""
-    //   }${txnSpeed !== undefined ? "/" + txnSpeed !== undefined : ""}`
-    // );
-  }
+export default function CurrencyInput({ currencies }: CurrencyInputProps) {
+  const { control } = useFormContext()
+
+  const { field } = useController({
+    name: 'currency',
+    control,
+  })
 
   return (
     <>
       <div className="col-span-1 sm:col-span-1">
-        <Listbox value={selectedCurrency} onChange={(event) => handleCurrencyChange(event)}>
+        <Listbox value={field.value} onChange={field.onChange}>
           {({ open }) => (
             <>
               <Listbox.Label className="text-text-base-content/80 block text-sm font-medium">
@@ -30,7 +30,7 @@ export default function CurrencyInput({ selectedCurrency, setSelectedCurrency })
               </Listbox.Label>
               <div className="relative mt-1">
                 <Listbox.Button className="relative h-full w-full cursor-default rounded-md border border-base-300 bg-base-100 py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm">
-                  <span className="block truncate">{selectedCurrency}</span>
+                  <span className="block truncate">{field.value}</span>
                   <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                     <ChevronUpDownIcon
                       className="h-5 w-5 text-base-content/80"
@@ -51,7 +51,7 @@ export default function CurrencyInput({ selectedCurrency, setSelectedCurrency })
                       <Listbox.Option
                         key={currency}
                         className={({ active }) =>
-                          classNames(
+                          clsx(
                             active ? 'bg-primary text-white' : 'text-base-content',
                             'relative cursor-default select-none py-2 pl-8 pr-4',
                           )
@@ -61,7 +61,7 @@ export default function CurrencyInput({ selectedCurrency, setSelectedCurrency })
                         {({ selectedCurrency, active }) => (
                           <>
                             <span
-                              className={classNames(
+                              className={clsx(
                                 selectedCurrency ? 'font-semibold' : 'font-normal',
                                 'block truncate',
                               )}
@@ -70,7 +70,7 @@ export default function CurrencyInput({ selectedCurrency, setSelectedCurrency })
                             </span>
                             {selectedCurrency ? (
                               <span
-                                className={classNames(
+                                className={clsx(
                                   active ? 'text-white' : 'text-primary',
                                   'absolute inset-y-0 left-0 flex items-center pl-1.5',
                                 )}

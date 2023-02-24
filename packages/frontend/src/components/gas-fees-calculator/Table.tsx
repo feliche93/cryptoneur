@@ -1,19 +1,23 @@
-import Image from "next/image";
+'use client'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+import clsx from 'clsx'
+import Image from 'next/image'
+
+import { FC } from 'react'
+import { useFormContext } from 'react-hook-form'
+
+export interface TableProps {
+  networkPrices: any
 }
+export const Table: FC<TableProps> = ({ networkPrices }) => {
+  const { watch } = useFormContext()
 
-export default function Table({
-  selectedCurrency,
-  usedGas,
-  selectedGasPrice,
-  networkPrices,
-}) {
+  const { currency, gasPrice, usedGas } = watch()
+
   return (
     <div className="mt-8 flex flex-col">
       {/* Desktop */}
-      <div className="hidden sm:block -my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div className="-my-2 -mx-4 hidden overflow-x-auto sm:-mx-6 sm:block lg:-mx-8">
         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
           <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <table className="min-w-full divide-y divide-base-300">
@@ -72,11 +76,9 @@ export default function Table({
                           />
                         </div>
                         <div className="ml-4">
-                          <div className="font-medium text-base-content">
-                            {network?.name}
-                          </div>
+                          <div className="font-medium text-base-content">{network?.name}</div>
                           <a
-                            target={"_blank"}
+                            target={'_blank'}
                             href={network?.website}
                             rel="noopener noreferrer"
                             className="text-base-content/80 hover:text-primary"
@@ -88,53 +90,44 @@ export default function Table({
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-base-content/80">
                       <span
-                        className={classNames(
-                          network.type === "Layer 1"
-                            ? "bg-accent text-accent-content"
-                            : network.type === "Sidechain"
-                            ? "bg-primary text-primary-content"
-                            : "bg-secondary text-secondary-content",
-                          "px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                        className={clsx(
+                          network.type === 'Layer 1'
+                            ? 'bg-accent text-accent-content'
+                            : network.type === 'Sidechain'
+                            ? 'bg-primary text-primary-content'
+                            : 'bg-secondary text-secondary-content',
+                          'inline-flex rounded-full px-2 text-xs font-semibold leading-5',
                         )}
                       >
                         {network?.type}
                       </span>
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-base-content/80">
-                      <div className="text-sm text-base-content font-semibold">
+                      <div className="text-sm font-semibold text-base-content">
                         {network.symbol}
                       </div>
                       <div className="text-sm text-base-content/80">
-                        {
-                          network.tokenPrice[
-                            selectedCurrency.toLocaleLowerCase()
-                          ]
-                        }{" "}
-                        {selectedCurrency}
+                        {network.tokenPrice[currency.toLocaleLowerCase()]} {currency}
                       </div>
                     </td>
 
-                    <td className="whitespace-nowrap px-3 py-4 text-sm ">
-                      {usedGas}
-                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm ">{usedGas}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-base-content/80">
-                      <div className="text-sm capitalize text-base-content font-semibold">
-                        {selectedGasPrice}
+                      <div className="text-sm font-semibold capitalize text-base-content">
+                        {gasPrice}
                       </div>
                       <div className="text-sm text-base-content/80">
-                        {network.gasPrice[selectedGasPrice]}
+                        {network.gasPrice[gasPrice]}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap font-bold text-sm text-base-content">
+                    <td className="whitespace-nowrap px-6 py-4 text-sm font-bold text-base-content">
                       {(
-                        (network.tokenPrice[
-                          selectedCurrency.toLocaleLowerCase()
-                        ] *
+                        (network.tokenPrice[currency.toLocaleLowerCase()] *
                           usedGas *
-                          network.gasPrice[selectedGasPrice]) /
+                          network.gasPrice[gasPrice]) /
                         10 ** 9
-                      ).toFixed(4)}{" "}
-                      {selectedCurrency}
+                      ).toFixed(4)}{' '}
+                      {currency}
                     </td>
                   </tr>
                 ))}
@@ -145,18 +138,18 @@ export default function Table({
       </div>
 
       {/* Mobile */}
-      <table className="block sm:hidden mx-auto divide-y divide-base-300">
-        <thead className="bg-base-300 rounded-lg">
+      <table className="mx-auto block divide-y divide-base-300 sm:hidden">
+        <thead className="rounded-lg bg-base-300">
           <tr>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-bold text-base-content/80 uppercase tracking-wider"
+              className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider text-base-content/80"
             >
               Calculation
             </th>
           </tr>
         </thead>
-        <tbody className="bg-base-100 divide-y divide-base-300">
+        <tbody className="divide-y divide-base-300 bg-base-100">
           {networkPrices.map((network) => (
             <tr key={network.website}>
               <td className="px-2 py-4">
@@ -169,21 +162,19 @@ export default function Table({
                         alt={network.name}
                         width={50}
                         height={50}
-                        className="object-contain aspect-square"
+                        className="aspect-square object-contain"
                       ></Image>
                     </div>
                     <div className="ml-4 space-y-2">
-                      <div className="text-sm font-medium text-base-content">
-                        {network.name}
-                      </div>
+                      <div className="text-sm font-medium text-base-content">{network.name}</div>
                       <span
-                        className={classNames(
-                          network.type === "Layer 1"
-                            ? "bg-accent text-accent-content"
-                            : network.type === "Sidechain"
-                            ? "bg-primary text-primary-content"
-                            : "bg-secondary text-secondary-content",
-                          "px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                        className={clsx(
+                          network.type === 'Layer 1'
+                            ? 'bg-accent text-accent-content'
+                            : network.type === 'Sidechain'
+                            ? 'bg-primary text-primary-content'
+                            : 'bg-secondary text-secondary-content',
+                          'inline-flex rounded-full px-2 text-xs font-semibold leading-5',
                         )}
                       >
                         {network.type}
@@ -192,36 +183,28 @@ export default function Table({
                   </div>
                   {/* Calculation Details */}
                   <div className="space-y-1">
-                    <div className="px-2 text-sm uppercase text-base-content text-left">
-                      {network.symbol}{" "}
+                    <div className="px-2 text-left text-sm uppercase text-base-content">
+                      {network.symbol}{' '}
                       <span className="font-semibold">
-                        {network.tokenPrice[
-                          selectedCurrency.toLocaleLowerCase()
-                        ].toFixed(2)}{" "}
-                        {selectedCurrency}
+                        {network.tokenPrice[currency.toLocaleLowerCase()].toFixed(2)} {currency}
                       </span>
                     </div>
                     <div className="px-2 text-sm uppercase text-base-content">
-                      Gas Price{" "}
-                      <span className="font-semibold">
-                        {network.gasPrice[selectedGasPrice]}
-                      </span>
+                      Gas Price <span className="font-semibold">{network.gasPrice[gasPrice]}</span>
                     </div>
                     <div className="px-2 text-sm uppercase text-base-content">
                       Gas Used <span className="font-semibold">{usedGas}</span>
                     </div>
-                    <div className="px-2 border border-primary bg-primary/10 rounded-full max-h-fit py-1 max-w-fit text-sm uppercase text-base-content">
-                      Cost{" "}
+                    <div className="max-h-fit max-w-fit rounded-full border border-primary bg-primary/10 px-2 py-1 text-sm uppercase text-base-content">
+                      Cost{' '}
                       <span className="font-semibold">
                         {(
-                          (network.tokenPrice[
-                            selectedCurrency.toLocaleLowerCase()
-                          ] *
+                          (network.tokenPrice[currency.toLocaleLowerCase()] *
                             usedGas *
-                            network.gasPrice[selectedGasPrice]) /
+                            network.gasPrice[gasPrice]) /
                           10 ** 9
-                        ).toFixed(4)}{" "}
-                        {selectedCurrency}
+                        ).toFixed(4)}{' '}
+                        {currency}
                       </span>
                     </div>
                   </div>
@@ -232,5 +215,5 @@ export default function Table({
         </tbody>
       </table>
     </div>
-  );
+  )
 }

@@ -1,6 +1,8 @@
 import 'server-only'
 
+import { QueryClientWrapper } from '@components/query-client-wrapper'
 import { AnalyticsWrapper } from '@components/shared/analytics'
+import { ToasterWrapper } from '@components/shared/ToasterWrapper'
 import SupabaseProvider from '@components/supabase-provider'
 import { Database } from '@lib/database.types'
 import type { SupabaseClient } from '@supabase/auth-helpers-nextjs'
@@ -9,12 +11,53 @@ import { NextSeo } from 'next-seo'
 import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/Navbar'
 import './globals.css'
-import { QueryClientWrapper } from '@components/query-client-wrapper'
-import { ToasterWrapper } from '@components/shared/ToasterWrapper'
+import { Metadata } from 'next'
+import profilePic from '@public/profilePic.jpg'
 
 export type TypedSupabaseClient = SupabaseClient<Database>
 
-export const revalidate = 0
+export const metadata: Metadata = {
+  title: {
+    default: 'Cryptoneur',
+    template: 'Cryptoneur | %s',
+  },
+  description:
+    'Welcome to my personal website! Check out my portofolio projects, browse through my blog posts or get in touch with me for freelance work.',
+  keywords:
+    'crypto, web3, freelancer, developer, react, nextjs, tailwind, typescript, ethereum, solidity, web3, blockchain, dapp, defi, decentralised, data, machine learning, gpt3',
+  openGraph: {
+    title: 'Cryptoneur',
+    description:
+      'Welcome to my personal website! Check out my portofolio projects, browse through my blog posts or get in touch with me for freelance work.',
+    url: 'https://www.cryptoneur.xyz',
+    siteName: 'Cryptoneur.xyz',
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_URL}${profilePic.src}`,
+        width: profilePic.width,
+        height: profilePic.height,
+        alt: 'Cryptoneur.xyz profile picture',
+      },
+    ],
+    locale: 'en-US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Cryptoneur',
+    description:
+      'Welcome to my personal website! Check out my portofolio projects, browse through my blog posts or get in touch with me for freelance work.',
+    creator: '@cryptoneur_eth',
+    creatorId: '1229504037495746560',
+    images: [
+      {
+        url: profilePic.src,
+        width: profilePic.width,
+        height: profilePic.height,
+      },
+    ],
+  },
+}
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const supabase = createServerClient()
@@ -25,18 +68,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en">
-      <head>
-        {/* Used to be added by default, now we need to add manually */}
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <NextSeo
-        useAppDir={true}
-        // facebook={{ appId: '1234567890' }}
-        // themeColor="#73fa97"
-        titleTemplate="Cryptoneur | %s"
-      />
       <SupabaseProvider session={session}>
         <QueryClientWrapper>
           <body className="min-h-screen bg-base-200">

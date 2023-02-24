@@ -1,0 +1,8 @@
+
+pre-commit
+mypy
+isort
+black
+flake8
+pylint
+ipykernel

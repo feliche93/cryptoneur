@@ -1,39 +1,36 @@
-import { useState } from "react";
-import { RadioGroup } from "@headlessui/react";
+'use client'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import { useState } from 'react'
+import { RadioGroup } from '@headlessui/react'
 
-export default function GasPriceRadio({ setSelectedGasPrice }) {
-  // console.log(selectedGasPrice)
-  const gasPriceOption = ["standard", "fast", "instant"];
+import { FC } from 'react'
+import { useController, useFormContext } from 'react-hook-form'
+
+export const GasPriceRadio: FC = () => {
+  const gasPriceOption = ['standard', 'fast', 'instant']
+
+  const { control } = useFormContext()
+  const { field } = useController({ name: 'gasPrice', control })
 
   return (
     <div className="col-span-1 sm:col-span-1">
-      <label
-        htmlFor="gas-input"
-        className="block text-sm font-medium text-gray-700"
-      >
+      <label htmlFor="gas-input" className="block text-sm font-medium text-gray-700">
         Transaction Speed
       </label>
       <fieldset className="mt-2">
-        <legend className="sr-only">Notification method</legend>
+        <legend className="sr-only">Gas Price Radio</legend>
         <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
           {gasPriceOption.map((option) => (
             <div key={option} className="flex items-center">
               <input
                 id={option}
-                onChange={() => setSelectedGasPrice(option)}
+                onChange={() => field.onChange(option)}
                 name="gas-price-option"
                 type="radio"
-                defaultChecked={option === "standard"}
-                className="focus:ring-primary-focus h-4 w-4 text-primary border-base-200"
+                defaultChecked={option === 'standard'}
+                className="h-4 w-4 border-base-200 text-primary focus:ring-primary-focus"
               />
-              <label
-                htmlFor={option}
-                className="capitalize ml-3 block text-sm font-medium"
-              >
+              <label htmlFor={option} className="ml-3 block text-sm font-normal capitalize">
                 {option}
               </label>
             </div>
@@ -41,5 +38,5 @@ export default function GasPriceRadio({ setSelectedGasPrice }) {
         </div>
       </fieldset>
     </div>
-  );
+  )
 }
