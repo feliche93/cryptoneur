@@ -14,6 +14,8 @@ import image2 from '@public/gas-fees-calculator/ogImage2.jpg'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
+export const revalidate = 300
+
 export const metadata = {
   title: 'Gas Fees Calculator (Multi Currency, Network & Txn Types)',
   description:
@@ -59,10 +61,6 @@ const GasFeesCalculator = async () => {
       tokenPrice,
     }
   })
-
-  //   const [selectedCurrency, setSelectedCurrency] = useState('USD')
-  //   const [selectedGasPrice, setSelectedGasPrice] = useState('standard')
-  //   const [usedGas, setUsedGas] = useState(21000)
 
   return (
     <>
@@ -116,7 +114,6 @@ const GasFeesCalculator = async () => {
           </a>
         </div>
       </div>
-      {/* <Banner /> */}
     </>
   )
 }
