@@ -36,6 +36,7 @@ export const metadata: Metadata = {
         url: profilePic.src,
         width: profilePic.width,
         height: profilePic.height,
+        alt: 'Cryptoneur.xyz profile picture',
       },
     ],
     locale: 'en-US',

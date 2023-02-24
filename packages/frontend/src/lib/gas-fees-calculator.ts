@@ -1,7 +1,10 @@
+import "server-only";
+
 import axios from 'axios';
 
 const API_KEY = process.env.ZAPPER_API_KEY;
 const apiUrl = 'https://api.zapper.fi/v2';
+
 
 const currencies = [
   "USD",

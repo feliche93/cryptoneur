@@ -1,33 +1,32 @@
-import React from "react";
+'use client'
+
 import {
-  RedditShareButton,
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
   RedditIcon,
+  RedditShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TwitterIcon,
+  TwitterShareButton,
   WhatsappIcon,
   WhatsappShareButton,
-  FacebookShareButton,
-  FacebookIcon,
-  TwitterShareButton,
-  TwitterIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-  EmailShareButton,
-  EmailIcon,
-  TelegramShareButton,
-  TelegramIcon,
-} from "next-share";
-
-type Props = {
-  title: string;
-  size: number;
-  shareTitle: string;
-  shareUrl: string;
-};
-
-export default function ShareButtons(props: Props) {
-  const { title, size, shareTitle, shareUrl } = props;
+} from 'next-share'
+import { FC } from 'react'
+export interface ShareButtonsProps {
+  title: string
+  size: number
+  shareTitle: string
+  shareUrl: string
+}
+export const ShareButtons: FC<ShareButtonsProps> = ({ title, size, shareTitle, shareUrl }) => {
   return (
-    <div className="pt-5 pb-10 space-y-4">
-      <h2 className="text-center text-base-content/80 text-xs">{title}</h2>
+    <div className="space-y-4 pt-5 pb-10">
+      <h2 className="text-center text-xs text-base-content/80">{title}</h2>
       <div className="flex justify-center space-x-2">
         <RedditShareButton url={shareUrl} title={shareTitle}>
           <RedditIcon round size={size} />
@@ -52,5 +51,5 @@ export default function ShareButtons(props: Props) {
         </FacebookShareButton>
       </div>
     </div>
-  );
+  )
 }
