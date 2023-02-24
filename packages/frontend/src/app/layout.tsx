@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: 'Cryptoneur.xyz',
     images: [
       {
-        url: profilePic.src,
+        url: '/profilePic.jpg',
         width: profilePic.width,
         height: profilePic.height,
         alt: 'Cryptoneur.xyz profile picture',
