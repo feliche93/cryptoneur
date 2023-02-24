@@ -1,10 +1,7 @@
 import "server-only";
 
-import axios from 'axios';
-
 const API_KEY = process.env.ZAPPER_API_KEY;
 const apiUrl = 'https://api.zapper.fi/v2';
-
 
 const currencies = [
   "USD",
@@ -43,6 +40,16 @@ const currencies = [
   "MYR",
   "RON",
 ];
+
+interface Network {
+  network: string;
+  symbol: string;
+  name: string;
+  coinGeckoId: string;
+  website: string;
+  image: string;
+  type: string;
+}
 
 const networks = [
   {
@@ -147,21 +154,16 @@ const networks = [
 ];
 
 const fetchFiatRates = async () => {
-
-  let ids = networks.map(network => network.coinGeckoId).join(',');
+  const ids = networks.map(network => network.coinGeckoId).join(',');
+  const vsCurrencies = currencies.join(',');
 
   try {
-    const res = await axios({
-      method: 'get',
-      url: 'https://api.coingecko.com/api/v3/simple/price',
-      params: {
-        ids,
-        vs_currencies: currencies.join(','),
-      },
-    });
+    const response = await fetch(
+      `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`,
+      { next: { revalidate: 300 } }
+    );
 
-    const data = res.data;
-
+    const data = await response.json();
     return data;
   } catch (error) {
     console.log(error);
@@ -172,18 +174,14 @@ const fetchGasPrices = async () => {
   try {
     const requests = Promise.all(
       networks.map(async ({ network }) => {
-        const gasPriceResponse = await axios.get(`${apiUrl}/gas-prices`, {
-          params: { network, api_key: API_KEY },
-        });
-
-        const data = gasPriceResponse.data;
-
+        const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`;
+        const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } });
+        const data = await gasPriceResponse.json();
         return data;
       })
     );
 
-    let data = await requests;
-
+    const data = await requests;
     return data;
 
   } catch (e) {
@@ -196,4 +194,4 @@ export {
   fetchGasPrices,
   networks,
   currencies
-}
+};

@@ -15,8 +15,6 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
-export const revalidate = 300
-
 export const metadata: Metadata = {
   title: 'Gas Fees Calculator (Multi Currency, Network & Txn Types)',
   description:
