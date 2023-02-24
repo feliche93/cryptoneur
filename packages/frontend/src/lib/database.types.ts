@@ -183,6 +183,90 @@ export interface Database {
           id?: number
         }
       }
+      grant_project_payments: {
+        Row: {
+          amount_paid_fiat: number
+          amount_paid_value: number
+          created_at: string | null
+          grant_id: number
+          id: number
+          project_id: number
+          transaction_reference: string
+        }
+        Insert: {
+          amount_paid_fiat: number
+          amount_paid_value: number
+          created_at?: string | null
+          grant_id: number
+          id?: number
+          project_id: number
+          transaction_reference: string
+        }
+        Update: {
+          amount_paid_fiat?: number
+          amount_paid_value?: number
+          created_at?: string | null
+          grant_id?: number
+          id?: number
+          project_id?: number
+          transaction_reference?: string
+        }
+      }
+      grant_projects: {
+        Row: {
+          amount_requested_curency: number | null
+          amount_requested_value: number | null
+          created_at: string | null
+          end_date: string | null
+          grant_id: number
+          id: number
+          last_updated_at: string | null
+          project_id: number
+          start_date: string | null
+        }
+        Insert: {
+          amount_requested_curency?: number | null
+          amount_requested_value?: number | null
+          created_at?: string | null
+          end_date?: string | null
+          grant_id: number
+          id?: number
+          last_updated_at?: string | null
+          project_id: number
+          start_date?: string | null
+        }
+        Update: {
+          amount_requested_curency?: number | null
+          amount_requested_value?: number | null
+          created_at?: string | null
+          end_date?: string | null
+          grant_id?: number
+          id?: number
+          last_updated_at?: string | null
+          project_id?: number
+          start_date?: string | null
+        }
+      }
+      grant_rfps: {
+        Row: {
+          created_at: string | null
+          grant_id: number | null
+          id: number
+          rfp_id: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          grant_id?: number | null
+          id?: number
+          rfp_id?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          grant_id?: number | null
+          id?: number
+          rfp_id?: number | null
+        }
+      }
       grant_use_cases: {
         Row: {
           created_at: string | null
@@ -271,6 +355,44 @@ export interface Database {
           website?: string | null
         }
       }
+      nc_evolutions: {
+        Row: {
+          batch: number | null
+          checksum: string | null
+          created: string | null
+          created_at: string | null
+          description: string | null
+          id: number
+          status: number | null
+          title: string
+          titleDown: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          batch?: number | null
+          checksum?: string | null
+          created?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          status?: number | null
+          title: string
+          titleDown?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          batch?: number | null
+          checksum?: string | null
+          created?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          status?: number | null
+          title?: string
+          titleDown?: string | null
+          updated_at?: string | null
+        }
+      }
       posts: {
         Row: {
           author_id: string
@@ -298,6 +420,52 @@ export interface Database {
           media?: string | null
           reply_id?: number | null
           text?: string
+        }
+      }
+      project_use_cases: {
+        Row: {
+          created_at: string | null
+          id: number
+          project_id: number
+          use_case_id: number
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          project_id: number
+          use_case_id: number
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          project_id?: number
+          use_case_id?: number
+        }
+      }
+      projects: {
+        Row: {
+          created_at: string | null
+          id: number
+          last_updated_at: string | null
+          logo: string | null
+          name: string
+          url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          last_updated_at?: string | null
+          logo?: string | null
+          name: string
+          url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          last_updated_at?: string | null
+          logo?: string | null
+          name?: string
+          url?: string | null
         }
       }
       providers: {
@@ -364,6 +532,101 @@ export interface Database {
           id?: number
           is_generated?: boolean | null
           reply?: string
+        }
+      }
+      rfp_priorities: {
+        Row: {
+          created_at: string | null
+          id: number
+          name: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          name?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          name?: string | null
+        }
+      }
+      rfp_statuses: {
+        Row: {
+          created_at: string | null
+          id: number
+          status: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          status?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          status?: string | null
+        }
+      }
+      rfp_use_cases: {
+        Row: {
+          created_at: string | null
+          id: number
+          rfp_id: number
+          use_case_id: number
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          rfp_id: number
+          use_case_id: number
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          rfp_id?: number
+          use_case_id?: number
+        }
+      }
+      rfps: {
+        Row: {
+          created_at: string | null
+          deadline_at: string | null
+          description: string
+          funding_maximum: number | null
+          funding_maximum_currency: number | null
+          funding_minimum: number | null
+          funding_minimum_currency: number | null
+          id: number
+          name: string
+          priority_id: number | null
+          status_id: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          deadline_at?: string | null
+          description: string
+          funding_maximum?: number | null
+          funding_maximum_currency?: number | null
+          funding_minimum?: number | null
+          funding_minimum_currency?: number | null
+          id?: number
+          name: string
+          priority_id?: number | null
+          status_id?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          deadline_at?: string | null
+          description?: string
+          funding_maximum?: number | null
+          funding_maximum_currency?: number | null
+          funding_minimum?: number | null
+          funding_minimum_currency?: number | null
+          id?: number
+          name?: string
+          priority_id?: number | null
+          status_id?: number | null
         }
       }
       use_cases: {
