@@ -60,7 +60,7 @@ export const GrantRfps: FC<GrantRfpsProps> = async ({ slug, title, description }
           </div>
           <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
             {rfps?.map((rfp, index) => (
-              <dl key={rfp.id} className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+              <dl key={rfp.id} className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-1">
                 <div>
                   <dt className="text-sm font-medium text-base-content">
                     {index + 1}. {rfp.name}
