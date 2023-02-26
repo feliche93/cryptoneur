@@ -1,6 +1,7 @@
 export const revalidate = 60
 
 import { GrantInfoCard } from '@components/web3-grants/grant/GrantInfoCard'
+import { GrantRfps } from '@components/web3-grants/grant/GrantRfps'
 import { Header } from '@components/web3-grants/grant/Header'
 import { createServerClient } from '@utils/supabase-server'
 import { Metadata, NextPage } from 'next'
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
 
   return {
-    title: grant.name,
+    title: `${grant.name} | Web3 Grants`,
     description: grant.description,
     openGraph: {
       title: grant.name,
@@ -60,6 +61,11 @@ const Web3GrantPage = ({ params }: Params) => {
               title="Grant Info"
               description="All high-level infromation about the grant."
               slug={slug}
+            />
+            <GrantRfps
+              title="RFPs"
+              slug={slug}
+              description="All suggested ideas and projects from grant givers themeselves."
             />
           </div>
         </div>

@@ -1,11 +1,3 @@
-import {
-  FaceFrownIcon,
-  IdentificationIcon,
-  PaperClipIcon,
-  PlusCircleIcon,
-} from '@heroicons/react/24/outline'
-import { Database } from '@lib/database.types'
-import { getGrantbySlug } from '@shared/strapi'
 import { createServerClient } from '@utils/supabase-server'
 import { FC } from 'react'
 import { NoInfo } from './NoInfo'
