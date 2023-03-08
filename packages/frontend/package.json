@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@calcom/embed-react": "^1.0.10",
+    "@directus/sdk": "^10.3.1",
     "@google-analytics/data": "^3.2.1",
     "@headlessui/react": "^1.7.11",
     "@heroicons/react": "^2.0.16",
@@ -59,6 +60,7 @@
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "autoprefixer": "^10.4.13",
+    "directus-typescript-gen": "^0.2.1",
     "encoding": "^0.1.13",
     "eslint": "8.34.0",
     "eslint-config-next": "13.2.0",
