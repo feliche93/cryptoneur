@@ -12,7 +12,7 @@ export const SecondCta: FC = async () => {
     .select('id,name,logo')
     .in('id', [7, 2, 17, 15, 19, 14, 1, 6, 20])
 
-  // console.log({ ...data })
+  console.log({ ...data })
 
   const avatarsRowOne = [...data?.slice(0, 5)]
 
