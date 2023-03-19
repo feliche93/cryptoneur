@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+		"@formatjs/intl-localematcher": "^0.2.32",
+		"negotiator": "^0.6.3"
+	},
+	"devDependencies": {
+		"@types/negotiator": "^0.6.1"
+	}
+}

@@ -100,6 +100,132 @@ export interface paths {
     /** Returns a random string of given length. */
     get: operations["random"];
   };
+  "/items/authors": {
+    /** List the authors items. */
+    get: operations["readItemsAuthors"];
+    /** Create a new authors item. */
+    post: operations["createItemsAuthors"];
+  };
+  "/items/authors/{id}": {
+    /** Retrieve a single authors item by unique identifier. */
+    get: operations["readSingleItemsAuthors"];
+    /** Delete an existing authors item. */
+    delete: operations["deleteSingleItemsAuthors"];
+    /** Update an existing authors item. */
+    patch: operations["updateSingleItemsAuthors"];
+  };
+  "/items/block_cal": {
+    /** List the block_cal items. */
+    get: operations["readItemsBlockCal"];
+    /** Create a new block_cal item. */
+    post: operations["createItemsBlockCal"];
+  };
+  "/items/block_cal/{id}": {
+    /** Retrieve a single block_cal item by unique identifier. */
+    get: operations["readSingleItemsBlockCal"];
+    /** Delete an existing block_cal item. */
+    delete: operations["deleteSingleItemsBlockCal"];
+    /** Update an existing block_cal item. */
+    patch: operations["updateSingleItemsBlockCal"];
+  };
+  "/items/block_cal_title": {
+    /** List the block_cal_title items. */
+    get: operations["readItemsBlockCalTitle"];
+    /** Create a new block_cal_title item. */
+    post: operations["createItemsBlockCalTitle"];
+  };
+  "/items/block_cal_title/{id}": {
+    /** Retrieve a single block_cal_title item by unique identifier. */
+    get: operations["readSingleItemsBlockCalTitle"];
+    /** Delete an existing block_cal_title item. */
+    delete: operations["deleteSingleItemsBlockCalTitle"];
+    /** Update an existing block_cal_title item. */
+    patch: operations["updateSingleItemsBlockCalTitle"];
+  };
+  "/items/block_gradient_title": {
+    /** List the block_gradient_title items. */
+    get: operations["readItemsBlockGradientTitle"];
+    /** Create a new block_gradient_title item. */
+    post: operations["createItemsBlockGradientTitle"];
+  };
+  "/items/block_gradient_title/{id}": {
+    /** Retrieve a single block_gradient_title item by unique identifier. */
+    get: operations["readSingleItemsBlockGradientTitle"];
+    /** Delete an existing block_gradient_title item. */
+    delete: operations["deleteSingleItemsBlockGradientTitle"];
+    /** Update an existing block_gradient_title item. */
+    patch: operations["updateSingleItemsBlockGradientTitle"];
+  };
+  "/items/block_gradient_title_translations": {
+    /** List the block_gradient_title_translations items. */
+    get: operations["readItemsBlockGradientTitleTranslations"];
+    /** Create a new block_gradient_title_translations item. */
+    post: operations["createItemsBlockGradientTitleTranslations"];
+  };
+  "/items/block_gradient_title_translations/{id}": {
+    /** Retrieve a single block_gradient_title_translations item by unique identifier. */
+    get: operations["readSingleItemsBlockGradientTitleTranslations"];
+    /** Delete an existing block_gradient_title_translations item. */
+    delete: operations["deleteSingleItemsBlockGradientTitleTranslations"];
+    /** Update an existing block_gradient_title_translations item. */
+    patch: operations["updateSingleItemsBlockGradientTitleTranslations"];
+  };
+  "/items/block_hero": {
+    /** List the block_hero items. */
+    get: operations["readItemsBlockHero"];
+    /** Create a new block_hero item. */
+    post: operations["createItemsBlockHero"];
+  };
+  "/items/block_hero/{id}": {
+    /** Retrieve a single block_hero item by unique identifier. */
+    get: operations["readSingleItemsBlockHero"];
+    /** Delete an existing block_hero item. */
+    delete: operations["deleteSingleItemsBlockHero"];
+    /** Update an existing block_hero item. */
+    patch: operations["updateSingleItemsBlockHero"];
+  };
+  "/items/block_hero_translations": {
+    /** List the block_hero_translations items. */
+    get: operations["readItemsBlockHeroTranslations"];
+    /** Create a new block_hero_translations item. */
+    post: operations["createItemsBlockHeroTranslations"];
+  };
+  "/items/block_hero_translations/{id}": {
+    /** Retrieve a single block_hero_translations item by unique identifier. */
+    get: operations["readSingleItemsBlockHeroTranslations"];
+    /** Delete an existing block_hero_translations item. */
+    delete: operations["deleteSingleItemsBlockHeroTranslations"];
+    /** Update an existing block_hero_translations item. */
+    patch: operations["updateSingleItemsBlockHeroTranslations"];
+  };
+  "/items/block_title": {
+    /** List the block_title items. */
+    get: operations["readItemsBlockTitle"];
+    /** Create a new block_title item. */
+    post: operations["createItemsBlockTitle"];
+  };
+  "/items/block_title/{id}": {
+    /** Retrieve a single block_title item by unique identifier. */
+    get: operations["readSingleItemsBlockTitle"];
+    /** Delete an existing block_title item. */
+    delete: operations["deleteSingleItemsBlockTitle"];
+    /** Update an existing block_title item. */
+    patch: operations["updateSingleItemsBlockTitle"];
+  };
+  "/items/block_title_translations": {
+    /** List the block_title_translations items. */
+    get: operations["readItemsBlockTitleTranslations"];
+    /** Create a new block_title_translations item. */
+    post: operations["createItemsBlockTitleTranslations"];
+  };
+  "/items/block_title_translations/{id}": {
+    /** Retrieve a single block_title_translations item by unique identifier. */
+    get: operations["readSingleItemsBlockTitleTranslations"];
+    /** Delete an existing block_title_translations item. */
+    delete: operations["deleteSingleItemsBlockTitleTranslations"];
+    /** Update an existing block_title_translations item. */
+    patch: operations["updateSingleItemsBlockTitleTranslations"];
+  };
   "/items/blockchains": {
     /** List the blockchains items. */
     get: operations["readItemsBlockchains"];
@@ -114,6 +240,34 @@ export interface paths {
     /** Update an existing blockchains item. */
     patch: operations["updateSingleItemsBlockchains"];
   };
+  "/items/blocks": {
+    /** List the blocks items. */
+    get: operations["readItemsBlocks"];
+    /** Create a new blocks item. */
+    post: operations["createItemsBlocks"];
+  };
+  "/items/blocks/{id}": {
+    /** Retrieve a single blocks item by unique identifier. */
+    get: operations["readSingleItemsBlocks"];
+    /** Delete an existing blocks item. */
+    delete: operations["deleteSingleItemsBlocks"];
+    /** Update an existing blocks item. */
+    patch: operations["updateSingleItemsBlocks"];
+  };
+  "/items/categories": {
+    /** List the categories items. */
+    get: operations["readItemsCategories"];
+    /** Create a new categories item. */
+    post: operations["createItemsCategories"];
+  };
+  "/items/categories/{id}": {
+    /** Retrieve a single categories item by unique identifier. */
+    get: operations["readSingleItemsCategories"];
+    /** Delete an existing categories item. */
+    delete: operations["deleteSingleItemsCategories"];
+    /** Update an existing categories item. */
+    patch: operations["updateSingleItemsCategories"];
+  };
   "/items/currencies": {
     /** List the currencies items. */
     get: operations["readItemsCurrencies"];
@@ -127,6 +281,34 @@ export interface paths {
     delete: operations["deleteSingleItemsCurrencies"];
     /** Update an existing currencies item. */
     patch: operations["updateSingleItemsCurrencies"];
+  };
+  "/items/fiats": {
+    /** List the fiats items. */
+    get: operations["readItemsFiats"];
+    /** Create a new fiats item. */
+    post: operations["createItemsFiats"];
+  };
+  "/items/fiats/{id}": {
+    /** Retrieve a single fiats item by unique identifier. */
+    get: operations["readSingleItemsFiats"];
+    /** Delete an existing fiats item. */
+    delete: operations["deleteSingleItemsFiats"];
+    /** Update an existing fiats item. */
+    patch: operations["updateSingleItemsFiats"];
+  };
+  "/items/followers": {
+    /** List the followers items. */
+    get: operations["readItemsFollowers"];
+    /** Create a new followers item. */
+    post: operations["createItemsFollowers"];
+  };
+  "/items/followers/{id}": {
+    /** Retrieve a single followers item by unique identifier. */
+    get: operations["readSingleItemsFollowers"];
+    /** Delete an existing followers item. */
+    delete: operations["deleteSingleItemsFollowers"];
+    /** Update an existing followers item. */
+    patch: operations["updateSingleItemsFollowers"];
   };
   "/items/grant_blockchains": {
     /** List the grant_blockchains items. */
@@ -183,6 +365,48 @@ export interface paths {
     delete: operations["deleteSingleItemsLanguages"];
     /** Update an existing languages item. */
     patch: operations["updateSingleItemsLanguages"];
+  };
+  "/items/pages": {
+    /** List the pages items. */
+    get: operations["readItemsPages"];
+    /** Create a new pages item. */
+    post: operations["createItemsPages"];
+  };
+  "/items/pages/{id}": {
+    /** Retrieve a single pages item by unique identifier. */
+    get: operations["readSingleItemsPages"];
+    /** Delete an existing pages item. */
+    delete: operations["deleteSingleItemsPages"];
+    /** Update an existing pages item. */
+    patch: operations["updateSingleItemsPages"];
+  };
+  "/items/pages_content": {
+    /** List the pages_content items. */
+    get: operations["readItemsPagesContent"];
+    /** Create a new pages_content item. */
+    post: operations["createItemsPagesContent"];
+  };
+  "/items/pages_content/{id}": {
+    /** Retrieve a single pages_content item by unique identifier. */
+    get: operations["readSingleItemsPagesContent"];
+    /** Delete an existing pages_content item. */
+    delete: operations["deleteSingleItemsPagesContent"];
+    /** Update an existing pages_content item. */
+    patch: operations["updateSingleItemsPagesContent"];
+  };
+  "/items/pages_contentbla": {
+    /** List the pages_contentbla items. */
+    get: operations["readItemsPagesContentbla"];
+    /** Create a new pages_contentbla item. */
+    post: operations["createItemsPagesContentbla"];
+  };
+  "/items/pages_contentbla/{id}": {
+    /** Retrieve a single pages_contentbla item by unique identifier. */
+    get: operations["readSingleItemsPagesContentbla"];
+    /** Delete an existing pages_contentbla item. */
+    delete: operations["deleteSingleItemsPagesContentbla"];
+    /** Update an existing pages_contentbla item. */
+    patch: operations["updateSingleItemsPagesContentbla"];
   };
   "/items/web3": {
     /** List the web3 items. */
@@ -670,62 +894,6 @@ export interface paths {
     /** Update an existing operation */
     patch: operations["updateOperation"];
   };
-  "/items/authors": {
-    /** List the authors items. */
-    get: operations["readItemsAuthors"];
-    /** Create a new authors item. */
-    post: operations["createItemsAuthors"];
-  };
-  "/items/authors/{id}": {
-    /** Retrieve a single authors item by unique identifier. */
-    get: operations["readSingleItemsAuthors"];
-    /** Delete an existing authors item. */
-    delete: operations["deleteSingleItemsAuthors"];
-    /** Update an existing authors item. */
-    patch: operations["updateSingleItemsAuthors"];
-  };
-  "/items/categories": {
-    /** List the categories items. */
-    get: operations["readItemsCategories"];
-    /** Create a new categories item. */
-    post: operations["createItemsCategories"];
-  };
-  "/items/categories/{id}": {
-    /** Retrieve a single categories item by unique identifier. */
-    get: operations["readSingleItemsCategories"];
-    /** Delete an existing categories item. */
-    delete: operations["deleteSingleItemsCategories"];
-    /** Update an existing categories item. */
-    patch: operations["updateSingleItemsCategories"];
-  };
-  "/items/fiats": {
-    /** List the fiats items. */
-    get: operations["readItemsFiats"];
-    /** Create a new fiats item. */
-    post: operations["createItemsFiats"];
-  };
-  "/items/fiats/{id}": {
-    /** Retrieve a single fiats item by unique identifier. */
-    get: operations["readSingleItemsFiats"];
-    /** Delete an existing fiats item. */
-    delete: operations["deleteSingleItemsFiats"];
-    /** Update an existing fiats item. */
-    patch: operations["updateSingleItemsFiats"];
-  };
-  "/items/followers": {
-    /** List the followers items. */
-    get: operations["readItemsFollowers"];
-    /** Create a new followers item. */
-    post: operations["createItemsFollowers"];
-  };
-  "/items/followers/{id}": {
-    /** Retrieve a single followers item by unique identifier. */
-    get: operations["readSingleItemsFollowers"];
-    /** Delete an existing followers item. */
-    delete: operations["deleteSingleItemsFollowers"];
-    /** Update an existing followers item. */
-    patch: operations["updateSingleItemsFollowers"];
-  };
   "/items/grant_project_payments": {
     /** List the grant_project_payments items. */
     get: operations["readItemsGrantProjectPayments"];
@@ -977,11 +1145,107 @@ export interface components {
       /** Returns the item count of the collection you're querying, taking the current filter/search parameters into account. */
       filter_count?: number;
     };
+    ItemsAuthors: {
+      id?: string;
+      created_at?: string | null;
+      username?: string;
+      is_following?: boolean | null;
+      provider_id?: number | components["schemas"]["ItemsProviders"];
+    };
+    ItemsBlockCal: {
+      id?: number;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      url?: string | null;
+      title?: (number | components["schemas"]["ItemsBlockCalTitle"])[];
+    };
+    ItemsBlockCalTitle: {
+      id?: number;
+      block_cal_id?: (number | components["schemas"]["ItemsBlockCal"]) | null;
+      item?: (string | { [key: string]: any })[] | null;
+      collection?: string | null;
+    };
+    ItemsBlockGradientTitle: {
+      id?: number;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      translations?: (
+        | number
+        | components["schemas"]["ItemsBlockGradientTitleTranslations"]
+      )[];
+    };
+    ItemsBlockGradientTitleTranslations: {
+      id?: number;
+      block_gradient_title_id?:
+        | (number | components["schemas"]["ItemsBlockGradientTitle"])
+        | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      name?: string | null;
+    };
+    ItemsBlockHero: {
+      id?: number;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      image?: (string | components["schemas"]["Files"]) | null;
+      translations?: (
+        | number
+        | components["schemas"]["ItemsBlockHeroTranslations"]
+      )[];
+    };
+    ItemsBlockHeroTranslations: {
+      id?: number;
+      block_hero_id?: (number | components["schemas"]["ItemsBlockHero"]) | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      subtitle?: string | null;
+      title?: string | null;
+    };
+    ItemsBlockTitle: {
+      id?: number;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      translations?: (
+        | number
+        | components["schemas"]["ItemsBlockTitleTranslations"]
+      )[];
+    };
+    ItemsBlockTitleTranslations: {
+      id?: number;
+      block_title_id?:
+        | (number | components["schemas"]["ItemsBlockTitle"])
+        | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      name?: string | null;
+    };
     ItemsBlockchains: {
       id?: number;
       name?: string | null;
       created_at?: string | null;
       updated_at?: string | null;
+    };
+    ItemsBlocks: { [key: string]: any };
+    ItemsCategories: {
+      id?: number;
+      created_at?: string | null;
+      updated_at?: string | null;
+      name?: string;
     };
     ItemsCurrencies: {
       id?: number;
@@ -994,6 +1258,21 @@ export interface components {
       name?: string | null;
       sign?: string | null;
       symbol?: string | null;
+    };
+    ItemsFiats: {
+      id?: number;
+      created_at?: string | null;
+      name?: string;
+      sign?: string;
+      symbol?: string;
+    };
+    ItemsFollowers: {
+      id?: number;
+      created_at?: string | null;
+      provider_id?: (number | components["schemas"]["ItemsProviders"]) | null;
+      username?: string;
+      is_following?: boolean;
+      is_sent?: boolean;
     };
     ItemsGrantBlockchains: { [key: string]: any };
     ItemsGrantCategories: { [key: string]: any };
@@ -1029,6 +1308,28 @@ export interface components {
       code?: string;
       name?: string | null;
       direction?: string | null;
+    };
+    ItemsPages: {
+      id?: number;
+      status?: string;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      content?: (number | components["schemas"]["ItemsPagesContent"])[];
+    };
+    ItemsPagesContent: {
+      id?: number;
+      pages_id?: (number | components["schemas"]["ItemsPages"]) | null;
+      item?: (string | { [key: string]: any })[] | null;
+      collection?: string | null;
+    };
+    ItemsPagesContentbla: {
+      id?: number;
+      pages_id?: (number | components["schemas"]["ItemsPages"]) | null;
+      item?: (string | { [key: string]: any })[] | null;
+      collection?: string | null;
     };
     ItemsWeb3: { [key: string]: any };
     ItemsWeb3Blockchains: {
@@ -1667,34 +1968,6 @@ export interface components {
       date_created?: string | null;
       /** The user who created the operation. */
       user_created?: string | components["schemas"]["Users"];
-    };
-    ItemsAuthors: {
-      id?: string;
-      created_at?: string | null;
-      username?: string;
-      is_following?: boolean | null;
-      provider_id?: number | components["schemas"]["ItemsProviders"];
-    };
-    ItemsCategories: {
-      id?: number;
-      created_at?: string | null;
-      updated_at?: string | null;
-      name?: string;
-    };
-    ItemsFiats: {
-      id?: number;
-      created_at?: string | null;
-      name?: string;
-      sign?: string;
-      symbol?: string;
-    };
-    ItemsFollowers: {
-      id?: number;
-      created_at?: string | null;
-      provider_id?: (number | components["schemas"]["ItemsProviders"]) | null;
-      username?: string;
-      is_following?: boolean;
-      is_sent?: boolean;
     };
     ItemsGrantProjectPayments: {
       id?: number;
@@ -2343,6 +2616,1212 @@ export interface operations {
       };
     };
   };
+  /** List the authors items. */
+  readItemsAuthors: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsAuthors"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new authors item. */
+  createItemsAuthors: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsAuthors"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsAuthors"][]
+          | components["schemas"]["ItemsAuthors"];
+      };
+    };
+  };
+  /** Retrieve a single authors item by unique identifier. */
+  readSingleItemsAuthors: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsAuthors"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing authors item. */
+  deleteSingleItemsAuthors: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing authors item. */
+  updateSingleItemsAuthors: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsAuthors"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsAuthors"];
+      };
+    };
+  };
+  /** List the block_cal items. */
+  readItemsBlockCal: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockCal"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_cal item. */
+  createItemsBlockCal: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockCal"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockCal"][]
+          | components["schemas"]["ItemsBlockCal"];
+      };
+    };
+  };
+  /** Retrieve a single block_cal item by unique identifier. */
+  readSingleItemsBlockCal: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockCal"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_cal item. */
+  deleteSingleItemsBlockCal: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_cal item. */
+  updateSingleItemsBlockCal: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockCal"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockCal"];
+      };
+    };
+  };
+  /** List the block_cal_title items. */
+  readItemsBlockCalTitle: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockCalTitle"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_cal_title item. */
+  createItemsBlockCalTitle: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockCalTitle"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockCalTitle"][]
+          | components["schemas"]["ItemsBlockCalTitle"];
+      };
+    };
+  };
+  /** Retrieve a single block_cal_title item by unique identifier. */
+  readSingleItemsBlockCalTitle: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockCalTitle"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_cal_title item. */
+  deleteSingleItemsBlockCalTitle: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_cal_title item. */
+  updateSingleItemsBlockCalTitle: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockCalTitle"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockCalTitle"];
+      };
+    };
+  };
+  /** List the block_gradient_title items. */
+  readItemsBlockGradientTitle: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockGradientTitle"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_gradient_title item. */
+  createItemsBlockGradientTitle: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockGradientTitle"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockGradientTitle"][]
+          | components["schemas"]["ItemsBlockGradientTitle"];
+      };
+    };
+  };
+  /** Retrieve a single block_gradient_title item by unique identifier. */
+  readSingleItemsBlockGradientTitle: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockGradientTitle"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_gradient_title item. */
+  deleteSingleItemsBlockGradientTitle: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_gradient_title item. */
+  updateSingleItemsBlockGradientTitle: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockGradientTitle"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockGradientTitle"];
+      };
+    };
+  };
+  /** List the block_gradient_title_translations items. */
+  readItemsBlockGradientTitleTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockGradientTitleTranslations"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_gradient_title_translations item. */
+  createItemsBlockGradientTitleTranslations: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockGradientTitleTranslations"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockGradientTitleTranslations"][]
+          | components["schemas"]["ItemsBlockGradientTitleTranslations"];
+      };
+    };
+  };
+  /** Retrieve a single block_gradient_title_translations item by unique identifier. */
+  readSingleItemsBlockGradientTitleTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockGradientTitleTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_gradient_title_translations item. */
+  deleteSingleItemsBlockGradientTitleTranslations: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_gradient_title_translations item. */
+  updateSingleItemsBlockGradientTitleTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockGradientTitleTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockGradientTitleTranslations"];
+      };
+    };
+  };
+  /** List the block_hero items. */
+  readItemsBlockHero: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHero"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_hero item. */
+  createItemsBlockHero: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHero"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockHero"][]
+          | components["schemas"]["ItemsBlockHero"];
+      };
+    };
+  };
+  /** Retrieve a single block_hero item by unique identifier. */
+  readSingleItemsBlockHero: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHero"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_hero item. */
+  deleteSingleItemsBlockHero: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_hero item. */
+  updateSingleItemsBlockHero: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHero"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockHero"];
+      };
+    };
+  };
+  /** List the block_hero_translations items. */
+  readItemsBlockHeroTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHeroTranslations"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_hero_translations item. */
+  createItemsBlockHeroTranslations: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHeroTranslations"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockHeroTranslations"][]
+          | components["schemas"]["ItemsBlockHeroTranslations"];
+      };
+    };
+  };
+  /** Retrieve a single block_hero_translations item by unique identifier. */
+  readSingleItemsBlockHeroTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHeroTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_hero_translations item. */
+  deleteSingleItemsBlockHeroTranslations: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_hero_translations item. */
+  updateSingleItemsBlockHeroTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHeroTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockHeroTranslations"];
+      };
+    };
+  };
+  /** List the block_title items. */
+  readItemsBlockTitle: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTitle"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_title item. */
+  createItemsBlockTitle: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTitle"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockTitle"][]
+          | components["schemas"]["ItemsBlockTitle"];
+      };
+    };
+  };
+  /** Retrieve a single block_title item by unique identifier. */
+  readSingleItemsBlockTitle: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTitle"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_title item. */
+  deleteSingleItemsBlockTitle: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_title item. */
+  updateSingleItemsBlockTitle: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTitle"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockTitle"];
+      };
+    };
+  };
+  /** List the block_title_translations items. */
+  readItemsBlockTitleTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTitleTranslations"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_title_translations item. */
+  createItemsBlockTitleTranslations: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTitleTranslations"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockTitleTranslations"][]
+          | components["schemas"]["ItemsBlockTitleTranslations"];
+      };
+    };
+  };
+  /** Retrieve a single block_title_translations item by unique identifier. */
+  readSingleItemsBlockTitleTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTitleTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_title_translations item. */
+  deleteSingleItemsBlockTitleTranslations: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_title_translations item. */
+  updateSingleItemsBlockTitleTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTitleTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockTitleTranslations"];
+      };
+    };
+  };
   /** List the blockchains items. */
   readItemsBlockchains: {
     parameters: {
@@ -2477,6 +3956,274 @@ export interface operations {
       };
     };
   };
+  /** List the blocks items. */
+  readItemsBlocks: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlocks"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new blocks item. */
+  createItemsBlocks: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlocks"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlocks"][]
+          | components["schemas"]["ItemsBlocks"];
+      };
+    };
+  };
+  /** Retrieve a single blocks item by unique identifier. */
+  readSingleItemsBlocks: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlocks"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing blocks item. */
+  deleteSingleItemsBlocks: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing blocks item. */
+  updateSingleItemsBlocks: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlocks"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlocks"];
+      };
+    };
+  };
+  /** List the categories items. */
+  readItemsCategories: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsCategories"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new categories item. */
+  createItemsCategories: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsCategories"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsCategories"][]
+          | components["schemas"]["ItemsCategories"];
+      };
+    };
+  };
+  /** Retrieve a single categories item by unique identifier. */
+  readSingleItemsCategories: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsCategories"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing categories item. */
+  deleteSingleItemsCategories: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing categories item. */
+  updateSingleItemsCategories: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsCategories"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsCategories"];
+      };
+    };
+  };
   /** List the currencies items. */
   readItemsCurrencies: {
     parameters: {
@@ -2608,6 +4355,274 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["ItemsCurrencies"];
+      };
+    };
+  };
+  /** List the fiats items. */
+  readItemsFiats: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsFiats"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new fiats item. */
+  createItemsFiats: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsFiats"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsFiats"][]
+          | components["schemas"]["ItemsFiats"];
+      };
+    };
+  };
+  /** Retrieve a single fiats item by unique identifier. */
+  readSingleItemsFiats: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsFiats"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing fiats item. */
+  deleteSingleItemsFiats: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing fiats item. */
+  updateSingleItemsFiats: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsFiats"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsFiats"];
+      };
+    };
+  };
+  /** List the followers items. */
+  readItemsFollowers: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsFollowers"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new followers item. */
+  createItemsFollowers: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsFollowers"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsFollowers"][]
+          | components["schemas"]["ItemsFollowers"];
+      };
+    };
+  };
+  /** Retrieve a single followers item by unique identifier. */
+  readSingleItemsFollowers: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsFollowers"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing followers item. */
+  deleteSingleItemsFollowers: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing followers item. */
+  updateSingleItemsFollowers: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsFollowers"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsFollowers"];
       };
     };
   };
@@ -3144,6 +5159,408 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["ItemsLanguages"];
+      };
+    };
+  };
+  /** List the pages items. */
+  readItemsPages: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPages"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new pages item. */
+  createItemsPages: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPages"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsPages"][]
+          | components["schemas"]["ItemsPages"];
+      };
+    };
+  };
+  /** Retrieve a single pages item by unique identifier. */
+  readSingleItemsPages: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPages"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing pages item. */
+  deleteSingleItemsPages: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing pages item. */
+  updateSingleItemsPages: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPages"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsPages"];
+      };
+    };
+  };
+  /** List the pages_content items. */
+  readItemsPagesContent: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPagesContent"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new pages_content item. */
+  createItemsPagesContent: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPagesContent"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsPagesContent"][]
+          | components["schemas"]["ItemsPagesContent"];
+      };
+    };
+  };
+  /** Retrieve a single pages_content item by unique identifier. */
+  readSingleItemsPagesContent: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPagesContent"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing pages_content item. */
+  deleteSingleItemsPagesContent: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing pages_content item. */
+  updateSingleItemsPagesContent: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPagesContent"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsPagesContent"];
+      };
+    };
+  };
+  /** List the pages_contentbla items. */
+  readItemsPagesContentbla: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPagesContentbla"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new pages_contentbla item. */
+  createItemsPagesContentbla: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPagesContentbla"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsPagesContentbla"][]
+          | components["schemas"]["ItemsPagesContentbla"];
+      };
+    };
+  };
+  /** Retrieve a single pages_contentbla item by unique identifier. */
+  readSingleItemsPagesContentbla: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPagesContentbla"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing pages_contentbla item. */
+  deleteSingleItemsPagesContentbla: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing pages_contentbla item. */
+  updateSingleItemsPagesContentbla: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsPagesContentbla"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsPagesContentbla"];
       };
     };
   };
@@ -7879,542 +10296,6 @@ export interface operations {
       };
     };
   };
-  /** List the authors items. */
-  readItemsAuthors: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** A limit on the number of objects that are returned. */
-        limit?: components["parameters"]["Limit"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-        /** How many items to skip when fetching data. */
-        offset?: components["parameters"]["Offset"];
-        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
-        sort?: components["parameters"]["Sort"];
-        /** Select items in collection by given conditions. */
-        filter?: components["parameters"]["Filter"];
-        /** Filter by items that contain the given search query in one of their fields. */
-        search?: components["parameters"]["Search"];
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsAuthors"][];
-            meta?: components["schemas"]["x-metadata"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-    };
-  };
-  /** Create a new authors item. */
-  createItemsAuthors: {
-    parameters: {
-      query: {
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsAuthors"][];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-    };
-    requestBody: {
-      content: {
-        "application/json":
-          | components["schemas"]["ItemsAuthors"][]
-          | components["schemas"]["ItemsAuthors"];
-      };
-    };
-  };
-  /** Retrieve a single authors item by unique identifier. */
-  readSingleItemsAuthors: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsAuthors"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-  };
-  /** Delete an existing authors item. */
-  deleteSingleItemsAuthors: {
-    parameters: {
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: unknown;
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-  };
-  /** Update an existing authors item. */
-  updateSingleItemsAuthors: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsAuthors"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ItemsAuthors"];
-      };
-    };
-  };
-  /** List the categories items. */
-  readItemsCategories: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** A limit on the number of objects that are returned. */
-        limit?: components["parameters"]["Limit"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-        /** How many items to skip when fetching data. */
-        offset?: components["parameters"]["Offset"];
-        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
-        sort?: components["parameters"]["Sort"];
-        /** Select items in collection by given conditions. */
-        filter?: components["parameters"]["Filter"];
-        /** Filter by items that contain the given search query in one of their fields. */
-        search?: components["parameters"]["Search"];
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsCategories"][];
-            meta?: components["schemas"]["x-metadata"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-    };
-  };
-  /** Create a new categories item. */
-  createItemsCategories: {
-    parameters: {
-      query: {
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsCategories"][];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-    };
-    requestBody: {
-      content: {
-        "application/json":
-          | components["schemas"]["ItemsCategories"][]
-          | components["schemas"]["ItemsCategories"];
-      };
-    };
-  };
-  /** Retrieve a single categories item by unique identifier. */
-  readSingleItemsCategories: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsCategories"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-  };
-  /** Delete an existing categories item. */
-  deleteSingleItemsCategories: {
-    parameters: {
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: unknown;
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-  };
-  /** Update an existing categories item. */
-  updateSingleItemsCategories: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsCategories"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ItemsCategories"];
-      };
-    };
-  };
-  /** List the fiats items. */
-  readItemsFiats: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** A limit on the number of objects that are returned. */
-        limit?: components["parameters"]["Limit"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-        /** How many items to skip when fetching data. */
-        offset?: components["parameters"]["Offset"];
-        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
-        sort?: components["parameters"]["Sort"];
-        /** Select items in collection by given conditions. */
-        filter?: components["parameters"]["Filter"];
-        /** Filter by items that contain the given search query in one of their fields. */
-        search?: components["parameters"]["Search"];
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsFiats"][];
-            meta?: components["schemas"]["x-metadata"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-    };
-  };
-  /** Create a new fiats item. */
-  createItemsFiats: {
-    parameters: {
-      query: {
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsFiats"][];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-    };
-    requestBody: {
-      content: {
-        "application/json":
-          | components["schemas"]["ItemsFiats"][]
-          | components["schemas"]["ItemsFiats"];
-      };
-    };
-  };
-  /** Retrieve a single fiats item by unique identifier. */
-  readSingleItemsFiats: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsFiats"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-  };
-  /** Delete an existing fiats item. */
-  deleteSingleItemsFiats: {
-    parameters: {
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: unknown;
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-  };
-  /** Update an existing fiats item. */
-  updateSingleItemsFiats: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsFiats"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ItemsFiats"];
-      };
-    };
-  };
-  /** List the followers items. */
-  readItemsFollowers: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** A limit on the number of objects that are returned. */
-        limit?: components["parameters"]["Limit"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-        /** How many items to skip when fetching data. */
-        offset?: components["parameters"]["Offset"];
-        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
-        sort?: components["parameters"]["Sort"];
-        /** Select items in collection by given conditions. */
-        filter?: components["parameters"]["Filter"];
-        /** Filter by items that contain the given search query in one of their fields. */
-        search?: components["parameters"]["Search"];
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsFollowers"][];
-            meta?: components["schemas"]["x-metadata"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-    };
-  };
-  /** Create a new followers item. */
-  createItemsFollowers: {
-    parameters: {
-      query: {
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsFollowers"][];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-    };
-    requestBody: {
-      content: {
-        "application/json":
-          | components["schemas"]["ItemsFollowers"][]
-          | components["schemas"]["ItemsFollowers"];
-      };
-    };
-  };
-  /** Retrieve a single followers item by unique identifier. */
-  readSingleItemsFollowers: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsFollowers"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-  };
-  /** Delete an existing followers item. */
-  deleteSingleItemsFollowers: {
-    parameters: {
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: unknown;
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-  };
-  /** Update an existing followers item. */
-  updateSingleItemsFollowers: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsFollowers"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ItemsFollowers"];
-      };
-    };
-  };
   /** List the grant_project_payments items. */
   readItemsGrantProjectPayments: {
     parameters: {
@@ -10562,12 +12443,28 @@ export interface operations {
 }
 
 export type DirectusCollections = {
+  authors: components["schemas"]["ItemsAuthors"];
+  block_cal: components["schemas"]["ItemsBlockCal"];
+  block_cal_title: components["schemas"]["ItemsBlockCalTitle"];
+  block_gradient_title: components["schemas"]["ItemsBlockGradientTitle"];
+  block_gradient_title_translations: components["schemas"]["ItemsBlockGradientTitleTranslations"];
+  block_hero: components["schemas"]["ItemsBlockHero"];
+  block_hero_translations: components["schemas"]["ItemsBlockHeroTranslations"];
+  block_title: components["schemas"]["ItemsBlockTitle"];
+  block_title_translations: components["schemas"]["ItemsBlockTitleTranslations"];
   blockchains: components["schemas"]["ItemsBlockchains"];
+  blocks: components["schemas"]["ItemsBlocks"];
+  categories: components["schemas"]["ItemsCategories"];
   currencies: components["schemas"]["ItemsCurrencies"];
+  fiats: components["schemas"]["ItemsFiats"];
+  followers: components["schemas"]["ItemsFollowers"];
   grant_blockchains: components["schemas"]["ItemsGrantBlockchains"];
   grant_categories: components["schemas"]["ItemsGrantCategories"];
   grants: components["schemas"]["ItemsGrants"];
   languages: components["schemas"]["ItemsLanguages"];
+  pages: components["schemas"]["ItemsPages"];
+  pages_content: components["schemas"]["ItemsPagesContent"];
+  pages_contentbla: components["schemas"]["ItemsPagesContentbla"];
   web3: components["schemas"]["ItemsWeb3"];
   web3_blockchains: components["schemas"]["ItemsWeb3Blockchains"];
   web3_categories: components["schemas"]["ItemsWeb3Categories"];
@@ -10586,10 +12483,6 @@ export type DirectusCollections = {
   web3_rfps_translations: components["schemas"]["ItemsWeb3RfpsTranslations"];
   web3_use_cases: components["schemas"]["ItemsWeb3UseCases"];
   web3_use_cases_translations: components["schemas"]["ItemsWeb3UseCasesTranslations"];
-  authors: components["schemas"]["ItemsAuthors"];
-  categories: components["schemas"]["ItemsCategories"];
-  fiats: components["schemas"]["ItemsFiats"];
-  followers: components["schemas"]["ItemsFollowers"];
   grant_project_payments: components["schemas"]["ItemsGrantProjectPayments"];
   grant_projects: components["schemas"]["ItemsGrantProjects"];
   grant_rfps: components["schemas"]["ItemsGrantRfps"];
