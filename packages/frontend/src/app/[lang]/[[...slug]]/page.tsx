@@ -1,7 +1,6 @@
 // pages/index.tsx
 import { RenderBlock } from '@components/render-block'
 import directus from '@lib/directus'
-import { DirectusCollections } from '@lib/directus-collections'
 import { notFound } from 'next/navigation'
 
 const HomePage = async ({ params }: { params: { slug: string; lang: string } }) => {
@@ -23,15 +22,11 @@ const HomePage = async ({ params }: { params: { slug: string; lang: string } }) 
 
   return (
     <>
-      {content.map((block) => {
-        return <RenderBlock lang={lang} block={block} />
+      {content.map((block, index) => {
+        return <RenderBlock key={index} lang={lang} block={block} />
       })}
     </>
   )
-
-  // return <pre>{JSON.stringify(data, null, 2)}</pre>
-
-  // return <Hero />
 }
 
 export default HomePage

@@ -114,6 +114,34 @@ export interface paths {
     /** Update an existing authors item. */
     patch: operations["updateSingleItemsAuthors"];
   };
+  "/items/block_button": {
+    /** List the block_button items. */
+    get: operations["readItemsBlockButton"];
+    /** Create a new block_button item. */
+    post: operations["createItemsBlockButton"];
+  };
+  "/items/block_button/{id}": {
+    /** Retrieve a single block_button item by unique identifier. */
+    get: operations["readSingleItemsBlockButton"];
+    /** Delete an existing block_button item. */
+    delete: operations["deleteSingleItemsBlockButton"];
+    /** Update an existing block_button item. */
+    patch: operations["updateSingleItemsBlockButton"];
+  };
+  "/items/block_button_translations": {
+    /** List the block_button_translations items. */
+    get: operations["readItemsBlockButtonTranslations"];
+    /** Create a new block_button_translations item. */
+    post: operations["createItemsBlockButtonTranslations"];
+  };
+  "/items/block_button_translations/{id}": {
+    /** Retrieve a single block_button_translations item by unique identifier. */
+    get: operations["readSingleItemsBlockButtonTranslations"];
+    /** Delete an existing block_button_translations item. */
+    delete: operations["deleteSingleItemsBlockButtonTranslations"];
+    /** Update an existing block_button_translations item. */
+    patch: operations["updateSingleItemsBlockButtonTranslations"];
+  };
   "/items/block_cal": {
     /** List the block_cal items. */
     get: operations["readItemsBlockCal"];
@@ -142,33 +170,33 @@ export interface paths {
     /** Update an existing block_cal_title item. */
     patch: operations["updateSingleItemsBlockCalTitle"];
   };
-  "/items/block_gradient_title": {
-    /** List the block_gradient_title items. */
-    get: operations["readItemsBlockGradientTitle"];
-    /** Create a new block_gradient_title item. */
-    post: operations["createItemsBlockGradientTitle"];
+  "/items/block_external_link": {
+    /** List the block_external_link items. */
+    get: operations["readItemsBlockExternalLink"];
+    /** Create a new block_external_link item. */
+    post: operations["createItemsBlockExternalLink"];
   };
-  "/items/block_gradient_title/{id}": {
-    /** Retrieve a single block_gradient_title item by unique identifier. */
-    get: operations["readSingleItemsBlockGradientTitle"];
-    /** Delete an existing block_gradient_title item. */
-    delete: operations["deleteSingleItemsBlockGradientTitle"];
-    /** Update an existing block_gradient_title item. */
-    patch: operations["updateSingleItemsBlockGradientTitle"];
+  "/items/block_external_link/{id}": {
+    /** Retrieve a single block_external_link item by unique identifier. */
+    get: operations["readSingleItemsBlockExternalLink"];
+    /** Delete an existing block_external_link item. */
+    delete: operations["deleteSingleItemsBlockExternalLink"];
+    /** Update an existing block_external_link item. */
+    patch: operations["updateSingleItemsBlockExternalLink"];
   };
-  "/items/block_gradient_title_translations": {
-    /** List the block_gradient_title_translations items. */
-    get: operations["readItemsBlockGradientTitleTranslations"];
-    /** Create a new block_gradient_title_translations item. */
-    post: operations["createItemsBlockGradientTitleTranslations"];
+  "/items/block_external_link_translations": {
+    /** List the block_external_link_translations items. */
+    get: operations["readItemsBlockExternalLinkTranslations"];
+    /** Create a new block_external_link_translations item. */
+    post: operations["createItemsBlockExternalLinkTranslations"];
   };
-  "/items/block_gradient_title_translations/{id}": {
-    /** Retrieve a single block_gradient_title_translations item by unique identifier. */
-    get: operations["readSingleItemsBlockGradientTitleTranslations"];
-    /** Delete an existing block_gradient_title_translations item. */
-    delete: operations["deleteSingleItemsBlockGradientTitleTranslations"];
-    /** Update an existing block_gradient_title_translations item. */
-    patch: operations["updateSingleItemsBlockGradientTitleTranslations"];
+  "/items/block_external_link_translations/{id}": {
+    /** Retrieve a single block_external_link_translations item by unique identifier. */
+    get: operations["readSingleItemsBlockExternalLinkTranslations"];
+    /** Delete an existing block_external_link_translations item. */
+    delete: operations["deleteSingleItemsBlockExternalLinkTranslations"];
+    /** Update an existing block_external_link_translations item. */
+    patch: operations["updateSingleItemsBlockExternalLinkTranslations"];
   };
   "/items/block_hero": {
     /** List the block_hero items. */
@@ -184,6 +212,20 @@ export interface paths {
     /** Update an existing block_hero item. */
     patch: operations["updateSingleItemsBlockHero"];
   };
+  "/items/block_hero_buttons": {
+    /** List the block_hero_buttons items. */
+    get: operations["readItemsBlockHeroButtons"];
+    /** Create a new block_hero_buttons item. */
+    post: operations["createItemsBlockHeroButtons"];
+  };
+  "/items/block_hero_buttons/{id}": {
+    /** Retrieve a single block_hero_buttons item by unique identifier. */
+    get: operations["readSingleItemsBlockHeroButtons"];
+    /** Delete an existing block_hero_buttons item. */
+    delete: operations["deleteSingleItemsBlockHeroButtons"];
+    /** Update an existing block_hero_buttons item. */
+    patch: operations["updateSingleItemsBlockHeroButtons"];
+  };
   "/items/block_hero_translations": {
     /** List the block_hero_translations items. */
     get: operations["readItemsBlockHeroTranslations"];
@@ -198,33 +240,19 @@ export interface paths {
     /** Update an existing block_hero_translations item. */
     patch: operations["updateSingleItemsBlockHeroTranslations"];
   };
-  "/items/block_title": {
-    /** List the block_title items. */
-    get: operations["readItemsBlockTitle"];
-    /** Create a new block_title item. */
-    post: operations["createItemsBlockTitle"];
+  "/items/block_page_link": {
+    /** List the block_page_link items. */
+    get: operations["readItemsBlockPageLink"];
+    /** Create a new block_page_link item. */
+    post: operations["createItemsBlockPageLink"];
   };
-  "/items/block_title/{id}": {
-    /** Retrieve a single block_title item by unique identifier. */
-    get: operations["readSingleItemsBlockTitle"];
-    /** Delete an existing block_title item. */
-    delete: operations["deleteSingleItemsBlockTitle"];
-    /** Update an existing block_title item. */
-    patch: operations["updateSingleItemsBlockTitle"];
-  };
-  "/items/block_title_translations": {
-    /** List the block_title_translations items. */
-    get: operations["readItemsBlockTitleTranslations"];
-    /** Create a new block_title_translations item. */
-    post: operations["createItemsBlockTitleTranslations"];
-  };
-  "/items/block_title_translations/{id}": {
-    /** Retrieve a single block_title_translations item by unique identifier. */
-    get: operations["readSingleItemsBlockTitleTranslations"];
-    /** Delete an existing block_title_translations item. */
-    delete: operations["deleteSingleItemsBlockTitleTranslations"];
-    /** Update an existing block_title_translations item. */
-    patch: operations["updateSingleItemsBlockTitleTranslations"];
+  "/items/block_page_link/{id}": {
+    /** Retrieve a single block_page_link item by unique identifier. */
+    get: operations["readSingleItemsBlockPageLink"];
+    /** Delete an existing block_page_link item. */
+    delete: operations["deleteSingleItemsBlockPageLink"];
+    /** Update an existing block_page_link item. */
+    patch: operations["updateSingleItemsBlockPageLink"];
   };
   "/items/blockchains": {
     /** List the blockchains items. */
@@ -394,19 +422,19 @@ export interface paths {
     /** Update an existing pages_content item. */
     patch: operations["updateSingleItemsPagesContent"];
   };
-  "/items/pages_contentbla": {
-    /** List the pages_contentbla items. */
-    get: operations["readItemsPagesContentbla"];
-    /** Create a new pages_contentbla item. */
-    post: operations["createItemsPagesContentbla"];
+  "/items/pages_translations": {
+    /** List the pages_translations items. */
+    get: operations["readItemsPagesTranslations"];
+    /** Create a new pages_translations item. */
+    post: operations["createItemsPagesTranslations"];
   };
-  "/items/pages_contentbla/{id}": {
-    /** Retrieve a single pages_contentbla item by unique identifier. */
-    get: operations["readSingleItemsPagesContentbla"];
-    /** Delete an existing pages_contentbla item. */
-    delete: operations["deleteSingleItemsPagesContentbla"];
-    /** Update an existing pages_contentbla item. */
-    patch: operations["updateSingleItemsPagesContentbla"];
+  "/items/pages_translations/{id}": {
+    /** Retrieve a single pages_translations item by unique identifier. */
+    get: operations["readSingleItemsPagesTranslations"];
+    /** Delete an existing pages_translations item. */
+    delete: operations["deleteSingleItemsPagesTranslations"];
+    /** Update an existing pages_translations item. */
+    patch: operations["updateSingleItemsPagesTranslations"];
   };
   "/items/web3": {
     /** List the web3 items. */
@@ -1152,6 +1180,31 @@ export interface components {
       is_following?: boolean | null;
       provider_id?: number | components["schemas"]["ItemsProviders"];
     };
+    ItemsBlockButton: {
+      id?: number;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      variant?: string | null;
+      size?: string | null;
+      shape?: string | null;
+      translations?: (
+        | number
+        | components["schemas"]["ItemsBlockButtonTranslations"]
+      )[];
+    };
+    ItemsBlockButtonTranslations: {
+      id?: number;
+      block_button_id?:
+        | (number | components["schemas"]["ItemsBlockButton"])
+        | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      label?: string | null;
+    };
     ItemsBlockCal: {
       id?: number;
       sort?: number | null;
@@ -1168,27 +1221,30 @@ export interface components {
       item?: (string | { [key: string]: any })[] | null;
       collection?: string | null;
     };
-    ItemsBlockGradientTitle: {
+    ItemsBlockExternalLink: {
       id?: number;
       sort?: number | null;
       user_created?: (string | components["schemas"]["Users"]) | null;
       date_created?: string | null;
       user_updated?: (string | components["schemas"]["Users"]) | null;
       date_updated?: string | null;
+      href?: string | null;
+      target?: string | null;
+      rel?: { [key: string]: any } | null;
       translations?: (
         | number
-        | components["schemas"]["ItemsBlockGradientTitleTranslations"]
+        | components["schemas"]["ItemsBlockExternalLinkTranslations"]
       )[];
     };
-    ItemsBlockGradientTitleTranslations: {
+    ItemsBlockExternalLinkTranslations: {
       id?: number;
-      block_gradient_title_id?:
-        | (number | components["schemas"]["ItemsBlockGradientTitle"])
+      block_external_link_id?:
+        | (number | components["schemas"]["ItemsBlockExternalLink"])
         | null;
       languages_code?:
         | (string | components["schemas"]["ItemsLanguages"])
         | null;
-      name?: string | null;
+      label?: string | null;
     };
     ItemsBlockHero: {
       id?: number;
@@ -1198,10 +1254,17 @@ export interface components {
       user_updated?: (string | components["schemas"]["Users"]) | null;
       date_updated?: string | null;
       image?: (string | components["schemas"]["Files"]) | null;
+      buttons?: (number | components["schemas"]["ItemsBlockHeroButtons"])[];
       translations?: (
         | number
         | components["schemas"]["ItemsBlockHeroTranslations"]
       )[];
+    };
+    ItemsBlockHeroButtons: {
+      id?: number;
+      block_hero_id?: (number | components["schemas"]["ItemsBlockHero"]) | null;
+      item?: (string | { [key: string]: any })[] | null;
+      collection?: string | null;
     };
     ItemsBlockHeroTranslations: {
       id?: number;
@@ -1212,27 +1275,15 @@ export interface components {
       subtitle?: string | null;
       title?: string | null;
     };
-    ItemsBlockTitle: {
+    ItemsBlockPageLink: {
       id?: number;
       sort?: number | null;
       user_created?: (string | components["schemas"]["Users"]) | null;
       date_created?: string | null;
       user_updated?: (string | components["schemas"]["Users"]) | null;
       date_updated?: string | null;
-      translations?: (
-        | number
-        | components["schemas"]["ItemsBlockTitleTranslations"]
-      )[];
-    };
-    ItemsBlockTitleTranslations: {
-      id?: number;
-      block_title_id?:
-        | (number | components["schemas"]["ItemsBlockTitle"])
-        | null;
-      languages_code?:
-        | (string | components["schemas"]["ItemsLanguages"])
-        | null;
-      name?: string | null;
+      page?: (number | components["schemas"]["ItemsPages"]) | null;
+      button?: (number | components["schemas"]["ItemsBlockButton"]) | null;
     };
     ItemsBlockchains: {
       id?: number;
@@ -1317,6 +1368,10 @@ export interface components {
       date_created?: string | null;
       user_updated?: (string | components["schemas"]["Users"]) | null;
       date_updated?: string | null;
+      translations?: (
+        | number
+        | components["schemas"]["ItemsPagesTranslations"]
+      )[];
       content?: (number | components["schemas"]["ItemsPagesContent"])[];
     };
     ItemsPagesContent: {
@@ -1325,11 +1380,13 @@ export interface components {
       item?: (string | { [key: string]: any })[] | null;
       collection?: string | null;
     };
-    ItemsPagesContentbla: {
+    ItemsPagesTranslations: {
       id?: number;
       pages_id?: (number | components["schemas"]["ItemsPages"]) | null;
-      item?: (string | { [key: string]: any })[] | null;
-      collection?: string | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      slug?: string | null;
     };
     ItemsWeb3: { [key: string]: any };
     ItemsWeb3Blockchains: {
@@ -2750,6 +2807,274 @@ export interface operations {
       };
     };
   };
+  /** List the block_button items. */
+  readItemsBlockButton: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockButton"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_button item. */
+  createItemsBlockButton: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockButton"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockButton"][]
+          | components["schemas"]["ItemsBlockButton"];
+      };
+    };
+  };
+  /** Retrieve a single block_button item by unique identifier. */
+  readSingleItemsBlockButton: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockButton"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_button item. */
+  deleteSingleItemsBlockButton: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_button item. */
+  updateSingleItemsBlockButton: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockButton"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockButton"];
+      };
+    };
+  };
+  /** List the block_button_translations items. */
+  readItemsBlockButtonTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockButtonTranslations"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_button_translations item. */
+  createItemsBlockButtonTranslations: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockButtonTranslations"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockButtonTranslations"][]
+          | components["schemas"]["ItemsBlockButtonTranslations"];
+      };
+    };
+  };
+  /** Retrieve a single block_button_translations item by unique identifier. */
+  readSingleItemsBlockButtonTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockButtonTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_button_translations item. */
+  deleteSingleItemsBlockButtonTranslations: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_button_translations item. */
+  updateSingleItemsBlockButtonTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockButtonTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockButtonTranslations"];
+      };
+    };
+  };
   /** List the block_cal items. */
   readItemsBlockCal: {
     parameters: {
@@ -3018,8 +3343,8 @@ export interface operations {
       };
     };
   };
-  /** List the block_gradient_title items. */
-  readItemsBlockGradientTitle: {
+  /** List the block_external_link items. */
+  readItemsBlockExternalLink: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3043,7 +3368,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockGradientTitle"][];
+            data?: components["schemas"]["ItemsBlockExternalLink"][];
             meta?: components["schemas"]["x-metadata"];
           };
         };
@@ -3051,8 +3376,8 @@ export interface operations {
       401: components["responses"]["UnauthorizedError"];
     };
   };
-  /** Create a new block_gradient_title item. */
-  createItemsBlockGradientTitle: {
+  /** Create a new block_external_link item. */
+  createItemsBlockExternalLink: {
     parameters: {
       query: {
         /** What metadata to return in the response. */
@@ -3064,7 +3389,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockGradientTitle"][];
+            data?: components["schemas"]["ItemsBlockExternalLink"][];
           };
         };
       };
@@ -3073,13 +3398,13 @@ export interface operations {
     requestBody: {
       content: {
         "application/json":
-          | components["schemas"]["ItemsBlockGradientTitle"][]
-          | components["schemas"]["ItemsBlockGradientTitle"];
+          | components["schemas"]["ItemsBlockExternalLink"][]
+          | components["schemas"]["ItemsBlockExternalLink"];
       };
     };
   };
-  /** Retrieve a single block_gradient_title item by unique identifier. */
-  readSingleItemsBlockGradientTitle: {
+  /** Retrieve a single block_external_link item by unique identifier. */
+  readSingleItemsBlockExternalLink: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3097,7 +3422,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockGradientTitle"];
+            data?: components["schemas"]["ItemsBlockExternalLink"];
           };
         };
       };
@@ -3105,8 +3430,8 @@ export interface operations {
       404: components["responses"]["NotFoundError"];
     };
   };
-  /** Delete an existing block_gradient_title item. */
-  deleteSingleItemsBlockGradientTitle: {
+  /** Delete an existing block_external_link item. */
+  deleteSingleItemsBlockExternalLink: {
     parameters: {
       path: {
         /** Index of the item. */
@@ -3120,8 +3445,8 @@ export interface operations {
       404: components["responses"]["NotFoundError"];
     };
   };
-  /** Update an existing block_gradient_title item. */
-  updateSingleItemsBlockGradientTitle: {
+  /** Update an existing block_external_link item. */
+  updateSingleItemsBlockExternalLink: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3139,7 +3464,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockGradientTitle"];
+            data?: components["schemas"]["ItemsBlockExternalLink"];
           };
         };
       };
@@ -3148,12 +3473,12 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ItemsBlockGradientTitle"];
+        "application/json": components["schemas"]["ItemsBlockExternalLink"];
       };
     };
   };
-  /** List the block_gradient_title_translations items. */
-  readItemsBlockGradientTitleTranslations: {
+  /** List the block_external_link_translations items. */
+  readItemsBlockExternalLinkTranslations: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3177,7 +3502,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockGradientTitleTranslations"][];
+            data?: components["schemas"]["ItemsBlockExternalLinkTranslations"][];
             meta?: components["schemas"]["x-metadata"];
           };
         };
@@ -3185,8 +3510,8 @@ export interface operations {
       401: components["responses"]["UnauthorizedError"];
     };
   };
-  /** Create a new block_gradient_title_translations item. */
-  createItemsBlockGradientTitleTranslations: {
+  /** Create a new block_external_link_translations item. */
+  createItemsBlockExternalLinkTranslations: {
     parameters: {
       query: {
         /** What metadata to return in the response. */
@@ -3198,7 +3523,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockGradientTitleTranslations"][];
+            data?: components["schemas"]["ItemsBlockExternalLinkTranslations"][];
           };
         };
       };
@@ -3207,13 +3532,13 @@ export interface operations {
     requestBody: {
       content: {
         "application/json":
-          | components["schemas"]["ItemsBlockGradientTitleTranslations"][]
-          | components["schemas"]["ItemsBlockGradientTitleTranslations"];
+          | components["schemas"]["ItemsBlockExternalLinkTranslations"][]
+          | components["schemas"]["ItemsBlockExternalLinkTranslations"];
       };
     };
   };
-  /** Retrieve a single block_gradient_title_translations item by unique identifier. */
-  readSingleItemsBlockGradientTitleTranslations: {
+  /** Retrieve a single block_external_link_translations item by unique identifier. */
+  readSingleItemsBlockExternalLinkTranslations: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3231,7 +3556,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockGradientTitleTranslations"];
+            data?: components["schemas"]["ItemsBlockExternalLinkTranslations"];
           };
         };
       };
@@ -3239,8 +3564,8 @@ export interface operations {
       404: components["responses"]["NotFoundError"];
     };
   };
-  /** Delete an existing block_gradient_title_translations item. */
-  deleteSingleItemsBlockGradientTitleTranslations: {
+  /** Delete an existing block_external_link_translations item. */
+  deleteSingleItemsBlockExternalLinkTranslations: {
     parameters: {
       path: {
         /** Index of the item. */
@@ -3254,8 +3579,8 @@ export interface operations {
       404: components["responses"]["NotFoundError"];
     };
   };
-  /** Update an existing block_gradient_title_translations item. */
-  updateSingleItemsBlockGradientTitleTranslations: {
+  /** Update an existing block_external_link_translations item. */
+  updateSingleItemsBlockExternalLinkTranslations: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3273,7 +3598,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockGradientTitleTranslations"];
+            data?: components["schemas"]["ItemsBlockExternalLinkTranslations"];
           };
         };
       };
@@ -3282,7 +3607,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ItemsBlockGradientTitleTranslations"];
+        "application/json": components["schemas"]["ItemsBlockExternalLinkTranslations"];
       };
     };
   };
@@ -3420,6 +3745,140 @@ export interface operations {
       };
     };
   };
+  /** List the block_hero_buttons items. */
+  readItemsBlockHeroButtons: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHeroButtons"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_hero_buttons item. */
+  createItemsBlockHeroButtons: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHeroButtons"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockHeroButtons"][]
+          | components["schemas"]["ItemsBlockHeroButtons"];
+      };
+    };
+  };
+  /** Retrieve a single block_hero_buttons item by unique identifier. */
+  readSingleItemsBlockHeroButtons: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHeroButtons"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_hero_buttons item. */
+  deleteSingleItemsBlockHeroButtons: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_hero_buttons item. */
+  updateSingleItemsBlockHeroButtons: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockHeroButtons"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockHeroButtons"];
+      };
+    };
+  };
   /** List the block_hero_translations items. */
   readItemsBlockHeroTranslations: {
     parameters: {
@@ -3554,8 +4013,8 @@ export interface operations {
       };
     };
   };
-  /** List the block_title items. */
-  readItemsBlockTitle: {
+  /** List the block_page_link items. */
+  readItemsBlockPageLink: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3579,7 +4038,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockTitle"][];
+            data?: components["schemas"]["ItemsBlockPageLink"][];
             meta?: components["schemas"]["x-metadata"];
           };
         };
@@ -3587,8 +4046,8 @@ export interface operations {
       401: components["responses"]["UnauthorizedError"];
     };
   };
-  /** Create a new block_title item. */
-  createItemsBlockTitle: {
+  /** Create a new block_page_link item. */
+  createItemsBlockPageLink: {
     parameters: {
       query: {
         /** What metadata to return in the response. */
@@ -3600,7 +4059,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockTitle"][];
+            data?: components["schemas"]["ItemsBlockPageLink"][];
           };
         };
       };
@@ -3609,13 +4068,13 @@ export interface operations {
     requestBody: {
       content: {
         "application/json":
-          | components["schemas"]["ItemsBlockTitle"][]
-          | components["schemas"]["ItemsBlockTitle"];
+          | components["schemas"]["ItemsBlockPageLink"][]
+          | components["schemas"]["ItemsBlockPageLink"];
       };
     };
   };
-  /** Retrieve a single block_title item by unique identifier. */
-  readSingleItemsBlockTitle: {
+  /** Retrieve a single block_page_link item by unique identifier. */
+  readSingleItemsBlockPageLink: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3633,7 +4092,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockTitle"];
+            data?: components["schemas"]["ItemsBlockPageLink"];
           };
         };
       };
@@ -3641,8 +4100,8 @@ export interface operations {
       404: components["responses"]["NotFoundError"];
     };
   };
-  /** Delete an existing block_title item. */
-  deleteSingleItemsBlockTitle: {
+  /** Delete an existing block_page_link item. */
+  deleteSingleItemsBlockPageLink: {
     parameters: {
       path: {
         /** Index of the item. */
@@ -3656,8 +4115,8 @@ export interface operations {
       404: components["responses"]["NotFoundError"];
     };
   };
-  /** Update an existing block_title item. */
-  updateSingleItemsBlockTitle: {
+  /** Update an existing block_page_link item. */
+  updateSingleItemsBlockPageLink: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3675,7 +4134,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockTitle"];
+            data?: components["schemas"]["ItemsBlockPageLink"];
           };
         };
       };
@@ -3684,141 +4143,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ItemsBlockTitle"];
-      };
-    };
-  };
-  /** List the block_title_translations items. */
-  readItemsBlockTitleTranslations: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** A limit on the number of objects that are returned. */
-        limit?: components["parameters"]["Limit"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-        /** How many items to skip when fetching data. */
-        offset?: components["parameters"]["Offset"];
-        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
-        sort?: components["parameters"]["Sort"];
-        /** Select items in collection by given conditions. */
-        filter?: components["parameters"]["Filter"];
-        /** Filter by items that contain the given search query in one of their fields. */
-        search?: components["parameters"]["Search"];
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsBlockTitleTranslations"][];
-            meta?: components["schemas"]["x-metadata"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-    };
-  };
-  /** Create a new block_title_translations item. */
-  createItemsBlockTitleTranslations: {
-    parameters: {
-      query: {
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsBlockTitleTranslations"][];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-    };
-    requestBody: {
-      content: {
-        "application/json":
-          | components["schemas"]["ItemsBlockTitleTranslations"][]
-          | components["schemas"]["ItemsBlockTitleTranslations"];
-      };
-    };
-  };
-  /** Retrieve a single block_title_translations item by unique identifier. */
-  readSingleItemsBlockTitleTranslations: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsBlockTitleTranslations"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-  };
-  /** Delete an existing block_title_translations item. */
-  deleteSingleItemsBlockTitleTranslations: {
-    parameters: {
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: unknown;
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-  };
-  /** Update an existing block_title_translations item. */
-  updateSingleItemsBlockTitleTranslations: {
-    parameters: {
-      query: {
-        /** Control what fields are being returned in the object. */
-        fields?: components["parameters"]["Fields"];
-        /** What metadata to return in the response. */
-        meta?: components["parameters"]["Meta"];
-      };
-      path: {
-        /** Index of the item. */
-        id: number | string;
-      };
-    };
-    responses: {
-      /** Successful request */
-      200: {
-        content: {
-          "application/json": {
-            data?: components["schemas"]["ItemsBlockTitleTranslations"];
-          };
-        };
-      };
-      401: components["responses"]["UnauthorizedError"];
-      404: components["responses"]["NotFoundError"];
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ItemsBlockTitleTranslations"];
+        "application/json": components["schemas"]["ItemsBlockPageLink"];
       };
     };
   };
@@ -5430,8 +5755,8 @@ export interface operations {
       };
     };
   };
-  /** List the pages_contentbla items. */
-  readItemsPagesContentbla: {
+  /** List the pages_translations items. */
+  readItemsPagesTranslations: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -5455,7 +5780,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsPagesContentbla"][];
+            data?: components["schemas"]["ItemsPagesTranslations"][];
             meta?: components["schemas"]["x-metadata"];
           };
         };
@@ -5463,8 +5788,8 @@ export interface operations {
       401: components["responses"]["UnauthorizedError"];
     };
   };
-  /** Create a new pages_contentbla item. */
-  createItemsPagesContentbla: {
+  /** Create a new pages_translations item. */
+  createItemsPagesTranslations: {
     parameters: {
       query: {
         /** What metadata to return in the response. */
@@ -5476,7 +5801,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsPagesContentbla"][];
+            data?: components["schemas"]["ItemsPagesTranslations"][];
           };
         };
       };
@@ -5485,13 +5810,13 @@ export interface operations {
     requestBody: {
       content: {
         "application/json":
-          | components["schemas"]["ItemsPagesContentbla"][]
-          | components["schemas"]["ItemsPagesContentbla"];
+          | components["schemas"]["ItemsPagesTranslations"][]
+          | components["schemas"]["ItemsPagesTranslations"];
       };
     };
   };
-  /** Retrieve a single pages_contentbla item by unique identifier. */
-  readSingleItemsPagesContentbla: {
+  /** Retrieve a single pages_translations item by unique identifier. */
+  readSingleItemsPagesTranslations: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -5509,7 +5834,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsPagesContentbla"];
+            data?: components["schemas"]["ItemsPagesTranslations"];
           };
         };
       };
@@ -5517,8 +5842,8 @@ export interface operations {
       404: components["responses"]["NotFoundError"];
     };
   };
-  /** Delete an existing pages_contentbla item. */
-  deleteSingleItemsPagesContentbla: {
+  /** Delete an existing pages_translations item. */
+  deleteSingleItemsPagesTranslations: {
     parameters: {
       path: {
         /** Index of the item. */
@@ -5532,8 +5857,8 @@ export interface operations {
       404: components["responses"]["NotFoundError"];
     };
   };
-  /** Update an existing pages_contentbla item. */
-  updateSingleItemsPagesContentbla: {
+  /** Update an existing pages_translations item. */
+  updateSingleItemsPagesTranslations: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -5551,7 +5876,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsPagesContentbla"];
+            data?: components["schemas"]["ItemsPagesTranslations"];
           };
         };
       };
@@ -5560,7 +5885,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ItemsPagesContentbla"];
+        "application/json": components["schemas"]["ItemsPagesTranslations"];
       };
     };
   };
@@ -12444,14 +12769,16 @@ export interface operations {
 
 export type DirectusCollections = {
   authors: components["schemas"]["ItemsAuthors"];
+  block_button: components["schemas"]["ItemsBlockButton"];
+  block_button_translations: components["schemas"]["ItemsBlockButtonTranslations"];
   block_cal: components["schemas"]["ItemsBlockCal"];
   block_cal_title: components["schemas"]["ItemsBlockCalTitle"];
-  block_gradient_title: components["schemas"]["ItemsBlockGradientTitle"];
-  block_gradient_title_translations: components["schemas"]["ItemsBlockGradientTitleTranslations"];
+  block_external_link: components["schemas"]["ItemsBlockExternalLink"];
+  block_external_link_translations: components["schemas"]["ItemsBlockExternalLinkTranslations"];
   block_hero: components["schemas"]["ItemsBlockHero"];
+  block_hero_buttons: components["schemas"]["ItemsBlockHeroButtons"];
   block_hero_translations: components["schemas"]["ItemsBlockHeroTranslations"];
-  block_title: components["schemas"]["ItemsBlockTitle"];
-  block_title_translations: components["schemas"]["ItemsBlockTitleTranslations"];
+  block_page_link: components["schemas"]["ItemsBlockPageLink"];
   blockchains: components["schemas"]["ItemsBlockchains"];
   blocks: components["schemas"]["ItemsBlocks"];
   categories: components["schemas"]["ItemsCategories"];
@@ -12464,7 +12791,7 @@ export type DirectusCollections = {
   languages: components["schemas"]["ItemsLanguages"];
   pages: components["schemas"]["ItemsPages"];
   pages_content: components["schemas"]["ItemsPagesContent"];
-  pages_contentbla: components["schemas"]["ItemsPagesContentbla"];
+  pages_translations: components["schemas"]["ItemsPagesTranslations"];
   web3: components["schemas"]["ItemsWeb3"];
   web3_blockchains: components["schemas"]["ItemsWeb3Blockchains"];
   web3_categories: components["schemas"]["ItemsWeb3Categories"];

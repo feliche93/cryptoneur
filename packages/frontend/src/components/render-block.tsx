@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import Hero from './blocks/hero'
+import { BlockHero } from './blocks/block-hero'
+import { BlockPageLink } from './blocks/block-page-link'
 
 export interface RenderBlockProps {
   block:
@@ -25,6 +26,8 @@ export const RenderBlock: FC<RenderBlockProps> = ({ block, lang }) => {
 
   switch (collection) {
     case 'block_hero':
-      return <Hero lang={lang} id={id} />
+      return <BlockHero lang={lang} id={id} />
+    case 'block_page_link':
+      return <BlockPageLink lang={lang} id={id} />
   }
 }
