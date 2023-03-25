@@ -5,6 +5,15 @@ import directus from '@lib/directus'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
+// export async function generateStaticParams() {
+//   return [
+//     {
+//       slug: [''],
+//       lang: 'en',
+//     },
+//   ]
+// }
+
 const HomePage = async ({ params }: { params: { slug: string; lang: string } }) => {
   const { data } = await directus.items('pages').readByQuery({
     fields: ['content.collection', 'content.id', 'content.item'],
