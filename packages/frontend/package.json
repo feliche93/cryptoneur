@@ -12,6 +12,7 @@
   "dependencies": {
     "@calcom/embed-react": "^1.0.10",
     "@directus/sdk": "^10.3.1",
+    "@formatjs/intl-localematcher": "^0.2.32",
     "@google-analytics/data": "^3.2.1",
     "@headlessui/react": "^1.7.11",
     "@heroicons/react": "^2.0.16",
@@ -28,6 +29,7 @@
     "@tiptap/pm": "2.0.0-beta.218",
     "@tiptap/react": "2.0.0-beta.218",
     "@tiptap/starter-kit": "2.0.0-beta.218",
+    "@types/negotiator": "^0.6.1",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@vercel/analytics": "^0.1.10",
     "axios": "1.1.3",

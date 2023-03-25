@@ -1,12 +1,10 @@
-import { Title } from '@components/blocks/Title'
-
 import { RenderBlock } from '@components/render-block'
 import { DirectusImage } from '@components/shared/directus-image'
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
-import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Subtitle } from './subtitle'
+import { Title } from './title'
 
 //
 export const BlockHero: FC<BlockType> = async ({ id, lang }) => {
