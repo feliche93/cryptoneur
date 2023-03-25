@@ -7,14 +7,13 @@ import { i18n } from '../i18n-config'
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
-  const negotiatorHeaders: Record<string, string> = {}
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
+  const negotiatorHeaders: Record<string, string> = {};
+  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
-  // Use negotiator and intl-localematcher to get best locale
-  let languages = new Negotiator({ headers: negotiatorHeaders }).languages()
-  const locales: string[] = i18n.locales.slice()
-
-  return matchLocale(languages, locales, i18n.defaultLocale)
+  // Use Negotiator to get the best locale
+  const negotiator = new Negotiator({ headers: negotiatorHeaders });
+  // @ts-ignore
+  return negotiator.language(i18n.locales) || i18n.defaultLocale;
 }
 
 // this middleware refreshes the user's session and must be run
