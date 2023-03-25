@@ -156,19 +156,19 @@ export interface paths {
     /** Update an existing block_cal item. */
     patch: operations["updateSingleItemsBlockCal"];
   };
-  "/items/block_cal_title": {
-    /** List the block_cal_title items. */
-    get: operations["readItemsBlockCalTitle"];
-    /** Create a new block_cal_title item. */
-    post: operations["createItemsBlockCalTitle"];
+  "/items/block_cal_translations": {
+    /** List the block_cal_translations items. */
+    get: operations["readItemsBlockCalTranslations"];
+    /** Create a new block_cal_translations item. */
+    post: operations["createItemsBlockCalTranslations"];
   };
-  "/items/block_cal_title/{id}": {
-    /** Retrieve a single block_cal_title item by unique identifier. */
-    get: operations["readSingleItemsBlockCalTitle"];
-    /** Delete an existing block_cal_title item. */
-    delete: operations["deleteSingleItemsBlockCalTitle"];
-    /** Update an existing block_cal_title item. */
-    patch: operations["updateSingleItemsBlockCalTitle"];
+  "/items/block_cal_translations/{id}": {
+    /** Retrieve a single block_cal_translations item by unique identifier. */
+    get: operations["readSingleItemsBlockCalTranslations"];
+    /** Delete an existing block_cal_translations item. */
+    delete: operations["deleteSingleItemsBlockCalTranslations"];
+    /** Update an existing block_cal_translations item. */
+    patch: operations["updateSingleItemsBlockCalTranslations"];
   };
   "/items/block_external_link": {
     /** List the block_external_link items. */
@@ -1311,13 +1311,19 @@ export interface components {
       user_updated?: (string | components["schemas"]["Users"]) | null;
       date_updated?: string | null;
       url?: string | null;
-      title?: (number | components["schemas"]["ItemsBlockCalTitle"])[];
+      translations?: (
+        | number
+        | components["schemas"]["ItemsBlockCalTranslations"]
+      )[];
     };
-    ItemsBlockCalTitle: {
+    ItemsBlockCalTranslations: {
       id?: number;
       block_cal_id?: (number | components["schemas"]["ItemsBlockCal"]) | null;
-      item?: (string | { [key: string]: any })[] | null;
-      collection?: string | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      section?: string | null;
+      title?: string | null;
     };
     ItemsBlockExternalLink: {
       id?: number;
@@ -3382,8 +3388,8 @@ export interface operations {
       };
     };
   };
-  /** List the block_cal_title items. */
-  readItemsBlockCalTitle: {
+  /** List the block_cal_translations items. */
+  readItemsBlockCalTranslations: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3407,7 +3413,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockCalTitle"][];
+            data?: components["schemas"]["ItemsBlockCalTranslations"][];
             meta?: components["schemas"]["x-metadata"];
           };
         };
@@ -3415,8 +3421,8 @@ export interface operations {
       401: components["responses"]["UnauthorizedError"];
     };
   };
-  /** Create a new block_cal_title item. */
-  createItemsBlockCalTitle: {
+  /** Create a new block_cal_translations item. */
+  createItemsBlockCalTranslations: {
     parameters: {
       query: {
         /** What metadata to return in the response. */
@@ -3428,7 +3434,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockCalTitle"][];
+            data?: components["schemas"]["ItemsBlockCalTranslations"][];
           };
         };
       };
@@ -3437,13 +3443,13 @@ export interface operations {
     requestBody: {
       content: {
         "application/json":
-          | components["schemas"]["ItemsBlockCalTitle"][]
-          | components["schemas"]["ItemsBlockCalTitle"];
+          | components["schemas"]["ItemsBlockCalTranslations"][]
+          | components["schemas"]["ItemsBlockCalTranslations"];
       };
     };
   };
-  /** Retrieve a single block_cal_title item by unique identifier. */
-  readSingleItemsBlockCalTitle: {
+  /** Retrieve a single block_cal_translations item by unique identifier. */
+  readSingleItemsBlockCalTranslations: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3461,7 +3467,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockCalTitle"];
+            data?: components["schemas"]["ItemsBlockCalTranslations"];
           };
         };
       };
@@ -3469,8 +3475,8 @@ export interface operations {
       404: components["responses"]["NotFoundError"];
     };
   };
-  /** Delete an existing block_cal_title item. */
-  deleteSingleItemsBlockCalTitle: {
+  /** Delete an existing block_cal_translations item. */
+  deleteSingleItemsBlockCalTranslations: {
     parameters: {
       path: {
         /** Index of the item. */
@@ -3484,8 +3490,8 @@ export interface operations {
       404: components["responses"]["NotFoundError"];
     };
   };
-  /** Update an existing block_cal_title item. */
-  updateSingleItemsBlockCalTitle: {
+  /** Update an existing block_cal_translations item. */
+  updateSingleItemsBlockCalTranslations: {
     parameters: {
       query: {
         /** Control what fields are being returned in the object. */
@@ -3503,7 +3509,7 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-            data?: components["schemas"]["ItemsBlockCalTitle"];
+            data?: components["schemas"]["ItemsBlockCalTranslations"];
           };
         };
       };
@@ -3512,7 +3518,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ItemsBlockCalTitle"];
+        "application/json": components["schemas"]["ItemsBlockCalTranslations"];
       };
     };
   };
@@ -13883,7 +13889,7 @@ export type DirectusCollections = {
   block_button: components["schemas"]["ItemsBlockButton"];
   block_button_translations: components["schemas"]["ItemsBlockButtonTranslations"];
   block_cal: components["schemas"]["ItemsBlockCal"];
-  block_cal_title: components["schemas"]["ItemsBlockCalTitle"];
+  block_cal_translations: components["schemas"]["ItemsBlockCalTranslations"];
   block_external_link: components["schemas"]["ItemsBlockExternalLink"];
   block_external_link_translations: components["schemas"]["ItemsBlockExternalLinkTranslations"];
   block_features: components["schemas"]["ItemsBlockFeatures"];

@@ -1,56 +1,53 @@
-'use client'
-
+import { CalCom } from '@components/cal-com'
+import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
-import Script from 'next/script'
+import dynamic from 'next/dynamic'
 import { FC } from 'react'
 
-export const BlockCalendar: FC<BlockType> = ({ lang, id }) => {
+export const BlockCalendar: FC<BlockType> = async ({ lang, id }) => {
+  const data = await directus.items('block_cal').readOne(id, {
+    fields: ['*.*'],
+    deep: {
+      translations: {
+        _filter: {
+          languages_code: {
+            _starts_with: lang,
+          },
+        },
+      },
+    },
+  })
+
+  const translations = data?.translations
+  const url = data?.url
+
+  if (
+    !translations?.length ||
+    typeof translations[0] === 'number' ||
+    !url ||
+    typeof url === 'number'
+  ) {
+    throw new Error('No translations found')
+  }
+
+  const { section, title } = translations[0]
+
+  if (!section || !title) {
+    throw new Error('Missing data')
+  }
+
   return (
     <div className="relative pt-16 sm:pt-24 lg:pt-32">
       <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-base font-semibold uppercase tracking-wider text-transparent">
-          Book a Meeting
+          {section}
         </h2>
         <p className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          Interested in Working together? 🗓️
+          {title}
         </p>
       </div>
       <div className="w-auto overflow-hidden pt-10" id="my-cal-inline"></div>
-      <Script strategy="lazyOnload">
-        {`
-          (function (C, A, L) {
-            let p = function (a, ar) { a.q.push(ar); };
-            let d = C.document;
-            C.Cal = C.Cal || function () {
-              let cal = C.Cal;
-              let ar = arguments;
-              if (!cal.loaded) {
-                cal.ns = {};
-                cal.q = cal.q || [];
-                d.head.appendChild(d.createElement("script")).src = A;
-                cal.loaded = true;
-              }
-              if (ar[0] === L) {
-                const api = function () { p(api, arguments); };
-                const namespace = ar[1];
-                api.q = api.q || [];
-                typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar);
-                return;
-              }
-              p(cal, ar);
-            };
-          })(window, "https://app.cal.com/embed/embed.js", "init");
-
-          Cal("init", {origin:"https://app.cal.com"});
-
-          Cal("inline", {
-            elementOrSelector:"#my-cal-inline",
-            calLink: "felix-vemmer/30-minute-google-hangout-chat"
-          });
-
-          Cal("ui", {"styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false});
-        `}
-      </Script>
+      <CalCom />
     </div>
   )
 }
