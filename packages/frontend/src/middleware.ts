@@ -5,16 +5,30 @@ import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
 import { i18n } from '../i18n-config'
 
+const languageCodeToTagMap: Record<string, string> = {
+  en: 'en-US',
+  de: 'de-DE',
+  // Add more mappings here as needed
+};
+
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
-  const negotiatorHeaders: Record<string, string> = {}
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
+  const negotiatorHeaders: Record<string, string> = {};
+  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
   // Use negotiator and intl-localematcher to get best locale
-  let languages = new Negotiator({ headers: negotiatorHeaders }).languages()
+  let languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+
+  // Filter out malformed locales and map language codes to BCP 47 language tags
+  languages = languages
+    .filter((lang) => /^[a-zA-Z]{2,}-?[a-zA-Z]*$/.test(lang))
+    .map((lang) => languageCodeToTagMap[lang] || lang);
+
   // @ts-ignore locales are readonly
-  const locales: string[] = i18n.locales
-  return matchLocale(languages, locales, i18n.defaultLocale)
+  const locales: string[] = i18n.locales.map(
+    (locale) => languageCodeToTagMap[locale] || locale
+  );
+  return matchLocale(languages, locales, languageCodeToTagMap[i18n.defaultLocale]);
 }
 
 // this middleware refreshes the user's session and must be run
