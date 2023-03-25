@@ -2,7 +2,6 @@ import { buttonVariants } from '@components/ui/button'
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import { FC } from 'react'
 
 export const BlockPageLink: FC<BlockType> = async ({ id, lang }) => {

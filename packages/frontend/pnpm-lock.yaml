@@ -39,6 +39,7 @@ specifiers:
   eslint-config-next: 13.2.0
   html-react-parser: ^3.0.12
   lucide-react: ^0.115.0
+  negotiator: ^0.6.3
   next: 13.2.1
   next-seo: ^5.15.0
   next-share: ^0.19.0
@@ -94,6 +95,7 @@ dependencies:
   dayjs: 1.11.7
   html-react-parser: 3.0.12_react@18.2.0
   lucide-react: 0.115.0_react@18.2.0
+  negotiator: 0.6.3
   next: 13.2.1_pjwopsidmaokadturxaafygjp4
   next-seo: 5.15.0_qgtcjgzkkjtbiyvnx7d32fl5vu
   next-share: 0.19.0_react@18.2.0
@@ -4602,6 +4604,11 @@ packages:
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+
+  /negotiator/0.6.3:
+    resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
+    engines: {node: '>= 0.6'}
+    dev: false
 
   /next-seo/5.15.0_qgtcjgzkkjtbiyvnx7d32fl5vu:
     resolution: {integrity: sha512-LGbcY91yDKGMb7YI+28n3g+RuChUkt6pXNpa8FkfKkEmNiJkeRDEXTnnjVtwT9FmMhG6NH8qwHTelGrlYm9rgg==}
