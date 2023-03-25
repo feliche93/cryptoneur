@@ -1,9 +1,8 @@
 'use client'
 
 import { BlockType } from '@lib/directus.types'
-import dynamic from 'next/dynamic'
 import Script from 'next/script'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 
 export const BlockCalendar: FC<BlockType> = ({ lang, id }) => {
   return (
@@ -17,7 +16,7 @@ export const BlockCalendar: FC<BlockType> = ({ lang, id }) => {
         </p>
       </div>
       <div className="w-auto overflow-hidden pt-10" id="my-cal-inline">
-        <Script strategy="afterInteractive">
+        <Script strategy="lazyOnload">
           {`
           (function (C, A, L) {
             let p = function (a, ar) { a.q.push(ar); };
