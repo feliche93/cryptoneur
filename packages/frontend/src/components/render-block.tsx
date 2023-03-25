@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { BlockCalendar, BlockCalendard } from './blocks/block-calendar'
+import { BlockCalendar } from './blocks/block-calendar'
 import { BlockFeatures } from './blocks/block-features'
 import { BlockHero } from './blocks/block-hero'
 import { BlockLogoCloud } from './blocks/block-logo-cloud'

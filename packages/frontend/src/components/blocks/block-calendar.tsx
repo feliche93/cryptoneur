@@ -2,8 +2,11 @@
 
 import { BlockType } from '@lib/directus.types'
 import { FC } from 'react'
-import Cal, { getCalApi } from '@calcom/embed-react'
+import { getCalApi } from '@calcom/embed-react'
 import { useEffect } from 'react'
+import dynamic from 'next/dynamic'
+
+const Cal = dynamic(() => import('@calcom/embed-react'))
 
 export const BlockCalendar: FC<BlockType> = ({ lang, id }) => {
   useEffect(() => {
