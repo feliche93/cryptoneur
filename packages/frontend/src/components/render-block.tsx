@@ -30,6 +30,7 @@ export const RenderBlock: FC<RenderBlockProps> = ({ block, lang }) => {
 
   switch (collection) {
     case 'block_hero':
+      return null
       return <BlockHero lang={lang} id={item} />
     case 'block_page_link':
       return <BlockPageLink lang={lang} id={item} />
