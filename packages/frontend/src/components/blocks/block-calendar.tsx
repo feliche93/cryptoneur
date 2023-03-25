@@ -16,8 +16,10 @@ export const BlockCalendar: FC<BlockType> = ({ lang, id }) => {
         </p>
       </div>
       <div className="w-auto overflow-hidden pt-10" id="my-cal-inline">
-        <Script strategy="lazyOnload">
-          {`
+        <Script
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
           (function (C, A, L) {
             let p = function (a, ar) { a.q.push(ar); };
             let d = C.document;
@@ -49,8 +51,9 @@ export const BlockCalendar: FC<BlockType> = ({ lang, id }) => {
           });
 
           Cal("ui", {"styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false});
-        `}
-        </Script>
+        `,
+          }}
+        ></Script>
       </div>
     </div>
   )
