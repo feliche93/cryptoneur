@@ -15,11 +15,9 @@ export const BlockCalendar: FC<BlockType> = ({ lang, id }) => {
           Interested in Working together? 🗓️
         </p>
       </div>
-      <div className="w-auto overflow-hidden pt-10" id="my-cal-inline">
-        <Script
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+      <div className="w-auto overflow-hidden pt-10" id="my-cal-inline"></div>
+      <Script strategy="lazyOnload">
+        {`
           (function (C, A, L) {
             let p = function (a, ar) { a.q.push(ar); };
             let d = C.document;
@@ -51,27 +49,8 @@ export const BlockCalendar: FC<BlockType> = ({ lang, id }) => {
           });
 
           Cal("ui", {"styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false});
-        `,
-          }}
-        ></Script>
-      </div>
-    </div>
-  )
-
-  return (
-    <div className="relative pt-16 sm:pt-24 lg:pt-32">
-      <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-base font-semibold uppercase tracking-wider text-transparent">
-          Book a Meeting
-        </h2>
-        <p className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          Interested in Working together? 🗓️
-        </p>
-      </div>
-      <Cal
-        calLink="felix-vemmer/30-minute-google-hangout-chat"
-        className="w-auto overflow-hidden pt-10"
-      />
+        `}
+      </Script>
     </div>
   )
 }
