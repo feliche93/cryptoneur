@@ -21,6 +21,15 @@ function getLocale(request: NextRequest): string | undefined {
 // for any Server Component route that uses `createServerComponentSupabaseClient`
 export async function middleware(req: NextRequest) {
 
+  // Skip next internal and image requests
+  if (
+    req.nextUrl.pathname.startsWith('/_next') ||
+    req.nextUrl.pathname.includes('/api/') ||
+    /\.(.*)$/.test(req.nextUrl.pathname)
+  ) {
+    return
+  }
+
   const pathname = req.nextUrl.pathname
 
   // Check if there is any supported locale in the pathname

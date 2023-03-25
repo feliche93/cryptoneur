@@ -27,14 +27,14 @@ export const BlockHero: FC<BlockType> = async ({ id, lang }) => {
   const translations = data?.translations
 
   if (!translations?.length || typeof translations[0] === 'number') {
-    notFound()
+    throw new Error('No translations found')
   }
 
   const { title, subtitle } = translations[0]
   const image = data?.image
 
   if (!title || !subtitle || !image || typeof image === 'string' || data.buttons?.length === 0) {
-    notFound()
+    throw new Error('Missing data')
   }
 
   return (
