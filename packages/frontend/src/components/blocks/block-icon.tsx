@@ -21,7 +21,7 @@ const snakeToPascal = (string: string) => {
 }
 
 export const BlockIcon: FC<BlockProps> = ({ iconName, color = 'text-black', size = 6 }) => {
-  console.log(iconName)
+  // console.log(iconName)
 
   const modifiedIconName = `Md${snakeToPascal(iconName)}`
 
