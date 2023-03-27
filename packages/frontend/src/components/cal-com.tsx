@@ -6,7 +6,7 @@ import { FC } from 'react'
 export interface CalComProps {}
 export const CalCom: FC<CalComProps> = () => {
   return (
-    <Script strategy="lazyOnload">
+    <Script strategy="afterInteractive">
       {`
       (function (C, A, L) {
         let p = function (a, ar) { a.q.push(ar); };
@@ -38,8 +38,7 @@ export const CalCom: FC<CalComProps> = () => {
         calLink: "felix-vemmer/30-minute-google-hangout-chat"
       });
 
-      Cal("ui", {"styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false});
-    `}
+      Cal("ui", {"theme":"light","styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false});    `}
     </Script>
   )
 }

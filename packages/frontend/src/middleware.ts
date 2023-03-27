@@ -75,6 +75,6 @@ export const config = {
   matcher: [
     '/sign-in',
     '/register',
-    '/((?!api|_next/static|_next/image|favicon.ico|gas-fees-calculator).*)'
+    '/((?!api|_next/static|_next/image|favicon.ico|gas-fees-calculator|web-3-grants).*)'
   ],
 }
