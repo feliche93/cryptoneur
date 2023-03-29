@@ -4,10 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import { DeskltopActionButtons } from './desktop-action-buttons'
+import { MenuProps } from './menu'
 import { NavLinks } from './nav-links'
 
-export interface DesktopMenuProps {}
-export const DesktopMenu: FC<DesktopMenuProps> = ({ pathname }) => {
+export interface DesktopMenuProps {
+  links: MenuProps['links']
+}
+export const DesktopMenu: FC<DesktopMenuProps> = ({ links }) => {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6">
       <nav
@@ -41,7 +44,7 @@ export const DesktopMenu: FC<DesktopMenuProps> = ({ pathname }) => {
           </div>
         </div>
         <div className="hidden md:flex md:space-x-10">
-          <NavLinks />
+          <NavLinks links={links} />
         </div>
         <DeskltopActionButtons />
       </nav>

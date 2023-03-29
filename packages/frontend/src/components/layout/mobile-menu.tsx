@@ -11,9 +11,13 @@ import { usePathname, useRouter } from 'next/navigation'
 import { classNames } from '@utils/helpers'
 import { navItems } from './nav-items'
 import { useSupabase } from '@components/supabase-provider'
+import { MenuProps } from './menu'
+import { NavLinks } from './nav-links'
 
-export interface MobileMenuProps {}
-export const MobileMenu: FC<MobileMenuProps> = () => {
+export interface MobileMenuProps {
+  links: MenuProps['links']
+}
+export const MobileMenu: FC<MobileMenuProps> = ({ links }) => {
   const pathname = usePathname()
   const { session, supabase } = useSupabase()
   const router = useRouter()
@@ -61,19 +65,7 @@ export const MobileMenu: FC<MobileMenuProps> = () => {
             </div>
           </div>
           <div className="px-2 pt-2 pb-3">
-            {navItems.map((item) => (
-              <Popover.Button
-                as={Link}
-                key={item.name}
-                href={item.href}
-                className={classNames(
-                  item.href === pathname ? 'text-black' : '',
-                  'block rounded-md px-3 py-2 text-base font-medium text-base-content/80 hover:bg-base-200 hover:text-primary',
-                )}
-              >
-                {item.name}
-              </Popover.Button>
-            ))}
+            <NavLinks mobile links={links} />
           </div>
           <div className="hidden md:absolute md:inset-y-0 md:right-0 md:flex md:items-center md:justify-end">
             {session ? (

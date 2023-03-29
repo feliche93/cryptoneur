@@ -1,40 +1,89 @@
 'use client'
 
+import { Popover } from '@headlessui/react'
 import { classNames } from '@utils/helpers'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
+import { Link as LinkItem, MenuProps } from './menu'
 import { navItems } from './nav-items'
 
-export interface NavLinksProps {}
+export interface NavLinksProps {
+  links: MenuProps['links']
+  mobile?: boolean
+}
 
-export const NavLinks: FC<NavLinksProps> = () => {
+export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
   const pathname = usePathname()
+  const language = pathname ? pathname.split('/')[1] : 'en'
 
-  console.log({ pathname })
+  // console.log({ pathname, links })
 
-  //   const data = await directus.singleton('navbar').read({
-  //     fields: 'links.item.*.*.*',
-  //   })
+  function getLabel(link: LinkItem) {
+    return link.item.button.translations.find(
+      (translation) => translation.languages_code.split('-')[0] === language,
+    )?.label
+  }
 
-  //   if (!data) {
-  //     throw new Error('Navbar not found')
-  //   }
+  function getLocalizedSlug(link: LinkItem) {
+    const translations = link?.item?.page?.translations
 
-  //   return <pre>{JSON.stringify(data, null, 2)}</pre>
+    if (!translations) {
+      throw new Error('No translations found')
+    }
+
+    const localizedSlug = translations.find(
+      (translation) => translation.languages_code.split('-')[0] === language,
+    )?.slug
+
+    if (!localizedSlug) {
+      throw new Error('No localized slug found')
+    }
+
+    return localizedSlug
+  }
+
+  function getHref(link: LinkItem) {
+    if (link.item.href) {
+      return link.item.href
+    }
+    if (link.item.page) {
+      return `/${language}/${getLocalizedSlug(link)}`
+    }
+    throw new Error('No href found')
+  }
+
+  if (mobile)
+    return (
+      <>
+        {links.map((link: LinkItem) => (
+          <Popover.Button
+            as={Link}
+            key={link.item.id}
+            href={getHref(link)}
+            className={classNames(
+              getHref(link) === pathname ? 'text-black' : '',
+              'block rounded-md px-3 py-2 text-base font-medium text-base-content/80 hover:bg-base-200 hover:text-primary',
+            )}
+          >
+            {getLabel(link)}
+          </Popover.Button>
+        ))}
+      </>
+    )
 
   return (
     <>
-      {navItems.map((item) => (
+      {links.map((link: LinkItem) => (
         <Link
+          href={getHref(link)}
           className={classNames(
-            item.href === pathname ? 'text-primary' : '',
+            getHref(link) === pathname ? 'text-primary' : '',
             'font-medium text-base-content/80 hover:text-primary',
           )}
-          key={item.name}
-          href={item.href}
+          key={link.item.id}
         >
-          {item.name}
+          {getLabel(link)}
         </Link>
       ))}
     </>
