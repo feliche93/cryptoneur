@@ -15,6 +15,8 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
+export const runtime = 'nodejs' // 'nodejs' (default) | 'experimental-edge'
+
 export const metadata: Metadata = {
   title: 'Gas Fees Calculator (Multi Currency, Network & Txn Types)',
   description:
