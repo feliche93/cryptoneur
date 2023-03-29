@@ -77,6 +77,6 @@ export const config = {
     '/sign-in',
     '/register',
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
-    '/((?!gas-fees-calculator|blog).*)'
   ],
 }
+
