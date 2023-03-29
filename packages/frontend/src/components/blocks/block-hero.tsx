@@ -6,7 +6,7 @@ import { FC } from 'react'
 import { Subtitle } from './subtitle'
 import { Title } from './title'
 
-//
+// @ts-expect-error Server Component
 export const BlockHero: FC<BlockType> = async ({ id, lang }) => {
   // return <pre>{JSON.stringify({ id, lang }, null, 2)}</pre>
   const data = await directus.items('block_hero').readOne(id, {

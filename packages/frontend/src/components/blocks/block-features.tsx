@@ -4,6 +4,8 @@ import { FC } from 'react'
 import { BlockIcon } from './block-icon'
 
 export interface BlockFeaturesProps {}
+
+// @ts-expect-error Server Component
 export const BlockFeatures: FC<BlockType> = async ({ id, lang }) => {
   const data = await directus.items('block_features').readOne(id, {
     fields: ['*.*.*'],

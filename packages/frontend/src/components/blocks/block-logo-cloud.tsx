@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 import { FC } from 'react'
 
+// @ts-expect-error Server Component
 export const BlockLogoCloud: FC<BlockType> = async ({ id, lang }) => {
   const data = await directus.items('block_logo_cloud').readOne(id, {
     fields: ['*.*', 'images.directus_files_id.*'],

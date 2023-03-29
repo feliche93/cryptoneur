@@ -4,6 +4,7 @@ import { BlockType } from '@lib/directus.types'
 import Link from 'next/link'
 import { FC } from 'react'
 
+// @ts-expect-error Server Component
 export const BlockPageLink: FC<BlockType> = async ({ id, lang }) => {
   const data = await directus.items('block_page_link').readOne(id, {
     fields: ['button.*.*', 'page.translations.*'],

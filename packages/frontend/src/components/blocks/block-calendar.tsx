@@ -4,6 +4,7 @@ import { BlockType } from '@lib/directus.types'
 import dynamic from 'next/dynamic'
 import { FC } from 'react'
 
+// @ts-expect-error Server Component
 export const BlockCalendar: FC<BlockType> = async ({ lang, id }) => {
   const data = await directus.items('block_cal').readOne(id, {
     fields: ['*.*'],

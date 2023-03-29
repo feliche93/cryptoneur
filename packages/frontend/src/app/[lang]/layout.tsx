@@ -13,6 +13,7 @@ import Navbar from '../../components/layout/Navbar'
 import '../globals.css'
 import { Metadata } from 'next'
 import profilePic from '@public/profilePic.jpg'
+import directus from '@lib/directus'
 
 export type TypedSupabaseClient = SupabaseClient<Database>
 
