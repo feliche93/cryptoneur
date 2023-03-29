@@ -17,7 +17,7 @@ specifiers:
   '@tailwindcss/typography': ^0.5.9
   '@tanstack/react-query': ^4.28.0
   '@tanstack/react-query-devtools': ^4.28.0
-  '@tanstack/react-table': ^8.8.0
+  '@tanstack/react-table': ^8.8.4
   '@tiptap/pm': 2.0.0-beta.220
   '@tiptap/react': 2.0.0-beta.220
   '@tiptap/starter-kit': 2.0.0-beta.220
@@ -37,8 +37,8 @@ specifiers:
   encoding: ^0.1.13
   eslint: 8.34.0
   eslint-config-next: 13.2.0
-  html-react-parser: ^3.0.14
-  lucide-react: ^0.115.0
+  html-react-parser: ^3.0.15
+  lucide-react: ^0.129.0
   negotiator: ^0.6.3
   next: 13.2.4
   next-seo: ^5.15.0
@@ -81,7 +81,7 @@ dependencies:
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
   '@tanstack/react-query': 4.28.0_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.28.0_q4teel2yjbizrm4naiaqcdpjum
-  '@tanstack/react-table': 8.8.0_biqbaboplfbrettd7655fr4n2y
+  '@tanstack/react-table': 8.8.4_biqbaboplfbrettd7655fr4n2y
   '@tiptap/pm': 2.0.0-beta.220_7w7m52asdh3tod4ocz57yex63q
   '@tiptap/react': 2.0.0-beta.220_xig6hpp4glylmgjqbtp4uwsv5e
   '@tiptap/starter-kit': 2.0.0-beta.220_@tiptap+pm@2.0.0-beta.220
@@ -93,8 +93,8 @@ dependencies:
   clsx: 1.2.1
   daisyui: 2.51.5_j7yt3jd32cwenjqavrrga47yr4
   dayjs: 1.11.7
-  html-react-parser: 3.0.14_react@18.2.0
-  lucide-react: 0.115.0_react@18.2.0
+  html-react-parser: 3.0.15_react@18.2.0
+  lucide-react: 0.129.0_react@18.2.0
   negotiator: 0.6.3
   next: 13.2.4_pjwopsidmaokadturxaafygjp4
   next-seo: 5.15.0_ld2jel3hspngo3u5lti2kgl2sq
@@ -1393,20 +1393,20 @@ packages:
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
-  /@tanstack/react-table/8.8.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-K55peZ4VNRA+Jk/rSI8+0Tj/T9q8SyysmnK08wO/5kgIX3MhGL7wl0858eEcvd/2eq+CPPmhQx9wYoWOWtFEhg==}
+  /@tanstack/react-table/8.8.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-5w2AoBnDBJYuUa80sLOqelcG/eJdGwIPFBRnEiU3RCAEeZ1QIhYse/0vzhTY8VAcTXa2sjWhXNDWci4VlktNmg==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
     dependencies:
-      '@tanstack/table-core': 8.8.0
+      '@tanstack/table-core': 8.8.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@tanstack/table-core/8.8.0:
-    resolution: {integrity: sha512-P8Vk9yngfai1GLEfyqtT0b+Dty8subPR8yl5r1z/z4Z8NtaCIL1n+OmMV1QBU8WojeSSsWgr+o1CTxnaaOBoyQ==}
+  /@tanstack/table-core/8.8.4:
+    resolution: {integrity: sha512-4gq0A/Qz/JFuclxPd1UnNi5P57vbVF10mPK743Iuv2ORLLgF/O/XkaYjYDGw5SHMof8CgiT/nfdJdlgHsOfRIg==}
     engines: {node: '>=12'}
     dev: false
 
@@ -3802,27 +3802,27 @@ packages:
       lru-cache: 6.0.0
     dev: true
 
-  /html-dom-parser/3.1.6:
-    resolution: {integrity: sha512-j3JYc7/W4CUzZXBqJVljJaWQ1vddTG0bxipRZh03emQtUQ5Uk+rFKil3hk7RbS9yd4QcyaFdD2qGJ1f6aY47Qg==}
+  /html-dom-parser/3.1.7:
+    resolution: {integrity: sha512-cDgNF4YgF6J3H+d9mcldGL19p0GzVdS3iGuDNzYWQpU47q3+IRM85X3Xo07E+nntF4ek4s78A9V24EwxlPTjig==}
     dependencies:
       domhandler: 5.0.3
-      htmlparser2: 8.0.1
+      htmlparser2: 8.0.2
     dev: false
 
-  /html-react-parser/3.0.14_react@18.2.0:
-    resolution: {integrity: sha512-e0b9UF8MD2ysx0hgNq+amdte36LjzzlkmNFfHwQLPL/6nZdPHYtUH1a0RqJIeqa/Rk/MZpLuL/jhdPSE3VU+4A==}
+  /html-react-parser/3.0.15_react@18.2.0:
+    resolution: {integrity: sha512-iM2KUVhNoeIsezbpO6xwOHlFqWH+EYaCGwWWeX7R+jvrgc+mbnuouWaCU8GZRRbPKDD0eJXPZwLoeGVft84QXw==}
     peerDependencies:
       react: 0.14 || 15 || 16 || 17 || 18
     dependencies:
       domhandler: 5.0.3
-      html-dom-parser: 3.1.6
+      html-dom-parser: 3.1.7
       react: 18.2.0
       react-property: 2.0.0
       style-to-js: 1.1.3
     dev: false
 
-  /htmlparser2/8.0.1:
-    resolution: {integrity: sha512-4lVbmc1diZC7GUJQtRQ5yBAeUCL1exyMwmForWkRLnwyzWBFxN633SALPMGYaWZvKe9j1pRZJpauvmxENSp/EA==}
+  /htmlparser2/8.0.2:
+    resolution: {integrity: sha512-GYdjWKDkbRLkZ5geuHs5NY1puJ+PXwP7+fHPRz06Eirsb9ugf6d8kkXav6ADhcODhFFPMIXyxkxSuMf3D6NCFA==}
     dependencies:
       domelementtype: 2.3.0
       domhandler: 5.0.3
@@ -4404,8 +4404,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucide-react/0.115.0_react@18.2.0:
-    resolution: {integrity: sha512-VGL7jBKN6pEXi6peXoyn9t9O7olvinaAonnoe+iFi/F2q7/yQzAFM5KR1OY15u9PlrB3scI9HvcTFoOrIjUaVQ==}
+  /lucide-react/0.129.0_react@18.2.0:
+    resolution: {integrity: sha512-kGEZ+pOk9FLKsCr4luL4HYqr23lQdVbmN+3cgTj0Ye6s95FED3CX/DNzB3o8/TimgNmKKw+iq+g3mnTbtS7/ew==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
