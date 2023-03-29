@@ -12,15 +12,17 @@ function getLocale(request: NextRequest): string | undefined {
 
   // Use negotiator and intl-localematcher to get best locale
   let languages = new Negotiator({ headers: negotiatorHeaders }).languages()
-  console.log('Negotiator languages:', languages) // Debugging line
+  // Filter out wildcard value
+  languages = languages.filter((language) => language !== '*')
+  console.log('Negotiator languages:', languages)
 
   const locales: string[] = i18n.locales.slice()
-  console.log('Available locales:', locales) // Debugging line
+  console.log('Available locales:', locales)
 
   try {
     return matchLocale(languages, locales, i18n.defaultLocale)
   } catch (error) {
-    console.error('Error matching locale:', error) // Debugging line
+    console.error('Error matching locale:', error)
     return i18n.defaultLocale
   }
 }
