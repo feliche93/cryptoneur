@@ -46,7 +46,8 @@ const GasFeesCalculator = async () => {
   const [gasPrices, fiatRates] = await Promise.all([fetchGasPrices(), fetchFiatRates()])
 
   if (!gasPrices || !fiatRates) {
-    notFound()
+    throw console.error('Error fetching gas prices or fiat rates')
+    console.log({ gasPrices, fiatRates })
   }
 
   let networkPrices = networks.map((network, index) => {
