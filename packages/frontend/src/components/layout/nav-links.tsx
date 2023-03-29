@@ -13,6 +13,8 @@ export interface NavLinksProps {
   mobile?: boolean
 }
 
+export const revalidate = 60
+
 export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
   const pathname = usePathname()
   const language = pathname ? pathname.split('/')[1] : 'en'
