@@ -174,30 +174,31 @@ const fetchFiatRates = async () => {
       return null;
     }
   };
+};
 
 
-  const fetchGasPrices = async () => {
-    try {
-      const requests = Promise.all(
-        networks.map(async ({ network }) => {
-          const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`;
-          const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } });
-          const data = await gasPriceResponse.json();
-          return data;
-        })
-      );
+const fetchGasPrices = async () => {
+  try {
+    const requests = Promise.all(
+      networks.map(async ({ network }) => {
+        const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`;
+        const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } });
+        const data = await gasPriceResponse.json();
+        return data;
+      })
+    );
 
-      const data = await requests;
-      return data;
+    const data = await requests;
+    return data;
 
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-  export {
-    fetchFiatRates,
-    fetchGasPrices,
-    networks,
-    currencies
-  };
+export {
+  fetchFiatRates,
+  fetchGasPrices,
+  networks,
+  currencies
+};
