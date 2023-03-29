@@ -13,6 +13,8 @@ import { Metadata } from 'next'
 import Footer from '../../components/layout/Footer'
 import '../globals.css'
 
+export const revalidate = 60
+
 export type TypedSupabaseClient = SupabaseClient<Database>
 
 export const metadata: Metadata = {
