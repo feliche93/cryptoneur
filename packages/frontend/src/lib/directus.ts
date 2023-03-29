@@ -1,6 +1,7 @@
 "server-only"
 
 import { Directus } from "@directus/sdk";
+import { cache } from "react";
 import { DirectusCollections } from "./directus-collections";
 
 const directus = new Directus<DirectusCollections>(
