@@ -163,10 +163,17 @@ const fetchFiatRates = async () => {
       { next: { revalidate: 300 } }
     );
 
+    console.log(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`);
+
+    if (!response.ok) {
+
+      throw new Error('Failed to fetch fiat rates');
+    }
+
     const data = await response.json();
     return data;
   } catch (error) {
-
+    console.log
     console.log(error);
   }
 };
