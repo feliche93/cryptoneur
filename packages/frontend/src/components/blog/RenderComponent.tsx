@@ -7,6 +7,8 @@ import { Tweet } from './Tweet'
 export interface RenderComponentProps {
   component: any
 }
+
+// @ts-expect-error Server Component
 export const RenderComponent: FC<RenderComponentProps> = async ({ component }) => {
   const { __component, id } = component
 

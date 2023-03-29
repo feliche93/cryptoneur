@@ -1,18 +1,19 @@
 import 'server-only'
 
+import Navbar from '@components/layout/navbar'
 import { QueryClientWrapper } from '@components/query-client-wrapper'
 import { AnalyticsWrapper } from '@components/shared/analytics'
 import { ToasterWrapper } from '@components/shared/ToasterWrapper'
 import SupabaseProvider from '@components/supabase-provider'
 import { Database } from '@lib/database.types'
+import profilePic from '@public/profilePic.jpg'
 import type { SupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { createServerClient } from '@utils/supabase-server'
-import { NextSeo } from 'next-seo'
-import Footer from '../components/layout/Footer'
-import Navbar from '../components/layout/Navbar'
-import './globals.css'
 import { Metadata } from 'next'
-import profilePic from '@public/profilePic.jpg'
+import Footer from '../../components/layout/Footer'
+import '../globals.css'
+
+export const revalidate = 60
 
 export type TypedSupabaseClient = SupabaseClient<Database>
 
