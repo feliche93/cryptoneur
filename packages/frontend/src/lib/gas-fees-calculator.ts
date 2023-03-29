@@ -1,5 +1,6 @@
 import "server-only";
 
+
 const API_KEY = process.env.ZAPPER_API_KEY;
 const apiUrl = 'https://api.zapper.fi/v2';
 
