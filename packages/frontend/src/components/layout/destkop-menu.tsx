@@ -6,9 +6,7 @@ import { FC } from 'react'
 import { DeskltopActionButtons } from './desktop-action-buttons'
 import { NavLinks } from './nav-links'
 
-export interface DesktopMenuProps {
-  pathname: string | null
-}
+export interface DesktopMenuProps {}
 export const DesktopMenu: FC<DesktopMenuProps> = ({ pathname }) => {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -43,7 +41,7 @@ export const DesktopMenu: FC<DesktopMenuProps> = ({ pathname }) => {
           </div>
         </div>
         <div className="hidden md:flex md:space-x-10">
-          <NavLinks pathname={pathname} />
+          <NavLinks />
         </div>
         <DeskltopActionButtons />
       </nav>

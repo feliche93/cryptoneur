@@ -1,15 +1,18 @@
-import directus from '@lib/directus'
+'use client'
+
 import { classNames } from '@utils/helpers'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { FC } from 'react'
-import { navigation } from './Navbar'
+import { navItems } from './nav-items'
 
-export interface NavLinksProps {
-  pathname: string | null
-}
+export interface NavLinksProps {}
 
-// @ts-expect-error Server Component
-export const NavLinks: FC<NavLinksProps> = ({ pathname }) => {
+export const NavLinks: FC<NavLinksProps> = () => {
+  const pathname = usePathname()
+
+  console.log({ pathname })
+
   //   const data = await directus.singleton('navbar').read({
   //     fields: 'links.item.*.*.*',
   //   })
@@ -22,7 +25,7 @@ export const NavLinks: FC<NavLinksProps> = ({ pathname }) => {
 
   return (
     <>
-      {navigation.map((item) => (
+      {navItems.map((item) => (
         <Link
           className={classNames(
             item.href === pathname ? 'text-primary' : '',
