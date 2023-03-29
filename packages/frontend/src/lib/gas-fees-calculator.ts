@@ -158,54 +158,46 @@ const fetchFiatRates = async () => {
   const ids = networks.map(network => network.coinGeckoId).join(',');
   const vsCurrencies = currencies.join(',');
 
-  try {
-    const response = await fetch(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`,
-      { next: { revalidate: 300 } }
-    );
+  const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`;
 
-    console.log(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch fiat rates: ${response.status} ${response.statusText}`);
-    }
-
+  const fetchFiatRates = async () => {
     try {
+      const response = await fetch(apiUrl, {
+        headers: {
+          'Accept': 'application/json',
+        },
+      });
       const data = await response.json();
-      console.log({ data })
       return data;
+    } catch (error) {
+      console.error('Error fetching fiat rates:', error);
+      return null;
+    }
+  };
+
+
+  const fetchGasPrices = async () => {
+    try {
+      const requests = Promise.all(
+        networks.map(async ({ network }) => {
+          const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`;
+          const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } });
+          const data = await gasPriceResponse.json();
+          return data;
+        })
+      );
+
+      const data = await requests;
+      return data;
+
     } catch (e) {
       console.log(e);
     }
+  };
 
-  } catch (error) {
-    console.log
-    console.log(error);
-  }
-};
-
-const fetchGasPrices = async () => {
-  try {
-    const requests = Promise.all(
-      networks.map(async ({ network }) => {
-        const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`;
-        const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } });
-        const data = await gasPriceResponse.json();
-        return data;
-      })
-    );
-
-    const data = await requests;
-    return data;
-
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export {
-  fetchFiatRates,
-  fetchGasPrices,
-  networks,
-  currencies
-};
+  export {
+    fetchFiatRates,
+    fetchGasPrices,
+    networks,
+    currencies
+  };
