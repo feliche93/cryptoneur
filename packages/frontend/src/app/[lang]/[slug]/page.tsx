@@ -3,6 +3,8 @@ import { RenderBlock } from '@components/render-block'
 import directus from '@lib/directus'
 import { notFound } from 'next/navigation'
 
+export const revalidate = 120
+
 const HomePage = async ({ params }: { params: { slug: string; lang: string } }) => {
   const { slug, lang } = params
 
