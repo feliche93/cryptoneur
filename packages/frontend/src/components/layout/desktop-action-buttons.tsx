@@ -1,3 +1,5 @@
+'use client'
+
 import { useSupabase } from '@components/supabase-provider'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
