@@ -12,9 +12,17 @@ function getLocale(request: NextRequest): string | undefined {
 
   // Use negotiator and intl-localematcher to get best locale
   let languages = new Negotiator({ headers: negotiatorHeaders }).languages()
-  const locales: string[] = i18n.locales.slice()
+  console.log('Negotiator languages:', languages) // Debugging line
 
-  return matchLocale(languages, locales, i18n.defaultLocale)
+  const locales: string[] = i18n.locales.slice()
+  console.log('Available locales:', locales) // Debugging line
+
+  try {
+    return matchLocale(languages, locales, i18n.defaultLocale)
+  } catch (error) {
+    console.error('Error matching locale:', error) // Debugging line
+    return i18n.defaultLocale
+  }
 }
 
 // this middleware refreshes the user's session and must be run
