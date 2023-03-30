@@ -3,13 +3,11 @@ import CurrencyInput from '@components/gas-fees-calculator/CurrencyInput'
 import { FeesForm } from '@components/gas-fees-calculator/FeesForm'
 import { FeesFormCard } from '@components/gas-fees-calculator/FeesFormCard'
 import { GasPriceRadio } from '@components/gas-fees-calculator/GasPriceRadio'
-import { GitcoinGrant } from '@components/gas-fees-calculator/gitcoin-grant'
-import { Header } from '@components/gas-fees-calculator/header'
+import { GitcoinGrant } from '@components/gas-fees-calculator/GitcoinGrant'
+import { Header } from '@components/gas-fees-calculator/Header'
 import { ShareButtons } from '@components/gas-fees-calculator/ShareButtons'
 import { Table } from '@components/gas-fees-calculator/Table'
 import { UsedGasInput } from '@components/gas-fees-calculator/UsedGasInput'
-import { DirectusImage } from '@components/shared/directus-image'
-import directus from '@lib/directus'
 import { fetchFiatRates, fetchGasPrices, networks } from '@lib/gas-fees-calculator'
 import image1 from '@public/gas-fees-calculator/ogImag1.jpg'
 import image2 from '@public/gas-fees-calculator/ogImage2.jpg'
@@ -46,90 +44,39 @@ export const metadata: Metadata = {
   },
 }
 
-interface Translation {
-  share_button_title: string
-  share_buttons_share_title: string
-}
+const GasFeesCalculator = async () => {
+  const [gasPrices, fiatRates] = await Promise.all([fetchGasPrices(), fetchFiatRates()])
 
-interface DirectusResponse {
-  translations: Translation[]
-  zapper_logo: {
-    id: string
+  if (!gasPrices || !fiatRates) {
+    console.log({ gasPrices, fiatRates })
+    throw console.error('Error fetching gas prices or fiat rates')
   }
-}
 
-const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string } }) => {
-  // const [gasPrices, fiatRates] = await Promise.all([fetchGasPrices(), fetchFiatRates()])
+  let networkPrices = networks.map((network, index) => {
+    const gasPrice = gasPrices[index]
 
-  // if (!gasPrices || !fiatRates) {
-  //   console.log({ gasPrices, fiatRates })
-  //   throw console.error('Error fetching gas prices or fiat rates')
-  // }
+    const tokenPrice = fiatRates[network.coinGeckoId]
 
-  // let networkPrices = networks.map((network, index) => {
-  //   const gasPrice = gasPrices[index]
-
-  //   const tokenPrice = fiatRates[network.coinGeckoId]
-
-  //   return {
-  //     ...network,
-  //     gasPrice,
-  //     tokenPrice,
-  //   }
-  // })
-
-  const { translations, zapper_logo } = (await directus.singleton('gas_fees_calculator').read({
-    fields: [
-      'translations.share_button_title',
-      'translations.share_buttons_share_title',
-      'zapper_logo.id',
-    ],
-    deep: {
-      translations: {
-        _filter: {
-          languages_code: {
-            _starts_with: lang,
-          },
-        },
-      },
-    },
-  })) as DirectusResponse
-
-  return (
-    <>
-      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <Header lang={lang} />
-        <GitcoinGrant />
-        <ShareButtons
-          size={38}
-          title={translations[0].share_button_title}
-          shareTitle={translations[0].share_buttons_share_title}
-          shareUrl={'https://www.cryptoneur.xyz/gas-fees-calculator'}
-        />
-      </div>
-      <div className="mt-10 flex items-center  justify-center">
-        <a
-          href="https://zapper.fi/?utmsource=cryptoneur.xyz&utmmedium=gas-fees-calcualtor"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <DirectusImage
-            className="rounded-lg object-center"
-            id={zapper_logo.id}
-            width={250}
-            height={50}
-          />
-        </a>
-      </div>
-    </>
-  )
+    return {
+      ...network,
+      gasPrice,
+      tokenPrice,
+    }
+  })
 
   return (
     <>
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Header />
         <GitcoinGrant />
-
+        <ShareButtons
+          size={38}
+          title={'Found the calculator helpful? Share it with others:'}
+          shareTitle={
+            'Calculate gas fees in your local currency for different transaction types on Mainnet, Arbitrum, Binance Smart Chain, Avalanche, Polygon, Fantom and Harmony.'
+          }
+          shareUrl={'https://www.cryptoneur.xyz/gas-fees-calculator'}
+        />
         <FeesForm>
           <FeesFormCard
             title="Local Currency"

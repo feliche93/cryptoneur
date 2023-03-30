@@ -32,7 +32,7 @@ export const BlockFeatures: FC<BlockType> = async ({ id, lang }) => {
 
   const { title, features, section } = translations[0]
 
-  if (!features || features.length === 0 || typeof features === 'number') {
+  if (!features || typeof features === 'number') {
     return null
   }
 

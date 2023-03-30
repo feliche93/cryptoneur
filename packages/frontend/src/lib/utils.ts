@@ -6,6 +6,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getAssetUrl(id: string) {
-    if (!id) return null;
+    if (!id) throw new Error("Asset ID is required");
     return `${process.env.NEXT_PUBLIC_DIRECTUS_URL}/assets/${id}`;
 }
