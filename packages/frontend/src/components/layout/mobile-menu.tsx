@@ -2,15 +2,10 @@
 
 import { Popover, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
 import { Fragment } from 'react'
-import { DesktopMenu } from './destkop-menu'
 
+import { usePathname } from 'next/navigation'
 import { FC } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
-import { classNames } from '@utils/helpers'
-import { navItems } from './nav-items'
-import { useSupabase } from '@components/supabase-provider'
 import { MenuProps } from './menu'
 import { NavLinks } from './nav-links'
 
@@ -19,17 +14,17 @@ export interface MobileMenuProps {
 }
 export const MobileMenu: FC<MobileMenuProps> = ({ links }) => {
   const pathname = usePathname()
-  const { session, supabase } = useSupabase()
-  const router = useRouter()
+  // const { session, supabase } = useSupabase()
+  // const router = useRouter()
 
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut()
+  // const handleLogout = async () => {
+  //   const { error } = await supabase.auth.signOut()
 
-    if (error) {
-      console.log({ error })
-    }
-    router.refresh()
-  }
+  //   if (error) {
+  //     console.log({ error })
+  //   }
+  //   router.refresh()
+  // }
 
   return (
     <Transition
@@ -68,7 +63,7 @@ export const MobileMenu: FC<MobileMenuProps> = ({ links }) => {
             <NavLinks mobile links={links} />
           </div>
           <div className="hidden md:absolute md:inset-y-0 md:right-0 md:flex md:items-center md:justify-end">
-            {session ? (
+            {/* {session ? (
               <button className="btn-outline btn-primary btn" onClick={handleLogout}>
                 Log Out
               </button>
@@ -76,7 +71,7 @@ export const MobileMenu: FC<MobileMenuProps> = ({ links }) => {
               <Link className="btn-primary btn" href={'/sign-in'}>
                 Log In
               </Link>
-            )}
+            )} */}
           </div>
         </div>
       </Popover.Panel>

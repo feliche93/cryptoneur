@@ -2,7 +2,7 @@
 
 import { Popover } from '@headlessui/react'
 import { FC } from 'react'
-import { DesktopMenu } from './destkop-menu'
+import { DesktopMenu } from './desktop-menu'
 import { MobileMenu } from './mobile-menu'
 
 export interface MenuProps {

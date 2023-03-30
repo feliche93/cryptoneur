@@ -46,7 +46,7 @@ export const DesktopMenu: FC<DesktopMenuProps> = ({ links }) => {
         <div className="hidden md:flex md:space-x-10">
           <NavLinks links={links} />
         </div>
-        <DeskltopActionButtons />
+        {/* <DeskltopActionButtons /> */}
       </nav>
     </div>
   )

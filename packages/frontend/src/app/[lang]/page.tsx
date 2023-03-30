@@ -3,7 +3,7 @@ import { RenderBlock } from '@components/render-block'
 import { fetchPageData, preload } from '@lib/directus'
 import { notFound } from 'next/navigation'
 
-export const dynamic = 'force-static'
+export const revalidate = 60
 
 const HomePage = async ({ params }: { params: { slug: string; lang: string } }) => {
   const { slug, lang } = params

@@ -34,11 +34,7 @@ function getLocale(request: NextRequest): string | undefined {
 export async function middleware(req: NextRequest) {
 
   const res = NextResponse.next()
-  const supabase = createMiddlewareSupabaseClient({ req, res })
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
 
   // Skip next internal and image requests
   if (
@@ -63,31 +59,11 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(`/${locale}/${pathname}`, req.url))
   }
 
-
-  if (session && req.nextUrl.pathname.startsWith('/sign-in')) {
-
-    // Auth condition not met, redirect to home page.
-    const redirectUrl = req.nextUrl.clone()
-    redirectUrl.pathname = '/'
-    redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname)
-    return NextResponse.redirect(redirectUrl)
-  }
-
-  if (session && req.nextUrl.pathname.startsWith('/register')) {
-    // Auth condition not met, redirect to home page.
-    const redirectUrl = req.nextUrl.clone()
-    redirectUrl.pathname = '/'
-    redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname)
-    return NextResponse.redirect(redirectUrl)
-  }
-
   return res
 }
 
 export const config = {
   matcher: [
-    '/sign-in',
-    '/register',
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }
