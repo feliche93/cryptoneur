@@ -7,10 +7,8 @@ import { Database } from '@lib/database.types'
 import profilePic from '@public/profilePic.jpg'
 import type { SupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { Metadata } from 'next'
-import Footer from '../../components/layout/Footer'
-import '../globals.css'
-
-export const revalidate = 60
+import Footer from '../components/layout/Footer'
+import './globals.css'
 
 export type TypedSupabaseClient = SupabaseClient<Database>
 

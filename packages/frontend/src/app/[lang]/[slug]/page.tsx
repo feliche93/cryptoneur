@@ -3,7 +3,7 @@ import { RenderBlock } from '@components/render-block'
 import { fetchPageData, preload } from '@lib/directus'
 import { notFound } from 'next/navigation'
 
-export const revalidate = 60
+export const dynamic = 'error'
 
 // export async function generateStaticParams() {
 //   const { data: allPages } = await directus.items('pages').readByQuery({
