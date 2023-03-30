@@ -55,4 +55,39 @@ export const fetchPageData = cache(async (slug: string, lang: string) => {
     return pageData;
 });
 
+export const generatePageStaticParams = async () => {
+    const { data: allPages } = await directus.items('pages').readByQuery({
+        fields: ['translations.languages_code', 'translations.slug', 'status'],
+        filter: {
+            status: {
+                _eq: 'published',
+            },
+        },
+    })
+
+    if (!allPages?.length) {
+        notFound()
+    }
+
+    const urls = [] as { slug: string; lang: string }[]
+
+    allPages.forEach((page) => {
+        if (page.translations) {
+            page.translations.forEach((translation) => {
+                if (typeof translation !== 'number') {
+                    if (!translation.languages_code || !translation.slug) {
+                        return
+                    }
+                    urls.push({
+                        slug: translation.slug,
+                        lang: translation.languages_code?.split('-')[0],
+                    })
+                }
+            })
+        }
+    })
+
+    return urls
+}
+
 export default directus;
