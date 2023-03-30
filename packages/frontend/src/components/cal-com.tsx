@@ -6,7 +6,7 @@ import { FC } from 'react'
 export interface CalComProps {}
 export const CalCom: FC<CalComProps> = () => {
   return (
-    <Script strategy="afterInteractive">
+    <Script strategy="lazyOnload">
       {`
       (function (C, A, L) {
         let p = function (a, ar) { a.q.push(ar); };
