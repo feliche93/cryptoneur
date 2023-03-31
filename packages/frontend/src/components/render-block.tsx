@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { BlockButtonLink, BlockPageLink } from './blocks/block-page-link'
+import { BlockPageLink } from './blocks/block-page-link'
 import { BlockCalendar } from './blocks/block-calendar'
 import { BlockFeatures } from './blocks/block-features'
 import { BlockHero } from './blocks/block-hero'
 import { BlockLogoCloud } from './blocks/block-logo-cloud'
+import { BlockExternalLink } from './blocks/block-external-link'
 
 export interface RenderBlockProps {
   block:
@@ -34,7 +35,7 @@ export const RenderBlock: FC<RenderBlockProps> = ({ block, lang }) => {
     case 'block_page_link':
       return <BlockPageLink lang={lang} id={item} />
     case 'block_external_link':
-      return null
+      return <BlockExternalLink lang={lang} id={item} />
     case 'block_cal':
       return <BlockCalendar lang={lang} id={item} />
     case 'block_features':
