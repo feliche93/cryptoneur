@@ -1,21 +1,19 @@
 import { currencies } from '@/lib/gas-fees-calculator'
 import CurrencyInput from '@components/gas-fees-calculator/currency-input'
-import { FeesForm } from '@components/gas-fees-calculator/FeesForm'
+import { FeesForm } from '@components/gas-fees-calculator/fees-form'
 import { FeesFormCard } from '@components/gas-fees-calculator/fees-form-card'
-import { GasPriceRadio } from '@components/gas-fees-calculator/GasPriceRadio'
+import { GasPriceRadio } from '@components/gas-fees-calculator/gas-price-radio'
 import { GitcoinGrant } from '@components/gas-fees-calculator/gitcoin-grant'
 import { Header } from '@components/gas-fees-calculator/header'
-import { ShareButtons } from '@components/gas-fees-calculator/ShareButtons'
+import { ShareButtons } from '@components/gas-fees-calculator/share-buttons'
 import { Table } from '@components/gas-fees-calculator/Table'
+import { UsedGaseInput } from '@components/gas-fees-calculator/used-gas-input'
 import { DirectusImage } from '@components/shared/directus-image'
 import directus from '@lib/directus'
 import { fetchFiatRates, fetchGasPrices, networks } from '@lib/gas-fees-calculator'
 import image1 from '@public/gas-fees-calculator/ogImag1.jpg'
 import image2 from '@public/gas-fees-calculator/ogImage2.jpg'
 import { Metadata } from 'next'
-import Image from 'next/image'
-import { notFound } from 'next/navigation'
-import { UsedGaseInput } from '@components/gas-fees-calculator/used-gas-input'
 
 export const runtime = 'nodejs' // 'nodejs' (default) | 'experimental-edge'
 
@@ -162,7 +160,6 @@ const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string 
               labelTransactionSpeed={translations[0].gas_price_input_label_transaction_speed}
             />
           </FeesFormCard>
-
           <Table
             labelHeaderName={translations[0].table_header_name}
             labelHeaderType={translations[0].table_header_type}
