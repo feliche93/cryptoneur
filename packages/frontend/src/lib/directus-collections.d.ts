@@ -1623,6 +1623,8 @@ export interface components {
       table_header_gas_price?: string | null;
       table_header_gas_current_cost?: string | null;
       share_buttons_share_title?: string | null;
+      currency_input_title?: string | null;
+      currency_input_description?: string | null;
       Header?: string;
       buttons?: string;
       table_headers?: string;

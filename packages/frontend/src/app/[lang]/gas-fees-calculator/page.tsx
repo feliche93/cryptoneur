@@ -1,13 +1,12 @@
 import { currencies } from '@/lib/gas-fees-calculator'
-import CurrencyInput from '@components/gas-fees-calculator/CurrencyInput'
+import CurrencyInput from '@components/gas-fees-calculator/currency-input'
 import { FeesForm } from '@components/gas-fees-calculator/FeesForm'
-import { FeesFormCard } from '@components/gas-fees-calculator/FeesFormCard'
+import { FeesFormCard } from '@components/gas-fees-calculator/fees-form-card'
 import { GasPriceRadio } from '@components/gas-fees-calculator/GasPriceRadio'
 import { GitcoinGrant } from '@components/gas-fees-calculator/gitcoin-grant'
 import { Header } from '@components/gas-fees-calculator/header'
 import { ShareButtons } from '@components/gas-fees-calculator/ShareButtons'
 import { Table } from '@components/gas-fees-calculator/Table'
-import { UsedGasInput } from '@components/gas-fees-calculator/UsedGasInput'
 import { DirectusImage } from '@components/shared/directus-image'
 import directus from '@lib/directus'
 import { fetchFiatRates, fetchGasPrices, networks } from '@lib/gas-fees-calculator'
@@ -16,6 +15,7 @@ import image2 from '@public/gas-fees-calculator/ogImage2.jpg'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { UsedGaseInput } from '@components/gas-fees-calculator/used-gas-input'
 
 export const runtime = 'nodejs' // 'nodejs' (default) | 'experimental-edge'
 
@@ -47,8 +47,31 @@ export const metadata: Metadata = {
 }
 
 interface Translation {
+  header_title: string
+  head_subtitle: string
+  header_description: string
+  gitcoin_title: string
   share_button_title: string
+  table_header_name: string
+  table_header_type: string
+  table_header_token: string
+  table_header_gas_used: string
+  table_header_gas_price: string
+  table_header_gas_current_cost: string
   share_buttons_share_title: string
+  currency_input_title: string
+  currency_input_description: string
+  curreny_input_label: string
+  used_gas_input_title: string
+  gas_price_input_title: string
+  used_gas_input_description: string
+  gas_price_input_description: string
+  used_gas_input_label_txn_type: string
+  used_gas_input_label_used_gas: string
+  gas_price_input_label_standard: string
+  gas_price_input_label_fast: string
+  gas_price_input_label_instant: string
+  gas_price_input_label_transaction_speed: string
 }
 
 interface DirectusResponse {
@@ -61,29 +84,34 @@ interface DirectusResponse {
 const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string } }) => {
   // const [gasPrices, fiatRates] = await Promise.all([fetchGasPrices(), fetchFiatRates()])
 
-  // if (!gasPrices || !fiatRates) {
-  //   console.log({ gasPrices, fiatRates })
-  //   throw console.error('Error fetching gas prices or fiat rates')
-  // }
+  const fiatRates = await fetchFiatRates()
 
-  // let networkPrices = networks.map((network, index) => {
-  //   const gasPrice = gasPrices[index]
+  if (!fiatRates) {
+    console.log({ fiatRates })
+    throw console.error('Error fetching fiat rates')
+  }
 
-  //   const tokenPrice = fiatRates[network.coinGeckoId]
+  const gasPrices = await fetchGasPrices()
 
-  //   return {
-  //     ...network,
-  //     gasPrice,
-  //     tokenPrice,
-  //   }
-  // })
+  if (!gasPrices) {
+    console.log({ gasPrices })
+    throw console.error('Error fetching gas prices')
+  }
+
+  let networkPrices = networks.map((network, index) => {
+    const gasPrice = gasPrices[index]
+
+    const tokenPrice = fiatRates[network.coinGeckoId]
+
+    return {
+      ...network,
+      gasPrice,
+      tokenPrice,
+    }
+  })
 
   const { translations, zapper_logo } = (await directus.singleton('gas_fees_calculator').read({
-    fields: [
-      'translations.share_button_title',
-      'translations.share_buttons_share_title',
-      'zapper_logo.id',
-    ],
+    fields: ['zapper_logo.id', 'translations.*'],
     deep: {
       translations: {
         _filter: {
@@ -106,6 +134,45 @@ const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string 
           shareTitle={translations[0].share_buttons_share_title}
           shareUrl={'https://www.cryptoneur.xyz/gas-fees-calculator'}
         />
+        <FeesForm>
+          <FeesFormCard
+            title={translations[0].currency_input_title}
+            description={translations[0].currency_input_description}
+          >
+            <CurrencyInput label={translations[0].curreny_input_label} currencies={currencies} />
+          </FeesFormCard>
+
+          <FeesFormCard
+            title={translations[0].used_gas_input_title}
+            description={translations[0].used_gas_input_description}
+          >
+            <UsedGaseInput
+              labelTransactionType={translations[0].used_gas_input_label_txn_type}
+              labelUsedGas={translations[0].used_gas_input_label_used_gas}
+            />
+          </FeesFormCard>
+          <FeesFormCard
+            title={translations[0].gas_price_input_title}
+            description={translations[0].gas_price_input_description}
+          >
+            <GasPriceRadio
+              labelStandard={translations[0].gas_price_input_label_standard}
+              labelFast={translations[0].gas_price_input_label_fast}
+              labelInstant={translations[0].gas_price_input_label_instant}
+              labelTransactionSpeed={translations[0].gas_price_input_label_transaction_speed}
+            />
+          </FeesFormCard>
+
+          <Table
+            labelHeaderName={translations[0].table_header_name}
+            labelHeaderType={translations[0].table_header_type}
+            labelHeaderToken={translations[0].table_header_token}
+            labelHeaderGasUsed={translations[0].table_header_gas_used}
+            labelHeaderGasPrice={translations[0].table_header_gas_price}
+            labelHeaderGasCurrentCost={translations[0].table_header_gas_current_cost}
+            networkPrices={networkPrices}
+          />
+        </FeesForm>
       </div>
       <div className="mt-10 flex items-center  justify-center">
         <a
@@ -120,54 +187,6 @@ const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string 
             height={50}
           />
         </a>
-      </div>
-    </>
-  )
-
-  return (
-    <>
-      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <Header />
-        <GitcoinGrant />
-
-        <FeesForm>
-          <FeesFormCard
-            title="Local Currency"
-            description="Select the currency you want the fees to be displayed in."
-          >
-            <CurrencyInput currencies={currencies} />
-          </FeesFormCard>
-          <FeesFormCard
-            title="Used Gas"
-            description="Every transaction uses gas. Pick a common transaction type or enter a custom amount of gas used."
-          >
-            <UsedGasInput />
-          </FeesFormCard>
-          <FeesFormCard
-            title="Gas Price"
-            description="Gas fees are paid in each network's native currency."
-          >
-            <GasPriceRadio />
-          </FeesFormCard>
-
-          <Table networkPrices={networkPrices} />
-        </FeesForm>
-
-        <div className="mt-10 flex items-center  justify-center">
-          <a
-            href="https://zapper.fi/?utmsource=cryptoneur.xyz&utmmedium=gas-fees-calcualtor"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Image
-              className="rounded-lg object-center"
-              src="/logos/power-zap-black.svg"
-              alt="Powered by Zapper"
-              width={200}
-              height={50}
-            />
-          </a>
-        </div>
       </div>
     </>
   )

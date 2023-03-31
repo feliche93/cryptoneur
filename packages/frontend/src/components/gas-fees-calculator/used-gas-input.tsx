@@ -2,7 +2,7 @@
 
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid'
-import { ChangeEventHandler, Fragment, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 
 interface TxnType {
@@ -66,12 +66,17 @@ export const txnTypes = [
   { name: 'Gnosis Safe: Creation with 4 Owners', gas: 355556 },
 ]
 
-import { FC } from 'react'
 import clsx from 'clsx'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, FC } from 'react'
 
-export const UsedGasInput: FC = () => {
+export interface UsedGasInputProps {
+  labelTransactionType: string
+  labelUsedGas: string
+}
+export const UsedGaseInput: FC<UsedGasInputProps> = ({ labelTransactionType, labelUsedGas }) => {
   const { control } = useFormContext() // retrieve all hook methods
+
+  // console.log({ labelTransactionType, labelUsedGas })
 
   const { field: selectField } = useController({
     name: 'txnType',
@@ -111,7 +116,7 @@ export const UsedGasInput: FC = () => {
           {({ open }) => (
             <>
               <Listbox.Label className="block text-sm font-medium text-gray-700">
-                Transaction Type
+                {labelTransactionType}
               </Listbox.Label>
               <div className="relative mt-1">
                 <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary-focus focus:outline-none focus:ring-1 focus:ring-primary-focus sm:text-sm">
@@ -171,7 +176,7 @@ export const UsedGasInput: FC = () => {
           )}
         </Listbox>
         <label htmlFor="gas-input" className="block pt-4 text-sm font-medium text-gray-700">
-          Used Gas
+          {labelUsedGas}
         </label>
         <input
           ref={input.ref}

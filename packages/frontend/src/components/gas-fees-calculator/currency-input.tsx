@@ -9,9 +9,10 @@ import { useController, useFormContext } from 'react-hook-form'
 
 interface CurrencyInputProps {
   currencies: string[]
+  label: string
 }
 
-export default function CurrencyInput({ currencies }: CurrencyInputProps) {
+export default function CurrencyInput({ currencies, label }: CurrencyInputProps) {
   const { control } = useFormContext()
 
   const { field } = useController({
@@ -26,7 +27,7 @@ export default function CurrencyInput({ currencies }: CurrencyInputProps) {
           {({ open }) => (
             <>
               <Listbox.Label className="text-text-base-content/80 block text-sm font-medium">
-                Currency
+                {label}
               </Listbox.Label>
               <div className="relative mt-1">
                 <Listbox.Button className="relative h-full w-full cursor-default rounded-md border border-base-300 bg-base-100 py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm">

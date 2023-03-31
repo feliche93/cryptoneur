@@ -2,7 +2,7 @@
 
 import { FC, PropsWithChildren } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { txnTypes } from './UsedGasInput'
+import { txnTypes } from './used-gas-input'
 
 export interface FeesFormProps extends PropsWithChildren {}
 export const FeesForm: FC<FeesFormProps> = ({ children }) => {
