@@ -80,8 +80,63 @@ interface DirectusResponse {
   }
 }
 
+export interface TxnTypes {
+  data: Datum[]
+}
+
+export interface Datum {
+  gas: number
+  translations: TranslationTxnType[]
+}
+
+export interface TranslationTxnType {
+  id: number
+  gas_fees_calculator_txn_types_id: number
+  languages_code: string
+  name: string
+  source: string
+}
+
 const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string } }) => {
-  // const [gasPrices, fiatRates] = await Promise.all([fetchGasPrices(), fetchFiatRates()])
+  const { translations, zapper_logo } = (await directus.singleton('gas_fees_calculator').read({
+    fields: ['zapper_logo.id', 'translations.*'],
+    deep: {
+      translations: {
+        _filter: {
+          languages_code: {
+            _starts_with: lang,
+          },
+        },
+      },
+    },
+  })) as DirectusResponse
+
+  const { data: txnTypes } = (await directus.items('gas_fees_calculator_txn_types').readByQuery({
+    fields: ['translations.*', 'gas', 'translations.languages_code'],
+    deep: {
+      translations: {
+        _filter: {
+          languages_code: {
+            _starts_with: lang,
+          },
+        },
+      },
+    },
+  })) as TxnTypes
+
+  const transformData = (txnTypes: TxnTypes['data']) => {
+    return txnTypes.map((item) => {
+      const name = item.translations.length > 0 ? item.translations[0].name : 'Standard Transfer'
+      const gas = item.gas
+
+      return { name, gas }
+    })
+  }
+
+  // Call the transformation function
+  const txnTypesTransformed = transformData(txnTypes)
+
+  // return <pre>{JSON.stringify(txnTypesTransformed, null, 2)}</pre>
 
   const fiatRates = await fetchFiatRates()
 
@@ -109,19 +164,6 @@ const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string 
     }
   })
 
-  const { translations, zapper_logo } = (await directus.singleton('gas_fees_calculator').read({
-    fields: ['zapper_logo.id', 'translations.*'],
-    deep: {
-      translations: {
-        _filter: {
-          languages_code: {
-            _starts_with: lang,
-          },
-        },
-      },
-    },
-  })) as DirectusResponse
-
   return (
     <>
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -133,7 +175,7 @@ const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string 
           shareTitle={translations[0].share_buttons_share_title}
           shareUrl={'https://www.cryptoneur.xyz/gas-fees-calculator'}
         />
-        <FeesForm>
+        <FeesForm txnTypes={txnTypesTransformed}>
           <FeesFormCard
             title={translations[0].currency_input_title}
             description={translations[0].currency_input_description}
@@ -148,6 +190,7 @@ const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string 
             <UsedGaseInput
               labelTransactionType={translations[0].used_gas_input_label_txn_type}
               labelUsedGas={translations[0].used_gas_input_label_used_gas}
+              txnTypes={txnTypesTransformed}
             />
           </FeesFormCard>
           <FeesFormCard
