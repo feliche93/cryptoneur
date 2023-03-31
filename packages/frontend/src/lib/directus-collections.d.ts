@@ -198,6 +198,34 @@ export interface paths {
     /** Update an existing block_external_link item. */
     patch: operations["updateSingleItemsBlockExternalLink"];
   };
+  "/items/block_feature_grid": {
+    /** List the block_feature_grid items. */
+    get: operations["readItemsBlockFeatureGrid"];
+    /** Create a new block_feature_grid item. */
+    post: operations["createItemsBlockFeatureGrid"];
+  };
+  "/items/block_feature_grid/{id}": {
+    /** Retrieve a single block_feature_grid item by unique identifier. */
+    get: operations["readSingleItemsBlockFeatureGrid"];
+    /** Delete an existing block_feature_grid item. */
+    delete: operations["deleteSingleItemsBlockFeatureGrid"];
+    /** Update an existing block_feature_grid item. */
+    patch: operations["updateSingleItemsBlockFeatureGrid"];
+  };
+  "/items/block_feature_grid_translations": {
+    /** List the block_feature_grid_translations items. */
+    get: operations["readItemsBlockFeatureGridTranslations"];
+    /** Create a new block_feature_grid_translations item. */
+    post: operations["createItemsBlockFeatureGridTranslations"];
+  };
+  "/items/block_feature_grid_translations/{id}": {
+    /** Retrieve a single block_feature_grid_translations item by unique identifier. */
+    get: operations["readSingleItemsBlockFeatureGridTranslations"];
+    /** Delete an existing block_feature_grid_translations item. */
+    delete: operations["deleteSingleItemsBlockFeatureGridTranslations"];
+    /** Update an existing block_feature_grid_translations item. */
+    patch: operations["updateSingleItemsBlockFeatureGridTranslations"];
+  };
   "/items/block_features": {
     /** List the block_features items. */
     get: operations["readItemsBlockFeatures"];
@@ -842,6 +870,20 @@ export interface paths {
     /** Update an existing rfps item. */
     patch: operations["updateSingleItemsRfps"];
   };
+  "/items/test_test": {
+    /** List the test_test items. */
+    get: operations["readItemsTestTest"];
+    /** Create a new test_test item. */
+    post: operations["createItemsTestTest"];
+  };
+  "/items/test_test/{id}": {
+    /** Retrieve a single test_test item by unique identifier. */
+    get: operations["readSingleItemsTestTest"];
+    /** Delete an existing test_test item. */
+    delete: operations["deleteSingleItemsTestTest"];
+    /** Update an existing test_test item. */
+    patch: operations["updateSingleItemsTestTest"];
+  };
   "/items/use_cases": {
     /** List the use_cases items. */
     get: operations["readItemsUseCases"];
@@ -1436,6 +1478,29 @@ export interface components {
       rel?: { [key: string]: any } | null;
       button?: (number | components["schemas"]["ItemsBlockButton"]) | null;
     };
+    ItemsBlockFeatureGrid: {
+      id?: number;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      translations?: (
+        | number
+        | components["schemas"]["ItemsBlockFeatureGridTranslations"]
+      )[];
+    };
+    ItemsBlockFeatureGridTranslations: {
+      id?: number;
+      block_feature_grid_id?:
+        | (number | components["schemas"]["ItemsBlockFeatureGrid"])
+        | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      features?: { [key: string]: any } | null;
+      title?: string | null;
+    };
     ItemsBlockFeatures: {
       id?: number;
       sort?: number | null;
@@ -1508,6 +1573,8 @@ export interface components {
         | (number | components["schemas"]["ItemsBlockLogoCloud"])
         | null;
       directus_files_id?: (string | components["schemas"]["Files"]) | null;
+      id_directus_files_id?: number | null;
+      sort?: number | null;
     };
     ItemsBlockLogoCloudTranslations: {
       id?: number;
@@ -1864,6 +1931,15 @@ export interface components {
       priority_id?:
         | (number | components["schemas"]["ItemsRfpPriorities"])
         | null;
+    };
+    ItemsTestTest: {
+      id?: number;
+      status?: string;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
     };
     ItemsUseCases: {
       id?: number;
@@ -3966,6 +4042,274 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["ItemsBlockExternalLink"];
+      };
+    };
+  };
+  /** List the block_feature_grid items. */
+  readItemsBlockFeatureGrid: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFeatureGrid"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_feature_grid item. */
+  createItemsBlockFeatureGrid: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFeatureGrid"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockFeatureGrid"][]
+          | components["schemas"]["ItemsBlockFeatureGrid"];
+      };
+    };
+  };
+  /** Retrieve a single block_feature_grid item by unique identifier. */
+  readSingleItemsBlockFeatureGrid: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFeatureGrid"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_feature_grid item. */
+  deleteSingleItemsBlockFeatureGrid: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_feature_grid item. */
+  updateSingleItemsBlockFeatureGrid: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFeatureGrid"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockFeatureGrid"];
+      };
+    };
+  };
+  /** List the block_feature_grid_translations items. */
+  readItemsBlockFeatureGridTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFeatureGridTranslations"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_feature_grid_translations item. */
+  createItemsBlockFeatureGridTranslations: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFeatureGridTranslations"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockFeatureGridTranslations"][]
+          | components["schemas"]["ItemsBlockFeatureGridTranslations"];
+      };
+    };
+  };
+  /** Retrieve a single block_feature_grid_translations item by unique identifier. */
+  readSingleItemsBlockFeatureGridTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFeatureGridTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_feature_grid_translations item. */
+  deleteSingleItemsBlockFeatureGridTranslations: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_feature_grid_translations item. */
+  updateSingleItemsBlockFeatureGridTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFeatureGridTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockFeatureGridTranslations"];
       };
     };
   };
@@ -10133,6 +10477,140 @@ export interface operations {
       };
     };
   };
+  /** List the test_test items. */
+  readItemsTestTest: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsTestTest"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new test_test item. */
+  createItemsTestTest: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsTestTest"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsTestTest"][]
+          | components["schemas"]["ItemsTestTest"];
+      };
+    };
+  };
+  /** Retrieve a single test_test item by unique identifier. */
+  readSingleItemsTestTest: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsTestTest"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing test_test item. */
+  deleteSingleItemsTestTest: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing test_test item. */
+  updateSingleItemsTestTest: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsTestTest"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsTestTest"];
+      };
+    };
+  };
   /** List the use_cases items. */
   readItemsUseCases: {
     parameters: {
@@ -15009,6 +15487,8 @@ export type DirectusCollections = {
   block_cal: components["schemas"]["ItemsBlockCal"];
   block_cal_translations: components["schemas"]["ItemsBlockCalTranslations"];
   block_external_link: components["schemas"]["ItemsBlockExternalLink"];
+  block_feature_grid: components["schemas"]["ItemsBlockFeatureGrid"];
+  block_feature_grid_translations: components["schemas"]["ItemsBlockFeatureGridTranslations"];
   block_features: components["schemas"]["ItemsBlockFeatures"];
   block_features_translations: components["schemas"]["ItemsBlockFeaturesTranslations"];
   block_hero: components["schemas"]["ItemsBlockHero"];
@@ -15055,6 +15535,7 @@ export type DirectusCollections = {
   rfp_statuses: components["schemas"]["ItemsRfpStatuses"];
   rfp_use_cases: components["schemas"]["ItemsRfpUseCases"];
   rfps: components["schemas"]["ItemsRfps"];
+  test_test: components["schemas"]["ItemsTestTest"];
   use_cases: components["schemas"]["ItemsUseCases"];
   web3: components["schemas"]["ItemsWeb3"];
   web3_blockchains: components["schemas"]["ItemsWeb3Blockchains"];

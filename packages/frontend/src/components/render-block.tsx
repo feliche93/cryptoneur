@@ -6,6 +6,7 @@ import { BlockFeatures } from './blocks/block-features'
 import { BlockHero } from './blocks/block-hero'
 import { BlockLogoCloud } from './blocks/block-logo-cloud'
 import { BlockExternalLink } from './blocks/block-external-link'
+import { BlockFeatureGrid } from './blocks/block-feature-grid'
 
 export interface RenderBlockProps {
   block:
@@ -40,6 +41,8 @@ export const RenderBlock: FC<RenderBlockProps> = ({ block, lang }) => {
       return <BlockCalendar lang={lang} id={item} />
     case 'block_features':
       return <BlockFeatures lang={lang} id={item} />
+    case 'block_feature_grid':
+      return <BlockFeatureGrid lang={lang} id={item} />
     case 'block_logo_cloud':
       return <BlockLogoCloud lang={lang} id={item} />
     default:
