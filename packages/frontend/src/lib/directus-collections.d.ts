@@ -1625,9 +1625,22 @@ export interface components {
       share_buttons_share_title?: string | null;
       currency_input_title?: string | null;
       currency_input_description?: string | null;
-      Header?: string;
+      curreny_input_label?: string | null;
+      used_gas_input_title?: string | null;
+      gas_price_input_title?: string | null;
+      used_gas_input_description?: string | null;
+      gas_price_input_description?: string | null;
+      used_gas_input_label_txn_type?: string | null;
+      used_gas_input_label_used_gas?: string | null;
+      gas_price_input_label_standard?: string | null;
+      gas_price_input_label_fast?: string | null;
+      gas_price_input_label_instant?: string | null;
+      gas_price_input_label_transaction_speed?: string | null;
       buttons?: string;
       table_headers?: string;
+      Forms?: string;
+      Header?: string;
+      form?: string;
     };
     ItemsGasFeesCalculatorTxnTypes: {
       id?: number;

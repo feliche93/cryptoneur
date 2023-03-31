@@ -5,12 +5,13 @@ import { BlockType } from '@lib/directus.types'
 import { FC } from 'react'
 import { Subtitle } from './subtitle'
 import { Title } from './title'
+import { DirectusCollections } from '@lib/directus-collections'
 
 // @ts-expect-error Server Component
 export const BlockHero: FC<BlockType> = async ({ id, lang }) => {
   // return <pre>{JSON.stringify({ id, lang }, null, 2)}</pre>
   const data = await directus.items('block_hero').readOne(id, {
-    fields: ['*.*'],
+    fields: ['translations.*', 'image.*', 'translations.*.buttons.*'],
     deep: {
       translations: {
         _filter: {
@@ -28,31 +29,31 @@ export const BlockHero: FC<BlockType> = async ({ id, lang }) => {
     throw new Error('No translations found')
   }
 
-  const { title, subtitle } = translations[0]
+  const { title, subtitle, block_hero_id } = translations[0] as unknown as {
+    title: string
+    subtitle: string
+    block_hero_id: any
+  }
   const image = data?.image
+  const buttons = block_hero_id?.buttons
 
-  if (
-    !title ||
-    !subtitle ||
-    !image ||
-    typeof image === 'string' ||
-    image?.id === undefined ||
-    data.buttons?.length === 0
-  ) {
+  if (!title || !subtitle || !data || buttons.length === 0) {
     throw new Error('Missing data')
   }
 
   return (
     <main className="mx-auto flex max-w-7xl flex-col items-center px-4 pt-16 sm:pt-8">
-      <DirectusImage
-        id={image.id}
-        className="h-44 w-44 rounded-full object-contain sm:h-64 sm:w-64"
-      />
+      {image !== undefined && typeof image !== 'string' && image?.id && (
+        <DirectusImage
+          id={image.id}
+          className="h-44 w-44 rounded-full object-contain sm:h-64 sm:w-64"
+        />
+      )}
       <div className="pt-8 text-center">
         <Title input={title} />
         <Subtitle input={subtitle} />
         <div className="mx-auto mt-5 flex max-w-md flex-col space-y-2 space-x-0 sm:flex sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-2 md:mt-8">
-          {data.buttons?.map((button, index) => {
+          {buttons?.map((button: any, index: number) => {
             if (!button) return null
             return <RenderBlock key={index} block={button} lang={lang} />
           })}
