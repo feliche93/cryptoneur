@@ -180,7 +180,9 @@ const fetchGasPrices = async () => {
     const requests = Promise.all(
       networks.map(async ({ network }) => {
         const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`;
-        const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } });
+        const gasPriceResponse = await fetch(url,
+          // { next: { revalidate: 300 } }
+        );
         const data = await gasPriceResponse.json();
         return data;
       })

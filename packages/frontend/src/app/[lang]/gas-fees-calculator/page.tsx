@@ -15,7 +15,8 @@ import image1 from '@public/gas-fees-calculator/ogImag1.jpg'
 import image2 from '@public/gas-fees-calculator/ogImage2.jpg'
 import { Metadata } from 'next'
 
-export const runtime = 'nodejs' // 'nodejs' (default) | 'experimental-edge'
+export const dynamic = 'error'
+export const revalidate = 300
 
 export const metadata: Metadata = {
   title: 'Gas Fees Calculator (Multi Currency, Network & Txn Types)',
