@@ -31,14 +31,21 @@ export const BlockHero: FC<BlockType> = async ({ id, lang }) => {
   const { title, subtitle } = translations[0]
   const image = data?.image
 
-  if (!title || !subtitle || !image || typeof image === 'string' || data.buttons?.length === 0) {
+  if (
+    !title ||
+    !subtitle ||
+    !image ||
+    typeof image === 'string' ||
+    image?.id === undefined ||
+    data.buttons?.length === 0
+  ) {
     throw new Error('Missing data')
   }
 
   return (
     <main className="mx-auto flex max-w-7xl flex-col items-center px-4 pt-16 sm:pt-8">
       <DirectusImage
-        image={image}
+        id={image.id}
         className="h-44 w-44 rounded-full object-contain sm:h-64 sm:w-64"
       />
       <div className="pt-8 text-center">
