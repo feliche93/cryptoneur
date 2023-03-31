@@ -8,7 +8,7 @@ import { FC } from 'react'
 // @ts-expect-error Server Component
 export const BlockLogoCloud: FC<BlockType> = async ({ id, lang }) => {
   const data = await directus.items('block_logo_cloud').readOne(id, {
-    fields: ['*.*', 'images.directus_files_id.id'],
+    fields: ['*.*', 'images.directus_files_id'],
     deep: {
       translations: {
         _filter: {
@@ -47,7 +47,7 @@ export const BlockLogoCloud: FC<BlockType> = async ({ id, lang }) => {
         <div className="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3 lg:mt-8">
           {images.map((image, index) => (
             <div key={index} className="col-span-1 flex justify-center rounded-lg bg-base-100 p-5">
-              <DirectusImage className="h-24 w-auto object-cover" id={image.directus_files_id.id} />
+              <DirectusImage className="h-24 w-auto object-contain" id={image.directus_files_id} />
             </div>
           ))}
         </div>
