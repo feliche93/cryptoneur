@@ -9,7 +9,7 @@ import { ShareButtons } from '@components/gas-fees-calculator/share-buttons'
 import { Table } from '@components/gas-fees-calculator/table'
 import { UsedGaseInput } from '@components/gas-fees-calculator/used-gas-input'
 import { DirectusImage } from '@components/shared/directus-image'
-import directus from '@lib/directus'
+import directus, { getMetaData } from '@lib/directus'
 import { fetchFiatRates, fetchGasPrices, networks } from '@lib/gas-fees-calculator'
 import image1 from '@public/gas-fees-calculator/ogImag1.jpg'
 import image2 from '@public/gas-fees-calculator/ogImage2.jpg'
@@ -18,33 +18,16 @@ import { Metadata } from 'next'
 export const dynamic = 'error'
 export const revalidate = 300
 
-export const metadata: Metadata = {
-  title: 'Gas Fees Calculator (Multi Currency, Network & Txn Types)',
-  description:
-    'Calculate gas fees in your local currency for different transaction types on Mainnet, Arbitrum, Optimism, Binance Smart Chain, Avalanche, Polygon, Gnosis, Celo, Moonriver, Fantom and Harmony.',
-  openGraph: {
-    url: 'https://www.cryptoneur.xyz/gas-fees-calculator',
-    title: 'Gas Fees Calculator (Multi Currency, Network & Txn Types)',
-    description:
-      'Calculate gas fees in your local currency for different transaction types on Mainnet, Arbitrum, Optimism, Binance Smart Chain, Avalanche, Polygon, Gnosis, Celo, Moonriver, Fantom and Harmony.',
-    images: [
-      {
-        url: `${process.env.NEXT_PUBLIC_URL}${image1.src}`,
-        width: image1.width,
-        height: image1.height,
-        alt: 'Gas Fees Calculator (Multi Currency, Network & Txn Types) UI',
-      },
-      {
-        url: `${process.env.NEXT_PUBLIC_URL}${image2.src}`,
-        width: image2.width,
-        height: image2.height,
-        alt: 'Gas Fees Calculator (Multi Currency, Network & Txn Types) UX',
-      },
-    ],
-    type: 'website',
-  },
-}
+export const generateMetadata = async ({ params }: { params: { slug: string; lang: string } }) => {
+  const { lang } = params
 
+  // TODO: get the id from directus
+  const metaData = await getMetaData(1, lang)
+
+  // console.log(metaData?.openGraph?.images)
+
+  return metaData
+}
 interface Translation {
   header_title: string
   head_subtitle: string
