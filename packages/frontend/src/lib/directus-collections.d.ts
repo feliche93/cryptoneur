@@ -282,6 +282,34 @@ export interface paths {
     /** Update an existing block_features_translations item. */
     patch: operations["updateSingleItemsBlockFeaturesTranslations"];
   };
+  "/items/block_founders_note": {
+    /** List the block_founders_note items. */
+    get: operations["readItemsBlockFoundersNote"];
+    /** Create a new block_founders_note item. */
+    post: operations["createItemsBlockFoundersNote"];
+  };
+  "/items/block_founders_note/{id}": {
+    /** Retrieve a single block_founders_note item by unique identifier. */
+    get: operations["readSingleItemsBlockFoundersNote"];
+    /** Delete an existing block_founders_note item. */
+    delete: operations["deleteSingleItemsBlockFoundersNote"];
+    /** Update an existing block_founders_note item. */
+    patch: operations["updateSingleItemsBlockFoundersNote"];
+  };
+  "/items/block_founders_note_translations": {
+    /** List the block_founders_note_translations items. */
+    get: operations["readItemsBlockFoundersNoteTranslations"];
+    /** Create a new block_founders_note_translations item. */
+    post: operations["createItemsBlockFoundersNoteTranslations"];
+  };
+  "/items/block_founders_note_translations/{id}": {
+    /** Retrieve a single block_founders_note_translations item by unique identifier. */
+    get: operations["readSingleItemsBlockFoundersNoteTranslations"];
+    /** Delete an existing block_founders_note_translations item. */
+    delete: operations["deleteSingleItemsBlockFoundersNoteTranslations"];
+    /** Update an existing block_founders_note_translations item. */
+    patch: operations["updateSingleItemsBlockFoundersNoteTranslations"];
+  };
   "/items/block_hero": {
     /** List the block_hero items. */
     get: operations["readItemsBlockHero"];
@@ -1572,6 +1600,32 @@ export interface components {
       title?: string | null;
       features?: { [key: string]: any } | null;
       section?: string | null;
+    };
+    ItemsBlockFoundersNote: {
+      id?: number;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      founder_avatar?: string | components["schemas"]["Files"];
+      founder_name?: string;
+      translations?: (
+        | number
+        | components["schemas"]["ItemsBlockFoundersNoteTranslations"]
+      )[];
+    };
+    ItemsBlockFoundersNoteTranslations: {
+      id?: number;
+      block_founders_note_id?:
+        | (number | components["schemas"]["ItemsBlockFoundersNote"])
+        | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      title?: string;
+      content?: string | null;
+      founder_title?: string;
     };
     ItemsBlockHero: {
       id?: number;
@@ -4894,6 +4948,274 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["ItemsBlockFeaturesTranslations"];
+      };
+    };
+  };
+  /** List the block_founders_note items. */
+  readItemsBlockFoundersNote: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFoundersNote"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_founders_note item. */
+  createItemsBlockFoundersNote: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFoundersNote"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockFoundersNote"][]
+          | components["schemas"]["ItemsBlockFoundersNote"];
+      };
+    };
+  };
+  /** Retrieve a single block_founders_note item by unique identifier. */
+  readSingleItemsBlockFoundersNote: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFoundersNote"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_founders_note item. */
+  deleteSingleItemsBlockFoundersNote: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_founders_note item. */
+  updateSingleItemsBlockFoundersNote: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFoundersNote"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockFoundersNote"];
+      };
+    };
+  };
+  /** List the block_founders_note_translations items. */
+  readItemsBlockFoundersNoteTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFoundersNoteTranslations"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_founders_note_translations item. */
+  createItemsBlockFoundersNoteTranslations: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFoundersNoteTranslations"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockFoundersNoteTranslations"][]
+          | components["schemas"]["ItemsBlockFoundersNoteTranslations"];
+      };
+    };
+  };
+  /** Retrieve a single block_founders_note_translations item by unique identifier. */
+  readSingleItemsBlockFoundersNoteTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFoundersNoteTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_founders_note_translations item. */
+  deleteSingleItemsBlockFoundersNoteTranslations: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_founders_note_translations item. */
+  updateSingleItemsBlockFoundersNoteTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFoundersNoteTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockFoundersNoteTranslations"];
       };
     };
   };
@@ -15809,6 +16131,8 @@ export type DirectusCollections = {
   block_feature_grid_translations: components["schemas"]["ItemsBlockFeatureGridTranslations"];
   block_features: components["schemas"]["ItemsBlockFeatures"];
   block_features_translations: components["schemas"]["ItemsBlockFeaturesTranslations"];
+  block_founders_note: components["schemas"]["ItemsBlockFoundersNote"];
+  block_founders_note_translations: components["schemas"]["ItemsBlockFoundersNoteTranslations"];
   block_hero: components["schemas"]["ItemsBlockHero"];
   block_hero_buttons: components["schemas"]["ItemsBlockHeroButtons"];
   block_hero_translations: components["schemas"]["ItemsBlockHeroTranslations"];

@@ -3,6 +3,7 @@ import { BlockType } from '@lib/directus.types'
 import { FC } from 'react'
 import { BlockFaqWrapper } from './block-faq-wrapper'
 
+// @ts-expect-error Server Component
 export const BlockFaq: FC<BlockType> = async ({ id, lang }) => {
   const data = await directus.items('block_faq').readOne(id, {
     fields: ['translations.*', 'translations.languages_code'],

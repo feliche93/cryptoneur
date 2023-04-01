@@ -8,6 +8,7 @@ import { BlockLogoCloud } from './blocks/block-logo-cloud'
 import { BlockExternalLink } from './blocks/block-external-link'
 import { BlockFeatureGrid } from './blocks/block-feature-grid'
 import { BlockFaq } from './blocks/block-faq'
+import { BlockFoundersNote } from './blocks/block-founders-note'
 
 export interface RenderBlockProps {
   block:
@@ -48,6 +49,8 @@ export const RenderBlock: FC<RenderBlockProps> = ({ block, lang }) => {
       return <BlockLogoCloud lang={lang} id={item} />
     case 'block_faq':
       return <BlockFaq lang={lang} id={item} />
+    case 'block_founders_note':
+      return <BlockFoundersNote lang={lang} id={item} />
     default:
       throw new Error(`Unknown collection: ${collection}`)
   }
