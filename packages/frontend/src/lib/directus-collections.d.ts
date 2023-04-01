@@ -198,6 +198,34 @@ export interface paths {
     /** Update an existing block_external_link item. */
     patch: operations["updateSingleItemsBlockExternalLink"];
   };
+  "/items/block_faq": {
+    /** List the block_faq items. */
+    get: operations["readItemsBlockFAQ"];
+    /** Create a new block_faq item. */
+    post: operations["createItemsBlockFAQ"];
+  };
+  "/items/block_faq/{id}": {
+    /** Retrieve a single block_faq item by unique identifier. */
+    get: operations["readSingleItemsBlockFAQ"];
+    /** Delete an existing block_faq item. */
+    delete: operations["deleteSingleItemsBlockFAQ"];
+    /** Update an existing block_faq item. */
+    patch: operations["updateSingleItemsBlockFAQ"];
+  };
+  "/items/block_faq_translations": {
+    /** List the block_faq_translations items. */
+    get: operations["readItemsBlockFAQTranslations"];
+    /** Create a new block_faq_translations item. */
+    post: operations["createItemsBlockFAQTranslations"];
+  };
+  "/items/block_faq_translations/{id}": {
+    /** Retrieve a single block_faq_translations item by unique identifier. */
+    get: operations["readSingleItemsBlockFAQTranslations"];
+    /** Delete an existing block_faq_translations item. */
+    delete: operations["deleteSingleItemsBlockFAQTranslations"];
+    /** Update an existing block_faq_translations item. */
+    patch: operations["updateSingleItemsBlockFAQTranslations"];
+  };
   "/items/block_feature_grid": {
     /** List the block_feature_grid items. */
     get: operations["readItemsBlockFeatureGrid"];
@@ -1477,6 +1505,26 @@ export interface components {
       target?: string | null;
       rel?: { [key: string]: any } | null;
       button?: (number | components["schemas"]["ItemsBlockButton"]) | null;
+    };
+    ItemsBlockFAQ: {
+      id?: number;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      translations?: (
+        | number
+        | components["schemas"]["ItemsBlockFAQTranslations"]
+      )[];
+    };
+    ItemsBlockFAQTranslations: {
+      id?: number;
+      block_faq_id?: (number | components["schemas"]["ItemsBlockFAQ"]) | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      title?: string | null;
+      faqs?: { [key: string]: any } | null;
     };
     ItemsBlockFeatureGrid: {
       id?: number;
@@ -4042,6 +4090,274 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["ItemsBlockExternalLink"];
+      };
+    };
+  };
+  /** List the block_faq items. */
+  readItemsBlockFAQ: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFAQ"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_faq item. */
+  createItemsBlockFAQ: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFAQ"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockFAQ"][]
+          | components["schemas"]["ItemsBlockFAQ"];
+      };
+    };
+  };
+  /** Retrieve a single block_faq item by unique identifier. */
+  readSingleItemsBlockFAQ: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFAQ"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_faq item. */
+  deleteSingleItemsBlockFAQ: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_faq item. */
+  updateSingleItemsBlockFAQ: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFAQ"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockFAQ"];
+      };
+    };
+  };
+  /** List the block_faq_translations items. */
+  readItemsBlockFAQTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFAQTranslations"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_faq_translations item. */
+  createItemsBlockFAQTranslations: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFAQTranslations"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockFAQTranslations"][]
+          | components["schemas"]["ItemsBlockFAQTranslations"];
+      };
+    };
+  };
+  /** Retrieve a single block_faq_translations item by unique identifier. */
+  readSingleItemsBlockFAQTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFAQTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_faq_translations item. */
+  deleteSingleItemsBlockFAQTranslations: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_faq_translations item. */
+  updateSingleItemsBlockFAQTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockFAQTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockFAQTranslations"];
       };
     };
   };
@@ -15487,6 +15803,8 @@ export type DirectusCollections = {
   block_cal: components["schemas"]["ItemsBlockCal"];
   block_cal_translations: components["schemas"]["ItemsBlockCalTranslations"];
   block_external_link: components["schemas"]["ItemsBlockExternalLink"];
+  block_faq: components["schemas"]["ItemsBlockFAQ"];
+  block_faq_translations: components["schemas"]["ItemsBlockFAQTranslations"];
   block_feature_grid: components["schemas"]["ItemsBlockFeatureGrid"];
   block_feature_grid_translations: components["schemas"]["ItemsBlockFeatureGridTranslations"];
   block_features: components["schemas"]["ItemsBlockFeatures"];
