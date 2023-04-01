@@ -48,7 +48,6 @@ export const getMetaData = cache(async (id: number, lang: string) => {
     } = translation
 
     const openGraphImages = data.open_graph_images?.map((image: any) => {
-
         return {
             url: getAssetUrl(image.directus_files_id.id),
             width: image.directus_files_id.width,
@@ -57,10 +56,11 @@ export const getMetaData = cache(async (id: number, lang: string) => {
         }
     })
 
-    const openGraph = {
+    const openGraph: Metadata["openGraph"] = {
         title,
         description,
-        openGraphImages
+        images: openGraphImages,
+        locale: lang,
     }
 
     const metadata: Metadata = {

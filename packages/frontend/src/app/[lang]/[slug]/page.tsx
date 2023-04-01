@@ -52,6 +52,8 @@ export const generateMetadata = async ({ params }: { params: { slug: string; lan
 
   const metaData = await getMetaData(seo?.id, lang)
 
+  // console.log(metaData?.openGraph?.images)
+
   return metaData
 }
 
