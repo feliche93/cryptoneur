@@ -408,6 +408,20 @@ export interface paths {
     /** Update an existing block_page_link item. */
     patch: operations["updateSingleItemsBlockPageLink"];
   };
+  "/items/block_table": {
+    /** List the block_table items. */
+    get: operations["readItemsBlockTable"];
+    /** Create a new block_table item. */
+    post: operations["createItemsBlockTable"];
+  };
+  "/items/block_table/{id}": {
+    /** Retrieve a single block_table item by unique identifier. */
+    get: operations["readSingleItemsBlockTable"];
+    /** Delete an existing block_table item. */
+    delete: operations["deleteSingleItemsBlockTable"];
+    /** Update an existing block_table item. */
+    patch: operations["updateSingleItemsBlockTable"];
+  };
   "/items/block_title": {
     /** List the block_title items. */
     get: operations["readItemsBlockTitle"];
@@ -925,6 +939,48 @@ export interface paths {
     delete: operations["deleteSingleItemsRfps"];
     /** Update an existing rfps item. */
     patch: operations["updateSingleItemsRfps"];
+  };
+  "/items/seo": {
+    /** List the seo items. */
+    get: operations["readItemsSEO"];
+    /** Create a new seo item. */
+    post: operations["createItemsSEO"];
+  };
+  "/items/seo/{id}": {
+    /** Retrieve a single seo item by unique identifier. */
+    get: operations["readSingleItemsSEO"];
+    /** Delete an existing seo item. */
+    delete: operations["deleteSingleItemsSEO"];
+    /** Update an existing seo item. */
+    patch: operations["updateSingleItemsSEO"];
+  };
+  "/items/seo_files": {
+    /** List the seo_files items. */
+    get: operations["readItemsSEOFiles"];
+    /** Create a new seo_files item. */
+    post: operations["createItemsSEOFiles"];
+  };
+  "/items/seo_files/{id}": {
+    /** Retrieve a single seo_files item by unique identifier. */
+    get: operations["readSingleItemsSEOFiles"];
+    /** Delete an existing seo_files item. */
+    delete: operations["deleteSingleItemsSEOFiles"];
+    /** Update an existing seo_files item. */
+    patch: operations["updateSingleItemsSEOFiles"];
+  };
+  "/items/seo_translations": {
+    /** List the seo_translations items. */
+    get: operations["readItemsSEOTranslations"];
+    /** Create a new seo_translations item. */
+    post: operations["createItemsSEOTranslations"];
+  };
+  "/items/seo_translations/{id}": {
+    /** Retrieve a single seo_translations item by unique identifier. */
+    get: operations["readSingleItemsSEOTranslations"];
+    /** Delete an existing seo_translations item. */
+    delete: operations["deleteSingleItemsSEOTranslations"];
+    /** Update an existing seo_translations item. */
+    patch: operations["updateSingleItemsSEOTranslations"];
   };
   "/items/test_test": {
     /** List the test_test items. */
@@ -1698,6 +1754,14 @@ export interface components {
       page?: (number | components["schemas"]["ItemsPages"]) | null;
       button?: (number | components["schemas"]["ItemsBlockButton"]) | null;
     };
+    ItemsBlockTable: {
+      id?: number;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+    };
     ItemsBlockTitle: {
       id?: number;
       sort?: number | null;
@@ -1935,6 +1999,7 @@ export interface components {
       date_created?: string | null;
       user_updated?: (string | components["schemas"]["Users"]) | null;
       date_updated?: string | null;
+      seo?: (number | components["schemas"]["ItemsSEO"]) | null;
       translations?: (
         | number
         | components["schemas"]["ItemsPagesTranslations"]
@@ -2033,6 +2098,30 @@ export interface components {
       priority_id?:
         | (number | components["schemas"]["ItemsRfpPriorities"])
         | null;
+    };
+    ItemsSEO: {
+      id?: number;
+      sort?: number | null;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      open_graph_images?: (number | components["schemas"]["ItemsSEOFiles"])[];
+      translations?: (number | components["schemas"]["ItemsSEOTranslations"])[];
+    };
+    ItemsSEOFiles: {
+      id?: number;
+      seo_id?: (number | components["schemas"]["ItemsSEO"]) | null;
+      directus_files_id?: (string | components["schemas"]["Files"]) | null;
+    };
+    ItemsSEOTranslations: {
+      id?: number;
+      seo_id?: (number | components["schemas"]["ItemsSEO"]) | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      title?: string;
+      description?: string;
     };
     ItemsTestTest: {
       id?: number;
@@ -6154,6 +6243,140 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["ItemsBlockPageLink"];
+      };
+    };
+  };
+  /** List the block_table items. */
+  readItemsBlockTable: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTable"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new block_table item. */
+  createItemsBlockTable: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTable"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsBlockTable"][]
+          | components["schemas"]["ItemsBlockTable"];
+      };
+    };
+  };
+  /** Retrieve a single block_table item by unique identifier. */
+  readSingleItemsBlockTable: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTable"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing block_table item. */
+  deleteSingleItemsBlockTable: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing block_table item. */
+  updateSingleItemsBlockTable: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsBlockTable"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsBlockTable"];
       };
     };
   };
@@ -11112,6 +11335,408 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["ItemsRfps"];
+      };
+    };
+  };
+  /** List the seo items. */
+  readItemsSEO: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEO"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new seo item. */
+  createItemsSEO: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEO"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsSEO"][]
+          | components["schemas"]["ItemsSEO"];
+      };
+    };
+  };
+  /** Retrieve a single seo item by unique identifier. */
+  readSingleItemsSEO: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEO"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing seo item. */
+  deleteSingleItemsSEO: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing seo item. */
+  updateSingleItemsSEO: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEO"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsSEO"];
+      };
+    };
+  };
+  /** List the seo_files items. */
+  readItemsSEOFiles: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEOFiles"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new seo_files item. */
+  createItemsSEOFiles: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEOFiles"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsSEOFiles"][]
+          | components["schemas"]["ItemsSEOFiles"];
+      };
+    };
+  };
+  /** Retrieve a single seo_files item by unique identifier. */
+  readSingleItemsSEOFiles: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEOFiles"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing seo_files item. */
+  deleteSingleItemsSEOFiles: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing seo_files item. */
+  updateSingleItemsSEOFiles: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEOFiles"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsSEOFiles"];
+      };
+    };
+  };
+  /** List the seo_translations items. */
+  readItemsSEOTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEOTranslations"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new seo_translations item. */
+  createItemsSEOTranslations: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEOTranslations"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsSEOTranslations"][]
+          | components["schemas"]["ItemsSEOTranslations"];
+      };
+    };
+  };
+  /** Retrieve a single seo_translations item by unique identifier. */
+  readSingleItemsSEOTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEOTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing seo_translations item. */
+  deleteSingleItemsSEOTranslations: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing seo_translations item. */
+  updateSingleItemsSEOTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsSEOTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsSEOTranslations"];
       };
     };
   };
@@ -16140,6 +16765,7 @@ export type DirectusCollections = {
   block_logo_cloud_files: components["schemas"]["ItemsBlockLogoCloudFiles"];
   block_logo_cloud_translations: components["schemas"]["ItemsBlockLogoCloudTranslations"];
   block_page_link: components["schemas"]["ItemsBlockPageLink"];
+  block_table: components["schemas"]["ItemsBlockTable"];
   block_title: components["schemas"]["ItemsBlockTitle"];
   block_title_translations: components["schemas"]["ItemsBlockTitleTranslations"];
   blockchains: components["schemas"]["ItemsBlockchains"];
@@ -16177,6 +16803,9 @@ export type DirectusCollections = {
   rfp_statuses: components["schemas"]["ItemsRfpStatuses"];
   rfp_use_cases: components["schemas"]["ItemsRfpUseCases"];
   rfps: components["schemas"]["ItemsRfps"];
+  seo: components["schemas"]["ItemsSEO"];
+  seo_files: components["schemas"]["ItemsSEOFiles"];
+  seo_translations: components["schemas"]["ItemsSEOTranslations"];
   test_test: components["schemas"]["ItemsTestTest"];
   use_cases: components["schemas"]["ItemsUseCases"];
   web3: components["schemas"]["ItemsWeb3"];

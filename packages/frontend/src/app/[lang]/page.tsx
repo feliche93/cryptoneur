@@ -1,6 +1,6 @@
 // pages/index.tsx
 import { RenderBlock } from '@components/render-block'
-import { fetchPageData, preload } from '@lib/directus'
+import { fetchPageData, getMetaData, preload } from '@lib/directus'
 import { notFound } from 'next/navigation'
 
 export const dynamic = 'error'

@@ -1,6 +1,6 @@
 // pages/index.tsx
 import { RenderBlock } from '@components/render-block'
-import { fetchPageData, preload } from '@lib/directus'
+import { fetchPageData, getMetaData, preload } from '@lib/directus'
 import { notFound } from 'next/navigation'
 
 export const dynamic = 'error'
@@ -39,6 +39,21 @@ export const dynamic = 'error'
 
 //   return urls
 // }
+
+export const generateMetadata = async ({ params }: { params: { slug: string; lang: string } }) => {
+  const { slug, lang } = params
+  const pageData = await fetchPageData(slug, lang)
+
+  const seo = pageData?.seo
+
+  if (!seo || typeof seo !== 'object' || !seo?.id) {
+    return null
+  }
+
+  const metaData = await getMetaData(seo?.id, lang)
+
+  return metaData
+}
 
 const HomePage = async ({ params }: { params: { slug: string; lang: string } }) => {
   const { slug, lang } = params
