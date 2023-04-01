@@ -59,9 +59,9 @@ export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, descr
                 <dd className="mt-1 flex flex-wrap gap-2 text-sm text-base-content">
                   {!!grant?.blockchains && grant?.blockchains.length > 0 ? (
                     <>
-                      {grant?.blockchains.map((blockchain: any) => (
+                      {grant?.blockchains.map((blockchain: any, index: number) => (
                         <span
-                          key={blockchain.id}
+                          key={index}
                           className="inline-flex items-center rounded-full bg-primary px-3 py-0.5 text-sm font-medium text-primary-content"
                         >
                           {blockchain.name}

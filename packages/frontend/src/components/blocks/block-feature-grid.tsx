@@ -45,8 +45,8 @@ export const BlockFeatureGrid: FC<BlockType> = async ({ id, lang }) => {
           <h2 className="text-4xl font-bold tracking-tight sm:text-4xl">{title}</h2>
         </div>
         <dl className="mt-20 grid grid-cols-1 gap-16 sm:grid-cols-2 sm:gap-x-12 lg:col-span-2 lg:mt-0">
-          {features.map((feature: any) => (
-            <div key={feature.name}>
+          {features.map((feature: any, index: number) => (
+            <div key={index}>
               <dt>
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-content">
                   <BlockIcon

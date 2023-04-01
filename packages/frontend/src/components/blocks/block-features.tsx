@@ -52,8 +52,8 @@ export const BlockFeatures: FC<BlockType> = async ({ id, lang }) => {
         </p> */}
         <div className="mt-12">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-1 lg:grid-cols-3">
-            {features.map((feature: any) => (
-              <div key={feature.id} className="pt-6">
+            {features.map((feature: any, index: number) => (
+              <div key={index} className="pt-6">
                 <div className="flow-root h-full rounded-lg bg-base-100 px-6 pb-8 shadow">
                   <div className="-mt-6">
                     <div>

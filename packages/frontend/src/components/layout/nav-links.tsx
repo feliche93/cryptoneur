@@ -48,7 +48,7 @@ export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
       return link.item.href
     }
     if (link.item.page) {
-      console.log(`/${language}/${getLocalizedSlug(link)}`)
+      // console.log(`/${language}/${getLocalizedSlug(link)}`)
       return `/${language}/${getLocalizedSlug(link)}`
     }
     throw new Error('No href found')
