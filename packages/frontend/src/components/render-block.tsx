@@ -33,8 +33,8 @@ export const RenderBlock: FC<RenderBlockProps> = ({ block, lang }) => {
       return <BlockCalendar lang={lang} id={id} />
     case 'block_features':
       return <BlockFeatures lang={lang} id={id} />
-    // case 'block_feature_grid':
-    //   return <BlockFeatureGrid lang={lang} id={id} />
+    case 'block_feature_grid':
+      return <BlockFeatureGrid lang={lang} id={id} />
     // case 'block_logo_cloud':
     //   return <BlockLogoCloud lang={lang} id={id} />
     // case 'block_faq':

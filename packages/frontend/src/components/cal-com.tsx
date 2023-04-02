@@ -40,7 +40,7 @@ export const CalCom: FC<CalComProps> = ({ url }) => {
 
       Cal("inline", {
         elementOrSelector:"#my-cal-inline",
-        calLink: ${calLink}
+        calLink: "felix-vemmer/30-minute-google-hangout-chat"
       });
 
       Cal("ui", {"theme":"light","styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false});    `}
