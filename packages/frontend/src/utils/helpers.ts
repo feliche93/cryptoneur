@@ -1,9 +1,10 @@
-function currencyFormatter({ amount, currency, minimumFractionDigits = 0 }: {
+function currencyFormatter({ amount, currency, lang, minimumFractionDigits = 0 }: {
     amount: number
     currency?: string
     minimumFractionDigits?: number
+    lang?: string
 }) {
-    return new Intl.NumberFormat('de-DE', {
+    return new Intl.NumberFormat(lang ?? 'en-US', {
         style: 'currency',
         currency: currency ?? 'USD',
         minimumFractionDigits,

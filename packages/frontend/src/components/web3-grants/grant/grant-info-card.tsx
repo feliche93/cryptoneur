@@ -33,8 +33,8 @@ const schema = z.object({
   slug: z.string(),
   url_application: z.string(),
   url_info: z.string(),
-  funding_minimum: z.null(),
-  funding_maximum: z.null(),
+  funding_minimum: z.number().nullable(),
+  funding_maximum: z.number().nullable(),
   github: z.null(),
   discord: z.string(),
   telegram: z.string(),
@@ -72,8 +72,8 @@ const schema = z.object({
     }),
   ),
   rfps: z.array(z.number()),
-  funding_maximum_currency_id: z.string().nullable(),
-  funding_minimum_currency_id: z.string().nullable(),
+  funding_maximum_currency_id: z.object({ symbol: z.string() }).optional(),
+  funding_minimum_currency_id: z.object({ symbol: z.string() }).optional(),
 })
 
 // @ts-expect-error Server Component
@@ -93,6 +93,8 @@ export const GrantInfoCard: FC<BlockType> = async ({ id, lang }) => {
       'funding_minimum_currency_id.symbol',
     ],
   })
+
+  // return <pre>{JSON.stringify(grantData, null, 2)}</pre>
 
   const parsedGrantData = schema.parse(grantData)
 
@@ -221,6 +223,7 @@ export const GrantInfoCard: FC<BlockType> = async ({ id, lang }) => {
                   </dt>
                   <dd className="mt-1 text-sm text-base-content">
                     {currencyFormatter({
+                      lang: lang,
                       amount: parsedGrantData.funding_minimum,
                       minimumFractionDigits: 0,
                     })}
@@ -236,6 +239,7 @@ export const GrantInfoCard: FC<BlockType> = async ({ id, lang }) => {
                   </dt>
                   <dd className="mt-1 text-sm text-base-content">
                     {currencyFormatter({
+                      lang: lang,
                       amount: parsedGrantData.funding_maximum,
                       minimumFractionDigits: 0,
                     })}
