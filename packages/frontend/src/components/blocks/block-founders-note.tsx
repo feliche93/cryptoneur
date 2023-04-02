@@ -3,11 +3,31 @@ import { GraidentAvatar } from '@components/shared/GradientAvatar'
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
 import { FC } from 'react'
+import { z } from 'zod'
 
+const schema = z.object({
+  founder_avatar: z.string(),
+  founder_name: z.string(),
+  translations: z.array(
+    z.object({
+      languages_code: z.string(),
+      title: z.string(),
+      content: z.string(),
+      founder_title: z.string(),
+    }),
+  ),
+})
 // @ts-expect-error Server Component
 export const BlockFoundersNote: FC<BlockType> = async ({ id, lang }) => {
   const data = await directus.items('block_founders_note').readOne(id, {
-    fields: ['founder_avatar', 'founder_name', 'translations.*'],
+    fields: [
+      'founder_avatar',
+      'founder_name',
+      'translations.languages_code',
+      'translations.title',
+      'translations.content',
+      'translations.founder_title',
+    ],
     deep: {
       translations: {
         _filter: {
@@ -19,57 +39,29 @@ export const BlockFoundersNote: FC<BlockType> = async ({ id, lang }) => {
     },
   })
 
-  const translations = data?.translations
-  const founderAvatar = data?.founder_avatar
-  const founderName = data?.founder_name
+  const parsedData = schema.parse(data)
 
-  if (!translations?.length || typeof translations[0] === 'number') {
-    throw new Error(`No translations found for block ${id}`)
-  }
-
-  if (!founderAvatar || typeof founderAvatar !== 'string') {
-    throw new Error(`No founder avatar found for block ${id}`)
-  }
-
-  if (!founderName || typeof founderName !== 'string') {
-    throw new Error(`No founder name found for block ${id}`)
-  }
-
-  const title = translations[0]?.title
-  const content = translations[0]?.content
-  const founderTitle = translations[0]?.founder_title
-
-  if (!title || typeof title !== 'string') {
-    throw new Error(`No title found for block ${id}`)
-  }
-
-  if (!content || typeof content !== 'string') {
-    throw new Error(`No content found for block ${id}`)
-  }
-
-  if (!founderTitle || typeof founderTitle !== 'string') {
-    throw new Error(`No founder title found for block ${id}`)
-  }
+  const [translation] = parsedData.translations
 
   return (
     <div className="mx-auto my-12 max-w-2xl overflow-hidden rounded-none bg-base-200 shadow sm:rounded-lg">
       <div className="space-y-8 bg-base-100 px-4 py-5 text-2xl sm:p-6">
         <h3 className="bg-gradient-to-r from-primary to-secondary bg-clip-text font-semibold text-transparent">
-          {title}
+          {translation.title}
         </h3>
         <div
           dangerouslySetInnerHTML={{
-            __html: content,
+            __html: translation.content,
           }}
           className="prose"
         />
       </div>
       <div className="bg-base-300 px-4 py-4 sm:px-6">
         <div className="flex items-center justify-start">
-          <DirectusImage id={founderAvatar} className="h-20 w-20 rounded-full" />
+          <DirectusImage id={parsedData.founder_avatar} className="h-20 w-20 rounded-full" />
           <div className="ml-4 inline-block">
-            <div className="text-xl font-bold text-base-content">{founderTitle}</div>
-            <div className="text-base font-thin text-base-content">{founderTitle}</div>
+            <div className="text-xl font-bold text-base-content">{parsedData.founder_name}</div>
+            <div className="text-base font-thin text-base-content">{translation.founder_title}</div>
           </div>
         </div>
       </div>
