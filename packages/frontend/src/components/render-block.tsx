@@ -31,18 +31,18 @@ export const RenderBlock: FC<RenderBlockProps> = ({ block, lang }) => {
       return <BlockExternalLink lang={lang} id={id} />
     case 'block_cal':
       return <BlockCalendar lang={lang} id={id} />
-    // case 'block_features':
-    //   return <BlockFeatures lang={lang} id={item} />
+    case 'block_features':
+      return <BlockFeatures lang={lang} id={id} />
     // case 'block_feature_grid':
-    //   return <BlockFeatureGrid lang={lang} id={item} />
+    //   return <BlockFeatureGrid lang={lang} id={id} />
     // case 'block_logo_cloud':
-    //   return <BlockLogoCloud lang={lang} id={item} />
+    //   return <BlockLogoCloud lang={lang} id={id} />
     // case 'block_faq':
-    //   return <BlockFaq lang={lang} id={item} />
+    //   return <BlockFaq lang={lang} id={id} />
     // case 'block_founders_note':
-    //   return <BlockFoundersNote lang={lang} id={item} />
+    //   return <BlockFoundersNote lang={lang} id={id} />
     // case 'block_table':
-    //   return <BlockTable lang={lang} id={item} />
+    //   return <BlockTable lang={lang} id={id} />
     default:
       return null
       throw new Error(`Unknown collection: ${collection}`)
