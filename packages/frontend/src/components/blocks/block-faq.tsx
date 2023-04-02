@@ -2,11 +2,22 @@ import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
 import { FC } from 'react'
 import { BlockFaqWrapper } from './block-faq-wrapper'
+import { z } from 'zod'
+
+const schema = z.object({
+  translations: z.array(
+    z.object({
+      title: z.string(),
+      languages_code: z.string(),
+      faqs: z.array(z.object({ question: z.string(), answer: z.string() })),
+    }),
+  ),
+})
 
 // @ts-expect-error Server Component
 export const BlockFaq: FC<BlockType> = async ({ id, lang }) => {
   const data = await directus.items('block_faq').readOne(id, {
-    fields: ['translations.*', 'translations.languages_code'],
+    fields: ['translations.title', 'translations.languages_code', 'translations.faqs'],
     deep: {
       translations: {
         _filter: {
@@ -18,21 +29,9 @@ export const BlockFaq: FC<BlockType> = async ({ id, lang }) => {
     },
   })
 
-  const translations = data?.translations
+  const parsedData = schema.parse(data)
 
-  if (!translations?.length || typeof translations[0] === 'number') {
-    throw new Error('No translations found')
-  }
+  const [translation] = parsedData.translations
 
-  const { title, faqs } = translations[0]
-
-  if (!faqs || typeof faqs === 'number') {
-    throw new Error(`No faqs found for block ${id}`)
-  }
-
-  if (!title || typeof title !== 'string') {
-    throw new Error(`No title found for block ${id}`)
-  }
-
-  return <BlockFaqWrapper title={title} faqs={faqs} />
+  return <BlockFaqWrapper title={translation.title} faqs={translation.faqs} />
 }
