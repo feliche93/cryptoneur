@@ -1,67 +1,73 @@
+import { DirectusImage } from '@components/shared/directus-image'
+import directus, { isObject } from '@lib/directus'
+import { BlockType } from '@lib/directus.types'
 import { getGrantbySlug, strapi } from '@shared/strapi'
 import { createServerClient } from '@utils/supabase-server'
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import { FC } from 'react'
+import { z } from 'zod'
 
-export interface HeaderProps {
-  slug: string
-}
+export const schema = z.object({
+  name: z.string(),
+  web3_grants_id: z.object({
+    logo: z.string(),
+    url_application: z.string().optional(),
+    url_info: z.string().optional(),
+    date_updated: z.string(),
+  }),
+})
 
 // @ts-expect-error Server Component
-export const Header: FC<HeaderProps> = async ({ slug }) => {
-  console.log({ slug })
+export const Header: FC<BlockType> = async ({ id, lang }) => {
+  const data = await directus.items('web3_grants_translations').readOne(id, {
+    fields: [
+      'name',
+      'web3_grants_id.logo',
+      'web3_grants_id.url_application',
+      'web3_grants_id.url_info',
+      'web3_grants_id.date_updated',
+    ],
+  })
 
-  const supabase = createServerClient()
-  const { data: grant, error } = await supabase.from('grants').select('*').eq('slug', slug).single()
-
-  // console.log({ ...grant, ...error })
+  const parsedData = schema.parse(data)
 
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
       <div className="flex items-center space-x-5">
         <div className="flex-shrink-0">
-          {grant?.logo && grant?.name && (
-            <Image
-              className=" h-16 w-16 rounded-lg object-contain"
-              src={grant?.logo}
-              alt={grant?.name}
-              width={200}
-              height={200}
-            />
-          )}
+          <DirectusImage
+            className="h-16 w-16 rounded-lg object-contain"
+            id={parsedData.web3_grants_id.logo}
+          />
         </div>
         <div>
-          <h1 className="text-2xl font-bold">{grant?.name}</h1>
+          <h1 className="text-2xl font-bold">{parsedData.name}</h1>
           <p className="text-sm font-medium text-base-content/80">
-            Last Updated{' '}
-            {/* <a href="#" className="text-gray-900">
-              Front End Developer
-            </a>{' '} */}
-            {/* TODO: add relative time */}
+            Last Updated {/* TODO: add relative time */}
             on{' '}
-            <time dateTime={grant?.updated_at}>
-              {dayjs(grant?.updated_at).format('MMMM DD, YYYY')}
+            <time dateTime={parsedData.web3_grants_id.date_updated}>
+              {dayjs(parsedData.web3_grants_id.date_updated).format('MMMM DD, YYYY')}
             </time>
           </p>
         </div>
       </div>
       <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
-        {!!grant?.url_info && (
+        {!!parsedData.web3_grants_id.url_info && (
           <a
             target={'_blank'}
             rel="noopener nofollow"
-            href={grant?.url_info}
+            href={parsedData.web3_grants_id.url_info}
             className="btn-outline btn-primary btn"
           >
             Grant Info Page
           </a>
         )}
-        {!!grant?.url_application && (
+        {!!parsedData.web3_grants_id.url_application && (
           <a
             target={'_blank'}
             rel="noopener nofollow"
-            href={grant?.url_application}
+            href={parsedData.web3_grants_id.url_application}
             className="btn-primary btn"
           >
             Apply

@@ -1,3 +1,5 @@
+import directus from '@lib/directus'
+import { BlockType } from '@lib/directus.types'
 import { createServerClient } from '@utils/supabase-server'
 import { FC } from 'react'
 import { NoInfo } from './NoInfo'
@@ -9,29 +11,13 @@ export interface GrantInfoCardProps {
 }
 
 // @ts-expect-error Server Component
-export const GrantInfoCard: FC<GrantInfoCardProps> = async ({ slug, title, description }) => {
-  const supabase = createServerClient()
-  const { data: grant, error } = await supabase
-    .from('grants')
-    .select(
-      `
-      *,
-      blockchains(*),
-      categories(*),
-      use_cases(*),
-      funding_minimum_currency(symbol),
-      funding_maximum_currency(symbol)
-      `,
-    )
-    .eq('slug', slug)
-    .single()
+export const GrantInfoCard: FC<BlockType> = async ({ id, lang }) => {
+  const data = await directus.items('web3_grants_translations').readOne(id, {
+    fields: ['name', 'description', 'web3_grants_id.*'],
+  })
 
-  // console.log({ ...grant, ...error })
+  return <pre>{JSON.stringify(data, null, 2)}</pre>
 
-  const attachments = [
-    { name: 'resume_front_end_developer.pdf', href: '#' },
-    { name: 'coverletter_front_end_developer.pdf', href: '#' },
-  ]
   return (
     <>
       <section aria-labelledby="applicant-information-title">
