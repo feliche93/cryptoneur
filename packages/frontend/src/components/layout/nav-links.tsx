@@ -1,7 +1,8 @@
 'use client'
 
 import { Popover } from '@headlessui/react'
-import { classNames } from '@utils/helpers'
+import { cn } from '@lib/utils'
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
@@ -65,7 +66,7 @@ export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
             as={Link}
             key={link.item.id}
             href={getHref(link)}
-            className={classNames(
+            className={cn(
               getHref(link) === pathname ? 'text-black' : '',
               'block rounded-md px-3 py-2 text-base font-medium text-base-content/80 hover:bg-base-200 hover:text-primary',
             )}
@@ -81,7 +82,7 @@ export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
       {links.map((link: LinkItem) => (
         <Link
           href={getHref(link)}
-          className={classNames(
+          className={cn(
             getHref(link) === pathname ? 'text-primary' : '',
             'font-medium text-base-content/80 hover:text-primary',
           )}

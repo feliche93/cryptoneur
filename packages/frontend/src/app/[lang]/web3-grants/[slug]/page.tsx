@@ -26,8 +26,23 @@ const Web3GrantsDetailPage = async ({ params }: { params: { slug: string; lang: 
 
   return (
     <>
-      <Header id={grant.id} lang={lang} />
-      <GrantInfoCard id={grant.id} lang={lang} />
+      <main className="py-10">
+        {/* Page header */}
+        <Header id={grant.id} lang={lang} />
+
+        <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+          <div className="space-y-6 lg:col-span-2 lg:col-start-1">
+            {/* Description list*/}
+
+            <GrantInfoCard id={grant.id} lang={lang} />
+            {/* <GrantRfps
+        title="RFPs"
+        slug={slug}
+        description="All suggested ideas and projects from grant givers themeselves."
+      /> */}
+          </div>
+        </div>
+      </main>
     </>
   )
 }
