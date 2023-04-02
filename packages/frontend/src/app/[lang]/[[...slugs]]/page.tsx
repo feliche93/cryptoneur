@@ -40,8 +40,13 @@ export const dynamic = 'error'
 //   return urls
 // }
 
-export const generateMetadata = async ({ params }: { params: { slug: string; lang: string } }) => {
-  const { slug, lang } = params
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { slugs: string[]; lang: string }
+}) => {
+  const { slugs, lang } = params
+  const slug = slugs.join('/')
   const pageData = await fetchPageData(slug, lang)
 
   const seo = pageData?.seo
@@ -57,8 +62,9 @@ export const generateMetadata = async ({ params }: { params: { slug: string; lan
   return metaData
 }
 
-const HomePage = async ({ params }: { params: { slug: string; lang: string } }) => {
-  const { slug, lang } = params
+const HomePage = async ({ params }: { params: { slugs: string[]; lang: string } }) => {
+  const { slugs, lang } = params
+  const slug = slugs.join('/')
   preload(slug, lang)
 
   const pageData = await fetchPageData(slug, lang)
