@@ -46,7 +46,8 @@ export const generateMetadata = async ({
   params: { slugs: string[]; lang: string }
 }) => {
   const { slugs, lang } = params
-  const slug = slugs.join('/')
+
+  const slug = slugs ? slugs.join('/') : ''
   const pageData = await fetchPageData(slug, lang)
 
   const seo = pageData?.seo
@@ -64,7 +65,8 @@ export const generateMetadata = async ({
 
 const HomePage = async ({ params }: { params: { slugs: string[]; lang: string } }) => {
   const { slugs, lang } = params
-  const slug = slugs.join('/')
+
+  const slug = slugs ? slugs.join('/') : ''
   preload(slug, lang)
 
   const pageData = await fetchPageData(slug, lang)

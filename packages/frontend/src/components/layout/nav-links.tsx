@@ -15,6 +15,9 @@ export interface NavLinksProps {
 
 export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
   const pathname = usePathname()
+
+  console.log({ pathname })
+
   const language = pathname ? pathname.split('/')[1] : 'en'
 
   // console.log({ pathname, links })
