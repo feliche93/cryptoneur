@@ -1,13 +1,35 @@
-import { buttonVariants } from '@components/ui/button'
+import { Button } from '@components/layout/menu'
+import { ButtonProps, buttonVariants } from '@components/ui/button'
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
 import Link from 'next/link'
 import { FC } from 'react'
+import { z } from 'zod'
+
+const schema = z.object({
+  button: z.object({
+    size: z.string().optional(),
+    shape: z.string().optional(),
+    variant: z.string().optional(),
+    translations: z.array(z.object({ label: z.string(), languages_code: z.string() })),
+  }),
+  page: z.object({
+    translations: z.array(z.object({ slug: z.string(), languages_code: z.string() })),
+  }),
+})
 
 // @ts-expect-error Server Component
 export const BlockPageLink: FC<BlockType> = async ({ id, lang }) => {
   const data = await directus.items('block_page_link').readOne(id, {
-    fields: ['button.*.*', 'page.translations.*'],
+    fields: [
+      'button.translations.label',
+      'button.translations.languages_code',
+      'button.size',
+      'button.shape',
+      'button.variant',
+      'page.translations.slug',
+      'page.translations.languages_code',
+    ],
     deep: {
       translations: {
         _filter: {
@@ -28,54 +50,20 @@ export const BlockPageLink: FC<BlockType> = async ({ id, lang }) => {
     },
   })
 
-  const page = data?.page
-  const button = data?.button
+  const parsedData = schema.parse(data)
 
-  if (!page || typeof page === 'number') {
-    throw Error(`No page found for block ${id}`)
-  }
-
-  if (!button || typeof button === 'number') {
-    throw Error(`No button found for block ${id}`)
-  }
-
-  const translationsPage = page?.translations
-  const translationsButton = button?.translations
-
-  if (
-    !translationsPage ||
-    typeof translationsPage[0] === 'number' ||
-    translationsPage?.length === 0
-  ) {
-    throw Error(`No translations found for page ${id}`)
-  }
-
-  if (
-    !translationsButton ||
-    typeof translationsButton[0] === 'number' ||
-    translationsButton?.length === 0
-  ) {
-    throw Error(`No translations found for button ${id}`)
-  }
-
-  const { slug } = translationsPage[0]
-  const { label } = translationsButton[0]
-  const { variant, size, shape } = button
-
-  if (!slug || !label || !variant || !size || !shape) {
-    throw Error(`Missing data for block ${id}`)
-  }
+  // return <pre className="text-left">{JSON.stringify(parsedData, null, 2)}</pre>
 
   return (
     <Link
       className={buttonVariants({
-        variant: variant as any,
-        size: size as any,
-        shape: shape as any,
+        variant: parsedData.button.variant as any,
+        size: parsedData.button.size as any,
+        shape: parsedData.button.shape as any,
       })}
-      href={`/${lang}/${slug}`}
+      href={`/${lang}/${parsedData.page.translations[0].slug}`}
     >
-      {label}
+      {parsedData.button.translations[0].label}
     </Link>
   )
 }

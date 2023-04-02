@@ -1,7 +1,8 @@
 // pages/index.tsx
 import { RenderBlock } from '@components/render-block'
-import { fetchPageData, getMetaData, preload } from '@lib/directus'
+import directus, { fetchPageData, getMetaData, preload } from '@lib/directus'
 import { notFound } from 'next/navigation'
+import { z } from 'zod'
 
 export const dynamic = 'error'
 
@@ -45,39 +46,68 @@ export const generateMetadata = async ({
 }: {
   params: { slugs: string[]; lang: string }
 }) => {
-  const { slugs, lang } = params
+  // const { slugs, lang } = params
 
-  const slug = slugs ? slugs.join('/') : ''
-  const pageData = await fetchPageData(slug, lang)
+  // const slug = slugs ? slugs.join('/') : ''
+  // const pageData = await fetchPageData(slug, lang)
 
-  const seo = pageData?.seo
+  // const seo = pageData?.seo
 
-  if (!seo || typeof seo !== 'object' || !seo?.id) {
-    return null
-  }
+  // if (!seo || typeof seo !== 'object' || !seo?.id) {
+  //   return null
+  // }
 
-  const metaData = await getMetaData(seo?.id, lang)
+  // const metaData = await getMetaData(seo?.id, lang)
 
   // console.log(metaData?.openGraph?.images)
 
-  return metaData
+  return {}
 }
 
-const HomePage = async ({ params }: { params: { slugs: string[]; lang: string } }) => {
+const schema = z.array(
+  z.object({
+    id: z.number(),
+    languages_code: z.string(),
+    slug: z.string(),
+    pages_id: z.object({
+      content: z.array(z.object({ collection: z.string(), item: z.string() })),
+    }),
+  }),
+)
+
+const HomePage = async ({ params }: { params: { slugs?: string[]; lang: string } }) => {
   const { slugs, lang } = params
+  const slug = slugs ? slugs.join('/') : 'home'
 
-  const slug = slugs ? slugs.join('/') : ''
-  preload(slug, lang)
+  const { data } = await directus.items('pages_translations').readByQuery({
+    fields: ['*', 'pages_id.content.collection', 'pages_id.content.item'],
+    filter: {
+      _and: [
+        {
+          languages_code: {
+            _starts_with: lang,
+          },
+        },
+        {
+          slug: {
+            _eq: slug,
+          },
+        },
+      ],
+    },
+  })
 
-  const pageData = await fetchPageData(slug, lang)
+  const parsedData = schema.parse(data)
 
-  if (!pageData || pageData?.content === undefined) {
+  const [page] = parsedData
+
+  if (!page) {
     notFound()
   }
 
   return (
     <>
-      {pageData.content.map((block, index) => {
+      {page.pages_id.content.map((block, index) => {
         return <RenderBlock key={index} lang={lang} block={block} />
       })}
     </>

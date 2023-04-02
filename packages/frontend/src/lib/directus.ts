@@ -17,7 +17,6 @@ export const preload = (slug: string, lang: string) => {
     void fetchPageData(slug, lang);
 };
 
-
 export const getMetaData = cache(async (id: number, lang: string) => {
     const data = await directus.items('seo').readOne(id, {
         fields: ['*.*', 'open_graph_images.directus_files_id.*'],

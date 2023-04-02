@@ -12,49 +12,39 @@ import { BlockFoundersNote } from './blocks/block-founders-note'
 import { BlockTable } from './blocks/block-table/block-table'
 
 export interface RenderBlockProps {
-  block:
-    | number
-    | {
-        collection?: string | null | undefined
-        id?: number | undefined
-        item?: string[] | undefined
-      }
+  block: {
+    collection: string
+    item: string
+  }
   lang: string
 }
 
 export const RenderBlock: FC<RenderBlockProps> = ({ block, lang }) => {
-  if (typeof block === 'number') {
-    notFound()
-  }
-
-  const { id, collection, item } = block
-
-  if (!id || !collection || !item) {
-    notFound()
-  }
+  const { collection, item: id } = block
 
   switch (collection) {
     case 'block_hero':
-      return <BlockHero lang={lang} id={item} />
+      return <BlockHero lang={lang} id={id} />
     case 'block_page_link':
-      return <BlockPageLink lang={lang} id={item} />
+      return <BlockPageLink lang={lang} id={id} />
     case 'block_external_link':
-      return <BlockExternalLink lang={lang} id={item} />
-    case 'block_cal':
-      return <BlockCalendar lang={lang} id={item} />
-    case 'block_features':
-      return <BlockFeatures lang={lang} id={item} />
-    case 'block_feature_grid':
-      return <BlockFeatureGrid lang={lang} id={item} />
-    case 'block_logo_cloud':
-      return <BlockLogoCloud lang={lang} id={item} />
-    case 'block_faq':
-      return <BlockFaq lang={lang} id={item} />
-    case 'block_founders_note':
-      return <BlockFoundersNote lang={lang} id={item} />
-    case 'block_table':
-      return <BlockTable lang={lang} id={item} />
+      return <BlockExternalLink lang={lang} id={id} />
+    // case 'block_cal':
+    //   return <BlockCalendar lang={lang} id={item} />
+    // case 'block_features':
+    //   return <BlockFeatures lang={lang} id={item} />
+    // case 'block_feature_grid':
+    //   return <BlockFeatureGrid lang={lang} id={item} />
+    // case 'block_logo_cloud':
+    //   return <BlockLogoCloud lang={lang} id={item} />
+    // case 'block_faq':
+    //   return <BlockFaq lang={lang} id={item} />
+    // case 'block_founders_note':
+    //   return <BlockFoundersNote lang={lang} id={item} />
+    // case 'block_table':
+    //   return <BlockTable lang={lang} id={item} />
     default:
+      return null
       throw new Error(`Unknown collection: ${collection}`)
   }
 }
