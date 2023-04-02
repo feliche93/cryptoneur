@@ -3,8 +3,13 @@
 import Script from 'next/script'
 import { FC } from 'react'
 
-export interface CalComProps {}
-export const CalCom: FC<CalComProps> = () => {
+export interface CalComProps {
+  url: string
+}
+export const CalCom: FC<CalComProps> = ({ url }) => {
+  const calLink = url.replace('https://cal.com/', '')
+
+  // console.log({ calLink })
   return (
     <Script strategy="afterInteractive">
       {`
@@ -35,7 +40,7 @@ export const CalCom: FC<CalComProps> = () => {
 
       Cal("inline", {
         elementOrSelector:"#my-cal-inline",
-        calLink: "felix-vemmer/30-minute-google-hangout-chat"
+        calLink: ${calLink}
       });
 
       Cal("ui", {"theme":"light","styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false});    `}

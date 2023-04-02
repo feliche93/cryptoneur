@@ -29,8 +29,8 @@ export const RenderBlock: FC<RenderBlockProps> = ({ block, lang }) => {
       return <BlockPageLink lang={lang} id={id} />
     case 'block_external_link':
       return <BlockExternalLink lang={lang} id={id} />
-    // case 'block_cal':
-    //   return <BlockCalendar lang={lang} id={item} />
+    case 'block_cal':
+      return <BlockCalendar lang={lang} id={id} />
     // case 'block_features':
     //   return <BlockFeatures lang={lang} id={item} />
     // case 'block_feature_grid':
