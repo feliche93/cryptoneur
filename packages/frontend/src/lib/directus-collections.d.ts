@@ -1080,6 +1080,34 @@ export interface paths {
     /** Update an existing web3_grants item. */
     patch: operations["updateSingleItemsWeb3Grants"];
   };
+  "/items/web3_grants_detail_page": {
+    /** List the web3_grants_detail_page items. */
+    get: operations["readItemsWeb3GrantsDetailPage"];
+    /** Create a new web3_grants_detail_page item. */
+    post: operations["createItemsWeb3GrantsDetailPage"];
+  };
+  "/items/web3_grants_detail_page/{id}": {
+    /** Retrieve a single web3_grants_detail_page item by unique identifier. */
+    get: operations["readSingleItemsWeb3GrantsDetailPage"];
+    /** Delete an existing web3_grants_detail_page item. */
+    delete: operations["deleteSingleItemsWeb3GrantsDetailPage"];
+    /** Update an existing web3_grants_detail_page item. */
+    patch: operations["updateSingleItemsWeb3GrantsDetailPage"];
+  };
+  "/items/web3_grants_detail_page_translations": {
+    /** List the web3_grants_detail_page_translations items. */
+    get: operations["readItemsWeb3GrantsDetailPageTranslations"];
+    /** Create a new web3_grants_detail_page_translations item. */
+    post: operations["createItemsWeb3GrantsDetailPageTranslations"];
+  };
+  "/items/web3_grants_detail_page_translations/{id}": {
+    /** Retrieve a single web3_grants_detail_page_translations item by unique identifier. */
+    get: operations["readSingleItemsWeb3GrantsDetailPageTranslations"];
+    /** Delete an existing web3_grants_detail_page_translations item. */
+    delete: operations["deleteSingleItemsWeb3GrantsDetailPageTranslations"];
+    /** Update an existing web3_grants_detail_page_translations item. */
+    patch: operations["updateSingleItemsWeb3GrantsDetailPageTranslations"];
+  };
   "/items/web3_grants_translations": {
     /** List the web3_grants_translations items. */
     get: operations["readItemsWeb3GrantsTranslations"];
@@ -1656,6 +1684,7 @@ export interface components {
       title?: string | null;
       features?: { [key: string]: any } | null;
       section?: string | null;
+      description?: string | null;
     };
     ItemsBlockFoundersNote: {
       id?: number;
@@ -2224,6 +2253,40 @@ export interface components {
       grant_relationships?: string;
       "links-hc-lid"?: string;
       rfps?: (number | components["schemas"]["ItemsWeb3GrantsWeb3Rfps"])[];
+    };
+    ItemsWeb3GrantsDetailPage: {
+      id?: number;
+      user_created?: (string | components["schemas"]["Users"]) | null;
+      date_created?: string | null;
+      user_updated?: (string | components["schemas"]["Users"]) | null;
+      date_updated?: string | null;
+      translations?: (
+        | number
+        | components["schemas"]["ItemsWeb3GrantsDetailPageTranslations"]
+      )[];
+    };
+    ItemsWeb3GrantsDetailPageTranslations: {
+      id?: number;
+      web3_grants_detail_page_id?:
+        | (number | components["schemas"]["ItemsWeb3GrantsDetailPage"])
+        | null;
+      languages_code?:
+        | (string | components["schemas"]["ItemsLanguages"])
+        | null;
+      last_updated_label?: string;
+      grant_info_page_label?: string;
+      apply_label?: string;
+      info_card_title_label?: string;
+      info_card_subtitle_label?: string;
+      info_card_about_label?: string;
+      info_card_supported_blockchains_label?: string;
+      info_card_grant_category_label?: string;
+      info_card_grant_use_cases_label?: string;
+      info_card_minimum_funding_label?: string;
+      info_card_maximum_funding_label?: string;
+      edit_grant_label?: string;
+      info_card?: string;
+      header?: string;
     };
     ItemsWeb3GrantsTranslations: {
       id?: number;
@@ -12678,6 +12741,274 @@ export interface operations {
       };
     };
   };
+  /** List the web3_grants_detail_page items. */
+  readItemsWeb3GrantsDetailPage: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsWeb3GrantsDetailPage"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new web3_grants_detail_page item. */
+  createItemsWeb3GrantsDetailPage: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsWeb3GrantsDetailPage"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsWeb3GrantsDetailPage"][]
+          | components["schemas"]["ItemsWeb3GrantsDetailPage"];
+      };
+    };
+  };
+  /** Retrieve a single web3_grants_detail_page item by unique identifier. */
+  readSingleItemsWeb3GrantsDetailPage: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsWeb3GrantsDetailPage"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing web3_grants_detail_page item. */
+  deleteSingleItemsWeb3GrantsDetailPage: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing web3_grants_detail_page item. */
+  updateSingleItemsWeb3GrantsDetailPage: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsWeb3GrantsDetailPage"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsWeb3GrantsDetailPage"];
+      };
+    };
+  };
+  /** List the web3_grants_detail_page_translations items. */
+  readItemsWeb3GrantsDetailPageTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** A limit on the number of objects that are returned. */
+        limit?: components["parameters"]["Limit"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+        /** How many items to skip when fetching data. */
+        offset?: components["parameters"]["Offset"];
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components["parameters"]["Sort"];
+        /** Select items in collection by given conditions. */
+        filter?: components["parameters"]["Filter"];
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components["parameters"]["Search"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsWeb3GrantsDetailPageTranslations"][];
+            meta?: components["schemas"]["x-metadata"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+  };
+  /** Create a new web3_grants_detail_page_translations item. */
+  createItemsWeb3GrantsDetailPageTranslations: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsWeb3GrantsDetailPageTranslations"][];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+    };
+    requestBody: {
+      content: {
+        "application/json":
+          | components["schemas"]["ItemsWeb3GrantsDetailPageTranslations"][]
+          | components["schemas"]["ItemsWeb3GrantsDetailPageTranslations"];
+      };
+    };
+  };
+  /** Retrieve a single web3_grants_detail_page_translations item by unique identifier. */
+  readSingleItemsWeb3GrantsDetailPageTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsWeb3GrantsDetailPageTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Delete an existing web3_grants_detail_page_translations item. */
+  deleteSingleItemsWeb3GrantsDetailPageTranslations: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: unknown;
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+  };
+  /** Update an existing web3_grants_detail_page_translations item. */
+  updateSingleItemsWeb3GrantsDetailPageTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components["parameters"]["Fields"];
+        /** What metadata to return in the response. */
+        meta?: components["parameters"]["Meta"];
+      };
+      path: {
+        /** Index of the item. */
+        id: number | string;
+      };
+    };
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          "application/json": {
+            data?: components["schemas"]["ItemsWeb3GrantsDetailPageTranslations"];
+          };
+        };
+      };
+      401: components["responses"]["UnauthorizedError"];
+      404: components["responses"]["NotFoundError"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ItemsWeb3GrantsDetailPageTranslations"];
+      };
+    };
+  };
   /** List the web3_grants_translations items. */
   readItemsWeb3GrantsTranslations: {
     parameters: {
@@ -16813,6 +17144,8 @@ export type DirectusCollections = {
   web3_categories: components["schemas"]["ItemsWeb3Categories"];
   web3_categories_translations: components["schemas"]["ItemsWeb3CategoriesTranslations"];
   web3_grants: components["schemas"]["ItemsWeb3Grants"];
+  web3_grants_detail_page: components["schemas"]["ItemsWeb3GrantsDetailPage"];
+  web3_grants_detail_page_translations: components["schemas"]["ItemsWeb3GrantsDetailPageTranslations"];
   web3_grants_translations: components["schemas"]["ItemsWeb3GrantsTranslations"];
   web3_grants_web3_blockchains: components["schemas"]["ItemsWeb3GrantsWeb3Blockchains"];
   web3_grants_web3_categories: components["schemas"]["ItemsWeb3GrantsWeb3Categories"];

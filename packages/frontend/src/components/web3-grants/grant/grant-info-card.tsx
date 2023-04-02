@@ -3,20 +3,23 @@ import { BlockType } from '@lib/directus.types'
 import { createServerClient } from '@utils/supabase-server'
 import { FC } from 'react'
 import { NoInfo } from './NoInfo'
+import { z } from 'zod'
 
-export interface GrantInfoCardProps {
-  slug: string
-  title: string
-  description: string
-}
+const grantTranslationsSchema = z.array(
+  z.object({
+    last_updated_label: z.string(),
+    apply_label: z.string(),
+    grant_info_page_label: z.string(),
+  }),
+)
 
 // @ts-expect-error Server Component
 export const GrantInfoCard: FC<BlockType> = async ({ id, lang }) => {
-  const data = await directus.items('web3_grants_translations').readOne(id, {
+  const grantData = await directus.items('web3_grants_translations').readOne(id, {
     fields: ['name', 'description', 'web3_grants_id.*'],
   })
 
-  return <pre>{JSON.stringify(data, null, 2)}</pre>
+  return <pre>{JSON.stringify(grantData, null, 2)}</pre>
 
   return (
     <>

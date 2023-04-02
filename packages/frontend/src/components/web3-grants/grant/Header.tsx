@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { FC } from 'react'
 import { z } from 'zod'
 
-export const schema = z.object({
+export const grantDataSchema = z.object({
   name: z.string(),
   web3_grants_id: z.object({
     logo: z.string(),
@@ -18,9 +18,17 @@ export const schema = z.object({
   }),
 })
 
+const grantTranslationsSchema = z.array(
+  z.object({
+    last_updated_label: z.string(),
+    apply_label: z.string(),
+    grant_info_page_label: z.string(),
+  }),
+)
+
 // @ts-expect-error Server Component
 export const Header: FC<BlockType> = async ({ id, lang }) => {
-  const data = await directus.items('web3_grants_translations').readOne(id, {
+  const grantData = await directus.items('web3_grants_translations').readOne(id, {
     fields: [
       'name',
       'web3_grants_id.logo',
@@ -30,7 +38,15 @@ export const Header: FC<BlockType> = async ({ id, lang }) => {
     ],
   })
 
-  const parsedData = schema.parse(data)
+  const parsedGrantData = grantDataSchema.parse(grantData)
+
+  const grantTranslations = await directus.singleton('web3_grants_detail_page_translations').read({
+    fields: ['last_updated_label', 'apply_label', 'grant_info_page_label'],
+  })
+
+  const parsedGrantTranslations = grantTranslationsSchema.parse(grantTranslations)
+
+  const [grantTranslation] = parsedGrantTranslations
 
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
@@ -38,39 +54,38 @@ export const Header: FC<BlockType> = async ({ id, lang }) => {
         <div className="flex-shrink-0">
           <DirectusImage
             className="h-16 w-16 rounded-lg object-contain"
-            id={parsedData.web3_grants_id.logo}
+            id={parsedGrantData.web3_grants_id.logo}
           />
         </div>
         <div>
-          <h1 className="text-2xl font-bold">{parsedData.name}</h1>
+          <h1 className="text-2xl font-bold">{parsedGrantData.name}</h1>
           <p className="text-sm font-medium text-base-content/80">
-            Last Updated {/* TODO: add relative time */}
-            on{' '}
-            <time dateTime={parsedData.web3_grants_id.date_updated}>
-              {dayjs(parsedData.web3_grants_id.date_updated).format('MMMM DD, YYYY')}
+            {grantTranslation.last_updated_label}
+            <time dateTime={parsedGrantData.web3_grants_id.date_updated}>
+              {dayjs(parsedGrantData.web3_grants_id.date_updated).format('MMMM DD, YYYY')}
             </time>
           </p>
         </div>
       </div>
       <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
-        {!!parsedData.web3_grants_id.url_info && (
+        {!!parsedGrantData.web3_grants_id.url_info && (
           <a
             target={'_blank'}
             rel="noopener nofollow"
-            href={parsedData.web3_grants_id.url_info}
+            href={parsedGrantData.web3_grants_id.url_info}
             className="btn-outline btn-primary btn"
           >
-            Grant Info Page
+            {grantTranslation.grant_info_page_label}
           </a>
         )}
-        {!!parsedData.web3_grants_id.url_application && (
+        {!!parsedGrantData.web3_grants_id.url_application && (
           <a
             target={'_blank'}
             rel="noopener nofollow"
-            href={parsedData.web3_grants_id.url_application}
+            href={parsedGrantData.web3_grants_id.url_application}
             className="btn-primary btn"
           >
-            Apply
+            {grantTranslation.apply_label}
           </a>
         )}
       </div>

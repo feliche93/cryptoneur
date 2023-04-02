@@ -4,11 +4,14 @@ import { Header } from '@components/web3-grants/grant/header'
 import directus, { fetchPageData, preload } from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
 import { notFound } from 'next/navigation'
+import { z } from 'zod'
+
+const grantDataSchema = z.array(z.object({ slug: z.string(), id: z.number() }))
 
 const Web3GrantsDetailPage = async ({ params }: { params: { slug: string; lang: string } }) => {
   const { slug, lang } = params
 
-  const { data } = await directus.items('web3_grants').readByQuery({
+  const { data: grantData } = await directus.items('web3_grants').readByQuery({
     fields: ['slug', 'id'],
     filter: {
       slug: {
@@ -17,22 +20,14 @@ const Web3GrantsDetailPage = async ({ params }: { params: { slug: string; lang: 
     },
   })
 
-  if (!data || data?.length === 0) {
-    notFound()
-  }
+  const parsedGrantData = grantDataSchema.parse(grantData)
 
-  const id = data[0].id
-
-  if (!id) {
-    notFound()
-  }
-
-  //   return <pre>{JSON.stringify(data, null, 2)}</pre>
+  const [grant] = parsedGrantData
 
   return (
     <>
-      <Header id={id} lang={lang} />
-      <GrantInfoCard id={id} lang={lang} />
+      <Header id={grant.id} lang={lang} />
+      <GrantInfoCard id={grant.id} lang={lang} />
     </>
   )
 }
