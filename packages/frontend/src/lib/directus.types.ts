@@ -1,4 +1,4 @@
 export interface BlockType {
-    id: string;
+    id: string | number;
     lang: string;
 }

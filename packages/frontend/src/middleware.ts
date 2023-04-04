@@ -5,6 +5,8 @@ import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
 import { i18n } from '../i18n-config'
 
+export const runtime = 'nodejs'; // 'nodejs' (default) | 'experimental-edge'
+
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
   const negotiatorHeaders: Record<string, string> = {}
@@ -12,9 +14,19 @@ function getLocale(request: NextRequest): string | undefined {
 
   // Use negotiator and intl-localematcher to get best locale
   let languages = new Negotiator({ headers: negotiatorHeaders }).languages()
-  const locales: string[] = i18n.locales.slice()
+  // Filter out wildcard value
+  languages = languages.filter((language) => language !== '*')
+  console.log('Negotiator languages:', languages)
 
-  return matchLocale(languages, locales, i18n.defaultLocale)
+  const locales: string[] = i18n.locales.slice()
+  console.log('Available locales:', locales)
+
+  try {
+    return matchLocale(languages, locales, i18n.defaultLocale)
+  } catch (error) {
+    console.error('Error matching locale:', error)
+    return i18n.defaultLocale
+  }
 }
 
 // this middleware refreshes the user's session and must be run
@@ -22,11 +34,7 @@ function getLocale(request: NextRequest): string | undefined {
 export async function middleware(req: NextRequest) {
 
   const res = NextResponse.next()
-  const supabase = createMiddlewareSupabaseClient({ req, res })
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
 
   // Skip next internal and image requests
   if (
@@ -51,31 +59,11 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(`/${locale}/${pathname}`, req.url))
   }
 
-
-  if (session && req.nextUrl.pathname.startsWith('/sign-in')) {
-
-    // Auth condition not met, redirect to home page.
-    const redirectUrl = req.nextUrl.clone()
-    redirectUrl.pathname = '/'
-    redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname)
-    return NextResponse.redirect(redirectUrl)
-  }
-
-  if (session && req.nextUrl.pathname.startsWith('/register')) {
-    // Auth condition not met, redirect to home page.
-    const redirectUrl = req.nextUrl.clone()
-    redirectUrl.pathname = '/'
-    redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname)
-    return NextResponse.redirect(redirectUrl)
-  }
-
   return res
 }
 
 export const config = {
   matcher: [
-    '/sign-in',
-    '/register',
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }

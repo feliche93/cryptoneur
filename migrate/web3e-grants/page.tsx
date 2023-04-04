@@ -1,13 +1,4 @@
-import { Faq } from '@components/web3-grants/Faq'
-import { Features } from '@components/web3-grants/Features'
-import { FoundersNote } from '@components/web3-grants/FoundersNote'
-import { Hero } from '@components/web3-grants/Hero'
-import { SecondCta } from '@components/web3-grants/SecondCta'
-import { Testimonials } from '@components/web3-grants/Testimonials'
-import { Metadata } from 'next'
-import image1 from '@/../public/og/web-3-grants/image1.jpg'
-import image2 from '@/../public/og/web-3-grants/image2.jpg'
-import image3 from '@/../public/og/web-3-grants/image3.jpg'
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Web3 Grants',
@@ -42,7 +33,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-}
+};
 
 export default function Web3Grants() {
   return (
@@ -54,5 +45,5 @@ export default function Web3Grants() {
       <SecondCta />
       <FoundersNote />
     </>
-  )
+  );
 }

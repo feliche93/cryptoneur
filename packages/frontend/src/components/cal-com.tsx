@@ -3,8 +3,13 @@
 import Script from 'next/script'
 import { FC } from 'react'
 
-export interface CalComProps {}
-export const CalCom: FC<CalComProps> = () => {
+export interface CalComProps {
+  url: string
+}
+export const CalCom: FC<CalComProps> = ({ url }) => {
+  const calLink = url.replace('https://cal.com/', '')
+
+  // console.log({ calLink })
   return (
     <Script strategy="afterInteractive">
       {`

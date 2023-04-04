@@ -1,5 +1,6 @@
 import "server-only";
 
+
 const API_KEY = process.env.ZAPPER_API_KEY;
 const apiUrl = 'https://api.zapper.fi/v2';
 
@@ -157,25 +158,33 @@ const fetchFiatRates = async () => {
   const ids = networks.map(network => network.coinGeckoId).join(',');
   const vsCurrencies = currencies.join(',');
 
-  try {
-    const response = await fetch(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`,
-      { next: { revalidate: 300 } }
-    );
+  const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`;
 
+  try {
+    const response = await fetch(apiUrl,
+      {
+        next: { revalidate: 100 },
+        headers: {
+          'Accept': 'application/json',
+        },
+      });
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error('Error fetching fiat rates:', error);
+    return null;
   }
 };
+
 
 const fetchGasPrices = async () => {
   try {
     const requests = Promise.all(
       networks.map(async ({ network }) => {
         const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`;
-        const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } });
+        const gasPriceResponse = await fetch(url,
+          { next: { revalidate: 300 } }
+        );
         const data = await gasPriceResponse.json();
         return data;
       })

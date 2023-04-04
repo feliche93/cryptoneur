@@ -6,7 +6,20 @@ import { RadioGroup } from '@headlessui/react'
 import { FC } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 
-export const GasPriceRadio: FC = () => {
+import { FC } from 'react'
+
+export interface GasPriceRadioProps {
+  labelStandard: string
+  labelFast: string
+  labelInstant: string
+  labelTransactionSpeed: string
+}
+export const GasPriceRadio: FC<GasPriceRadioProps> = ({
+  labelStandard,
+  labelFast,
+  labelInstant,
+  labelTransactionSpeed,
+}) => {
   const gasPriceOption = ['standard', 'fast', 'instant']
 
   const { control } = useFormContext()

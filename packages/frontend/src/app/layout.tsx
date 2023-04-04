@@ -1,19 +1,14 @@
 import 'server-only'
 
 import Navbar from '@components/layout/navbar'
-import { QueryClientWrapper } from '@components/query-client-wrapper'
 import { AnalyticsWrapper } from '@components/shared/analytics'
 import { ToasterWrapper } from '@components/shared/ToasterWrapper'
-import SupabaseProvider from '@components/supabase-provider'
 import { Database } from '@lib/database.types'
 import profilePic from '@public/profilePic.jpg'
 import type { SupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { createServerClient } from '@utils/supabase-server'
 import { Metadata } from 'next'
-import Footer from '../../components/layout/Footer'
-import '../globals.css'
-
-export const revalidate = 60
+import Footer from '../components/layout/Footer'
+import './globals.css'
 
 export type TypedSupabaseClient = SupabaseClient<Database>
 
@@ -61,25 +56,15 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const supabase = createServerClient()
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
   return (
     <html lang="en">
-      <SupabaseProvider session={session}>
-        <QueryClientWrapper>
-          <body className="min-h-screen bg-base-200">
-            <ToasterWrapper />
-            <Navbar />
-            {children}
-            <AnalyticsWrapper />
-            <Footer />
-          </body>
-        </QueryClientWrapper>
-      </SupabaseProvider>
+      <body className="min-h-screen bg-base-200">
+        <ToasterWrapper />
+        <Navbar />
+        {children}
+        <AnalyticsWrapper />
+        <Footer />
+      </body>
     </html>
   )
 }

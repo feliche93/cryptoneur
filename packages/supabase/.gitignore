@@ -4,3 +4,4 @@
 .env
 seed_data
 clone-to-dev
+/backup/*

@@ -1,7 +1,8 @@
 'use client'
 
 import { Popover } from '@headlessui/react'
-import { classNames } from '@utils/helpers'
+import { cn } from '@lib/utils'
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
@@ -15,6 +16,9 @@ export interface NavLinksProps {
 
 export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
   const pathname = usePathname()
+
+  console.log({ pathname })
+
   const language = pathname ? pathname.split('/')[1] : 'en'
 
   // console.log({ pathname, links })
@@ -48,7 +52,7 @@ export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
       return link.item.href
     }
     if (link.item.page) {
-      console.log(`/${language}/${getLocalizedSlug(link)}`)
+      // console.log(`/${language}/${getLocalizedSlug(link)}`)
       return `/${language}/${getLocalizedSlug(link)}`
     }
     throw new Error('No href found')
@@ -62,7 +66,7 @@ export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
             as={Link}
             key={link.item.id}
             href={getHref(link)}
-            className={classNames(
+            className={cn(
               getHref(link) === pathname ? 'text-black' : '',
               'block rounded-md px-3 py-2 text-base font-medium text-base-content/80 hover:bg-base-200 hover:text-primary',
             )}
@@ -78,7 +82,7 @@ export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
       {links.map((link: LinkItem) => (
         <Link
           href={getHref(link)}
-          className={classNames(
+          className={cn(
             getHref(link) === pathname ? 'text-primary' : '',
             'font-medium text-base-content/80 hover:text-primary',
           )}

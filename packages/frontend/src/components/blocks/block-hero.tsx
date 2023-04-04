@@ -5,12 +5,33 @@ import { BlockType } from '@lib/directus.types'
 import { FC } from 'react'
 import { Subtitle } from './subtitle'
 import { Title } from './title'
+import { DirectusCollections } from '@lib/directus-collections'
+import { z } from 'zod'
+
+export const schema = z.object({
+  image: z.string().nullable(),
+  translations: z.array(
+    z.object({
+      id: z.number(),
+      languages_code: z.string(),
+      subtitle: z.string(),
+      title: z.string(),
+      block_hero_id: z.object({
+        buttons: z.array(z.object({ item: z.string(), collection: z.string() })),
+      }),
+    }),
+  ),
+})
 
 // @ts-expect-error Server Component
 export const BlockHero: FC<BlockType> = async ({ id, lang }) => {
-  // return <pre>{JSON.stringify({ id, lang }, null, 2)}</pre>
   const data = await directus.items('block_hero').readOne(id, {
-    fields: ['*.*'],
+    fields: [
+      'translations.*',
+      'image',
+      'translations.block_hero_id.buttons.item',
+      'translations.block_hero_id.buttons.collection',
+    ],
     deep: {
       translations: {
         _filter: {
@@ -22,40 +43,31 @@ export const BlockHero: FC<BlockType> = async ({ id, lang }) => {
     },
   })
 
-  const translations = data?.translations
+  // return <pre>{JSON.stringify(data, null, 2)}</pre>
 
-  if (!translations?.length || typeof translations[0] === 'number') {
-    throw new Error('No translations found')
-  }
+  const parsedData = schema.parse(data)
+  const [translation] = parsedData.translations
 
-  const { title, subtitle } = translations[0]
-  const image = data?.image
-
-  if (!title || !subtitle || !image || typeof image === 'string' || data.buttons?.length === 0) {
-    throw new Error('Missing data')
+  if (!translation) {
+    throw new Error(`No translation found for ${lang} in BlockHero ${id}`)
   }
 
   return (
     <main className="mx-auto flex max-w-7xl flex-col items-center px-4 pt-16 sm:pt-8">
-      <DirectusImage
-        image={image}
-        className="h-44 w-44 rounded-full object-contain sm:h-64 sm:w-64"
-      />
+      {parsedData?.image && (
+        <DirectusImage
+          id={parsedData.image}
+          className="h-44 w-44 rounded-full object-contain sm:h-64 sm:w-64"
+        />
+      )}
       <div className="pt-8 text-center">
-        <Title input={title} />
-        <Subtitle input={subtitle} />
+        <Title input={translation.title} />
+        <Subtitle input={translation.subtitle} />
         <div className="mx-auto mt-5 flex max-w-md flex-col space-y-2 space-x-0 sm:flex sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-2 md:mt-8">
-          {data.buttons?.map((button, index) => {
+          {translation.block_hero_id.buttons?.map((button, index: number) => {
             if (!button) return null
             return <RenderBlock key={index} block={button} lang={lang} />
           })}
-
-          {/* <Link className="btn-primary btn-md btn sm:btn-lg" href="/gas-fees-calculator">
-            Gas Fees Calculator
-          </Link> */}
-          {/* <Link className="btn btn-md sm:btn-lg btn-outline" href="/blog">
-            Blog
-          </Link> */}
         </div>
       </div>
     </main>

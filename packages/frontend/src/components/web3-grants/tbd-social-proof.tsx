@@ -4,7 +4,7 @@ import { ArrowDownLeftIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/rea
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
-import { Quote } from './Quote'
+import { Quote } from './quote'
 
 export const SocialProof: FC = () => {
   return (

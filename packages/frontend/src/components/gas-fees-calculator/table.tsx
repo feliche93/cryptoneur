@@ -8,8 +8,22 @@ import { useFormContext } from 'react-hook-form'
 
 export interface TableProps {
   networkPrices: any
+  labelHeaderName: string
+  labelHeaderType: string
+  labelHeaderToken: string
+  labelHeaderGasUsed: string
+  labelHeaderGasPrice: string
+  labelHeaderGasCurrentCost: string
 }
-export const Table: FC<TableProps> = ({ networkPrices }) => {
+export const Table: FC<TableProps> = ({
+  networkPrices,
+  labelHeaderName,
+  labelHeaderType,
+  labelHeaderToken,
+  labelHeaderGasUsed,
+  labelHeaderGasPrice,
+  labelHeaderGasCurrentCost,
+}) => {
   const { watch } = useFormContext()
 
   const { currency, gasPrice, usedGas } = watch()
@@ -27,37 +41,37 @@ export const Table: FC<TableProps> = ({ networkPrices }) => {
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-base-content sm:pl-6"
                   >
-                    Name
+                    {labelHeaderName}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-base-content"
                   >
-                    Type
+                    {labelHeaderType}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-base-content"
                   >
-                    Token
+                    {labelHeaderToken}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-base-content"
                   >
-                    Gas Used
+                    {labelHeaderGasUsed}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-base-content"
                   >
-                    Gas Price
+                    {labelHeaderGasUsed}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-base-content"
                   >
-                    Current Cost
+                    {labelHeaderGasCurrentCost}
                   </th>
                 </tr>
               </thead>
