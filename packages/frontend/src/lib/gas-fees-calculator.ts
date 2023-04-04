@@ -161,11 +161,13 @@ const fetchFiatRates = async () => {
   const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`;
 
   try {
-    const response = await fetch(apiUrl, {
-      headers: {
-        'Accept': 'application/json',
-      },
-    });
+    const response = await fetch(apiUrl,
+      {
+        next: { revalidate: 100 },
+        headers: {
+          'Accept': 'application/json',
+        },
+      });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -181,7 +183,7 @@ const fetchGasPrices = async () => {
       networks.map(async ({ network }) => {
         const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`;
         const gasPriceResponse = await fetch(url,
-          // { next: { revalidate: 300 } }
+          { next: { revalidate: 300 } }
         );
         const data = await gasPriceResponse.json();
         return data;
