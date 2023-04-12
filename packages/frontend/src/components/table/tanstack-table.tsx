@@ -46,9 +46,9 @@ export const TanstackTable = <TData,>({
     '',
   )
 
-  useEffect(() => {
-    setDefaultData(data)
-  }, [data])
+  // useEffect(() => {
+  //   setDefaultData(data)
+  // }, [data])
 
   const table: Table<TData> = useReactTable({
     columns,

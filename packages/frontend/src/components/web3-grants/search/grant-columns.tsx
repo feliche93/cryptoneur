@@ -19,16 +19,19 @@ export const grantColumns = [
       <TableHeader
         isSorted={info.header.column.getIsSorted()}
         getToggleSortingHandler={info.header.column.getToggleSortingHandler()}
-      ></TableHeader>
+      >
+        {' '}
+      </TableHeader>
     ),
     cell: (info) => (
       <TableCell className="whitespace-normal">
-        {info.cell.row.original.logo && (
+        {/* {info.cell.row.original.logo && (
           <DirectusImage
+            priority={false}
             id={info.cell.row.original.logo}
             className="aspect-square h-12 w-auto object-contain"
           />
-        )}
+        )} */}
       </TableCell>
     ),
     // filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
@@ -58,7 +61,7 @@ export const grantColumns = [
       <TableCell className="whitespace-normal">
         <>
           {info.cell.row.original.grant_blockchains.map((blockchain, index) => (
-            <div key={index} className="flex flex-row space-y-4">
+            <div key={`${index}-${info.row.original.id}`} className="flex flex-row space-y-4">
               <span className="text-sm">{blockchain.web3_blockchains_id.name}</span>
             </div>
           ))}
@@ -80,7 +83,7 @@ export const grantColumns = [
       <TableCell className="whitespace-normal">
         <>
           {info.cell.row.original.grant_use_cases.map((useCase, index) => (
-            <div key={index} className="flex flex-row space-y-4">
+            <div key={`${index}-${info.row.original.id}`} className="flex flex-row space-y-4">
               <span className="text-sm">{useCase.web3_use_cases_id.translations.name}</span>
             </div>
           ))}
@@ -89,7 +92,7 @@ export const grantColumns = [
     ),
     filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
   }),
-  grantColumnHelper.accessor('funding_maximum', {
+  grantColumnHelper.accessor('funding_minimum', {
     header: (info) => (
       <TableHeader
         className="text-right"

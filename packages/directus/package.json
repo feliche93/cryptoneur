@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "directus": "^9.23.4",
+    "directus": "^9.24",
     "pg": "^8.10.0"
   }
 }

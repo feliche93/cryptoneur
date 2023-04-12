@@ -1,6 +1,5 @@
 import { FileType, ID } from '@directus/sdk'
 import directus from '@lib/directus'
-import { components } from '@lib/directus-collections'
 import { getAssetUrl } from '@lib/utils'
 import Image from 'next/image'
 import { FC } from 'react'
@@ -34,7 +33,7 @@ export const DirectusImage: FC<DirectusImageProps> = async ({
   const src = getAssetUrl(fileId)
 
   if (!src) {
-    return null
+    return <></>
   }
 
   return (

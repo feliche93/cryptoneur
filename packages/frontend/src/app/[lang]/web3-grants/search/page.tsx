@@ -3,6 +3,8 @@ import { grantColumns } from '@components/web3-grants/search/grant-columns'
 import directus from '@lib/directus'
 import { z } from 'zod'
 
+export const dynamic = 'error'
+
 const translation = z.object({
   name: z.string(),
 })
@@ -103,7 +105,7 @@ const Search = async ({ params }: { params: { lang: string } }) => {
 
   // return <pre>{JSON.stringify(parsed, null, 2)}</pre>
 
-  return <TanstackTable data={parsed.data} columns={grantColumns} />
+  return <TanstackTable data={parsed.data} columns={grantColumns} enableGlobalFilter={true} />
 }
 
 export default Search
