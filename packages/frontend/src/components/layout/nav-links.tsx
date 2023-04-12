@@ -64,7 +64,7 @@ export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
         {links.map((link: LinkItem) => (
           <Popover.Button
             as={Link}
-            key={link.item.id}
+            key={`${link.item.page}-${link.item.id}`}
             href={getHref(link)}
             className={cn(
               getHref(link) === pathname ? 'text-black' : '',
@@ -86,7 +86,7 @@ export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
             getHref(link) === pathname ? 'text-primary' : '',
             'font-medium text-base-content/80 hover:text-primary',
           )}
-          key={link.item.id}
+          key={`${link.item.page}-${link.item.id}`}
         >
           {getLabel(link)}
         </Link>

@@ -35,14 +35,20 @@ export async function middleware(req: NextRequest) {
 
   const res = NextResponse.next()
 
+  console.log('req.nextUrl.pathname', req.nextUrl.pathname)
 
   // Skip next internal and image requests
   if (
     req.nextUrl.pathname.startsWith('/_next') ||
     req.nextUrl.pathname.includes('/api/') ||
+    req.nextUrl.pathname.includes('/_next/image') ||
+    req.nextUrl.pathname.startsWith('/api') ||
+    req.nextUrl.pathname.startsWith('/.ico') ||
+    req.nextUrl.pathname.startsWith('/_vercel') ||
+    req.nextUrl.pathname.startsWith('/_next') ||
     /\.(.*)$/.test(req.nextUrl.pathname)
   ) {
-    return
+    return res
   }
 
   const pathname = req.nextUrl.pathname

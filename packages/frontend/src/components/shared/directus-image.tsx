@@ -1,6 +1,5 @@
 import { FileType, ID } from '@directus/sdk'
 import directus from '@lib/directus'
-import { components } from '@lib/directus-collections'
 import { getAssetUrl } from '@lib/utils'
 import Image from 'next/image'
 import { FC } from 'react'
@@ -27,13 +26,14 @@ export const DirectusImage: FC<DirectusImageProps> = async ({
 
   if (!title || !width || !height || !fileId) {
     console.error('Invalid file format', file)
+    return <></>
     throw new Error('Invalid file format')
   }
 
   const src = getAssetUrl(fileId)
 
   if (!src) {
-    return null
+    return <></>
   }
 
   return (
