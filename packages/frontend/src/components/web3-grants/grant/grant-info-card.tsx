@@ -35,11 +35,11 @@ const schema = z.object({
   url_info: z.string(),
   funding_minimum: z.number().nullable(),
   funding_maximum: z.number().nullable(),
-  github: z.null(),
-  discord: z.string(),
-  telegram: z.string(),
-  website: z.string(),
-  twitter: z.string(),
+  github: z.string().nullish(),
+  discord: z.string().nullish(),
+  telegram: z.string().nullish(),
+  website: z.string().nullish(),
+  twitter: z.string().nullish(),
   logo: z.string(),
   translations: z.array(
     z.object({
@@ -72,8 +72,8 @@ const schema = z.object({
     }),
   ),
   rfps: z.array(z.number()),
-  funding_maximum_currency_id: z.object({ symbol: z.string() }).optional(),
-  funding_minimum_currency_id: z.object({ symbol: z.string() }).optional(),
+  funding_maximum_currency_id: z.object({ symbol: z.string() }).nullish(),
+  funding_minimum_currency_id: z.object({ symbol: z.string() }).nullish(),
 })
 
 // @ts-expect-error Server Component

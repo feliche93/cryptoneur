@@ -40,9 +40,11 @@ export async function middleware(req: NextRequest) {
   if (
     req.nextUrl.pathname.startsWith('/_next') ||
     req.nextUrl.pathname.includes('/api/') ||
+    req.nextUrl.pathname.includes('/_next/image') ||
+    req.nextUrl.pathname.startsWith('/api') ||
     /\.(.*)$/.test(req.nextUrl.pathname)
   ) {
-    return
+    return res
   }
 
   const pathname = req.nextUrl.pathname

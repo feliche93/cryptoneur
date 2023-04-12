@@ -27,6 +27,7 @@ export const DirectusImage: FC<DirectusImageProps> = async ({
 
   if (!title || !width || !height || !fileId) {
     console.error('Invalid file format', file)
+    return <></>
     throw new Error('Invalid file format')
   }
 
