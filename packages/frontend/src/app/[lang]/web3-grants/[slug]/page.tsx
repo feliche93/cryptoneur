@@ -3,6 +3,8 @@ import { Header } from '@components/web3-grants/grant/header'
 import directus from '@lib/directus'
 import { z } from 'zod'
 
+export const revalidate = 60
+
 const grantDataSchema = z.array(z.object({ slug: z.string(), id: z.number() }))
 
 const Web3GrantsDetailPage = async ({ params }: { params: { slug: string; lang: string } }) => {
