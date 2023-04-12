@@ -157,7 +157,7 @@ export const grantColumns = [
           //   variant: 'primary',
           //   size: 'sm',
           // })}
-          href={info.cell.row.original.slug}
+          href={`/web3-grants/${info.cell.row.original.slug}`}
         >
           <ArrowTopRightOnSquareIcon className="text h-5 w-5 rounded-lg text-primary" />
         </Link>
