@@ -1,24 +1,30 @@
 'use client'
 
 import {
-  RowData,
-  Table,
-  TableOptions,
   getCoreRowModel,
   getFacetedMinMaxValues,
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
-  getSortedRowModel,
-  useReactTable,
   getPaginationRowModel,
+  getSortedRowModel,
+  RowData,
+  Table,
+  TableOptions,
+  useReactTable,
 } from '@tanstack/react-table'
-import { useEffect, useState } from 'react'
-import { fuzzyFilter } from './filter-functions'
-import { TableCore } from './table-core'
-import { TableFilters } from './table-filters'
-import { TableResults } from './table-results'
 import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { fuzzyFilter } from './filter-functions'
+export const TableCore = React.lazy(() =>
+  import('./table-core').then((mod) => ({ default: mod.TableCore })),
+)
+export const TableFilters = React.lazy(() =>
+  import('./table-filters').then((mod) => ({ default: mod.TableFilters })),
+)
+export const TableResults = React.lazy(() =>
+  import('./table-results').then((mod) => ({ default: mod.TableResults })),
+)
 
 export interface TableProps<TData> {
   data: TData[]
