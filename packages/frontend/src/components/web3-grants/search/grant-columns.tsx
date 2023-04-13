@@ -1,11 +1,9 @@
 'use client'
 
 import { Grant } from '@app/[lang]/web3-grants/search/page'
-import { DirectusImage } from '@components/shared/directus-image'
 import { isWithinRange } from '@components/table/filter-functions'
 import { TableCell } from '@components/table/table-cell'
 import { TableHeader } from '@components/table/table-header'
-import { buttonVariants } from '@components/ui/button'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import { getAssetUrl } from '@lib/utils'
 import { createColumnHelper } from '@tanstack/react-table'
@@ -26,12 +24,12 @@ export const grantColumns = [
       </TableHeader>
     ),
     cell: (info) => (
-      <TableCell className="whitespace-normal">
+      <TableCell className="">
         <Image
           src={getAssetUrl(info.cell.row.original.logo)}
           alt={info.cell.row.original.translations.name}
-          width={55}
-          height={55}
+          width={100}
+          height={100}
         />
       </TableCell>
     ),
@@ -97,6 +95,19 @@ export const grantColumns = [
         </>
       </TableCell>
     ),
+    filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
+  }),
+  grantColumnHelper.accessor('rfps', {
+    header: (info) => (
+      <TableHeader
+        className="text-right"
+        isSorted={info.header.column.getIsSorted()}
+        getToggleSortingHandler={info.header.column.getToggleSortingHandler()}
+      >
+        Rfps
+      </TableHeader>
+    ),
+    cell: (info) => <TableCell className="text-right">{info.cell.row.original.rfps}</TableCell>,
     filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
   }),
   grantColumnHelper.accessor('funding_minimum', {

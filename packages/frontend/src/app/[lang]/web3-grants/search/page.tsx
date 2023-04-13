@@ -60,7 +60,10 @@ const grantSchema = z.object({
     .min(1)
     .max(1)
     .transform((translations) => translations[0]),
-  rfps: z.array(z.number()).nullish(),
+  rfps: z
+    .array(z.number())
+    .nullish()
+    .transform((rfps) => rfps?.length),
   grant_blockchains: z.array(blockchain).min(1),
   grant_use_cases: z.array(useCase).min(1),
   funding_maximum_currency_id: currency.nullish(),
