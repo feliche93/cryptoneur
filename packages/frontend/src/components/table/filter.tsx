@@ -130,7 +130,6 @@ export function Filter({ column, table, className }: FilterProps) {
     const uniqueValuesArray = Array.from(uniqueValues.keys()).flat()
     const uniqueValuesArrayNoDuplicates = Array.from(new Set(uniqueValuesArray))
 
-    console.log('object', uniqueValuesArrayNoDuplicates)
     return (
       <div className="sm:col-span-1 md:col-span-2 lg:col-span-3">
         <datalist id={column.id + 'list'}>
