@@ -15,6 +15,12 @@ const useCase = z.object({
   }),
 })
 
+const grantCategory = z.object({
+  web3_categories_id: z.object({
+    translations: z.array(translation).transform((translations) => translations[0]),
+  }),
+})
+
 const blockchain = z.object({
   web3_blockchains_id: z.object({
     name: z.string(),
@@ -54,15 +60,33 @@ const grantSchema = z.object({
   website: z.string().nullish(),
   twitter: z.string().nullish(),
   logo: z.string(),
-  grant_categories: z.array(z.number()),
+  grant_categories: z
+    .array(grantCategory)
+    .min(1)
+    .transform((categories) =>
+      categories.map((category) => category.web3_categories_id.translations.name),
+    ),
   translations: z
     .array(grantTranslation)
     .min(1)
     .max(1)
     .transform((translations) => translations[0]),
-  rfps: z.array(z.number()).nullish(),
-  grant_blockchains: z.array(blockchain).min(1),
-  grant_use_cases: z.array(useCase).min(1),
+  rfps: z
+    .array(z.number())
+    .nullish()
+    .transform((rfps) => rfps?.length),
+  grant_blockchains: z
+    .array(blockchain)
+    .min(1)
+    .transform((blockchains) =>
+      blockchains.map((blockchain) => blockchain.web3_blockchains_id.name),
+    ),
+  grant_use_cases: z
+    .array(useCase)
+    .min(1)
+    .transform((useCases) =>
+      useCases.map((useCase) => useCase.web3_use_cases_id.translations.name),
+    ),
   funding_maximum_currency_id: currency.nullish(),
   funding_minimum_currency_id: currency.nullish(),
 })
@@ -80,6 +104,7 @@ const Search = async ({ params }: { params: { lang: string } }) => {
       '*',
       'translations.*',
       'grant_blockchains.web3_blockchains_id.name',
+      'grant_categories.web3_categories_id.translations.name',
       'grant_use_cases.web3_use_cases_id.translations.name',
       'funding_maximum_currency_id.symbol',
       'funding_minimum_currency_id.symbol',
@@ -105,7 +130,23 @@ const Search = async ({ params }: { params: { lang: string } }) => {
 
   // return <pre>{JSON.stringify(parsed, null, 2)}</pre>
 
-  return <TanstackTable data={parsed.data} columns={grantColumns} enableGlobalFilter={true} />
+  const grantFilters = [
+    'grant_use_cases',
+    'grant_categories',
+    'grant_blockchains',
+    'funding_minimum',
+    'funding_maximum',
+    'rfps',
+  ]
+
+  return (
+    <TanstackTable
+      data={parsed.data}
+      columns={grantColumns}
+      filterColumns={grantFilters}
+      enableGlobalFilter={true}
+    />
+  )
 }
 
 export default Search

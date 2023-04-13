@@ -14,6 +14,7 @@ const nextConfig = {
         hostname: '**',
       }
     ],
+    dangerouslyAllowSVG: true,
   },
   typescript: {
     ignoreBuildErrors: true,
