@@ -12,21 +12,6 @@ interface FilterProps {
   table: Table<any>
 }
 
-interface DateFilterProps extends Pick<FilterProps, 'className' | 'column'> {
-  minDate: string
-  maxDate: string
-  columnFilterValue: [string, string]
-}
-
-interface NumberFilterProps extends Pick<FilterProps, 'className' | 'column'> {
-  minMaxValues: [number, number]
-  columnFilterValue: [number, number]
-}
-
-interface TextFilterProps extends Pick<FilterProps, 'className' | 'column'> {
-  sortedUniqueValues: any[]
-}
-
 function findFirstNonNullValue(column: Column<any, unknown>, table: Table<any>) {
   const flatRows = table.getPreFilteredRowModel().flatRows
   for (const row of flatRows) {
@@ -36,76 +21,6 @@ function findFirstNonNullValue(column: Column<any, unknown>, table: Table<any>) 
     }
   }
   return null
-}
-
-function DateFilter({ column, className, minDate, maxDate, columnFilterValue }: DateFilterProps) {
-  return (
-    <div className={clsx(className)}>
-      <div className="grid grid-cols-2 gap-x-2">
-        <DebouncedInput
-          primaryLabel="Start Date"
-          type="date"
-          min={minDate}
-          max={maxDate}
-          value={columnFilterValue?.[0] ?? minDate}
-          onChange={(value) => {
-            column.setFilterValue((old: [string, string]) => [value, old?.[1]])
-          }}
-          placeholder={`Min ${minDate ? `(${minDate})` : ''}`}
-          className="col-span-1"
-        />
-        <DebouncedInput
-          primaryLabel="End Date"
-          type="date"
-          min={minDate}
-          max={maxDate}
-          value={columnFilterValue?.[1] ?? maxDate}
-          onChange={(value) => column.setFilterValue((old: [string, string]) => [old?.[0], value])}
-          placeholder={`Max ${maxDate ? `(${maxDate})` : ''}`}
-          className="col-span-1"
-        />
-      </div>
-    </div>
-  )
-}
-
-function NumberFilter({ column, className, minMaxValues, columnFilterValue }: NumberFilterProps) {
-  const min = Number(minMaxValues?.[0] ?? '')
-  const max = Number(minMaxValues?.[1] ?? '')
-
-  // column.setFilterValue((old: [number, number]) => [0, 150])
-  // return null
-
-  return (
-    <div className={clsx(className)}>
-      <div className="grid grid-cols-2 gap-x-2">
-        <DebouncedInput
-          primaryLabel={`Min ${column?.id?.replace(/_/g, ' ')}`}
-          type="number"
-          min={min}
-          max={max}
-          value={(columnFilterValue as [number, number])?.[0] ?? ''}
-          onChange={(value) =>
-            column.setFilterValue((old: [number, number]) => [Number(value), old?.[1]])
-          }
-          placeholder={`Min ${min ? `(${min})` : ''}`}
-          className="col-span-1"
-        />
-        <DebouncedInput
-          primaryLabel={`Max ${column?.id?.replace(/_/g, ' ')}`}
-          type="number"
-          min={min}
-          max={max}
-          value={(columnFilterValue as [number, number])?.[1] ?? ''}
-          onChange={(value) =>
-            column.setFilterValue((old: [number, number]) => [old?.[0], Number(value)])
-          }
-          placeholder={`Max ${max ? `(${max})` : ''}`}
-          className="col-span-1"
-        />
-      </div>
-    </div>
-  )
 }
 
 function isValidDate(dateString: string): boolean {
@@ -211,8 +126,28 @@ export function Filter({ column, table, className }: FilterProps) {
   }
 
   if (typeof firstValue === 'object') {
-    console.log('object', firstValue)
-    return null
+    const uniqueValues = column.getFacetedUniqueValues()
+    const uniqueValuesArray = Array.from(uniqueValues.keys()).flat()
+    const uniqueValuesArrayNoDuplicates = Array.from(new Set(uniqueValuesArray))
+
+    console.log('object', uniqueValuesArrayNoDuplicates)
+    return (
+      <div className="sm:col-span-1 md:col-span-2 lg:col-span-3">
+        <datalist id={column.id + 'list'}>
+          {uniqueValuesArrayNoDuplicates.slice(0, 5000).map((value: any) => (
+            <option value={value} key={value} />
+          ))}
+        </datalist>
+        <DebouncedInput
+          primaryLabel={`Filter ${lodash.startCase(column.id)}`}
+          type="text"
+          value={(columnFilterValue ?? '') as string}
+          onChange={(value) => column.setFilterValue(value)}
+          placeholder={`Search... (${uniqueValuesArrayNoDuplicates.length})`}
+          list={column.id + 'list'}
+        />
+      </div>
+    )
   }
 
   return (

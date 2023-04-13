@@ -24,12 +24,12 @@ export const grantColumns = [
       </TableHeader>
     ),
     cell: (info) => (
-      <TableCell className="w-40">
+      <TableCell className="w-16">
         <Image
           src={getAssetUrl(info.cell.row.original.logo)}
           alt={info.cell.row.original.translations.name}
-          width={100}
-          height={100}
+          width={64}
+          height={64}
         />
       </TableCell>
     ),
@@ -73,6 +73,7 @@ export const grantColumns = [
         </>
       </TableCell>
     ),
+    filterFn: 'arrIncludes',
   }),
   grantColumnHelper.accessor('grant_blockchains', {
     header: (info) => (
@@ -94,7 +95,7 @@ export const grantColumns = [
         </>
       </TableCell>
     ),
-    filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
+    filterFn: 'arrIncludes',
   }),
   grantColumnHelper.accessor('grant_use_cases', {
     header: (info) => (
@@ -116,7 +117,7 @@ export const grantColumns = [
         </>
       </TableCell>
     ),
-    filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
+    filterFn: 'arrIncludes',
   }),
   grantColumnHelper.accessor('rfps', {
     header: (info) => (

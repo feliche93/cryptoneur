@@ -130,7 +130,14 @@ const Search = async ({ params }: { params: { lang: string } }) => {
 
   // return <pre>{JSON.stringify(parsed, null, 2)}</pre>
 
-  const grantFilters = ['funding_minimum', 'funding_maximum', 'rfps', 'grant_use_cases']
+  const grantFilters = [
+    'grant_use_cases',
+    'grant_categories',
+    'grant_blockchains',
+    'funding_minimum',
+    'funding_maximum',
+    'rfps',
+  ]
 
   return (
     <TanstackTable
