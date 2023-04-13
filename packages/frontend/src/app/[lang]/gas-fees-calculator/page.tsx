@@ -11,9 +11,6 @@ import { UsedGaseInput } from '@components/gas-fees-calculator/used-gas-input'
 import { DirectusImage } from '@components/shared/directus-image'
 import directus, { getMetaData } from '@lib/directus'
 import { fetchFiatRates, fetchGasPrices, networks } from '@lib/gas-fees-calculator'
-import image1 from '@public/gas-fees-calculator/ogImag1.jpg'
-import image2 from '@public/gas-fees-calculator/ogImage2.jpg'
-import { Metadata } from 'next'
 
 export const dynamic = 'error'
 export const revalidate = 300

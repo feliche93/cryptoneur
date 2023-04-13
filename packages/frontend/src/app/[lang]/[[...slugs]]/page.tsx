@@ -1,67 +1,23 @@
 // pages/index.tsx
 import { RenderBlock } from '@components/render-block'
 import directus, { fetchPageData, getMetaData, preload } from '@lib/directus'
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { z } from 'zod'
 
-export const dynamic = 'error'
-
-// export async function generateStaticParams() {
-//   const { data: allPages } = await directus.items('pages').readByQuery({
-//     fields: ['translations.languages_code', 'translations.slug', 'status'],
-//     filter: {
-//       status: {
-//         _eq: 'published',
-//       },
-//     },
-//   })
-
-//   if (!allPages?.length) {
-//     notFound()
-//   }
-
-//   const urls = [] as { slug: string; lang: string }[]
-
-//   allPages.forEach((page) => {
-//     if (page.translations) {
-//       page.translations.forEach((translation) => {
-//         if (typeof translation !== 'number') {
-//           if (!translation.languages_code || !translation.slug) {
-//             return
-//           }
-//           urls.push({
-//             slug: translation.slug,
-//             lang: translation.languages_code?.split('-')[0],
-//           })
-//         }
-//       })
-//     }
-//   })
-
-//   return urls
-// }
+export const dynamic = 60
 
 export const generateMetadata = async ({
   params,
 }: {
-  params: { slugs: string[]; lang: string }
-}) => {
-  // const { slugs, lang } = params
+  params: { slug: string; lang: string }
+}): Promise<Metadata> => {
+  const { lang } = params
 
-  // const slug = slugs ? slugs.join('/') : ''
-  // const pageData = await fetchPageData(slug, lang)
+  // TODO: get the id from directus
+  const metaData = (await getMetaData(4, lang)) as Metadata
 
-  // const seo = pageData?.seo
-
-  // if (!seo || typeof seo !== 'object' || !seo?.id) {
-  //   return null
-  // }
-
-  // const metaData = await getMetaData(seo?.id, lang)
-
-  // console.log(metaData?.openGraph?.images)
-
-  return {}
+  return metaData
 }
 
 const schema = z.array(

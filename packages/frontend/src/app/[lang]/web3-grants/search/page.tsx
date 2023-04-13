@@ -1,17 +1,20 @@
 import { TanstackTable } from '@components/table/tanstack-table'
 import { grantColumns } from '@components/web3-grants/search/grant-columns'
 import directus, { getMetaData } from '@lib/directus'
+import { Metadata } from 'next'
 import { z } from 'zod'
 
 export const revalidate = 60
 
-export const generateMetadata = async ({ params }: { params: { slug: string; lang: string } }) => {
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { slug: string; lang: string }
+}): Promise<Metadata> => {
   const { lang } = params
 
   // TODO: get the id from directus
-  const metaData = await getMetaData(4, lang)
-
-  // console.log(metaData?.openGraph?.images)
+  const metaData = (await getMetaData(4, lang)) as Metadata
 
   return metaData
 }

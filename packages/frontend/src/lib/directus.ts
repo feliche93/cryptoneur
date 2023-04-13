@@ -32,7 +32,7 @@ export const getMetaData = cache(async (id: number, lang: string) => {
     })
 
     if (!data) {
-        return null
+        throw new Error(`No seo data found for id ${id}`)
     }
 
     const translation = data.translations?.[0]
