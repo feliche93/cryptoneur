@@ -210,6 +210,11 @@ export function Filter({ column, table, className }: FilterProps) {
     )
   }
 
+  if (typeof firstValue === 'object') {
+    console.log('object', firstValue)
+    return null
+  }
+
   return (
     <div className="sm:col-span-1 md:col-span-2 lg:col-span-3">
       <datalist id={column.id + 'list'}>

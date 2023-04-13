@@ -24,7 +24,7 @@ export const grantColumns = [
       </TableHeader>
     ),
     cell: (info) => (
-      <TableCell className="">
+      <TableCell className="w-40">
         <Image
           src={getAssetUrl(info.cell.row.original.logo)}
           alt={info.cell.row.original.translations.name}
@@ -53,6 +53,27 @@ export const grantColumns = [
     ),
     filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
   }),
+  grantColumnHelper.accessor('grant_categories', {
+    header: (info) => (
+      <TableHeader
+        isSorted={info.header.column.getIsSorted()}
+        getToggleSortingHandler={info.header.column.getToggleSortingHandler()}
+      >
+        Category
+      </TableHeader>
+    ),
+    cell: (info) => (
+      <TableCell className="whitespace-normal">
+        <>
+          {info.cell.row.original.grant_categories.map((category, index) => (
+            <div key={`${index}-${info.row.original.id}`} className="flex flex-row space-y-4">
+              <span className="text-sm">{category}</span>
+            </div>
+          ))}
+        </>
+      </TableCell>
+    ),
+  }),
   grantColumnHelper.accessor('grant_blockchains', {
     header: (info) => (
       <TableHeader
@@ -67,7 +88,7 @@ export const grantColumns = [
         <>
           {info.cell.row.original.grant_blockchains.map((blockchain, index) => (
             <div key={`${index}-${info.row.original.id}`} className="flex flex-row space-y-4">
-              <span className="text-sm">{blockchain.web3_blockchains_id.name}</span>
+              <span className="text-sm">{blockchain}</span>
             </div>
           ))}
         </>
@@ -89,7 +110,7 @@ export const grantColumns = [
         <>
           {info.cell.row.original.grant_use_cases.map((useCase, index) => (
             <div key={`${index}-${info.row.original.id}`} className="flex flex-row space-y-4">
-              <span className="text-sm">{useCase.web3_use_cases_id.translations.name}</span>
+              <span className="text-sm">{useCase}</span>
             </div>
           ))}
         </>
@@ -133,7 +154,6 @@ export const grantColumns = [
         ) : null}
       </TableCell>
     ),
-    filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
   }),
   grantColumnHelper.accessor('funding_maximum', {
     header: (info) => (
@@ -158,7 +178,6 @@ export const grantColumns = [
         ) : null}
       </TableCell>
     ),
-    filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
   }),
   grantColumnHelper.display({
     id: 'detail',
@@ -203,11 +222,20 @@ export const grantColumns = [
                 {info.cell.row.original.translations.name}
               </div>
 
+              {/* Categories row */}
+              <div className="flex flex-row flex-wrap gap-1">
+                {info.cell.row.original.grant_categories.map((category, index) => (
+                  <div key={`${index}-${info.row.original.id}`} className="badge-accent badge">
+                    <span className="text-sm">{category}</span>
+                  </div>
+                ))}
+              </div>
+
               {/* Blockchains row */}
               <div className="flex flex-row flex-wrap gap-1">
                 {info.cell.row.original.grant_blockchains.map((blockchain, index) => (
                   <div key={`${index}-${info.row.original.id}`} className="badge-primary badge">
-                    <span className="text-sm">{blockchain.web3_blockchains_id.name}</span>
+                    <span className="text-sm">{blockchain}</span>
                   </div>
                 ))}
               </div>
@@ -216,7 +244,7 @@ export const grantColumns = [
               <div className="flex flex-row flex-wrap gap-1">
                 {info.cell.row.original.grant_use_cases.map((useCase, index) => (
                   <div key={`${index}-${info.row.original.id}`} className="badge-secondary badge">
-                    <span className="text-sm">{useCase.web3_use_cases_id.translations.name}</span>
+                    <span className="text-sm">{useCase}</span>
                   </div>
                 ))}
               </div>
@@ -279,7 +307,7 @@ export const grantColumns = [
             </div>
           </div>
           {/* Info Button */}
-          <div className="pr-2">
+          <div className="px-2">
             <Link href={`/web3-grants/${info.cell.row.original.slug}`}>
               <ArrowTopRightOnSquareIcon className="h-5 w-5 text-primary" aria-hidden="true" />
             </Link>
