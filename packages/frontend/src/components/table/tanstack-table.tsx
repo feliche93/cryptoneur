@@ -11,6 +11,7 @@ import {
   getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
+  getPaginationRowModel,
 } from '@tanstack/react-table'
 import { useEffect, useState } from 'react'
 import { fuzzyFilter } from './filter-functions'
@@ -73,6 +74,7 @@ export const TanstackTable = <TData,>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
+    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (
