@@ -24,15 +24,26 @@ export const DirectusImage: FC<DirectusImageProps> = async ({
 
   const { title, width, height, id: fileId } = file
 
-  if (!title || !width || !height || !fileId) {
-    console.error('Invalid file format', file)
-    return <></>
-    throw new Error('Invalid file format')
-  }
-
   const src = getAssetUrl(fileId)
 
   if (!src) {
+    return <></>
+  }
+
+  if (!title || !width || !height || !fileId) {
+    if (heightProp && widthProp) {
+      return (
+        <Image
+          className={className}
+          priority={priority}
+          alt={title}
+          src={src}
+          width={widthProp ?? width}
+          height={heightProp ?? height}
+        />
+      )
+    }
+
     return <></>
   }
 

@@ -87,13 +87,26 @@ export const generateMetadata = async ({ params }: { params: { slug: string; lan
   return metadata
 }
 
-const grantDataSchema = z.array(z.object({ slug: z.string(), id: z.number() }))
+const grantDataSchema = z.array(
+  z.object({
+    slug: z.string(),
+    id: z.number(),
+    translations: z
+      .array(
+        z.object({
+          id: z.number(),
+        }),
+      )
+      .min(1)
+      .transform((translations) => translations[0]),
+  }),
+)
 
 const Web3GrantsDetailPage = async ({ params }: { params: { slug: string; lang: string } }) => {
   const { slug, lang } = params
 
   const { data: grantData } = await directus.items('web3_grants').readByQuery({
-    fields: ['slug', 'id'],
+    fields: ['slug', 'id', 'translations.id'],
     filter: {
       slug: {
         _eq: slug,
@@ -109,7 +122,7 @@ const Web3GrantsDetailPage = async ({ params }: { params: { slug: string; lang: 
     <>
       <main className="py-10">
         {/* Page header */}
-        <Header id={grant.id} lang={lang} />
+        <Header id={grant.translations.id} lang={lang} />
 
         <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2 lg:col-start-1">

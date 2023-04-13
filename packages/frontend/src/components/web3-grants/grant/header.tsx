@@ -1,10 +1,7 @@
 import { DirectusImage } from '@components/shared/directus-image'
-import directus, { isObject } from '@lib/directus'
+import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
-import { getGrantbySlug, strapi } from '@shared/strapi'
-import { createServerClient } from '@utils/supabase-server'
 import dayjs from 'dayjs'
-import Image from 'next/image'
 import { FC } from 'react'
 import { z } from 'zod'
 
@@ -55,6 +52,8 @@ export const Header: FC<BlockType> = async ({ id, lang }) => {
           <DirectusImage
             className="h-16 w-16 rounded-lg object-contain"
             id={parsedGrantData.web3_grants_id.logo}
+            width={64}
+            height={64}
           />
         </div>
         <div>
@@ -67,7 +66,7 @@ export const Header: FC<BlockType> = async ({ id, lang }) => {
           </p>
         </div>
       </div>
-      <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+      <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
         {!!parsedGrantData.web3_grants_id.url_info && (
           <a
             target={'_blank'}
