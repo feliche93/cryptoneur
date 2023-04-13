@@ -102,7 +102,7 @@ const grantSchema = z.object({
   funding_minimum_currency_id: currency.nullish(),
 })
 
-const responseSchema = z.object({
+export const responseSchema = z.object({
   data: z.array(grantSchema),
 })
 
