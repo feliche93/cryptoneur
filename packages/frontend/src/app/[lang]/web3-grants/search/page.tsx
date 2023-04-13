@@ -1,9 +1,20 @@
 import { TanstackTable } from '@components/table/tanstack-table'
 import { grantColumns } from '@components/web3-grants/search/grant-columns'
-import directus from '@lib/directus'
+import directus, { getMetaData } from '@lib/directus'
 import { z } from 'zod'
 
-export const dynamic = 'error'
+export const revalidate = 60
+
+export const generateMetadata = async ({ params }: { params: { slug: string; lang: string } }) => {
+  const { lang } = params
+
+  // TODO: get the id from directus
+  const metaData = await getMetaData(4, lang)
+
+  // console.log(metaData?.openGraph?.images)
+
+  return metaData
+}
 
 const translation = z.object({
   name: z.string(),
@@ -91,7 +102,7 @@ const grantSchema = z.object({
   funding_minimum_currency_id: currency.nullish(),
 })
 
-const responseSchema = z.object({
+export const responseSchema = z.object({
   data: z.array(grantSchema),
 })
 

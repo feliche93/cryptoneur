@@ -1,10 +1,11 @@
 'use client'
 
-
 import { ColumnDef, Table } from '@tanstack/react-table'
-import { Dispatch, FC, SetStateAction } from 'react'
-import { DebouncedInput } from './debounced-input'
-import { Filter } from './filter'
+import React, { Dispatch, FC, SetStateAction } from 'react'
+export const DebouncedInput = React.lazy(() =>
+  import('./debounced-input').then((mod) => ({ default: mod.DebouncedInput })),
+)
+export const Filter = React.lazy(() => import('./filter').then((mod) => ({ default: mod.Filter })))
 
 export interface TableFilterProps<T> {
   table: Table<T>
@@ -69,6 +70,8 @@ export const TableFilters: FC<TableFilterProps<any>> = ({
           onClick={() => {
             table.resetColumnFilters()
             table.resetGlobalFilter()
+            table.resetPageIndex()
+            table.resetPageSize()
           }}
           className="btn-primary btn w-full sm:w-fit"
         >

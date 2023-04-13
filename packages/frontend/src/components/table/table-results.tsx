@@ -8,10 +8,8 @@ export const TableResults: FC<TableResultsProps<any>> = ({ table }) => {
   return (
     <div className="px-6 pt-8 sm:px-0">
       <p className="text-sm font-normal text-primary-focus">
-        <span className="font-bold text-primary">
-          {table.getPrePaginationRowModel().rows.length}
-        </span>{' '}
-        Results found
+        <span className="font-bold text-primary">{table.getRowModel().rows.length}</span> Results
+        found
       </p>
     </div>
   )
