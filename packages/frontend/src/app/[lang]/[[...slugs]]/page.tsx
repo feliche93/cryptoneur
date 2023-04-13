@@ -1,65 +1,31 @@
 // pages/index.tsx
 import { RenderBlock } from '@components/render-block'
-import directus, { fetchPageData, getMetaData, preload } from '@lib/directus'
+import { getMetaData, getPageData } from '@lib/directus'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { z } from 'zod'
 
 export const dynamic = 60
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: { slug: string; lang: string }
-}): Promise<Metadata> => {
-  const { lang } = params
+type PageParams = {
+  slugs?: string[]
+  lang: string
+}
 
-  // TODO: get the id from directus
-  const metaData = (await getMetaData(4, lang)) as Metadata
+export const generateMetadata = async ({ params }: { params: PageParams }): Promise<Metadata> => {
+  const { lang, slugs } = params
+  const slug = slugs ? slugs.join('/') : 'home'
+
+  const page = await getPageData({ slug, lang })
+
+  const metaData = (await getMetaData({ id: page.id, lang })) as Metadata
 
   return metaData
 }
 
-const schema = z.array(
-  z.object({
-    id: z.number(),
-    languages_code: z.string(),
-    slug: z.string(),
-    pages_id: z.object({
-      content: z.array(z.object({ collection: z.string(), item: z.string() })),
-    }),
-  }),
-)
-
-const HomePage = async ({ params }: { params: { slugs?: string[]; lang: string } }) => {
+const HomePage = async ({ params }: { params: PageParams }) => {
   const { slugs, lang } = params
   const slug = slugs ? slugs.join('/') : 'home'
 
-  const { data } = await directus.items('pages_translations').readByQuery({
-    fields: ['*', 'pages_id.content.collection', 'pages_id.content.item'],
-    filter: {
-      _and: [
-        {
-          languages_code: {
-            _starts_with: lang,
-          },
-        },
-        {
-          slug: {
-            _eq: slug,
-          },
-        },
-      ],
-    },
-  })
-
-  const parsedData = schema.parse(data)
-
-  const [page] = parsedData
-
-  if (!page) {
-    notFound()
-  }
+  const page = await getPageData({ slug, lang })
 
   return (
     <>
