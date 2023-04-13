@@ -3,7 +3,7 @@ import { grantColumns } from '@components/web3-grants/search/grant-columns'
 import directus from '@lib/directus'
 import { z } from 'zod'
 
-export const dynamic = 'error'
+export const revalidate = 60
 
 const translation = z.object({
   name: z.string(),
