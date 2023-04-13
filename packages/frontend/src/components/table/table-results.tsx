@@ -7,9 +7,10 @@ export interface TableResultsProps<T> {
 export const TableResults: FC<TableResultsProps<any>> = ({ table }) => {
   return (
     <div className="px-6 pt-8 sm:px-0">
-      <p className="text-sm font-normal text-primary-focus">
-        <span className="font-bold text-primary">{table.getRowModel().rows.length}</span> Results
-        found
+      <p className="text-sm font-normal text-base-content">
+        <span className="font-bold text-base-content">{table.getRowModel().rows.length}</span>{' '}
+        Results displayed out of{' '}
+        <span className="font-bold text-base-content">{table.getCoreRowModel().rows.length}</span>.
       </p>
     </div>
   )

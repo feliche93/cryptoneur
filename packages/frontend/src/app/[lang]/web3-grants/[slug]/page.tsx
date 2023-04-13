@@ -1,4 +1,5 @@
 import { GrantInfoCard } from '@components/web3-grants/grant/grant-info-card'
+import { GrantRfps } from '@components/web3-grants/grant/grant-rfps'
 import { Header } from '@components/web3-grants/grant/header'
 import directus from '@lib/directus'
 import { getAssetUrl } from '@lib/utils'
@@ -129,11 +130,10 @@ const Web3GrantsDetailPage = async ({ params }: { params: { slug: string; lang: 
             {/* Description list*/}
 
             <GrantInfoCard id={grant.id} lang={lang} />
-            {/* <GrantRfps
-        title="RFPs"
-        slug={slug}
-        description="All suggested ideas and projects from grant givers themeselves."
-      /> */}
+            <GrantRfps id={grant.id} lang={lang}
+
+
+            />
           </div>
         </div>
       </main>
