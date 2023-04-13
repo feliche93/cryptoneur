@@ -198,31 +198,12 @@ export const grantColumns = [
               height={40}
             />
             <div className="space-y-2">
-              {/* Second Row with Date */}
-              {/* <div className="flex flex-row space-x-4 text-xs text-base-content/80">
-              <div className="flex items-center">
-                <CalendarDaysIcon
-                  className="mr-1 h-4 w-5 text-base-content/60"
-                  aria-hidden="true"
-                />
-                {info.cell.row.original.date}
-              </div>
-            </div> */}
-              {/* Third Row with Event */}
-              {/* {info.cell.row.original.events?.name && (
-              <div className="flex flex-col text-xs text-base-content/80">
-                <div className="flex items-center">
-                  <MapPinIcon className="mr-1 h-4 w-5 text-base-content/60" aria-hidden="true" />
-                  {info.cell.row.original.events?.name}
-                </div>
-              </div>
-            )} */}
-              {/* Fourth row with description */}
+              {/* Fourth Name Row */}
               <div className="text-sm text-base-content">
                 {info.cell.row.original.translations.name}
               </div>
 
-              {/* First Row with label */}
+              {/* Blockchains row */}
               <div className="flex flex-row flex-wrap gap-1">
                 {info.cell.row.original.grant_blockchains.map((blockchain, index) => (
                   <div key={`${index}-${info.row.original.id}`} className="badge-primary badge">
@@ -231,6 +212,7 @@ export const grantColumns = [
                 ))}
               </div>
 
+              {/* Use Cases Row */}
               <div className="flex flex-row flex-wrap gap-1">
                 {info.cell.row.original.grant_use_cases.map((useCase, index) => (
                   <div key={`${index}-${info.row.original.id}`} className="badge-secondary badge">
@@ -239,6 +221,7 @@ export const grantColumns = [
                 ))}
               </div>
 
+              {/* Funding Row */}
               <div className="text-primary">
                 <div className="flex items-center">
                   {info.cell.row.original?.funding_minimum &&
@@ -295,6 +278,7 @@ export const grantColumns = [
               </div>
             </div>
           </div>
+          {/* Info Button */}
           <div className="pr-2">
             <Link href={`/web3-grants/${info.cell.row.original.slug}`}>
               <ArrowTopRightOnSquareIcon className="h-5 w-5 text-primary" aria-hidden="true" />
