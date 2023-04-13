@@ -7,8 +7,10 @@ import { TableCell } from '@components/table/table-cell'
 import { TableHeader } from '@components/table/table-header'
 import { buttonVariants } from '@components/ui/button'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
+import { getAssetUrl } from '@lib/utils'
 import { createColumnHelper } from '@tanstack/react-table'
 import { currencyFormatter } from '@utils/helpers'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const grantColumnHelper = createColumnHelper<Grant>()
@@ -25,13 +27,12 @@ export const grantColumns = [
     ),
     cell: (info) => (
       <TableCell className="whitespace-normal">
-        {/* {info.cell.row.original.logo && (
-          <DirectusImage
-            priority={false}
-            id={info.cell.row.original.logo}
-            className="aspect-square h-12 w-auto object-contain"
-          />
-        )} */}
+        <Image
+          src={getAssetUrl(info.cell.row.original.logo)}
+          alt={info.cell.row.original.translations.name}
+          width={55}
+          height={55}
+        />
       </TableCell>
     ),
     // filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
@@ -45,7 +46,13 @@ export const grantColumns = [
         Grant Name
       </TableHeader>
     ),
-    cell: (info) => <TableCell className="whitespace-normal">{info.cell.getValue()}</TableCell>,
+    cell: (info) => (
+      <TableCell className="whitespace-normal">
+        <Link className="link" href={`/web3-grants/${info.cell.row.original.slug}`}>
+          {info.cell.getValue()}
+        </Link>
+      </TableCell>
+    ),
     filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
   }),
   grantColumnHelper.accessor('grant_blockchains', {

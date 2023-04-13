@@ -50,8 +50,8 @@ export const BlockExternalLink: FC<BlockType> = async ({ id, lang }) => {
 
   return (
     <Link
-      // rel={parsedData.rel ?? undefined}
-      // target={parsedData.target ?? undefined}
+      rel={parsedData.rel ?? undefined}
+      target={parsedData.target ?? undefined}
       className={buttonVariants({
         variant: parsedData.button.variant as any,
         size: parsedData.button.size as any,
