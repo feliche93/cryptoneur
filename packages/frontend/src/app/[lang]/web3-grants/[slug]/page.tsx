@@ -55,6 +55,15 @@ export const generateMetadata = async ({ params }: { params: { slug: string; lan
   const description = shortenDescription(grant.translations.description, 160)
   const title = `Web3 Crunchbase - ${grant.translations.name}`
 
+  const images = [
+    {
+      url: getAssetUrl(grant.logo),
+      width: 1200,
+      height: 630,
+      alt: grant.translations.name,
+    },
+  ]
+
   // example image url
   // https://directus.cryptoneur.xyz/assets/1ac73658-8b62-4dea-b6da-529fbc9d01a4?fit=contain&width=1200&height=630&quality=80
 
@@ -66,27 +75,38 @@ export const generateMetadata = async ({ params }: { params: { slug: string; lan
       title,
       description,
       locale: lang,
-      images: [
-        {
-          url: getAssetUrl(grant.logo),
-          width: 1200,
-          height: 630,
-          alt: grant.translations.name,
-        },
-      ],
+      images,
+    },
+    twitter: {
+      title,
+      description,
+      images,
     },
   }
 
   return metadata
 }
 
-const grantDataSchema = z.array(z.object({ slug: z.string(), id: z.number() }))
+const grantDataSchema = z.array(
+  z.object({
+    slug: z.string(),
+    id: z.number(),
+    translations: z
+      .array(
+        z.object({
+          id: z.number(),
+        }),
+      )
+      .min(1)
+      .transform((translations) => translations[0]),
+  }),
+)
 
 const Web3GrantsDetailPage = async ({ params }: { params: { slug: string; lang: string } }) => {
   const { slug, lang } = params
 
   const { data: grantData } = await directus.items('web3_grants').readByQuery({
-    fields: ['slug', 'id'],
+    fields: ['slug', 'id', 'translations.id'],
     filter: {
       slug: {
         _eq: slug,
@@ -102,7 +122,7 @@ const Web3GrantsDetailPage = async ({ params }: { params: { slug: string; lang: 
     <>
       <main className="py-10">
         {/* Page header */}
-        <Header id={grant.id} lang={lang} />
+        <Header id={grant.translations.id} lang={lang} />
 
         <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2 lg:col-start-1">
