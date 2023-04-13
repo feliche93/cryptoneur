@@ -130,7 +130,6 @@ export const grantColumns = [
       </TableHeader>
     ),
     cell: (info) => <TableCell className="text-right">{info.cell.row.original.rfps}</TableCell>,
-    filterFn: (rows, id, filterValue, meta) => isWithinRange(rows, id, filterValue, meta),
   }),
   grantColumnHelper.accessor('funding_minimum', {
     header: (info) => (
