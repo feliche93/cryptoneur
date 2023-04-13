@@ -55,6 +55,14 @@ export const getMetaData = cache(async (id: number, lang: string) => {
         }
     })
 
+    const twitter: Metadata["twitter"] = {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: openGraphImages
+
+    }
+
     const openGraph: Metadata["openGraph"] = {
         title,
         description,
@@ -66,6 +74,7 @@ export const getMetaData = cache(async (id: number, lang: string) => {
         title,
         description,
         openGraph,
+        twitter
     }
 
     return metadata

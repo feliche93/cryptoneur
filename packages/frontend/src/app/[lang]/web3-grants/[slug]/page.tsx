@@ -55,6 +55,15 @@ export const generateMetadata = async ({ params }: { params: { slug: string; lan
   const description = shortenDescription(grant.translations.description, 160)
   const title = `Web3 Crunchbase - ${grant.translations.name}`
 
+  const images = [
+    {
+      url: getAssetUrl(grant.logo),
+      width: 1200,
+      height: 630,
+      alt: grant.translations.name,
+    },
+  ]
+
   // example image url
   // https://directus.cryptoneur.xyz/assets/1ac73658-8b62-4dea-b6da-529fbc9d01a4?fit=contain&width=1200&height=630&quality=80
 
@@ -66,14 +75,12 @@ export const generateMetadata = async ({ params }: { params: { slug: string; lan
       title,
       description,
       locale: lang,
-      images: [
-        {
-          url: getAssetUrl(grant.logo),
-          width: 1200,
-          height: 630,
-          alt: grant.translations.name,
-        },
-      ],
+      images,
+    },
+    twitter: {
+      title,
+      description,
+      images,
     },
   }
 
