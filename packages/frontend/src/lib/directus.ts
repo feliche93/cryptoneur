@@ -61,7 +61,7 @@ type GetMetadataParams = {
     lang: string
 }
 
-export const getMetaData = cache(async (params: GetMetadata) => {
+export const getMetaData = cache(async (params: GetMetadataParams) => {
     const { id, lang } = params
 
     const data = await directus.items('seo').readOne(id, {
@@ -132,6 +132,7 @@ const ContentSchema = z.object({
 
 const PagesIdSchema = z.object({
     content: z.array(ContentSchema),
+    seo: z.number(),
 });
 
 const PagesTranslationsSchema = z.array(
@@ -154,7 +155,7 @@ export const getPageData = cache(async (params: getPageDataParams) => {
     const { slug, lang } = params
 
     const { data } = await directus.items('pages_translations').readByQuery({
-        fields: ['*', 'pages_id.content.collection', 'pages_id.content.item'],
+        fields: ['*', 'pages_id.content.collection', 'pages_id.content.item', 'pages_id.seo'],
         filter: {
             _and: [
                 {

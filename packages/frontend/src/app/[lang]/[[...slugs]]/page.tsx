@@ -16,7 +16,7 @@ export const generateMetadata = async ({ params }: { params: PageParams }): Prom
 
   const page = await getPageData({ slug, lang })
 
-  const metaData = (await getMetaData({ id: page.id, lang })) as Metadata
+  const metaData = (await getMetaData({ id: page.pages_id.seo, lang })) as Metadata
 
   return metaData
 }

@@ -18,10 +18,7 @@ export const revalidate = 300
 export const generateMetadata = async ({ params }: { params: { slug: string; lang: string } }) => {
   const { lang } = params
 
-  // TODO: get the id from directus
-  const metaData = await getMetaData(1, lang)
-
-  // console.log(metaData?.openGraph?.images)
+  const metaData = await getMetaData({ id: 1, lang })
 
   return metaData
 }

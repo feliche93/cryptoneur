@@ -9,12 +9,11 @@ export const revalidate = 60
 export const generateMetadata = async ({
   params,
 }: {
-  params: { slug: string; lang: string }
+  params: { lang: string }
 }): Promise<Metadata> => {
   const { lang } = params
 
-  // TODO: get the id from directus
-  const metaData = (await getMetaData(4, lang)) as Metadata
+  const metaData = (await getMetaData({ id: 4, lang })) as Metadata
 
   return metaData
 }
