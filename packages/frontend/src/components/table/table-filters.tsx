@@ -1,6 +1,5 @@
 'use client'
 
-
 import { ColumnDef, Table } from '@tanstack/react-table'
 import { Dispatch, FC, SetStateAction } from 'react'
 import { DebouncedInput } from './debounced-input'
@@ -69,6 +68,8 @@ export const TableFilters: FC<TableFilterProps<any>> = ({
           onClick={() => {
             table.resetColumnFilters()
             table.resetGlobalFilter()
+            table.resetPageIndex()
+            table.resetPageSize()
           }}
           className="btn-primary btn w-full sm:w-fit"
         >
