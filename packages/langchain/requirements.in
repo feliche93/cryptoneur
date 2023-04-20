@@ -1,9 +1,7 @@
 python-dotenv
 pendulum
-prefect
 clean-text[gpl]
 python-dotenv
-langdetect
 pytest-playwright
 supabase
 playwright-stealth
@@ -11,5 +9,7 @@ modal-client
 pandas
 beautifulsoup4
 gender-guesser
-pyairtable
-markdownify
+langchain
+kor
+selenium
+unstructured
