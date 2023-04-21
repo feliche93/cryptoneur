@@ -6,7 +6,7 @@ const apiKey = process.env.DEEPL_API_KEY;
 const deepLUrl = 'https://api-free.deepl.com/v2/translate';
 const directusApiKey = process.env.DIRECTUS_API_KEY;
 
-export const schema = z.object({
+const payloadSchema = z.object({
     event: z.string(),
     accountability: z.object({ user: z.string().uuid(), role: z.string().uuid() }),
     payload: z.object({
@@ -19,8 +19,10 @@ export const schema = z.object({
     collection: z.string()
 });
 
+type Payload = z.infer<typeof payloadSchema>;
+
 // Define the DeepL Translation Result schema
-const TranslationResultSchema = z.object({
+const translationResultSchema = z.object({
     translations: z.array(
         z.object({
             detected_source_language: z.string(),
@@ -29,7 +31,7 @@ const TranslationResultSchema = z.object({
     ),
 });
 
-type TranslationResult = z.infer<typeof TranslationResultSchema>;
+type TranslationResult = z.infer<typeof translationResultSchema>;
 
 const translate = async (
     text: string,
@@ -54,9 +56,9 @@ const translate = async (
     });
 
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
+    // console.log(jsonResponse);
 
-    const result = TranslationResultSchema.parse(jsonResponse);
+    const result = translationResultSchema.parse(jsonResponse);
 
     return result.translations[0].text;
 };
@@ -75,7 +77,10 @@ const translateObject = async (
     return translatedObj;
 };
 
-const getDirectusItemId = async (collection: string, targetLang: string) => {
+const getDirectusItemId = async (
+    collection: string,
+    targetLang: string
+): Promise<number | null> => {
     const { data } = await directus.items(collection).readByQuery({
         fields: "id",
         filter: {
@@ -96,8 +101,10 @@ const getDirectusItemId = async (collection: string, targetLang: string) => {
     return null
 }
 
-const getExistingItemTranslation = async (collection: string, id: string | number) => {
-
+const getExistingItemTranslation = async (
+    collection: string,
+    id: string | number
+): Promise<Record<string, any>> => {
     const data = await directus.items(collection).readOne(id);
 
     if (!data) {
@@ -114,19 +121,20 @@ export async function POST(request: Request) {
     // console.log(JSON.stringify({ body }));
 
     // Parse body
-    const parsedBody = schema.parse(body)
+    const parsedBody = payloadSchema.parse(body)
     // console.log(JSON.stringify({ parsedBody }));
 
 
-    const { event, accountability, payload, collection } = parsedBody;
+    const { payload, collection } = parsedBody;
     const { languages_code, id, ...keysToTranslate } = payload;
 
-    const filteredKeysToTranslate = Object.entries(keysToTranslate).reduce((acc, [key, value]) => {
+    const filteredKeysToTranslate = Object.entries(keysToTranslate).reduce<Record<string, any>>((acc, [key, value]) => {
         if (value !== null) {
             acc[key] = value;
         }
         return acc;
     }, {});
+
 
     if (
         languages_code === undefined ||
@@ -140,15 +148,18 @@ export async function POST(request: Request) {
 
 
     // SET API KEY FOR ADMIN ACCESS
+    if (!directusApiKey) throw new Error("No Directus API key found")
+
     await directus.auth.static(directusApiKey)
 
-    const targetLang = 'zh-CN'; // Replace with the desired target language code
+    const targetLang = 'fr-FR'; // Replace with the desired target language code
 
     const targetId = await getDirectusItemId(parsedBody.collection, targetLang)
 
-    if (targetId === null && id !== undefined) {
+    if (targetId === null) {
+        if (id === undefined) throw new Error("Target language not found, but id is defined")
         const existingTranslation = await getExistingItemTranslation(parsedBody.collection, id)
-        const filteredExistingTranslation = Object.entries(existingTranslation).reduce((acc, [key, value]) => {
+        const filteredExistingTranslation = Object.entries(existingTranslation).reduce<Record<string, any>>((acc, [key, value]) => {
             if (value !== null) {
                 acc[key] = value;
             }
@@ -175,14 +186,14 @@ export async function POST(request: Request) {
     const translatedKeys = await translateObject(filteredKeysToTranslate, sourceLang, targetLang);
 
     // Create an updated translation object with non-null values from translatedKeys
-    const updatedTranslation = Object.entries(translatedKeys).reduce((acc, [key, value]) => {
+    const updatedTranslation = Object.entries(translatedKeys).reduce<Record<string, any>>((acc, [key, value]) => {
         if (value !== null && existingTranslation[key] === null) {
             acc[key] = value;
         }
         return acc;
     }, {});
 
-    console.log(JSON.stringify({ updatedTranslation }));
+    // console.log(JSON.stringify({ updatedTranslation }));
 
     const response = await directus.items(collection).updateOne(targetId, {
         ...updatedTranslation,
