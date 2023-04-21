@@ -41,6 +41,7 @@ export const NavLinks: FC<NavLinksProps> = ({ links, mobile }) => {
     )?.slug
 
     if (!localizedSlug) {
+      console.log({ translations, language })
       throw new Error('No localized slug found')
     }
 

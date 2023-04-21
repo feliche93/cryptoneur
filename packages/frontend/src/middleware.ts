@@ -7,7 +7,7 @@ import { i18n } from '../i18n-config'
 
 export const runtime = 'nodejs'; // 'nodejs' (default) | 'experimental-edge'
 
-function getLocale(request: NextRequest): string | undefined {
+function getLocale(request: NextRequest, pageLanguages: string[]): string | undefined {
   // Negotiator expects plain object so we need to transform headers
   const negotiatorHeaders: Record<string, string> = {}
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
@@ -21,8 +21,12 @@ function getLocale(request: NextRequest): string | undefined {
   const locales: string[] = i18n.locales.slice()
   console.log('Available locales:', locales)
 
+  // Filter the supported locales based on the available languages for the page
+  const supportedLocales = locales.filter((locale) => pageLanguages.includes(locale))
+  console.log('Supported locales for the page:', supportedLocales)
+
   try {
-    return matchLocale(languages, locales, i18n.defaultLocale)
+    return matchLocale(languages, supportedLocales, i18n.defaultLocale)
   } catch (error) {
     console.error('Error matching locale:', error)
     return i18n.defaultLocale
@@ -60,7 +64,14 @@ export async function middleware(req: NextRequest) {
 
   // Let's redirect if there is no locale
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(req)
+
+    let pageLanguages = ['en']
+
+    if (pathname.includes('/gas-fees-calculator')) {
+      pageLanguages = ['en', 'zh']
+    }
+
+    const locale = getLocale(req, pageLanguages)
 
     return NextResponse.redirect(new URL(`/${locale}/${pathname}`, req.url))
   }
