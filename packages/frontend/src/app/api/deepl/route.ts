@@ -70,25 +70,47 @@ const translateObject = async (
 ): Promise<Record<string, string>> => {
     const translatedObj: Record<string, string> = {};
 
-    for (const key in obj) {
-        translatedObj[key] = await translate(obj[key], sourceLang, targetLang);
-    }
+    await Promise.all(Object.entries(obj).map(async ([key, value]) => {
+        translatedObj[key] = await translate(value, sourceLang, targetLang);
+    }));
 
     return translatedObj;
 };
 
+
 const getDirectusItemId = async (
-    collection: string,
+    parsedBody: Payload,
     targetLang: string
 ): Promise<number | null> => {
-    const { data } = await directus.items(collection).readByQuery({
+
+    const idEntry = Object.entries(parsedBody.payload).find(([key]) => key.endsWith('_id'));
+
+    const queryOptions: any = {
         fields: "id",
         filter: {
             languages_code: {
                 _eq: targetLang
             }
         }
-    })
+    };
+
+    if (idEntry) {
+        const [idKey, idValue] = idEntry;
+
+        const deepObject = {
+            [idKey]: {
+                _filter: {
+                    id: {
+                        _eq: idValue
+                    }
+                }
+            }
+        };
+
+        queryOptions.deep = deepObject;
+    }
+
+    const { data } = await directus.items(parsedBody.collection).readByQuery(queryOptions);
 
     if (!data) {
         return null
@@ -102,10 +124,10 @@ const getDirectusItemId = async (
 }
 
 const getExistingItemTranslation = async (
-    collection: string,
+    parsedBody: Payload,
     id: string | number
 ): Promise<Record<string, any>> => {
-    const data = await directus.items(collection).readOne(id);
+    const data = await directus.items(parsedBody.collection).readOne(id);
 
     if (!data) {
         throw new Error("No data found")
@@ -115,17 +137,13 @@ const getExistingItemTranslation = async (
 
 }
 
-export async function POST(request: Request) {
-
-    const body = await request.json();
-    // console.log(JSON.stringify({ body }));
-
-    // Parse body
-    const parsedBody = payloadSchema.parse(body)
-    // console.log(JSON.stringify({ parsedBody }));
-
+const translateContent = async (
+    parsedBody: Payload,
+    targetLang: string // Replace with the desired target language code
+): Promise<NextResponse> => {
 
     const { payload, collection } = parsedBody;
+
     const { languages_code, id, ...keysToTranslate } = payload;
 
     const filteredKeysToTranslate = Object.entries(keysToTranslate).reduce<Record<string, any>>((acc, [key, value]) => {
@@ -134,7 +152,6 @@ export async function POST(request: Request) {
         }
         return acc;
     }, {});
-
 
     if (
         languages_code === undefined ||
@@ -152,13 +169,14 @@ export async function POST(request: Request) {
 
     await directus.auth.static(directusApiKey)
 
-    const targetLang = 'fr-FR'; // Replace with the desired target language code
+    const targetId = await getDirectusItemId(parsedBody, targetLang)
 
-    const targetId = await getDirectusItemId(parsedBody.collection, targetLang)
+    // console.log(JSON.stringify({ targetId }));
 
     if (targetId === null) {
         if (id === undefined) throw new Error("Target language not found, but id is defined")
-        const existingTranslation = await getExistingItemTranslation(parsedBody.collection, id)
+        const existingTranslation = await getExistingItemTranslation(parsedBody, id)
+
         const filteredExistingTranslation = Object.entries(existingTranslation).reduce<Record<string, any>>((acc, [key, value]) => {
             if (value !== null) {
                 acc[key] = value;
@@ -167,7 +185,8 @@ export async function POST(request: Request) {
         }, {});
 
         const translatedKeys = await translateObject(filteredExistingTranslation, sourceLang, targetLang);
-        const response = await directus.items("gas_fees_calculator_translations").createOne({
+
+        const response = await directus.items(parsedBody.collection).createOne({
             ...translatedKeys,
             "id": undefined,
             "languages_code": {
@@ -181,7 +200,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ translatedKeys });
     }
 
-    const existingTranslation = await getExistingItemTranslation(parsedBody.collection, targetId)
+    const existingTranslation = await getExistingItemTranslation(parsedBody, targetId)
 
     const translatedKeys = await translateObject(filteredKeysToTranslate, sourceLang, targetLang);
 
@@ -205,4 +224,30 @@ export async function POST(request: Request) {
     console.log(JSON.stringify({ response }));
 
     return NextResponse.json(response);
+}
+
+export async function POST(request: Request) {
+
+    const body = await request.json();
+
+    // console.log(JSON.stringify({ body }));
+
+    // Parse body
+    const parsedBody = payloadSchema.parse(body)
+    // console.log(JSON.stringify({ parsedBody }));
+
+    const targetLangs = [
+        "de-DE",
+        "es-ES",
+        "fr-FR",
+        "it-IT",
+        "pt-BR",
+        "ru-RU",
+        "zh-CN"
+    ]
+
+    Promise.all(targetLangs.map(async (targetLang) => {
+        await translateContent(parsedBody, targetLang)
+    }
+    ))
 }
