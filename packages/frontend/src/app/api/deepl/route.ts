@@ -1,8 +1,6 @@
-import { Auth, Directus } from '@directus/sdk';
 import directus from '@lib/directus';
-import { DirectusCollections } from '@lib/directus-collections';
 import { NextResponse } from 'next/server';
-import { z } from "zod"
+import { z } from "zod";
 
 const apiKey = process.env.DEEPL_API_KEY;
 const deepLUrl = 'https://api-free.deepl.com/v2/translate';
