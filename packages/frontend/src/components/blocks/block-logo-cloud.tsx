@@ -1,6 +1,7 @@
 import { DirectusImage } from '@components/shared/directus-image'
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
+import Link from 'next/link'
 import { FC } from 'react'
 import { z } from 'zod'
 
@@ -35,11 +36,36 @@ export const BlockLogoCloud: FC<BlockType> = async ({ id, lang }) => {
           {translation.section}
         </p>
         <div className="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3 lg:mt-8">
-          {parsedData.images.map((image, index) => (
-            <div key={index} className="col-span-1 flex justify-center rounded-lg bg-base-100 p-5">
-              <DirectusImage className="h-24 w-auto object-contain" id={image.directus_files_id} />
-            </div>
-          ))}
+          {parsedData.images.map((image, index) => {
+            console.log({ image })
+
+            if (image.directus_files_id === '47903e6e-2b96-44fc-a1dc-79b7e73e7022')
+              return (
+                <Link target={'_blank'} href={'https://moneycoach.ai/'}>
+                  <div
+                    key={index}
+                    className="col-span-1 flex justify-center rounded-lg bg-base-100 p-5"
+                  >
+                    <DirectusImage
+                      className="h-24 w-auto object-contain"
+                      id={image.directus_files_id}
+                    />
+                  </div>
+                </Link>
+              )
+
+            return (
+              <div
+                key={index}
+                className="col-span-1 flex justify-center rounded-lg bg-base-100 p-5"
+              >
+                <DirectusImage
+                  className="h-24 w-auto object-contain"
+                  id={image.directus_files_id}
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>
