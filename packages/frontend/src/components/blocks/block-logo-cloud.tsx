@@ -54,6 +54,36 @@ export const BlockLogoCloud: FC<BlockType> = async ({ id, lang }) => {
                 </Link>
               )
 
+            if (image.directus_files_id === '4da637fc-142e-4e0c-98f8-a7c531c0ca8e')
+              return (
+                <Link target={'_blank'} href={'https://www.giftideasai.xyz/'}>
+                  <div
+                    key={index}
+                    className="col-span-1 flex justify-center rounded-lg bg-base-100 p-5"
+                  >
+                    <DirectusImage
+                      className="h-24 w-auto object-contain"
+                      id={image.directus_files_id}
+                    />
+                  </div>
+                </Link>
+              )
+
+            if (image.directus_files_id === 'e95b6bac-7afe-4a34-ac05-d8e38b0e382d')
+              return (
+                <Link target={'_blank'} href={'https://www.backlinkgpt.com/'}>
+                  <div
+                    key={index}
+                    className="col-span-1 flex justify-center rounded-lg bg-base-100 p-5"
+                  >
+                    <DirectusImage
+                      className="h-24 w-auto object-contain"
+                      id={image.directus_files_id}
+                    />
+                  </div>
+                </Link>
+              )
+
             return (
               <div
                 key={index}
