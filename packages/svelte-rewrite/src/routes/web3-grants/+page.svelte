@@ -1,9 +1,11 @@
 <script lang="ts">
-	import Features from '$components/features.svelte';
 	import Hero from '$components/hero/Hero.svelte';
 	import PersonalNote from '$components/personal-note.svelte';
 	import { BarChart, Bell, Database, Filter, Folder, UserPlus } from 'lucide-svelte';
 	import avatarFelixVemmer from '$lib/images/avatarFelixVemmer.png';
+	import Features from '$components/features.svelte';
+	import * as Accordion from '$lib/components/ui/accordion';
+	import Title from '$ui/Title.svelte';
 
 	let features = [
 		{
@@ -81,3 +83,47 @@
 	personName="Felix Vemmer"
 	personTitle="CEO Cryptoneur.xyz"
 />
+
+<div class="flex flex-col items-center py-8">
+	<h3 class="lg:text-4xl font-bold pt-4 pb-8">Frequently Asked Questions</h3>
+
+	<Accordion.Root class="w-full text-lg sm:max-w-[70%]">
+		<Accordion.Item value="item-1">
+			<Accordion.Trigger>What is your web3 grant platform about?</Accordion.Trigger>
+			<Accordion.Content
+				>Our web3 grant platform is a comprehensive and constantly updated database of web3 grants,
+				making it easy for users to find the perfect funding opportunity for their project. Our
+				advanced filtering options allow users to quickly and easily search for grants by category,
+				blockchain ecosystem, funding amount, or use cases. We also provide valuable data-driven
+				insights on past and successful grant applications, giving users the knowledge they need to
+				increase their chances of success. And with the ability for anyone to contribute and add
+				information, our community is constantly growing and making our database even more complete.</Accordion.Content
+			>
+		</Accordion.Item>
+		<Accordion.Item value="item-2">
+			<Accordion.Trigger>What kind of grants can I find on your platform?</Accordion.Trigger>
+			<Accordion.Content
+				>Our platform offers a wide range of web3 grants that you can filter by category, blockchain
+				ecosystem, funding amount, or use cases.</Accordion.Content
+			>
+		</Accordion.Item>
+		<Accordion.Item value="item-3">
+			<Accordion.Trigger>How do I apply for a grant on your platform?</Accordion.Trigger>
+			<Accordion.Content
+				>The process for applying for a grant on our platform varies depending on the grant. You can
+				find the application instructions for each grant on the grant page.</Accordion.Content
+			>
+		</Accordion.Item>
+		<Accordion.Item value="item-4">
+			<Accordion.Trigger>Is there a cost to use your platform?</Accordion.Trigger>
+			<Accordion.Content>No, our platform is free to use.</Accordion.Content>
+		</Accordion.Item>
+		<Accordion.Item value="item-5">
+			<Accordion.Trigger>Can I contribute to the database?</Accordion.Trigger>
+			<Accordion.Content
+				>Yes, anyone can contribute and add information to our database. This will help to make our
+				database even more complete and accurate.</Accordion.Content
+			>
+		</Accordion.Item>
+	</Accordion.Root>
+</div>
