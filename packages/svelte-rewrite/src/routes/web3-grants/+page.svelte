@@ -1,7 +1,9 @@
 <script lang="ts">
-	import Features from '$lib/compoents/Features.svelte';
+	import Features from '$lib/compoents/features.svelte';
 	import Hero from '$lib/compoents/hero/Hero.svelte';
+	import PersonalNote from '$lib/compoents/personal-note.svelte';
 	import { BarChart, Bell, Database, Filter, Folder, UserPlus } from 'lucide-svelte';
+	import avatarFelixVemmer from '$lib/images/avatarFelixVemmer.png';
 
 	let features = [
 		{
@@ -66,3 +68,16 @@
 		></Title
 	>
 </Features>
+<PersonalNote
+	title="As a web3 entrepreneur, finding the right funding opportunity for your project can be a daunting task."
+	content={`With so many grants available, it can be difficult to navigate and find the ones that align with your specific project and use case. Additionally, a lack of data-driven insights on past and successful grant applications can make the application process even more challenging.
+
+		We understand these challenges and have created a solution. Our web3 grant platform is a comprehensive and constantly updated database of web3 grants, equipped with advanced filtering options and valuable data-driven insights to make the search and application process easier for you.
+
+		But our platform isn't just about providing resources - it's also about building a community. Anyone can contribute and add information to our database, making it even more complete and beneficial for all users.
+
+		As a web3 entrepreneur, I understand the importance of funding and resources for the success of your project. That's why I'm committed to making Cryptoneur's web3 grant platform the go-to destination for anyone looking for funding opportunities in the web3 space.`}
+	personAvatarUrl={avatarFelixVemmer}
+	personName="Felix Vemmer"
+	personTitle="CEO Cryptoneur.xyz"
+/>

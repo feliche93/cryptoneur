@@ -63,6 +63,8 @@
 		"pg": "^8.11.3",
 		"postgres": "^3.3.5",
 		"posthog-js": "^1.77.2",
-		"tailwind-merge": "^1.14.0"
+		"tailwind-merge": "^1.14.0",
+		"tailwind-variants": "^0.1.13",
+		"tailwindcss-animate": "^1.0.6"
 	}
 }

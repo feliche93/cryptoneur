@@ -1,34 +1,21 @@
 <script lang="ts">
-	import Features from '$lib/compoents/Features.svelte';
+	import Features from '$lib/compoents/features.svelte';
 	import Hero from '$lib/compoents/hero/Hero.svelte';
-	import { CheckCircle, Code, FileDownIcon, Mail } from 'lucide-svelte';
+	import { Calculator, CheckCircle, Code, DollarSignIcon, FileDownIcon, Mail } from 'lucide-svelte';
 
 	let features = [
 		{
-			title: 'Zero Coding Experience Required',
+			title: 'Gas Fees Calculator',
 			description:
-				'Dive right in, no coding experience necessary. Just supply the website URL and specify the data you need. Leave the HTML, CSS, and JavaScript to us.',
-			icon: Code
+				'Start calculating gas fees for the biggest networks at different transaction speeds in your own local currency for a variety of blockchain transactions.',
+			icon: Calculator
 		},
 		{
-			title: 'Unbreakable Resilience',
+			title: 'Web3 Grants',
 			description:
 				'Worried about HTML modifications? Fear not. Our robust scraper adjusts and continues to operate effectively, regardless of changes.',
-			icon: CheckCircle
-		},
-		{
-			title: 'Universally Compatible',
-			description:
-				'Say goodbye to constant scraper adjustments. Our technology is equipped to work seamlessly with any new website.',
-			icon: Mail
-		},
-		{
-			title: 'Hassle-Free Data Export',
-			description:
-				'Simple and flexible data export options at your fingertips. Choose from CSV, JSON, or Excel formats for your convenience.',
-			icon: FileDownIcon
+			icon: DollarSignIcon
 		}
-		// More features...
 	];
 </script>
 
