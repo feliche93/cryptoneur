@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import Button from '$ui/Button/Button.svelte';
 	import posthog from 'posthog-js';
-	import '../app.css';
+	import '../app.postcss';
 	import type { LayoutData } from './$types';
 
 	if (browser) {

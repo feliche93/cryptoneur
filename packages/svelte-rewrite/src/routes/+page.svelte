@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Features from '$lib/compoents/features.svelte';
-	import Hero from '$lib/compoents/hero/Hero.svelte';
+	import Features from '$components/features.svelte';
+	import Hero from '$components/hero/Hero.svelte';
 	import { Calculator, CheckCircle, Code, DollarSignIcon, FileDownIcon, Mail } from 'lucide-svelte';
 
 	let features = [

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Hero from '$lib/compoents/hero/Hero.svelte';
+	import Hero from '$components/hero/Hero.svelte';
 	import type { PageData } from './$types';
 	import Gitcoin from './Gitcoin.svelte';
 	import ShareButtons from './ShareButtons.svelte';

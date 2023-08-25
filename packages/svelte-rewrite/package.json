@@ -52,6 +52,7 @@
 		"@lucia-auth/oauth": "^3.0.0",
 		"@melt-ui/svelte": "^0.34.6",
 		"@neondatabase/serverless": "^0.5.7",
+		"bits-ui": "^0.0.33",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
 		"dotenv": "^16.3.1",

@@ -1,12 +1,14 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
-  theme: {
-    extend: {},
-  },
-  plugins: [require('daisyui')],
-  daisyui: {
-    themes: ["light", "dark"],
-  },
-}
+import { fontFamily } from "tailwindcss/defaultTheme";
+import tailwindcssAnimate from "tailwindcss-animate";
 
+/** @type {import('tailwindcss').Config} */
+const config = {
+	content: ["./src/**/*.{html,js,svelte,ts}"],
+
+	plugins: [require('daisyui'), tailwindcssAnimate],
+	daisyui: {
+		themes: ["light", "dark"],
+	},
+};
+
+export default config;

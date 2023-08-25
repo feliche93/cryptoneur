@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Features from '$lib/compoents/features.svelte';
-	import Hero from '$lib/compoents/hero/Hero.svelte';
-	import PersonalNote from '$lib/compoents/personal-note.svelte';
+	import Features from '$components/features.svelte';
+	import Hero from '$components/hero/Hero.svelte';
+	import PersonalNote from '$components/personal-note.svelte';
 	import { BarChart, Bell, Database, Filter, Folder, UserPlus } from 'lucide-svelte';
 	import avatarFelixVemmer from '$lib/images/avatarFelixVemmer.png';
 
