@@ -18,6 +18,7 @@ declare namespace Lucia {
 }
 
 declare module 'svelte-share-buttons-component' {
+
 	export interface EmailProps {
 		subject: string;
 		body: string;

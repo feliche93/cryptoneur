@@ -104,12 +104,13 @@
 		<!-- <pre>
 			{JSON.stringify(user, null, 2)}
 		</pre> -->
-		{#if user}
+		<!-- TODO: Readd user -->
+		<!-- {#if user}
 			<Button href="/sign-out" variant="primaryOutline">Sign Out</Button>
 		{:else}
 			<Button href="/sign-in" variant="primary">Sign In</Button>
 			<Button href="/sign-up" variant="primaryOutline">Sign Up</Button>
-		{/if}
+		{/if} -->
 	</div>
 </div>
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">

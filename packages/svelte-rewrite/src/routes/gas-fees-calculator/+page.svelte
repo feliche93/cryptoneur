@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Hero from '$components/hero/Hero.svelte';
-	import type { PageData } from './$types';
-	import Gitcoin from './Gitcoin.svelte';
-	import ShareButtons from './ShareButtons.svelte';
-
-	export let data: PageData;
+	import CurrencyInput from './currency-input.svelte';
+	import GasPriceInput from './gas-price-input.svelte';
+	import Gitcoin from './gitcoin.svelte';
+	import ShareButtons from './share-buttons.svelte';
+	import UsedGasInput from './used-gas-input.svelte';
 </script>
 
 <Hero let:Title let:Subtitle let:Button>
@@ -21,3 +21,9 @@
 </Hero>
 <Gitcoin />
 <ShareButtons />
+
+<div class="pt-24 space-y-6">
+	<CurrencyInput />
+	<UsedGasInput />
+	<GasPriceInput />
+</div>
