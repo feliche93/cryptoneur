@@ -1,5 +1,3 @@
-import 'server-only'
-
 import Navbar from '@components/layout/navbar'
 import { AnalyticsWrapper } from '@components/shared/analytics'
 import { ToasterWrapper } from '@components/shared/ToasterWrapper'
