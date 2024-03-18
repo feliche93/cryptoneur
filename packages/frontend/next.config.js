@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    appDir: true,
+    ppr: true,
   },
   images: {
     remotePatterns: [
@@ -12,13 +12,17 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: '**',
-      }
+      },
     ],
     dangerouslyAllowSVG: true,
   },
-  typescript: {
-    ignoreBuildErrors: true,
-    // serverComponentsExternalPackages: ['"@supabase/auth-helpers-nextjs'],
+  async rewrites() {
+    return [
+      {
+        source: '/ingest/:path*',
+        destination: 'https://eu.posthog.com/:path*',
+      },
+    ]
   },
 }
 

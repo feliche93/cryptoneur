@@ -1,6 +1,6 @@
 'use client'
 
-import { Grant } from '@app/[lang]/web3-grants/search/page'
+import { Grant } from '@app/[locale]/web3-grants/search/pagege'
 import { isWithinRange } from '@components/table/filter-functions'
 import { TableCell } from '@components/table/table-cell'
 import { TableHeader } from '@components/table/table-header'
