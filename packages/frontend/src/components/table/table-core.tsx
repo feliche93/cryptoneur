@@ -4,7 +4,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/outline'
-import { flexRender, Table } from '@tanstack/react-table'
+import { Table, flexRender } from '@tanstack/react-table'
 import { FC, Fragment } from 'react'
 
 export interface TableCoreProps<T> {

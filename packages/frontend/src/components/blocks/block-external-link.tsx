@@ -1,6 +1,5 @@
 import { buttonVariants } from '@components/ui/button'
 import directus from '@lib/directus'
-import { DirectusCollections } from '@lib/directus-collections'
 import { BlockType } from '@lib/directus.types'
 import Link from 'next/link'
 import { FC } from 'react'

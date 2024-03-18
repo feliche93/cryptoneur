@@ -1,7 +1,6 @@
 import { CalCom } from '@components/cal-com'
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
-import dynamic from 'next/dynamic'
 import { FC } from 'react'
 import { z } from 'zod'
 

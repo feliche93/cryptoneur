@@ -2,10 +2,9 @@
 
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid'
-import { Fragment, useState } from 'react'
-import { useController, useFormContext } from 'react-hook-form'
 import clsx from 'clsx'
-import { ChangeEvent, FC } from 'react'
+import { ChangeEvent, FC, Fragment, useState } from 'react'
+import { useController, useFormContext } from 'react-hook-form'
 
 interface TxnType {
   name: string

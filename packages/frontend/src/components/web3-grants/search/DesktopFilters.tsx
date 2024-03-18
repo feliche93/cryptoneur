@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react'
-import { FieldValues, RegisterOptions, useForm, UseFormRegister } from 'react-hook-form'
+import { FieldValues, UseFormRegister } from 'react-hook-form'
 import { DesktopFilterOption } from './DesktopFilterOption'
 
 export interface DesktopFiltersProps extends PropsWithChildren {

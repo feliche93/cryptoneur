@@ -1,9 +1,9 @@
-import { FC } from 'react'
-import { CheckCircleIcon, ChevronRightIcon, EnvelopeIcon } from '@heroicons/react/20/solid'
-import Image from 'next/image'
-import Link from 'next/link'
+import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { ClockIcon } from '@heroicons/react/24/outline'
 import dayjs from 'dayjs'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FC } from 'react'
 
 export interface GrantCardProps {
   grant: any

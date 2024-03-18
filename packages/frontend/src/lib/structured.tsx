@@ -92,11 +92,7 @@ const authorData: WithContext<Person> = {
   name: 'Felix Vemmer',
   url: siteConfig.url,
   image: siteConfig.logo,
-  sameAs: [
-    siteConfig.links.github,
-    siteConfig.links.linkedin,
-    siteConfig.links.twitter,
-  ],
+  sameAs: [siteConfig.links.github, siteConfig.links.linkedin, siteConfig.links.twitter],
   jobTitle: 'Full-Stack Developer & Indiepreneur',
   worksFor: organizationData,
 }
@@ -123,7 +119,6 @@ export const StructuredData: React.FC = () => {
     />
   )
 }
-
 
 export const BreadCrumbStructuredData = ({
   itemListElement,

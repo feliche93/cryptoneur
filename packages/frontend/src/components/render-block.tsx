@@ -1,15 +1,13 @@
-import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { BlockPageLink } from './blocks/block-page-link'
 import { BlockCalendar } from './blocks/block-calendar'
+import { BlockExternalLink } from './blocks/block-external-link'
+import { BlockFaq } from './blocks/block-faq'
+import { BlockFeatureGrid } from './blocks/block-feature-grid'
 import { BlockFeatures } from './blocks/block-features'
+import { BlockFoundersNote } from './blocks/block-founders-note'
 import { BlockHero } from './blocks/block-hero'
 import { BlockLogoCloud } from './blocks/block-logo-cloud'
-import { BlockExternalLink } from './blocks/block-external-link'
-import { BlockFeatureGrid } from './blocks/block-feature-grid'
-import { BlockFaq } from './blocks/block-faq'
-import { BlockFoundersNote } from './blocks/block-founders-note'
-import { BlockTable } from './blocks/block-table/block-table'
+import { BlockPageLink } from './blocks/block-page-link'
 
 export interface RenderBlockProps {
   block: {

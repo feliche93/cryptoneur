@@ -3,11 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "postbuild": "next-sitemap",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "pnpm concurrently \"contentlayer dev\" \"next dev\"",
+    "build": "pnpm contentlayer build && pnpm next build",
+    "preview": "pnpm next build && pnpm next start",
+    "start": "pnpm next start",
+    "lint": "prettier . --check && pnpm eslint",
+    "lint:fix": "prettier . --write && eslint --fix",
+    "lint:format": "prettier . --write",
+    "type-check": "tsc --pretty --noEmit",
+    "generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
+    "update-pg": "drizzle-kit up:pg --config=drizzle.config.ts",
+    "check": "drizzle-kit check:pg --config=drizzle.config.ts",
+    "drop": "drizzle-kit drop --config=drizzle.config.ts",
+    "generate-content": "pnpm contentlayer build",
+    "generate-posthog-sdk": "npx openapi-typescript-codegen --input ./openapi-specs/posthog.yaml --output ./src/lib/posthog-typescript-sdk --name client --useOptions --client fetch --useUnionTypes",
+    "generate-papierkram-sdk": "npx openapi-typescript-codegen --input https://felixvemmer.papierkram.de/api/v1/api-docs/api/v1/swagger.json --output ./src/lib/papierkram-typescript-sdk --name client --useOptions --client fetch --useUnionTypes",
+    "clean": "rm -rf pnpm-lock.yaml node_modules .next"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.3.2",

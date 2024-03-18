@@ -1,8 +1,8 @@
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
 import { FC } from 'react'
-import { BlockFaqWrapper } from './block-faq-wrapper'
 import { z } from 'zod'
+import { BlockFaqWrapper } from './block-faq-wrapper'
 
 const schema = z.object({
   translations: z.array(

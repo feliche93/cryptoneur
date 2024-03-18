@@ -1,30 +1,25 @@
 import {
-  GlobeAltIcon,
-  ArrowUpCircleIcon,
-  ArrowDownCircleIcon,
-  ClockIcon,
-} from "@heroicons/react/24/outline";
-import {
   activeUsers,
   activeUsers30Days,
   averageSessionDuration30Days,
   runReport,
-} from "@/lib/analytics";
+} from '@/lib/analytics'
+import {
+  ArrowDownCircleIcon,
+  ArrowUpCircleIcon,
+  ClockIcon,
+  GlobeAltIcon,
+} from '@heroicons/react/24/outline'
 
-export const revalidate = 60 * 60 * 1; // 24 hours
-
-import React from "react";
+export const revalidate = 60 * 60 * 1 // 24 hours
 
 export default async function WebsiteStats() {
-  const [
-    activeUsers30DaysData,
-    activeUsersData,
-    averageSessionDuration30DaysData,
-  ] = await Promise.all([
-    runReport(activeUsers30Days),
-    runReport(activeUsers),
-    runReport(averageSessionDuration30Days),
-  ]);
+  const [activeUsers30DaysData, activeUsersData, averageSessionDuration30DaysData] =
+    await Promise.all([
+      runReport(activeUsers30Days),
+      runReport(activeUsers),
+      runReport(averageSessionDuration30Days),
+    ])
 
   return (
     <div className="relative pt-16 sm:pt-24 lg:pt-32">
@@ -43,9 +38,7 @@ export default async function WebsiteStats() {
               <GlobeAltIcon className="h-5 w-5 text-secondary" />
               <h2>Website Visits</h2>
             </div>
-            <p className="bg-base-300 rounded-full px-2 py-1 text-sm h-fit text-center">
-              Lifetime
-            </p>
+            <p className="bg-base-300 rounded-full px-2 py-1 text-sm h-fit text-center">Lifetime</p>
           </div>
           <p className="font-bold text-4xl py-4">{activeUsersData[0]?.value}</p>
         </div>
@@ -60,9 +53,7 @@ export default async function WebsiteStats() {
               Last 30 days
             </p>
           </div>
-          <p className="font-bold text-4xl py-4">
-            {activeUsers30DaysData[0]?.value}
-          </p>
+          <p className="font-bold text-4xl py-4">{activeUsers30DaysData[0]?.value}</p>
           {activeUsers30DaysData[2]?.value > 0 ? (
             <div className="flex flex-row space-x-2 items-center text-success">
               <ArrowUpCircleIcon className="h-5 w-5 " />
@@ -87,15 +78,13 @@ export default async function WebsiteStats() {
             </p>
           </div>
           <p className="font-bold text-4xl py-4">
-            {averageSessionDuration30DaysData[0]?.value}{" "}
+            {averageSessionDuration30DaysData[0]?.value}{' '}
             <span className=" font-normal text-base">seconds</span>
           </p>
           {averageSessionDuration30DaysData[2]?.value > 0 ? (
             <div className="flex flex-row space-x-2 items-center text-success">
               <ArrowUpCircleIcon className="h-5 w-5 " />
-              <p>{`${averageSessionDuration30DaysData[2]?.value.toFixed(
-                1
-              )} %`}</p>
+              <p>{`${averageSessionDuration30DaysData[2]?.value.toFixed(1)} %`}</p>
             </div>
           ) : (
             <div className="flex flex-row space-x-2 items-center text-error">
@@ -106,5 +95,5 @@ export default async function WebsiteStats() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,10 +1,10 @@
 'use client'
 
+import clsx from 'clsx'
+import { Configuration, OpenAIApi } from 'openai'
 import { FC } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { Configuration, OpenAIApi } from 'openai'
 import { toast } from 'react-hot-toast'
-import clsx from 'clsx'
 
 export interface ApiKeyInputProps {}
 export const ApiKeyInput: FC<ApiKeyInputProps> = () => {

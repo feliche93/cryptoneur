@@ -2,7 +2,6 @@
 
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid'
-import { currencies } from '@lib/gas-fees-calculator'
 import clsx from 'clsx'
 import { Fragment } from 'react'
 import { useController, useFormContext } from 'react-hook-form'

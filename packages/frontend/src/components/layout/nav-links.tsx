@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
 import { Link as LinkItem, MenuProps } from './menu'
-import { navItems } from './nav-items'
 
 export interface NavLinksProps {
   links: MenuProps['links']

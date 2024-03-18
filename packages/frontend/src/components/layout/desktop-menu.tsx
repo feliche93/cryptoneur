@@ -3,7 +3,6 @@ import { Bars4Icon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
-import { DeskltopActionButtons } from './desktop-action-buttons'
 import { MenuProps } from './menu'
 import { NavLinks } from './nav-links'
 

@@ -1,5 +1,4 @@
-import { Button } from '@components/layout/menu'
-import { ButtonProps, buttonVariants } from '@components/ui/button'
+import { buttonVariants } from '@components/ui/button'
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
 import Link from 'next/link'

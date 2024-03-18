@@ -1,8 +1,8 @@
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
 import { FC } from 'react'
-import { BlockIcon } from './block-icon'
 import { z } from 'zod'
+import { BlockIcon } from './block-icon'
 
 const schema = z.object({
   translations: z.array(

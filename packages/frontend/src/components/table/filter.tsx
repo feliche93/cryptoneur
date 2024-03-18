@@ -2,8 +2,8 @@
 
 import { Column, Table } from '@tanstack/react-table'
 import clsx from 'clsx'
-import { useMemo } from 'react'
 import lodash from 'lodash'
+import { useMemo } from 'react'
 import { DebouncedInput } from './debounced-input'
 
 interface FilterProps {

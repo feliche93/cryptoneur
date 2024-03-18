@@ -11,13 +11,11 @@ const featuredTestimonial = {
     name: 'Perjan Duro',
     linkedinUrl: 'https://www.linkedin.com/in/perjanduro/',
     position: 'Co-Founder at MoneyCoach.ai',
-    imageUrl:
-      '/testimonials/perjan_duro.jpeg',
+    imageUrl: '/testimonials/perjan_duro.jpeg',
     logoUrl:
       'https://moneycoach.ai/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmoneycoach-web-logo.ce5031e1.png&w=1920&q=75',
   },
 }
-
 
 const testimonialsData = [
   [
@@ -28,8 +26,7 @@ const testimonialsData = [
           name: 'Julian Richter',
           socialUrl: 'https://www.linkedin.com/in/richter-julian/',
           position: 'Founder at DezentralizedFinance.com',
-          imageUrl:
-            '/testimonials/julian_richter.jpeg',
+          imageUrl: '/testimonials/julian_richter.jpeg',
         },
       },
       {
@@ -58,7 +55,6 @@ const testimonialsData = [
       },
     ],
     [
-
       {
         body: 'Thank you very much for creating this article. I am a beginner with Next.js, and I found your piece extremely helpful. It also led me to explore the rest of your impressive blog 🤩',
         author: {
@@ -77,8 +73,7 @@ const testimonialsData = [
           name: 'Daniel Biene',
           socialUrl: 'https://www.linkedin.com/in/danielbiene/',
           position: 'Digital Entrepreneur',
-          imageUrl:
-            '/testimonials/daniel_biene.jpeg',
+          imageUrl: '/testimonials/daniel_biene.jpeg',
         },
       },
 
@@ -98,16 +93,14 @@ const testimonialsData = [
           name: 'Dorian Develops',
           socialUrl: 'httpshttps://twitter.com/DorianDevelops',
           position: '@DorianDevelops',
-          imageUrl:
-            '/testimonials/dorian_develops.jpeg',
+          imageUrl: '/testimonials/dorian_develops.jpeg',
         },
-      }
+      },
     ],
   ],
 ]
 
-
-interface Testimonial extends PropsWithChildren { }
+interface Testimonial extends PropsWithChildren {}
 
 export default async function Testimonials({ children }: Testimonial) {
   return (

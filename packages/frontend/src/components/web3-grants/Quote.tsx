@@ -1,5 +1,4 @@
 import { GraidentAvatar } from '@components/shared/GradientAvatar'
-import Image from 'next/image'
 import { FC } from 'react'
 
 export interface QuoteProps {

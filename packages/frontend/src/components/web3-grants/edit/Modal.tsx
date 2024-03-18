@@ -1,12 +1,11 @@
 'use client'
 
-import { Fragment, useRef } from 'react'
+import { useSupabase } from '@components/supabase-provider'
 import { Dialog, Transition } from '@headlessui/react'
-import { FC } from 'react'
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-import { useSupabase } from '@components/supabase-provider'
+import { FC, Fragment, useRef } from 'react'
 
 export interface ModalProps {
   primaryButtonLabel: string

@@ -1,14 +1,10 @@
-import { FC } from 'react'
 import {
   BanknotesIcon,
-  BoltIcon,
   ChartBarIcon,
-  DevicePhoneMobileIcon,
-  GlobeAltIcon,
   ListBulletIcon,
-  ScaleIcon,
   TicketIcon,
 } from '@heroicons/react/24/outline'
+import { FC } from 'react'
 
 export const Features: FC = () => {
   const features = [

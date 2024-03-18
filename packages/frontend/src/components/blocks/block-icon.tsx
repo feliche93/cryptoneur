@@ -1,6 +1,6 @@
-import * as Icons from 'react-icons/md'
 import { cn } from '@lib/utils'
 import { FC } from 'react'
+import * as Icons from 'react-icons/md'
 
 export interface BlockProps {
   iconName: string

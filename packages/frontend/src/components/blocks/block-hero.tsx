@@ -3,10 +3,9 @@ import { DirectusImage } from '@components/shared/directus-image'
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
 import { FC } from 'react'
+import { z } from 'zod'
 import { Subtitle } from './subtitle'
 import { Title } from './title'
-import { DirectusCollections } from '@lib/directus-collections'
-import { z } from 'zod'
 
 export const schema = z.object({
   image: z.string().nullable(),

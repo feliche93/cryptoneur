@@ -1,8 +1,8 @@
 'use client'
 
 import { FC } from 'react'
+import { Controller, useFormContext } from 'react-hook-form'
 import Select from 'react-select'
-import { Controller, useForm, useFormContext } from 'react-hook-form'
 
 export interface MatrixSelectProps {}
 

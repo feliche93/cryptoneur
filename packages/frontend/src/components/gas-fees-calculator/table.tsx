@@ -108,8 +108,8 @@ export const Table: FC<TableProps> = ({
                           network.type === 'Layer 1'
                             ? 'bg-accent text-accent-content'
                             : network.type === 'Sidechain'
-                            ? 'bg-primary text-primary-content'
-                            : 'bg-secondary text-secondary-content',
+                              ? 'bg-primary text-primary-content'
+                              : 'bg-secondary text-secondary-content',
                           'inline-flex rounded-full px-2 text-xs font-semibold leading-5',
                         )}
                       >
@@ -186,8 +186,8 @@ export const Table: FC<TableProps> = ({
                           network.type === 'Layer 1'
                             ? 'bg-accent text-accent-content'
                             : network.type === 'Sidechain'
-                            ? 'bg-primary text-primary-content'
-                            : 'bg-secondary text-secondary-content',
+                              ? 'bg-primary text-primary-content'
+                              : 'bg-secondary text-secondary-content',
                           'inline-flex rounded-full px-2 text-xs font-semibold leading-5',
                         )}
                       >

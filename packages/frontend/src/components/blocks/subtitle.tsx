@@ -1,5 +1,5 @@
+import parse, { Element, HTMLReactParserOptions, domToReact } from 'html-react-parser'
 import React from 'react'
-import parse, { domToReact, HTMLReactParserOptions, Element } from 'html-react-parser'
 
 interface SubtitleProps {
   input: string

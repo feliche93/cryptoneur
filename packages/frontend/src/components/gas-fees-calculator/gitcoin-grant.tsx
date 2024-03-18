@@ -1,9 +1,6 @@
-import Image from 'next/image'
-import { FC } from 'react'
-import directus from '@lib/directus'
-import { DirectusCollections } from '@lib/directus-collections'
-import { getAssetUrl } from '@lib/utils'
 import { DirectusImage } from '@components/shared/directus-image'
+import directus from '@lib/directus'
+import { FC } from 'react'
 
 interface Translation {
   gitcoin_title: string

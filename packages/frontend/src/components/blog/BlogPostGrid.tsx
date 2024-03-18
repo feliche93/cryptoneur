@@ -1,6 +1,5 @@
-import React from 'react'
-import { BlogPostCard } from './BlogPostCard'
 import { strapi } from '@/shared/strapi'
+import { BlogPostCard } from './BlogPostCard'
 
 type Props = {}
 

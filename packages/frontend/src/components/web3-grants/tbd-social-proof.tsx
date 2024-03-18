@@ -1,7 +1,6 @@
 'use client'
 
-import { ArrowDownLeftIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { FC } from 'react'
 import { Quote } from './quote'

@@ -3,9 +3,8 @@ import { Post, allAuthors } from 'contentlayer/generated'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, Suspense } from 'react'
-import { Badge } from './ui/badge'
-import { FadeIn } from './ui/fade-in'
 import { PageViews } from './page-views'
+import { Badge } from './ui/badge'
 
 export interface BlogPostGridProps {
   posts: Post[] // replace with your actual Post type
@@ -59,7 +58,7 @@ export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
                     {post.description}
                   </p>
                 </div>
-                <div className='flex flex-row items-center justify-between'>
+                <div className="flex flex-row items-center justify-between">
                   {/* Author */}
                   <div className="relative mt-4 flex items-center gap-x-4">
                     {authors[0]?.avatar && (
@@ -84,7 +83,7 @@ export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
                   </div>
                   {/* Page Views */}
                   <Suspense fallback={null}>
-                    <PageViews className='mt-3 mr-2' slug={post.slug} />
+                    <PageViews className="mt-3 mr-2" slug={post.slug} />
                   </Suspense>
                 </div>
               </div>

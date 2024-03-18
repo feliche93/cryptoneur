@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import Script from 'next/script'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 
 export interface GrantFormTallyProps {
   grant?: any

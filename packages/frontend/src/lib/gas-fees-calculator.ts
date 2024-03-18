@@ -1,55 +1,54 @@
-import "server-only";
+import 'server-only'
 
-
-const API_KEY = process.env.ZAPPER_API_KEY;
-const apiUrl = 'https://api.zapper.fi/v2';
+const API_KEY = process.env.ZAPPER_API_KEY
+const apiUrl = 'https://api.zapper.fi/v2'
 
 const currencies = [
-  "USD",
-  "EUR",
-  "JPY",
-  "GBP",
-  "AUD",
-  "CAD",
-  "CHF",
-  "CNY",
-  "HKD",
-  "NZD",
-  "SEK",
-  "KRW",
-  "SGD",
-  "NOK",
-  "MXN",
-  "INR",
-  "RUB",
-  "ZAR",
-  "TRY",
-  "BRL",
-  "TWD",
-  "DKK",
-  "PLN",
-  "THB",
-  "IDR",
-  "HUF",
-  "CZK",
-  "ILS",
-  "CLP",
-  "PHP",
-  "AED",
-  "COP",
-  "SAR",
-  "MYR",
-  "RON",
-];
+  'USD',
+  'EUR',
+  'JPY',
+  'GBP',
+  'AUD',
+  'CAD',
+  'CHF',
+  'CNY',
+  'HKD',
+  'NZD',
+  'SEK',
+  'KRW',
+  'SGD',
+  'NOK',
+  'MXN',
+  'INR',
+  'RUB',
+  'ZAR',
+  'TRY',
+  'BRL',
+  'TWD',
+  'DKK',
+  'PLN',
+  'THB',
+  'IDR',
+  'HUF',
+  'CZK',
+  'ILS',
+  'CLP',
+  'PHP',
+  'AED',
+  'COP',
+  'SAR',
+  'MYR',
+  'RON',
+]
 
 interface Network {
-  network: string;
-  symbol: string;
-  name: string;
-  coinGeckoId: string;
-  website: string;
-  image: string;
-  type: string;
+  network: string
+  symbol: string
+  name: string
+  coinGeckoId: string
+  website: string
+  image: string
+  type: string
 }
 
 const networks = [
@@ -152,55 +151,45 @@ const networks = [
     image: '/networks/harmony_logo.png',
     type: 'Sidechain',
   },
-];
+]
 
 const fetchFiatRates = async () => {
-  const ids = networks.map(network => network.coinGeckoId).join(',');
-  const vsCurrencies = currencies.join(',');
+  const ids = networks.map((network) => network.coinGeckoId).join(',')
+  const vsCurrencies = currencies.join(',')
 
-  const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`;
+  const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`
 
   try {
-    const response = await fetch(apiUrl,
-      {
-        next: { revalidate: 100 },
-        headers: {
-          'Accept': 'application/json',
-        },
-      });
-    const data = await response.json();
-    return data;
+    const response = await fetch(apiUrl, {
+      next: { revalidate: 100 },
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+    const data = await response.json()
+    return data
   } catch (error) {
-    console.error('Error fetching fiat rates:', error);
-    return null;
+    console.error('Error fetching fiat rates:', error)
+    return null
   }
-};
-
+}
 
 const fetchGasPrices = async () => {
   try {
     const requests = Promise.all(
       networks.map(async ({ network }) => {
-        const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`;
-        const gasPriceResponse = await fetch(url,
-          { next: { revalidate: 300 } }
-        );
-        const data = await gasPriceResponse.json();
-        return data;
-      })
-    );
+        const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`
+        const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } })
+        const data = await gasPriceResponse.json()
+        return data
+      }),
+    )
 
-    const data = await requests;
-    return data;
-
+    const data = await requests
+    return data
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-};
+}
 
-export {
-  fetchFiatRates,
-  fetchGasPrices,
-  networks,
-  currencies
-};
+export { currencies, fetchFiatRates, fetchGasPrices, networks }

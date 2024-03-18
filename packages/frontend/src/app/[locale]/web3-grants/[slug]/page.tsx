@@ -130,10 +130,7 @@ const Web3GrantsDetailPage = async ({ params }: { params: { slug: string; lang: 
             {/* Description list*/}
 
             <GrantInfoCard id={grant.id} lang={lang} />
-            <GrantRfps id={grant.id} lang={lang}
-
-
-            />
+            <GrantRfps id={grant.id} lang={lang} />
           </div>
         </div>
       </main>

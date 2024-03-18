@@ -1,7 +1,5 @@
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@components/ui/Tooltip'
-import { QuestionMarkCircleIcon, QueueListIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { FC, HTMLInputTypeAttribute, InputHTMLAttributes } from 'react'
+import { FC } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 export interface InputFileProps {

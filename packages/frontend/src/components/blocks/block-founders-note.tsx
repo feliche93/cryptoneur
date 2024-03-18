@@ -1,5 +1,4 @@
 import { DirectusImage } from '@components/shared/directus-image'
-import { GraidentAvatar } from '@components/shared/GradientAvatar'
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
 import { FC } from 'react'

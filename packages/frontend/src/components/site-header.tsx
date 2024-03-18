@@ -5,10 +5,10 @@ import { ModeToggle } from '@/components/mode-toggle'
 import { buttonVariants } from '@/components/ui/button'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
+import { AuthClerkHeader } from './auth-clerk-header'
 import { LanguageToggle } from './language-toggle'
 import { MainNav } from './main-nav'
 import { MobileNav } from './mobile-nav'
-import { AuthClerkHeader } from './auth-clerk-header'
 
 export async function SiteHeader() {
   return (

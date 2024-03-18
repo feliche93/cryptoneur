@@ -1,19 +1,18 @@
-"use client";
+'use client'
 
-import Cal, { getCalApi } from "@calcom/embed-react";
-import Script from "next/script";
-import { useEffect } from "react";
+import Cal, { getCalApi } from '@calcom/embed-react'
+import { useEffect } from 'react'
 
 export default function Calendar() {
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi();
-      cal("ui", {
-        theme: "light",
-        styles: { branding: { brandColor: "#000000" } },
-      });
-    })();
-  }, []);
+    ;(async function () {
+      const cal = await getCalApi()
+      cal('ui', {
+        theme: 'light',
+        styles: { branding: { brandColor: '#000000' } },
+      })
+    })()
+  }, [])
 
   return (
     <div className="relative pt-16 sm:pt-24 lg:pt-32">
@@ -51,5 +50,5 @@ export default function Calendar() {
 
       {/* <Cal allowtransparency="true" className='pt-12 w-full h-full overflow-hidden bg-gray-100' calLink="felix-vemmer/30-minute-google-hangout-chat" /> */}
     </div>
-  );
+  )
 }

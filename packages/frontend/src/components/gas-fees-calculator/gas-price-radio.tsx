@@ -1,12 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { RadioGroup } from '@headlessui/react'
-
 import { FC } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
-
-import { FC } from 'react'
 
 export interface GasPriceRadioProps {
   labelStandard: string

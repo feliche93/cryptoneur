@@ -1,11 +1,11 @@
 'use client'
 
-import { useParams, usePathname } from 'next/navigation'
+import { Link } from '@/app/navigation'
 import { navigationConfig } from '@/config/navigation'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { Link } from '@/app/navigation'
+import { useParams, usePathname } from 'next/navigation'
 
 export function MainNav() {
   const pathname = usePathname()
@@ -44,7 +44,6 @@ export function MainNav() {
           )
         })}
       </nav>
-
     </div>
   )
 }

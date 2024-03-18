@@ -4,7 +4,6 @@ import { type OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import { type Twitter } from 'next/dist/lib/metadata/types/twitter-types'
 import { type StaticImageData } from 'next/image'
 
-
 const title = 'Freelance Full-Stack Developer and Indiepreneur based in Berlin'
 const description = `Explore my insights on full-stack development and discover the freelance services I offer, directly from Berlin.`
 
@@ -31,8 +30,7 @@ export const rootMetadata: Metadata = {
   applicationName: 'Felix Vemmer',
   openGraph: rootOpenGraph,
   twitter: rootTwitter,
-  robots:
-    'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large',
+  robots: 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large',
 }
 
 function getImage(image?: StaticImageData | string, alt?: string) {
@@ -68,15 +66,15 @@ export function generatePageMeta({
   siteName = rootOpenGraph.siteName,
   feed,
   keywords = [
-    "Felix Vemmer",
-    "Freelance Software Engineer",
-    "Full-stack developer",
-    "Python",
-    "TypeScript",
-    "Next.js",
-    "React",
-    "Indiepreneur",
-    "Tech Stack",
+    'Felix Vemmer',
+    'Freelance Software Engineer',
+    'Full-stack developer',
+    'Python',
+    'TypeScript',
+    'Next.js',
+    'React',
+    'Indiepreneur',
+    'Tech Stack',
   ],
 }: {
   locale?: string

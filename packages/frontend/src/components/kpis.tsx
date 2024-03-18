@@ -51,12 +51,11 @@ export const Kpis: FC = async () => {
       {/* <pre>{JSON.stringify(pageViewsInsight, null, 2)}</pre> */}
       <Grid numItemsSm={2} numItemsLg={3} className="gap-6 max-w-5xl mx-auto container">
         {categories.map((item) => (
-          <Card key={item.title} className='p-6'>
+          <Card key={item.title} className="p-6">
             <Text>{item.title}</Text>
             <Metric>{item.metric}</Metric>
           </Card>
         ))}
-
       </Grid>
     </>
   )

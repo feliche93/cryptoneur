@@ -1,10 +1,9 @@
 'use client'
 
-import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PlusIcon } from '@heroicons/react/20/solid'
-import { strapi } from '@shared/strapi'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import { Fragment, useState } from 'react'
 
 export default async function CategoryFilters() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)

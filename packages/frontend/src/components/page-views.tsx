@@ -8,17 +8,13 @@ export interface PageViewsProps {
   className?: string
 }
 export const PageViews: FC<PageViewsProps> = async ({ slug, className }) => {
-
   const pageviews = await getTotalPageViewsByPath({ path: slug })
 
   if (!pageviews) return null
 
-  return <div className={
-    cn(
-      'text-sm text-muted-foreground',
-      className
-    )
-  }>
-    <EyeIcon className="h-4 w-4 inline-block" /> {pageviews.toLocaleString()}
-  </div>
+  return (
+    <div className={cn('text-sm text-muted-foreground', className)}>
+      <EyeIcon className="h-4 w-4 inline-block" /> {pageviews.toLocaleString()}
+    </div>
+  )
 }

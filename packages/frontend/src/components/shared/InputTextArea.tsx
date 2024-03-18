@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { FC } from 'react'
-import { FieldValues, useFormContext, UseFormRegister } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 export interface InputTextAreaProps {
   id: string

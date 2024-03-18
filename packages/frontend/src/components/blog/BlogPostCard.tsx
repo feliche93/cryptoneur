@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import { FC } from 'react'
 import dayjs from 'dayjs'
+import Image from 'next/image'
 import Link from 'next/link'
+import { FC } from 'react'
 
 export interface BlogPostCardProps {
   post: any

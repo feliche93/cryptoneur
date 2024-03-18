@@ -1,10 +1,9 @@
 import directus from '@lib/directus'
 import { BlockType } from '@lib/directus.types'
-import { createServerClient } from '@utils/supabase-server'
-import { FC } from 'react'
-import { NoInfo } from './NoInfo'
-import { z } from 'zod'
 import { currencyFormatter } from '@utils/helpers'
+import { FC } from 'react'
+import { z } from 'zod'
+import { NoInfo } from './NoInfo'
 
 const grantTranslationsSchema = z.array(
   z.object({

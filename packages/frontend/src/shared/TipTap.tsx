@@ -1,8 +1,8 @@
 'use client'
 
-import { FC } from 'react'
-import { useEditor, EditorContent } from '@tiptap/react'
+import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import { FC } from 'react'
 
 export const TipTap: FC = () => {
   const editor = useEditor({
