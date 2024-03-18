@@ -15,6 +15,13 @@
       "when": 1710782259136,
       "tag": "0001_aromatic_flatman",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1710782620921,
+      "tag": "0002_sharp_kate_bishop",
+      "breakpoints": true
     }
   ]
 }

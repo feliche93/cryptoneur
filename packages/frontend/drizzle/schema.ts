@@ -1,3 +1,4 @@
+import { sql } from 'drizzle-orm'
 import {
   boolean,
   date,
@@ -66,9 +67,29 @@ export const organizations = pgTable(
   },
   (table) => {
     return {
-      createdByIdx: index('created_by_idx').on(table.createdBy),
-      nameIdx: index('name_idx').on(table.name),
-      slugIdx: index('slug_idx').on(table.slug),
+      createdByIdx: index('organizations_created_by_idx').on(table.createdBy),
+      nameIdx: index('organizations_name_idx').on(table.name),
+      slugIdx: index('organizations_slug_idx').on(table.slug),
+    }
+  },
+)
+
+export const currencies = pgTable(
+  'currencies',
+  {
+    id: text('id')
+      .primaryKey()
+      .default(sql<string>`'cur_' || nanoid()`),
+    name: varchar('name', { length: 256 }).notNull(),
+    symbol: varchar('symbol', { length: 256 }).notNull(),
+    sign: varchar('sign', { length: 256 }).notNull(),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  },
+  (table) => {
+    return {
+      nameIdx: index('currencies_name_idx').on(table.name),
+      symbolIdx: index('currencies_symbol_idx').on(table.symbol),
     }
   },
 )
