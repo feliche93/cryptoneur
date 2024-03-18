@@ -1,0 +1,51 @@
+{
+  "site": {
+    "description": "Felix Vemmers Blog: Ihr Zugang zu Python, TypeScript, Full-Stack-Meisterschaft. Abonnieren Sie für exklusiven Inhalt und werden Sie Teil unserer Lerngemeinschaft!"
+  },
+  "blog": {
+    "title": "Das Neueste von meinem Blog",
+    "subtitle": "Klare Einblicke und praktische Ratschläge zu Python, TypeScript und allem, was mit Full-Stack zu tun hat.",
+    "tocHeading": "Auf dieser Seite"
+  },
+  "index": {
+    "notFound": "Seite nicht gefunden",
+    "hero": {
+      "title": "👋 Willkommen auf meiner persönlichen Webseite",
+      "description": "Hey, ich bin Felix, Full-Stack-Entwickler und Indiepreneur aus Berlin. Hier findest du klare Einblicke und praktische Ratschläge zu Python, TypeScript und allem, was mit Full-Stack zu tun hat.",
+      "primaryCTA": "Beratungsdienste",
+      "secondaryCTA": "Lese meinen Blog"
+    },
+    "skills": {
+      "section": "Fähigkeiten",
+      "title": "Womit kann ich dir helfen?",
+      "description": "Ich bin ein self-taught Developer mit einem CEMS Master in internationalem Management. Dank meiner Kombination aus Geschäftssinn und technischem Verständnis kann ich nicht nur komplexe technische Ideen verständlich vermitteln, sondern diese auch erfolgreich umsetzen."
+    },
+    "testimonials": {
+      "title": "Was Kunden und Leser sagen",
+      "section": "Referenzen"
+    },
+    "bookAMeeeting": {
+      "title": "Interessiert an einer Zusammenarbeit?",
+      "section": "Meeting Buchen"
+    },
+    "blog": {
+      "title": "Das Neueste von meinem Blog",
+      "section": "Blog"
+    }
+  },
+  "components": {
+    "skills": {
+      "tools": "Tools / Frameworks",
+      "languages": "Expertise",
+      "fullstack": {
+        "description": "Ich verwandle deine individuellen Ideen in moderne Web-Anwendungen."
+      },
+      "dataAndAI": {
+        "description": "Ich biete dir Einblicke und helfe dir dabei, skalierbare Datenprodukte und AI Services zu erstellen.        "
+      },
+      "businessAndMarketing": {
+        "description": "Lerne wie du dein aktuelles Geschäft optimieren kannst oder erhalte Feedback zu einer völlig neuen Geschäftsidee."
+      }
+    }
+  }
+}

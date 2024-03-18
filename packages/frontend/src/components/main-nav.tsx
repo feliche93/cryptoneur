@@ -4,7 +4,7 @@ import { Link } from '@/app/navigation'
 import { navigationConfig } from '@/config/navigation'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
+import { Rocket } from 'lucide-react'
 import { useParams, usePathname } from 'next/navigation'
 
 export function MainNav() {
@@ -16,13 +16,7 @@ export function MainNav() {
   return (
     <div className="mr-4 hidden md:flex">
       <Link href="/" className="mr-6 flex items-center space-x-2">
-        <Image
-          src={'/logos/felix-vemmer.png'}
-          priority={true}
-          width={40}
-          height={40}
-          alt="Felix Vemmer"
-        />
+        <Rocket className="w-6 h-6" />
         <span className="hidden font-bold sm:inline-block">{siteConfig.name}</span>
       </Link>
       <nav className="flex items-center space-x-6 text-sm font-medium">

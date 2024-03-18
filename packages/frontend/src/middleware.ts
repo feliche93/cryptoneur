@@ -22,10 +22,8 @@ export default authMiddleware({
     '/:locale/sign-up',
     // blog
     '/:locale/blog/:path*',
-    '/:locale/about',
-    '/:locale/tech-stack',
-    '/:locale/hardware',
-    '/:locale/consulting-services',
+    '/:locale/web3-grants',
+    '/:locale/gas-fees-calculator',
     '/:locale/playground',
   ],
 })

@@ -5,7 +5,7 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 if (!baseUrl) throw new Error('NEXT_PUBLIC_BASE_URL is not defined')
 
 export const siteConfig = {
-  name: 'Felix Vemmer',
+  name: 'Cryptoneur.xyz',
   url: baseUrl,
   logo: absoluteUrl('/logos/felix-vemmer.png'),
   ogImage: absoluteUrl('/og.webp'),

@@ -1,5 +1,4 @@
-import { DirectusImage } from '@components/shared/directus-image'
-import directus from '@lib/directus'
+import Image from 'next/image'
 import { FC } from 'react'
 
 interface Translation {
@@ -13,24 +12,7 @@ interface Data {
   }
 }
 
-// @ts-expect-error Server Component
 export const GitcoinGrant: FC = async () => {
-  const { translations, gitcoin_logo } = (await directus.singleton('gas_fees_calculator').read({
-    fields: ['translations.gitcoin_title', 'gitcoin_logo.id'],
-  })) as unknown as Data
-
-  const translation = translations?.[0]
-
-  if (!translation) {
-    throw new Error('Translation not found')
-  }
-
-  const { gitcoin_title } = translation
-
-  if (typeof gitcoin_title !== 'string') {
-    throw new Error('Invalid translation format')
-  }
-
   return (
     <div>
       <a
@@ -39,8 +21,17 @@ export const GitcoinGrant: FC = async () => {
         rel="noopener noreferrer"
       >
         <div className="flex flex-col items-center">
-          <p className="px-5 pt-5 text-center font-bold">{gitcoin_title}</p>
-          <DirectusImage priority={true} id={gitcoin_logo.id} height={100} width={300} />
+          <p className="px-5 pt-5 text-center font-bold">
+            Support this public good through a Gitcoin Grant:
+          </p>
+          <Image
+            src={'/logos/gitcoinGrant.svg'}
+            alt="GitcoinGrant"
+            priority={true}
+            height={100}
+            width={300}
+            className="dark:bg-primary dark:rounded-lg dark:my-2"
+          />
         </div>
       </a>
     </div>

@@ -3,7 +3,7 @@ import { ThemeProvider } from '@/components/providers'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
-import { Toaster } from '@/components/ui/toaster'
+import { Toaster } from '@/components/ui/sonner'
 import { siteConfig } from '@/config/site'
 import { fontSans } from '@/lib/fonts'
 import { generatePageMeta } from '@/lib/seo'
@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Metadata, Viewport } from 'next'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { unstable_setRequestLocale } from 'next-intl/server'
 import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
 import { locales } from '../../../i18n'
@@ -42,7 +42,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   unstable_setRequestLocale(locale || 'en')
 
-  const t = await getTranslations('site')
+  // const t = await getTranslations('site')
 
   return generatePageMeta({
     locale: locale,
@@ -81,10 +81,6 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
                 <TailwindIndicator />
               </ThemeProvider>
             </PHProvider>
-            {/* <ThemeSwitcher /> */}
-            {/* <Analytics /> */}
-            {/* <NewYorkToaster />
-          <DefaultToaster /> */}
             <Toaster />
           </body>
         </html>

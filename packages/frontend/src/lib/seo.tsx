@@ -4,14 +4,14 @@ import { type OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import { type Twitter } from 'next/dist/lib/metadata/types/twitter-types'
 import { type StaticImageData } from 'next/image'
 
-const title = 'Freelance Full-Stack Developer and Indiepreneur based in Berlin'
-const description = `Explore my insights on full-stack development and discover the freelance services I offer, directly from Berlin.`
+const title = 'Cryptoneur: Empowering Crypto Entrepreneurs'
+const description = `Explore tools like Gas Fees Calculator, discover Web3 Grants, and more for Crypto Entrepreneurs.`
 
 export const rootOpenGraph: OpenGraph = {
   locale: 'en',
   type: 'website',
   url: siteConfig.url,
-  siteName: 'Felix Vemmer',
+  siteName: 'Cryptoneur.xyz',
   title,
   description,
 }
@@ -27,7 +27,7 @@ export const rootMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title,
   description,
-  applicationName: 'Felix Vemmer',
+  applicationName: 'Cryptoneur.xyz',
   openGraph: rootOpenGraph,
   twitter: rootTwitter,
   robots: 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large',
@@ -66,15 +66,15 @@ export function generatePageMeta({
   siteName = rootOpenGraph.siteName,
   feed,
   keywords = [
-    'Felix Vemmer',
-    'Freelance Software Engineer',
-    'Full-stack developer',
-    'Python',
-    'TypeScript',
-    'Next.js',
-    'React',
-    'Indiepreneur',
-    'Tech Stack',
+    'cryptoneur',
+    'cryptoneur.xyz',
+    'crypto',
+    'gas fees',
+    'gas fees calculator',
+    'web3 grants',
+    'web3',
+    'ethereum',
+    'blockchain',
   ],
 }: {
   locale?: string

@@ -12,20 +12,12 @@ export const navigationConfig: NavigationConfig = {
   mainNav: {
     en: [
       {
-        title: 'Blog',
-        href: '/blog',
+        title: 'Web 3 Grants',
+        href: '/web-3-grants',
       },
       {
-        title: 'About',
-        href: '/about',
-      },
-      {
-        title: 'Tech Stack',
-        href: '/tech-stack',
-      },
-      {
-        title: 'Hardware',
-        href: '/hardware',
+        title: 'Gas Fees Calculator',
+        href: '/gas-fees-calculator',
       },
       {
         title: 'GitHub',
@@ -43,30 +35,15 @@ export const navigationConfig: NavigationConfig = {
         external: true,
       },
     ],
+
     de: [
       {
-        title: 'Blog',
-        href: '/blog',
+        title: 'Web 3 Grants',
+        href: '/web-3-grants',
       },
       {
-        title: 'Über mich',
-        href: '/about',
-      },
-      {
-        title: 'Tech Stack',
-        href: '/tech-stack',
-      },
-      {
-        title: 'Hardware',
-        href: '/hardware',
-      },
-      // {
-      //   title: 'Stats',
-      //   href: '/stats',
-      // },
-      {
-        title: 'Consulting Services',
-        href: '/consulting-services',
+        title: 'Gas Fees Calculator',
+        href: '/gas-fees-calculator',
       },
       {
         title: 'GitHub',

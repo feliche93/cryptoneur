@@ -1,27 +1,32 @@
-import { currencies } from '@/lib/gas-fees-calculator'
-import CurrencyInput from '@components/gas-fees-calculator/currency-input'
-import { FeesForm } from '@components/gas-fees-calculator/fees-form'
-import { FeesFormCard } from '@components/gas-fees-calculator/fees-form-card'
-import { GasPriceRadio } from '@components/gas-fees-calculator/gas-price-radio'
-import { GitcoinGrant } from '@components/gas-fees-calculator/gitcoin-grant'
-import { Header } from '@components/gas-fees-calculator/header'
-import { ShareButtons } from '@components/gas-fees-calculator/share-buttons'
-import { Table } from '@components/gas-fees-calculator/table'
-import { UsedGaseInput } from '@components/gas-fees-calculator/used-gas-input'
-import { DirectusImage } from '@components/shared/directus-image'
-import directus, { getMetaData } from '@lib/directus'
-import { fetchFiatRates, fetchGasPrices, networks } from '@lib/gas-fees-calculator'
+// import { GitcoinGrant } from '@components/gas-fees-calculator/gitcoin-grant'
+// import { Header } from '@components/gas-fees-calculator/header'
+// import { ShareButtons } from '@components/gas-fees-calculator/share-buttons'
+// import { getMetaData } from '@lib/directus'
 
-export const dynamic = 'error'
+import { GitcoinGrant } from '@/components/gas-fees-calculator/gitcoin-grant'
+import { ShareButtons } from '@/components/gas-fees-calculator/share-buttons'
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { currencies } from '@/lib/gas-fees-calculator'
+
+// export const dynamic = 'error'
 export const revalidate = 300
 
-export const generateMetadata = async ({ params }: { params: { slug: string; lang: string } }) => {
-  const { lang } = params
+// export const generateMetadata = async ({ params }: { params: { slug: string; lang: string } }) => {
+//   const { lang } = params
 
-  const metaData = await getMetaData({ id: 1, lang })
+//   const metaData = await getMetaData({ id: 1, lang })
 
-  return metaData
-}
+//   return metaData
+// }
 interface Translation {
   header_title: string
   head_subtitle: string
@@ -75,91 +80,150 @@ export interface TranslationTxnType {
 }
 
 const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string } }) => {
-  const { translations, zapper_logo } = (await directus.singleton('gas_fees_calculator').read({
-    fields: ['zapper_logo.id', 'translations.*'],
-    deep: {
-      translations: {
-        _filter: {
-          languages_code: {
-            _starts_with: lang,
-          },
-        },
-      },
-    },
-  })) as DirectusResponse
+  // const { translations, zapper_logo } = (await directus.singleton('gas_fees_calculator').read({
+  //   fields: ['zapper_logo.id', 'translations.*'],
+  //   deep: {
+  //     translations: {
+  //       _filter: {
+  //         languages_code: {
+  //           _starts_with: lang,
+  //         },
+  //       },
+  //     },
+  //   },
+  // })) as DirectusResponse
 
-  const { data: txnTypes } = (await directus.items('gas_fees_calculator_txn_types').readByQuery({
-    fields: ['translations.*', 'gas', 'translations.languages_code'],
-    deep: {
-      translations: {
-        _filter: {
-          languages_code: {
-            _starts_with: lang,
-          },
-        },
-      },
-    },
-  })) as TxnTypes
+  // const { data: txnTypes } = (await directus.items('gas_fees_calculator_txn_types').readByQuery({
+  //   fields: ['translations.*', 'gas', 'translations.languages_code'],
+  //   deep: {
+  //     translations: {
+  //       _filter: {
+  //         languages_code: {
+  //           _starts_with: lang,
+  //         },
+  //       },
+  //     },
+  //   },
+  // })) as TxnTypes
 
-  const transformData = (txnTypes: TxnTypes['data']) => {
-    return txnTypes.map((item) => {
-      const name = item.translations.length > 0 ? item.translations[0].name : 'Standard Transfer'
-      const gas = item.gas
+  // const transformData = (txnTypes: TxnTypes['data']) => {
+  //   return txnTypes.map((item) => {
+  //     const name = item.translations.length > 0 ? item.translations[0].name : 'Standard Transfer'
+  //     const gas = item.gas
 
-      return { name, gas }
-    })
-  }
+  //     return { name, gas }
+  //   })
+  // }
 
-  // Call the transformation function
-  const txnTypesTransformed = transformData(txnTypes)
+  // // Call the transformation function
+  // const txnTypesTransformed = transformData(txnTypes)
 
-  // return <pre>{JSON.stringify(txnTypesTransformed, null, 2)}</pre>
+  // // return <pre>{JSON.stringify(txnTypesTransformed, null, 2)}</pre>
 
-  const fiatRates = await fetchFiatRates()
+  // const fiatRates = await fetchFiatRates()
 
-  if (!fiatRates) {
-    console.log({ fiatRates })
-    throw console.error('Error fetching fiat rates')
-  }
+  // if (!fiatRates) {
+  //   console.log({ fiatRates })
+  //   throw console.error('Error fetching fiat rates')
+  // }
 
-  const gasPrices = await fetchGasPrices()
+  // const gasPrices = await fetchGasPrices()
 
-  if (!gasPrices) {
-    console.log({ gasPrices })
-    throw console.error('Error fetching gas prices')
-  }
+  // if (!gasPrices) {
+  //   console.log({ gasPrices })
+  //   throw console.error('Error fetching gas prices')
+  // }
 
-  let networkPrices = networks.map((network, index) => {
-    const gasPrice = gasPrices[index]
+  // let networkPrices = networks.map((network, index) => {
+  //   const gasPrice = gasPrices[index]
 
-    const tokenPrice = fiatRates[network.coinGeckoId]
+  //   const tokenPrice = fiatRates[network.coinGeckoId]
 
-    return {
-      ...network,
-      gasPrice,
-      tokenPrice,
-    }
-  })
+  //   return {
+  //     ...network,
+  //     gasPrice,
+  //     tokenPrice,
+  //   }
+  // })
 
   return (
     <>
-      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <Header lang={lang} />
+      <div className="container py-12 relative">
+        <PageHeader className="flex flex-col items-center">
+          <h2 className="text-lg py-2 font-bold">Gas Fees Calculator</h2>
+          <PageHeaderHeading>Sick of Paying too high gas fees?</PageHeaderHeading>
+          <PageHeaderDescription>
+            Start calculating gas fees for the biggest networks at different transaction speeds in
+            your own local currency for a variety of blockchain transactions.
+          </PageHeaderDescription>
+        </PageHeader>
+
         <GitcoinGrant />
         <ShareButtons
           size={38}
-          title={translations[0].share_button_title}
-          shareTitle={translations[0].share_buttons_share_title}
+          title={'Found the calculator helpful? Share it with others:'}
+          shareTitle={'Cryptoneur.xyz Gas Fees Calculator'}
           shareUrl={'https://www.cryptoneur.xyz/gas-fees-calculator'}
         />
-        <FeesForm txnTypes={txnTypesTransformed}>
+
+        <div className="grid gap-4">
+          <Card className="grid grid-cols-1 sm:grid-cols-2 items-end">
+            <CardHeader>
+              <CardTitle>Local Currency</CardTitle>
+              <CardDescription>
+                Select the currency you want the fees to be displayed in.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="sm:pt-4 pt-0 space-y-1">
+              <Label>Currency</Label>
+              <Select defaultValue="USD">
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Currency" />
+                </SelectTrigger>
+                <SelectContent>
+                  {currencies.map((currency) => (
+                    <SelectItem key={currency} value={currency}>
+                      {currency}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardContent>
+          </Card>
+          <Card className="grid grid-cols-1 sm:grid-cols-2 items-end">
+            <CardHeader>
+              <CardTitle>Used Gas</CardTitle>
+              <CardDescription>
+                Every transaction uses gas. Pick a common transaction type or enter a custom amount
+                of gas used.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="sm:pt-4 pt-0 space-y-1">
+              <Label>Transaction Type</Label>
+              <Select defaultValue="Standard Transfer">
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Transaction Type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {.map((currency) => (
+                    <SelectItem key={currency} value={currency}>
+                      {currency}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* <FeesForm txnTypes={txnTypesTransformed}>
           <FeesFormCard
             title={translations[0].currency_input_title}
             description={translations[0].currency_input_description}
           >
             <CurrencyInput label={translations[0].curreny_input_label} currencies={currencies} />
           </FeesFormCard>
-
+          
           <FeesFormCard
             title={translations[0].used_gas_input_title}
             description={translations[0].used_gas_input_description}
@@ -190,7 +254,7 @@ const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string 
             labelHeaderGasCurrentCost={translations[0].table_header_gas_current_cost}
             networkPrices={networkPrices}
           />
-        </FeesForm>
+        </FeesForm> */}
       </div>
       <div className="mt-10 flex items-center  justify-center">
         <a
@@ -198,12 +262,12 @@ const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string 
           target="_blank"
           rel="noreferrer"
         >
-          <DirectusImage
+          {/* <DirectusImage
             className="rounded-lg object-center"
             id={zapper_logo.id}
             width={250}
             height={50}
-          />
+          /> */}
         </a>
       </div>
     </>
