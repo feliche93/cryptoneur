@@ -36,6 +36,13 @@
       "when": 1710783599575,
       "tag": "0004_odd_thor",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1710783639525,
+      "tag": "0005_early_maverick",
+      "breakpoints": true
     }
   ]
 }
