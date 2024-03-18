@@ -22,6 +22,20 @@
       "when": 1710782620921,
       "tag": "0002_sharp_kate_bishop",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1710782649131,
+      "tag": "0003_light_the_twelve",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1710783599575,
+      "tag": "0004_odd_thor",
+      "breakpoints": true
     }
   ]
 }

@@ -93,3 +93,22 @@ export const currencies = pgTable(
     }
   },
 )
+
+export const transactionTypes = pgTable(
+  'transaction_types',
+  {
+    id: text('id')
+      .primaryKey()
+      .default(sql<string>`'txn_type_' || nanoid()`),
+    name: varchar('name', { length: 256 }).notNull(),
+    gas: integer('gas').notNull(),
+    isPublished: boolean('is_published').notNull().default(false),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  },
+  (table) => {
+    return {
+      nameIdx: index('transaction_types_name_idx').on(table.name),
+    }
+  },
+)
