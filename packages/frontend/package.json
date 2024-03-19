@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm concurrently \"contentlayer dev\" \"next dev\"",
-    "build": "pnpm contentlayer build && pnpm next build",
+    "build": "pnpm contentlayer build && pnpm next build && pnpm push",
     "preview": "pnpm next build && pnpm next start",
     "start": "pnpm next start",
     "lint": "prettier . --check && pnpm eslint",
