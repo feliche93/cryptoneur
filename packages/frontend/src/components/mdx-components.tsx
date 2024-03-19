@@ -24,7 +24,6 @@ import NextImage, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
 import { Tweet } from 'react-tweet'
-import ContentTeaser from './content-teaser'
 
 const components = {
   CalCom,
@@ -208,9 +207,6 @@ const components = {
       )}
       {...props}
     />
-  ),
-  ContentTeaser: ({ children, ...props }: React.ComponentProps<typeof ContentTeaser>) => (
-    <ContentTeaser {...props}>{children}</ContentTeaser>
   ),
 }
 

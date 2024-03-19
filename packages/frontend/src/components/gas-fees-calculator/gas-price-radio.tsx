@@ -1,50 +1,52 @@
 'use client'
 
-import { FC } from 'react'
-import { useController, useFormContext } from 'react-hook-form'
+import { createUrl } from '@/lib/utils'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
+import { Label } from '../ui/label'
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
 
-export interface GasPriceRadioProps {
-  labelStandard: string
-  labelFast: string
-  labelInstant: string
-  labelTransactionSpeed: string
-}
-export const GasPriceRadio: FC<GasPriceRadioProps> = ({
-  labelStandard,
-  labelFast,
-  labelInstant,
-  labelTransactionSpeed,
-}) => {
+export const GasPriceRadio = ({}) => {
   const gasPriceOption = ['standard', 'fast', 'instant']
 
-  const { control } = useFormContext()
-  const { field } = useController({ name: 'gasPrice', control })
+  const searchParams = useSearchParams()
+  const pathanme = usePathname()
+  const router = useRouter()
 
   return (
-    <div className="col-span-1 sm:col-span-1">
-      <label htmlFor="gas-input" className="block text-sm font-medium text-gray-700">
-        Transaction Speed
-      </label>
-      <fieldset className="mt-2">
-        <legend className="sr-only">Gas Price Radio</legend>
-        <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-          {gasPriceOption.map((option) => (
-            <div key={option} className="flex items-center">
-              <input
-                id={option}
-                onChange={() => field.onChange(option)}
-                name="gas-price-option"
-                type="radio"
-                defaultChecked={option === 'standard'}
-                className="h-4 w-4 border-base-200 text-primary focus:ring-primary-focus"
-              />
-              <label htmlFor={option} className="ml-3 block text-sm font-normal capitalize">
-                {option}
-              </label>
-            </div>
-          ))}
+    <Card className="grid grid-cols-1 sm:grid-cols-2 items-end">
+      <CardHeader>
+        <CardTitle>Gas Price</CardTitle>
+        <CardDescription>Select the transaction speed you want to use.</CardDescription>
+      </CardHeader>
+      <CardContent className="sm:pt-4 pt-0 space-y-1">
+        <div className="flex flex-col space-y-3 w-full">
+          <Label>Transaction Speed</Label>
+          <RadioGroup
+            className="flex flex-col sm:flex-row gap-3 sm:gap-12 w-44 justify-between"
+            defaultValue={searchParams?.get('gasPrice') ?? 'standard'}
+            onValueChange={(value) => {
+              if (!searchParams || !pathanme) return
+
+              const newSearchParams = new URLSearchParams(searchParams?.toString() ?? '')
+
+              newSearchParams.set('gasPrice', value)
+              router.push(createUrl(pathanme, newSearchParams), {
+                scroll: false,
+              })
+            }}
+          >
+            {gasPriceOption.map((option) => (
+              <div key={option} className="flex items-center space-x-2">
+                <RadioGroupItem value={option} id={option} />
+                <Label className="capitalize" htmlFor={option}>
+                  {option}
+                </Label>
+              </div>
+            ))}
+          </RadioGroup>
         </div>
-      </fieldset>
-    </div>
+      </CardContent>
+    </Card>
   )
 }

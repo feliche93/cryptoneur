@@ -1,9 +1,8 @@
-import { BarsArrowUpIcon } from '@heroicons/react/20/solid'
-import { BarsArrowDownIcon } from '@heroicons/react/24/outline'
-import { cn } from '@lib/utils'
+import { cn } from '@/lib/utils'
 import { SortDirection } from '@tanstack/react-table'
 import { VariantProps, cva } from 'class-variance-authority'
 import clsx from 'clsx'
+import { ArrowDown, ArrowUp } from 'lucide-react'
 import { FC, PropsWithChildren } from 'react'
 
 const tableHeaderVariants = cva('table-header', {
@@ -57,9 +56,9 @@ export const TableHeader: FC<TableHeaderProps> = ({
           <span className={cn('ml-2')}>
             {isSorted ? (
               isSorted == 'asc' ? (
-                <BarsArrowDownIcon className="h-5 w-5 text-primary" />
+                <ArrowDown className="h-5 w-5 text-primary" />
               ) : (
-                <BarsArrowUpIcon className="h-5 w-5 text-primary" />
+                <ArrowUp className="h-5 w-5 text-primary" />
               )
             ) : (
               ''

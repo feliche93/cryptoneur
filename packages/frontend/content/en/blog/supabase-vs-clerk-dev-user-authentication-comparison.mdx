@@ -1,0 +1,278 @@
+---
+image: '/posts/supabase-vs-clerk-dev-user-authentication-comparison/How-to-migrate-Auth-from-Supabase-to-Clerk.dev--1-.png'
+title: 'Supabase vs. Clerk.dev: Comparative Analysis of Auth Tools'
+description: 'Dive into the Supabase vs Clerk.dev debate. Uncover insights about their performance, custom tokens, user impersonation, cost dynamics, and more. Which tool will reign supreme for you?'
+metaTitle: 'Supabase vs. Clerk.dev: Comparative Analysis of Auth Tools'
+metaDescription: 'Supabase vs. Clerk.dev: Evaluating their user authentication, implementation ease, pricing, unique features, and user experience in web development.'
+date: '2023-06-14'
+categories:
+  - 'Comparisons'
+  - 'Reviews'
+  - 'Guides'
+authors:
+  - 'felix-vemmer'
+featured: true
+keywords:
+  - 'User Authentication'
+  - 'Supabase'
+  - 'Clerk.dev'
+  - 'Comparison'
+  - 'Web Development'
+  - 'JWT Templates'
+  - 'Custom Session Tokens'
+  - 'User Impersonation'
+  - 'OAuth Providers'
+  - 'Component Customization'
+---
+
+When it comes to web development, the tools we choose can make or break our projects. They not only shape our workflow but also impact the final products we deliver to our users. For the longest time, [Supabase](https://supabase.com/?ref=felixvemmer.com) was my go-to choice. Its robustness and versatility made it a reliable partner in my journey as a web developer. But as they say, change is the only constant. As I continued exploring, I stumbled upon another promising contender: [Clerk.dev](https://clerk.com/?ref=felixvemmer.com)
+
+If you're a fellow developer who's ever grappled with the decision to switch tools, or if you're simply curious about Clerk.dev, this post is for you. Whether you're considering a similar switch, or if you're just starting out in web development and are evaluating your options, I hope my experience will provide valuable insights to guide your decisions. Let's dive in.
+
+## The Supabase Advantage
+
+Firstly, I want to champion Supabase as an exceptional choice for all. As a satisfied user for an extended period, I can confidently recommend it to anyone seeking a robust, comprehensive backend service. Let's delve into why Supabase has been my preferred choice.
+
+### Ease of implementation
+
+Supabase released [auth-helpers](https://github.com/supabase/auth-helpers?ref=felixvemmer.com) to make authentication and authorization quite easy to implement.
+
+Big thanks to [Jon](https://twitter.com/jonmeyers_io?lang=de&ref=felixvemmer.com) from Supabase who keeps on producing excellent content on very "edge" (no pun intended) topics, such as server actions, auth middleware etc.
+
+### Row Level Secruity
+
+Supabase also introduced me to the idea of row level security, the idea of creating a policy for every table that automatically adds a `WHERE` clause to every query to check for example for the `user_id` .
+
+> When you need granular authorization rules, nothing beats PostgreSQL's [Row Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html?ref=felixvemmer.com).
+
+When using `supabase-js` or any `postgres function` auth becomes super simply and it just works out of the box.
+
+### Amazing User Dashboard with all Core Features
+
+Finally, I really liked the auth management dashboard, where you can do the most important tasks, such as:
+
+- Invite a new user via email
+- Manually create a new user
+- Send Password recovery
+
+<Image
+  className="my-4 rounded-lg"
+  src={
+    '/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-06-08-at-23.12.41@2x.png'
+  }
+  alt="Supabase Auth Dashboard"
+  width={800}
+  height={600}
+/>
+
+All in all Supabase has done a fantastic job when it comes to auth and it has been my go to choice.
+
+## Top 5 Reasons to Switch to Clerk.dev
+
+So, what provoked the switch to Clerk.dev for authentication, especially when Supabase had already proven to be such a stellar product? The answer lies in Clerk.dev's specific focus and proficiency in delivering a slightly more robust authentication solution. It has managed to incorporate some truly innovative features, which are not only challenging to construct independently but also rare to find in other products.
+
+Based on personal experience, I've noticed that the login and authentication processes tend to take somewhat longer with Supabase. Even simply accessing the Supabase dashboard or project seems to involve a more extended loading time than one might typically expect.
+
+<Callout icon={<Icons.lightBulb />} className="my-4">
+  Supabase also allows you to create an [Auth Middleware
+  client](https://supabase.com/docs/guides/auth/auth-helpers/nextjs?ref=felixvemmer.com) and also
+  recently launched the **PKCE** flow.
+</Callout>
+
+Clerk.dev has meticulously curated a [page](https://edge.clerk.app/?ref=felixvemmer.com) that demonstrates the integration of their edge middleware with Next.js. With this setup, I've experienced remarkably rapid response times, enhancing the overall user experience.
+
+<Image
+  className="my-4 rounded-lg"
+  src={
+    '/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-06-08-at-23.58.08@2x.png'
+  }
+  width={1600}
+  height={899}
+  alt="Showcasing Clerk.dev Edge Middleware with Supabase"
+/>
+
+### JWT Templates and Custom Session Tokens
+
+Most often you want to share your user data with other services such as [Canny.io](https://canny.io/?ref=felixvemmer.com) (feature requests) or [Plain.com](https://plain.com/?ref=felixvemmer.com). With JWT templates you can tailor each template to the data requirements of the provider, and get a signed token with a one liner and pass it to the provider. Check out this detailed [step-by-step](https://twitter.com/chronark_/status/1657696822725427200?ref=felixvemmer.com) tweet of [chronark\_](https://twitter.com/chronark_?ref=felixvemmer.com) on how to implement Plain seamlessly with the Clerk.dev JWT Teamplate:
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/supabase-vs-clerk-dev-user-authentication-comparison/FwFODCoXsAIigYm.jpeg"
+  alt="Picture and tweet by chronark_ showcasing plain JWT templates"
+  width={1600}
+  height={899}
+/>
+
+Picture and tweet by [chronark\_](https://twitter.com/chronark_?ref=felixvemmer.com) showcasing plain JWT templates
+
+An added convenience is the ability to select the information to display in my session token. This proves particularly useful for routing purposes - for instance, when a username is part of the route. Rather than continuously querying a specific field or table from the user, I can manually add this claim and gain immediate access, which is a significant time saver.
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-06-09-at-08.15.25@2x.png"
+
+alt="Customisation of session token"
+width={1600}
+height={899}
+
+/>
+
+### User Impersonation
+
+A valuable feature I've long sought is the ability to impersonate a specific user. This facilitates simpler app debugging and allows for quick checks to ensure functionality aligns with expectations. Clerk.dev has made this process remarkably straightforward. All it requires is a quick visit to the dashboard, identifying the user, and selecting the appropriate action.
+
+<Callout icon={<Icons.alertTriangle />} className="my-4">
+  This feature is currently only available in the **Business Plan** which is available at **$99**.
+</Callout>
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-06-09-at-08.19.55@2x.png"
+  alt="Customized Sign In Screen"
+  width={800}
+  height={600}
+/>
+
+### Connecting oAuth Providers
+
+Another awesome feature I was looking for is to allow users to easily connect their GMail, Twitter, GitHub to a signed up account. This can be super useful to read a repo on the users behalf or take other actions. I have not found a simple way to do this myself or another service that is offering it.
+
+<Callout icon={<Icons.alertTriangle />} className="my-4">
+  In the free plan you have **up to 3 Social logins / Web3 wallets** available.
+</Callout>
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-06-14-at-08.59.29@2x.png"
+  alt="Connecting other accounts."
+  width={800}
+  height={600}
+/>
+
+### Fully Customizable Components (even Tailwind)
+
+Utilising pre-built components can be a significant timesaver, provided they align with your website's layout. However, if they don't, it often becomes a struggle to modify them to fit, a process that can be more challenging than creating custom components from scratch.
+
+<Callout icon={<Icons.lightBulb />} className="my-4">
+  Supabase also has **well designed pre built auth components called Auth UI**. Check it
+  out [here](https://supabase.com/docs/guides/auth/auth-helpers/auth-ui?ref=felixvemmer.com).
+</Callout>
+
+Here's a code snippet on how I customized the appearance in the `ClerkProvider`
+
+```jsx
+<ClerkProvider
+  appearance={{
+    baseTheme: dark,
+    layout: {
+      logoPlacement: 'inside',
+      socialButtonsVariant: 'iconButton',
+    },
+    variables: {
+      colorPrimary: '#ffffff',
+      colorBackground: '#2e2d2f',
+      colorText: '#dca54c',
+      colorInputBackground: '#171618',
+      colorInputText: '#dca54c',
+      colorTextOnPrimaryBackground: '#000000',
+      colorDanger: '#ff6f6f',
+      colorSuccess: '#87d039',
+      colorWarning: '#e2d562',
+    },
+    elements: {
+      formButtonPrimary: buttonVariants({ variant: 'primary' }),
+      avatarBox: 'h-12 w-12 bg-base-300',
+    },
+  }}
+>
+```
+
+Overall, I am very happy with the results, as they perfectly blend into my existing design:
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-06-12-at-21.21.20@2x.png"
+  alt="Customized Sign In Screen"
+  width={800}
+  height={600}
+/>
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-06-14-at-08.44.19@2x.png"
+  alt="Customized Account Page"
+  width={800}
+  height={600}
+/>
+
+### Handy Sign Up Features: Block Fake Accounts & Email Subaddresses
+
+For SaaS founders, ensuring an authentic user base is crucial. One common challenge is users registering multiple times using email subaddressing. Clerk addresses this by blocking such practices. This means users can't exploit email variations, such as using [jane+extra@company.com](mailto:jane+extra@company.com) alongside [jane@company.com](mailto:jane@company.com). The result? A cleaner, more genuine user base that can't as easily take undue advantage of tiered offerings or trials.
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-08-23-at-12.40.18@2x.png"
+  alt="Blocking Email Subaddresses in Clerk"
+  width={800}
+  height={600}
+/>
+
+Another pressing issue for SaaS platforms is the influx of disposable emails. These are often used by individuals looking for one-time benefits without any long-term engagement intent. Clerk actively combats this by screening sign-ups against a database of over 160,000 known disposable email providers. By filtering out these transient users at the sign-up stage, SaaS founders can maintain a higher email quality, fostering genuine user growth and engagement.
+
+![Blocking Email](https://uc.autopilotapp.com/images/ap-clerk/aug_4__3_.gif)
+
+## Balancing Cost and Value: Assessing Authentication Pricing for Supabase and Clerk.dev
+
+In their respective free tiers, both Clerk.dev and Supabase provide user authentication functionality, but they differ in how many users they support and how their costs scale.
+
+Clerk.dev's free tier caters to a considerable starting point for budding applications, supporting up to 5,000 monthly active users. Nonetheless, scaling with Clerk.dev equates to scaling costs. When your user base expands beyond the initial 5,000, a move to the Hobby tier at $25 per month becomes necessary. This tier, however, only covers 1,000 monthly active users (MAUs), with each additional MAU costing $0.02. As your user base expands and your needs for advanced features increase, so will your investment in Clerk.dev.
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-06-14-at-09.16.40@2x.png"
+  alt="Clerk.dev Pricing"
+  width={800}
+  height={600}
+/>
+
+Contrastingly, Supabase's free tier offers a generous allowance of up to 50,000 monthly active users, enabling you to accommodate a significantly larger user base before upgrading to a paid tier becomes a consideration. When ready to scale, the Pro plan begins at an equivalent $25 per month but provides a more cost-efficient alternative for burgeoning applications.
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-06-14-at-09.17.40@2x.png"
+  alt="Supabase Pricing"
+  width={800}
+  height={600}
+/>
+
+Hence, if rapid user base growth is on your horizon, Supabase may present a more budget-friendly solution for user authentication. Conversely, Clerk.dev provides exceptional authentication features but at a premium. Your decision should balance the prospective size of your user base against the specific authentication capabilities your project demands.
+
+<Callout icon={<Icons.alertTriangle />} className="my-4">
+  If your project, for example, requires Multifactor authentication, you would need to pay right
+  away $99/month for Clerk.dev's Business tier.
+</Callout>
+
+At first glance, Clerk's pricing may seem daunting. However, considering that charges apply only for
+"active" users and that the success of your business model might warrant paying for a managed authentication
+solution, the investment might be justifiable. The ease of security handling, the swiftness of setup,
+and the access to future features that Clerk.dev offers can provide a remarkable return on your investment.
+
+## Final Thoughts: Choosing Between Supabase and Clerk.dev for User Authentication
+
+In conclusion, while both Supabase and Clerk.dev offer valuable features and services, your choice largely depends on your specific requirements and preferences. Supabase, with its robust backend service and easy implementation, continues to be a reliable choice for many developers. On the other hand, Clerk.dev, focusing on user authentication, brings unique features like edge middleware, custom session tokens, user impersonation, and pre-built components to the table, which can be a game-changer for some developers. Therefore, it's crucial to consider the benefits and drawbacks of each platform carefully before deciding on the one that best aligns with your web development needs. Ultimately, the best tool is the one that enables you to deliver efficient, secure, and user-friendly products.
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/supabase-vs-clerk-dev-user-authentication-comparison/CleanShot-2023-06-14-at-09.52.50@2x.png"
+  alt="User Qutoes"
+  width={800}
+  height={600}
+/>
+
+For those who want to have both you can actually [continue](https://supabase.com/docs/guides/integrations/clerk?ref=felixvemmer.com) using Supabase and only do user authentication through Clerk. Check out this [guide](https://supabase.com/docs/guides/integrations/clerk?ref=felixvemmer.com) for detailed instructions.
+
+If you're still not sure wether Supabase or Clerk are the best options, check out this [comprehensive analysis](https://blog.hyperknot.com/p/comparing-auth-providers?ref=felixvemmer.com) of 8 different popular auth providers by [Zsolt Ero's](https://twitter.com/hyperknot?ref=felixvemmer.com), it was one of the most useful articles I found on the topic.
+
+Ready to move to Clerk.dev? Here's how I did the migration:
+
+<RelatedPostCard slug="/en/blog/migrate-user-authentication-supabase-clerk-dev" />

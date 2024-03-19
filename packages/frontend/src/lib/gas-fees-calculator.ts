@@ -1,3 +1,4 @@
+import { getCurrencies, getTransactionTypes } from '@/data/gas-fees-calculator'
 import 'server-only'
 
 const API_KEY = process.env.ZAPPER_API_KEY
@@ -153,43 +154,81 @@ const networks = [
   },
 ]
 
-const fetchFiatRates = async () => {
+interface TFetchFiatRatesResponse {
+  [coinGeckoId: string]: {
+    [currency: string]: number
+  }
+}
+
+const fetchFiatRates = async (): Promise<TFetchFiatRatesResponse> => {
   const ids = networks.map((network) => network.coinGeckoId).join(',')
+
   const vsCurrencies = currencies.join(',')
 
   const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`
 
-  try {
-    const response = await fetch(apiUrl, {
-      next: { revalidate: 100 },
-      headers: {
-        Accept: 'application/json',
-      },
-    })
-    const data = await response.json()
-    return data
-  } catch (error) {
-    console.error('Error fetching fiat rates:', error)
-    return null
-  }
+  const response = await fetch(apiUrl, {
+    next: { revalidate: 100 },
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+  const data: TFetchFiatRatesResponse = await response.json()
+  return data
 }
 
-const fetchGasPrices = async () => {
-  try {
-    const requests = Promise.all(
-      networks.map(async ({ network }) => {
-        const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`
-        const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } })
-        const data = await gasPriceResponse.json()
-        return data
-      }),
-    )
-
-    const data = await requests
-    return data
-  } catch (e) {
-    console.log(e)
-  }
+interface GasPrice {
+  eip1559: boolean
+  standard: number
+  fast: number
+  instant: number
 }
+
+type TFetchGasPricesResponse = GasPrice[]
+
+const fetchGasPrices = async (): Promise<TFetchGasPricesResponse> => {
+  const requests = Promise.all(
+    networks.map(async ({ network }) => {
+      const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`
+      const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } })
+      const data: GasPrice = await gasPriceResponse.json()
+      return data
+    }),
+  )
+
+  const data: TFetchGasPricesResponse = await requests
+  return data
+}
+
+export const getNetworkPrices = async () => {
+  const fiatRatesPromise = fetchFiatRates()
+  const gasPricesPromise = fetchGasPrices()
+
+  const currenciesPromise = getCurrencies()
+  const txnTypesPromise = getTransactionTypes()
+
+  const [fiatRates, gasPrices, currencies, txnTypes] = await Promise.all([
+    fiatRatesPromise,
+    gasPricesPromise,
+    currenciesPromise,
+    txnTypesPromise,
+  ])
+
+  let networkPrices = networks.map((network, index) => {
+    const gasPrice = gasPrices[index]
+
+    const tokenPrice = fiatRates[network.coinGeckoId]
+
+    return {
+      ...network,
+      gasPrice,
+      tokenPrice,
+    }
+  })
+
+  return networkPrices
+}
+
+export type TGetNetworkPricesResponse = Awaited<ReturnType<typeof getNetworkPrices>>
 
 export { currencies, fetchFiatRates, fetchGasPrices, networks }

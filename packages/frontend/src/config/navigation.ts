@@ -13,7 +13,7 @@ export const navigationConfig: NavigationConfig = {
     en: [
       {
         title: 'Web 3 Grants',
-        href: '/web-3-grants',
+        href: '/web3-grants',
       },
       {
         title: 'Gas Fees Calculator',
@@ -39,7 +39,7 @@ export const navigationConfig: NavigationConfig = {
     de: [
       {
         title: 'Web 3 Grants',
-        href: '/web-3-grants',
+        href: '/web3-grants',
       },
       {
         title: 'Gas Fees Calculator',

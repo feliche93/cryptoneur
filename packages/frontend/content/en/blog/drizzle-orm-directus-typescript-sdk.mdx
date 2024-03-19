@@ -1,0 +1,715 @@
+---
+image: '/posts/drizzle-orm-directus-typescript-sdk/and.png'
+title: 'From Good to Great: Boosting Dev Experience with Drizzle ORM & Directus'
+description: 'Discover the synergy of Directus and Drizzle ORM. Elevate your TypeScript experience, streamline database operations, and supercharge your web development workflow in just a few steps.'
+metaTitle: 'Directus & Drizzle ORM: The TypeScript Game-Changer'
+metaDescription: 'Unleash the combined strength of Directus and Drizzle ORM. Boost your TypeScript workflow and revolutionize your development process.'
+date: '2023-09-17'
+categories:
+  - 'TypeScript'
+  - 'Directus'
+  - 'Drizzle ORM'
+authors:
+  - 'felix-vemmer'
+keywords:
+  - 'Drizzle ORM'
+  - 'Directus'
+  - 'TypeScript'
+  - 'Database Operations'
+  - 'Web Development Workflow'
+  - 'JavaScript SDK'
+  - 'Type Safety'
+  - 'Schema Generation'
+  - 'Database Access'
+  - 'Query Syntax'
+  - 'SQL Dialects'
+  - 'Database Connection'
+  - 'Configuration File'
+  - 'Database Credentials'
+  - 'PostgreSQL'
+  - 'Environment Variables'
+  - 'Database Management'
+  - 'Database Schema'
+  - 'Database Migration'
+  - 'SQL Migrations'
+  - 'Database Introspection'
+  - 'Zod Models'
+  - 'Data Fetching'
+  - 'Data Insertion'
+  - 'Data Update'
+  - 'Data Deletion'
+  - 'SQL Transactions'
+  - 'Database Errors'
+  - 'Database Compatibility'
+  - 'Database Performance'
+  - 'Database Connectivity'
+---
+
+[Directus](https://directus.io/?ref=felixvemmer.com) is packed with features we all love, but there's been a missing piece: TypeScript support when querying data. That's where [Drizzle ORM](https://orm.drizzle.team/?ref=felixvemmer.com) comes in. In this article, we'll explore how using Drizzle ORM with Directus can make our development process even better and solve the TypeScript challenge.
+
+## Exploring TypeScript Support in the Directus JavaScript SDK
+
+The Directus [JavaScript SDK](https://docs.directus.io/guides/sdk/getting-started.html?ref=felixvemmer.com#features) boasts a notable commitment to TypeScript, highlighting its dedication to offering developers a "TypeScript first" experience. This pledge is evident when we see the enticing feature tag:
+
+> **TypeScript first:** The SDK provides a robust and type-safe development experience
+
+It's clear that Directus aims to ensure developers can work seamlessly with TypeScript.
+
+However, when delving further into the SDK's documentation, we encounter:
+
+> If using TypeScript, you need to provide a `Schema` when creating a Directus client to make use of type hinting and completion. This schema contains definitions for each collection and provides you with type hints (on input) and completion (on output).
+
+This means developers are tasked with implementing the schema themselves.
+
+```typescript
+import { createDirectus } from '@directus/sdk'
+import { graphql } from '@directus/sdk/graphql'
+import { rest } from '@directus/sdk/rest'
+
+interface Article {
+  id: number
+  title: string
+  content: string
+}
+
+interface Schema {
+  articles: Article[]
+}
+
+// Client with REST support
+const client = createDirectus<Schema>('http://directus.example.com').with(rest())
+
+// Client with GraphQL support
+const client = createDirectus<Schema>('http://directus.example.com').with(graphql())
+```
+
+### The Challenge of Manual Schema Implementation
+
+While Directus offers a systematic approach to integrating TypeScript, there's a clear challenge: **manual schema implementation**.
+
+For developers who thrive on efficiency, creating and updating the schema by hand, especially for larger projects with numerous collections, can become a **time-consuming task**.
+
+Let's consider the process: for each collection in Directus, a corresponding TypeScript interface has to be crafted, ensuring that it matches the data structure in Directus precisely. This not only demands **meticulous attention to detail but also a significant investment of time**, especially when modifications are made to the Directus collections.
+
+It's not that manual implementations are inherently problematic, but in an era where automation and seamless workflows are prized, there's certainly room for improvement. And while Directus's "TypeScript first" approach is commendable, the **manual schema aspect does leave a few developers wishing for a more streamlined experience**.
+
+So, where do we go from here? Instead of resigning ourselves to the manual grind, let's explore some alternatives that can make our TypeScript journey with Directus smoother and more efficient.
+
+## Harnessing Automation for Schema Generation
+
+Navigating the manual intricacies of schema implementation can be cumbersome, but the developer landscape is vast, with many tools and methods at our disposal. The ideal approach **would be to strike a balance between automation and precision**, ensuring that we maintain the integrity of our data while speeding up the development process. In our quest for a more efficient TypeScript journey with Directus, let's delve into a promising option that can provide the solution we're after.
+
+### Option 1: ChatGPT-Assisted Schema Creation
+
+**Overview:**  
+Leverage the capabilities of ChatGPT to automate the generation of [Zod](https://github.com/colinhacks/zod?ref=felixvemmer.com) schemas or TypeScript interfaces from given table definitions or data schemas.
+
+**Advantages:**
+
+- **Efficiency Boost:** Simply copy and paste your table definition or data schema into ChatGPT and let it handle the heavy lifting.
+- **Error Minimization:** With a well-phrased prompt and a touch of manual verification, the chances of errors are significantly reduced.
+
+**Considerations:**
+
+- **Naming Consistency:** There might be occasional inconsistencies in naming, so it's essential to double-check the generated schema.
+- **Updating Schemas:** Remember, if there's a change in your Directus collections, you'll need to manually copy the updated schema into ChatGPT for a fresh generation.
+
+### Option 2: directus-typescript-gen
+
+**Overview:**  
+The [`directus-typescript-gen`](https://github.com/elierotenberg/directus-typescript-gen?ref=felixvemmer.com) tool aims to simplify the TypeScript integration process with Directus. By dynamically extracting typings from a live Directus server, it generates the necessary TypeScript definition files for the Directus TypeScript SDK. This ensures that developers not only get accurate definitions but also enjoy features like type-checking, autocompletion, and other TypeScript advantages.
+
+<Callout className="my-4" icon={<Icons.lightBulb />}>
+  There's a
+  great [blogpost](https://www.izoukhai.com/blog/generate-typescript-definitions-from-directus?ref=felixvemmer.com) on
+  izoukhai.com that goes through this appraoch in more detailed steps.
+</Callout>
+
+**Usage:**  
+Initiate the generator on a running Directus server to get the TypeScript definitions:
+
+```bash
+npx directus-typescript-gen --host http://localhost:8055 --email admin@example.com --password [your_password]
+```
+
+**Advantages:**
+
+- **Automation:** Bypass the manual process by dynamically extracting typings directly from a live server.
+- **Enhanced TypeScript Experience:** Enjoy the perks of type-checking, autocompletion, and other TypeScript features seamlessly.
+- **User-Friendly:** Just run a simple command to get the required TypeScript definitions, making it relatively straightforward even for those unfamiliar with Directus or TypeScript.
+
+**Considerations:**
+
+- **Update Status:** The tool's last update was two years ago, raising questions about its current compatibility and support for newer versions of Directus.
+- **Consistency:** While it worked effectively for a past project, its current reliability may need validation, given the time since its last update.
+
+### Option 3: Drizzle ORM
+
+**Overview:  
+[Drizzle ORM](https://drizzleorm.com/?ref=felixvemmer.com)** stands out as a robust TypeScript Object Relational Mapping (ORM) solution tailored for developers seeking both performance and longevity. Beyond merely mapping database entries to TypeScript objects, Drizzle offers a many features and benefits that makes it an excellent fit for those wanting to supercharge their Directus TypeScript experience.
+
+**Key Features:**
+
+- **Lightweight & Edge Ready:** Drizzle is designed to be nimble, ensuring top-notch performance across various platforms.
+- **Hassle-Free SQL Migrations:** Say goodbye to the intricacies of SQL migrations; Drizzle simplifies the process.
+- **No Code Generation:** Eliminate the need for redundant code generation processes.
+- **Zero Dependencies:** A cleaner codebase without additional dependencies.
+- **Rich SQL Dialects:** Catering to a variety of SQL dialects to enhance database interactions.
+- **Broad Runtime Support:** From Cloudflare Workers and Supabase functions to Vercel functions and Browser integrations, Drizzle has extensive compatibility.
+- **Diverse Database Connectivity:** Whether it's PostgreSQL, MySQL, or SQLite, Drizzle can seamlessly connect to a wide array of databases.
+
+If you're interested in a more detailed introduction of Drizzle, check out this [article](https://www.felixvemmer.com/blog/drizzle-orm-boosting-developer-productivity/).
+
+<RelatedPostCard slug="/en/blog/drizzle-orm-boosting-developer-productivity" />
+
+**Advantages:**
+
+- **Comprehensive ORM Solution:** Drizzle offers an all-in-one solution for those aiming to intertwine TypeScript and databases effectively.
+- **Future-Proofing:** Designed with longevity in mind, adopting Drizzle is a long-term investment in efficient database management.
+- **Ecosystem Integration:** With support for major serverful and serverless runtimes and various databases, Drizzle ensures a broad spectrum of compatibility.
+
+**Considerations:**
+
+- **Learning Curve:** As with any ORM, there might be an initial learning curve, especially for those new to Drizzle's specifics.
+
+### Why I Chose Drizzle ORM Over Others
+
+Making a decision among a slew of good options is never straightforward. However, certain standout features and benefits can tip the balance. For my project, Drizzle ORM emerged as the frontrunner, and here's why:
+
+1. **Instant Schema Generation:** The true power of an ORM or a development tool often lies in the time it saves. Drizzle ORM’s `drizzle-kit introspect:{dialect}` command is a testament to this. With just a quick command, I was able to pull the Data Definition Language (DDL) from my existing database and generate the required `schema.ts` file in a snap. This meant not only TypeScript interfaces but also Zod models were ready in mere seconds.
+2. **Direct Database Access:** One of the most significant advantages Drizzle ORM offers is its independence from the Directus server. Instead of routing my queries through Directus, I can communicate directly with the database. This direct approach makes it lightweight and perfect for edge deployments, ensuring speed and efficiency.
+3. **Intuitive Query Syntax:** We all have our preferences when it comes to coding syntax. With the traditional JavaScript SDK for Directus, I often found myself navigating through nested and sometimes convoluted structures. Drizzle ORM, on the other hand, empowers me with familiar SQL dialects, all while maintaining top-notch type safety. This combo not only feels natural but also streamlines the development process, making it more enjoyable and efficient.
+
+For context, let's first look at an implementation using the Directus SDK v11. Shortly, we'll compare it to a in my opionen more streamlined version.
+
+```typescript
+const PagesIdSchema = z.object({
+  content: z.array(ContentSchema),
+  seo: z.number(),
+})
+
+const PagesTranslationsSchema = z
+  .array(
+    z.object({
+      id: z.number(),
+      languages_code: z.string(),
+      slug: z.string(),
+      pages_id: PagesIdSchema,
+    }),
+  )
+  .min(1)
+
+type getPageDataParams = {
+  slug: string
+  lang: string
+}
+
+// Cache function for fetching page data
+export const getPageData = cache(async (params: getPageDataParams) => {
+  const { slug, lang } = params
+
+  const { data } = await directus.items('pages_translations').readByQuery({
+    fields: ['*', 'pages_id.content.collection', 'pages_id.content.item', 'pages_id.seo'],
+    filter: {
+      _and: [
+        {
+          languages_code: {
+            _starts_with: lang,
+          },
+        },
+        {
+          slug: {
+            _eq: slug,
+          },
+        },
+      ],
+    },
+  })
+
+  const pages = PagesTranslationsSchema.parse(data)
+
+  const [page] = pages
+
+  return page
+})
+```
+
+## Implementing Drizzle ORM with Directus Collections
+
+Successfully marrying Drizzle ORM with Directus Collections can amplify your development experience manifold. This combination lets you leverage the amazing interface of Directus while tapping into the power-packed features of Drizzle ORM. Here's a step-by-step guide to getting started.
+
+### Step 1: Setting Up Directus Models
+
+Your Directus models, or Collections as they're often referred to, serve as the blueprint for your content and dictate how data should be structured within your Directus instance. I set up these models:
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/drizzle-orm-directus-typescript-sdk/CleanShot-2023-09-17-at-11.20.40@2x.png"
+  alt="Directus Data Models"
+  width={800}
+  height={600}
+/>
+
+And here are the most important models in more detail:
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/drizzle-orm-directus-typescript-sdk/CleanShot-2023-09-17-at-11.21.31@2x.png"
+  alt="Authors Model"
+  width={800}
+  height={600}
+/>
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/drizzle-orm-directus-typescript-sdk/CleanShot-2023-09-17-at-11.22.03@2x.png"
+  alt="Blogposts Model"
+  width={800}
+  height={600}
+/>
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/drizzle-orm-directus-typescript-sdk/CleanShot-2023-09-17-at-11.22.29@2x.png"
+  alt="Seo model"
+  width={800}
+  height={600}
+/>
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/drizzle-orm-directus-typescript-sdk/CleanShot-2023-09-17-at-11.22.56@2x.png"
+  alt="Blogpost Categories Model"
+  width={800}
+  height={600}
+/>
+
+### Step 2: Setting Up Drizzle ORM Database Connection
+
+Connecting Drizzle ORM to your database is a pivotal step in our journey. This connection will be the bridge that facilitates all interactions between your Directus models and the underlying database, empowering you with direct, type-safe querying capabilities.
+
+#### Creating the Configuration File
+
+Firstly, let's set up a configuration file for Drizzle ORM, which I've named `directus-drizzle.config.ts`. You can place this file within your project's structure, I placed mine in the frontend package:
+
+📂 `path`: `packages/frontend/directus-drizzle.config.ts`
+
+```typescript
+import dotenv from 'dotenv'
+import type { Config } from 'drizzle-kit'
+
+// Load environment variables from '.env.local'
+dotenv.config({ path: '.env.local' })
+
+// Validate presence of the required DIRECTUS_DIRECT_URL environment variable
+if (!process.env.DIRECTUS_DIRECT_URL) {
+  throw new Error('DIRECTUS_DIRECT_URL is missing')
+}
+
+console.log('DIRECTUS_DIRECT_URL', process.env.DIRECTUS_DIRECT_URL)
+
+// Export the configuration for Drizzle ORM
+export default {
+  out: './directus-drizzle',
+  dbCredentials: {
+    connectionString: process.env.DIRECTUS_DIRECT_URL,
+  },
+  driver: 'pg',
+} as Config
+```
+
+In this configuration:
+
+- We're using the `dotenv` package to load environment variables from `.env.local`.
+- The connection string is sourced from an environment variable named `DIRECTUS_DIRECT_URL`.
+- The driver specified here is for a PostgreSQL database (`pg`). Ensure this matches your database type.
+
+For a deeper dive into configuration options and understanding the full capabilities of Drizzle ORM configurations, I highly recommend checking the official Drizzle ORM documentation, especially the section detailing configurations: [Drizzle ORM Configuration Documentation](https://orm.drizzle.team/kit-docs/conf?ref=felixvemmer.com).
+
+This setup ensures that Drizzle ORM is finely tuned to interact with your database, respecting the structures you've defined in Directus and facilitating efficient, type-safe operations.
+
+### Step 3: Creating the Schema
+
+Generating and maintaining a schema for your database is crucial. When working with Directus and Drizzle, this process becomes streamlined, allowing for quick introspection and schema creation from your database. Let's break down how this is accomplished:
+
+#### 1. Package.json Scripts:
+
+Within our `package.json` file, we have defined three scripts for schema management:
+
+```typescript
+{
+  "scripts": {
+    "introspect-drizzle": "drizzle-kit introspect:pg --config=directus-drizzle.config.ts",
+    "fix-directus-schema": "node fix-directus-schema.js",
+    "introspect-fix-directus": "pnpm introspect-drizzle && pnpm fix-directus-schema"
+  }
+}
+```
+
+- **introspect-drizzle**: Uses the [Drizzle introspection command](https://orm.drizzle.team/kit-docs/commands?ref=felixvemmer.com#introspect--pull) to generate a schema based on the Directus PostgreSQL database.
+- **fix-directus-schema**: Invokes a script to correct minor issues within the generated schema.
+- **introspect-fix-directus**: This combined script first introspects the database to generate a schema and then applies fixes. It's ideal to include this in your build step.
+
+#### 2. Correcting Schema Generation Issues:
+
+While the introspection process is robust, you might encounter minor issues with the generated schema. We address these with the `fix-directus-schema.js` script:
+
+```typescript
+const fs = require('fs')
+const path = require('path')
+
+const filePath = path.join(__dirname, 'directus-drizzle', 'schema.ts')
+
+fs.readFile(filePath, 'utf8', (err, data) => {
+  if (err) {
+    console.error('Error reading the file:', err)
+    return
+  }
+
+  let newData = data.replace(/::character varying/g, '')
+  newData = newData.replace(/\.default\(NULL\)/g, '')
+
+  fs.writeFile(filePath, newData, 'utf8', (err) => {
+    if (err) {
+      console.error('Error writing to the file:', err)
+      return
+    }
+
+    console.log('Replacements were successful!')
+  })
+})
+```
+
+Script to fix minor schema generation issues.
+
+This script modifies the generated schema by making certain replacements to correct minor discrepancies.
+
+### Step 4: Creating the Drizzle Client
+
+Once the database connection is set up, the next logical step in our journey is creating a client to handle database operations through Drizzle ORM. This client will act as the main interface for all our database-related tasks, leveraging the power of Drizzle ORM while working harmoniously with the Directus configurations we've established.
+
+#### Setting Up the Client
+
+To do this, I created a file named `directus.ts` located in the frontend's `src/lib` directory:
+
+📂 `path`: `packages/frontend/src/lib/directus.ts`
+
+```typescript
+import * as schema from '@../directus-drizzle/schema'
+import { Pool } from '@neondatabase/serverless'
+import { drizzle } from 'drizzle-orm/neon-serverless'
+
+// Validate the presence of the required DIRECTUS_DATABASE_URL environment variable
+const connectionString = process.env.DIRECTUS_DATABASE_URL
+if (!connectionString) {
+  throw new Error('DIRECTUS_DATABASE_URL environment variable is not set')
+}
+
+// Initialize a new connection pool
+const pool = new Pool({ connectionString: process.env.DIRECTUS_DATABASE_URL })
+
+// Create and export the Drizzle client
+export const directus = drizzle(pool, {
+  schema: {
+    ...schema,
+  },
+})
+```
+
+Here's a breakdown of what's happening:
+
+- We're utilizing the `@neondatabase/serverless` package to set up a connection pool. This provides a managed set of database connections that can be used for executing queries, ensuring efficient database communication.
+- The connection string is fetched from the `DIRECTUS_DATABASE_URL` environment variable, which must be set beforehand.
+- The Drizzle client is then initialized using the connection pool and the schema we defined earlier. This client will be the core tool you use to query and manipulate your data using Drizzle ORM.
+
+By the end of this step, you have a robust Drizzle client ready to go, backed by a sturdy database connection.
+
+### Step 5: Fetching Data - A Practical Example
+
+As we progress, understanding how to harness the combined power of Directus and Drizzle ORM to fetch data becomes critical. Let's delve into a concrete example to fetch and display data for a blog post page.
+
+Here's an example that illustrates the process:
+
+```typescript
+import { DirectusImage } from '@components/directus/directus-image'
+import { RenderBlocks } from '@components/directus/render-blocks'
+import { FireIcon } from '@heroicons/react/24/outline'
+import { directus } from '@lib/directus'
+import { format } from 'date-fns'
+import {
+  blogpostCategories as _blogpostCategories,
+  authors,
+  blogposts,
+  blogpostsBlogpostCategories,
+  blogpostsContent
+} from 'directus-drizzle/schema'
+import { eq } from 'drizzle-orm'
+import { notFound } from 'next/navigation'
+
+export default async function BlogTestPage({ params: { slug } }: { params: { slug: string } }) {
+  // Fetching the blog post data and its associated author
+  const blogpostsData = await directus
+    .select()
+    .from(blogposts)
+    .innerJoin(authors, eq(blogposts.author, authors.id))
+    .where(eq(blogposts.slug, slug))
+    .where(eq(blogposts.status, 'published'))
+
+  if (!blogpostsData.length) notFound()
+
+  const { blogposts: blogpost, authors: author } = blogpostsData[0]
+
+  // Fetching the categories associated with the blog post
+  const blogpostCategories = await directus
+    .select({
+      name: _blogpostCategories.name,
+    })
+    .from(_blogpostCategories)
+    .innerJoin(
+      blogpostsBlogpostCategories,
+      eq(blogpostsBlogpostCategories.blogpostCategoriesId, _blogpostCategories.id),
+    )
+    .where(eq(blogpostsBlogpostCategories.blogpostsId, blogpost.id))
+
+  // Fetching content data associated with the blog post
+  const blogpostContentData = await directus
+    .select({
+      item: blogpostsContent.item,
+      collection: blogpostsContent.collection,
+    })
+    .from(blogpostsContent)
+    .where(eq(blogpostsContent.blogpostsId, blogpost.id))
+
+  return (
+    // ... Rendered JSX components ...
+  )
+}
+```
+
+#### What's happening in the code above?
+
+1. **Fetching Blog Post Data:** We start by making an inner join between the `blogposts` and `authors` tables. We're interested in blog posts that match a certain `slug` and have a status of `'published'`.
+2. **Fetching Associated Categories:** We then retrieve the categories associated with the blog post. We make use of inner joins to combine data from the `blogpostCategories` and `blogpostsBlogpostCategories` tables.
+3. **Fetching Content Data:** Finally, we fetch content data related to our blog post, leveraging the `blogpostsContent` table.
+4. **Rendering:** After fetching all the required data, we use JSX to structure and present the data on the page.
+
+This example underscores the simplicity and power that Drizzle ORM brings to the table. By crafting precise queries, we're able to seamlessly integrate our Directus collections with the application, ensuring a dynamic and efficient content delivery system.
+
+In the next section, we'll delve into the "many-2-any" field, focusing on our content. We will explore how we can effectively render these blocks, ensuring our data is showcased in the best possible manner. Stay tuned!
+
+### Step 6: Rendering Dynamic Blocks with Directus and Drizzle ORM
+
+A powerful feature of content management systems (CMS) like Directus is the capability to define dynamic content blocks, which can be conditionally rendered based on data and logic. This flexibility ensures that content creators and developers can model and present data in a versatile and modular manner. Let's dive into how you can set up and render these dynamic content blocks using Directus and Drizzle ORM.
+
+#### 1. render-blocks Component
+
+Our first order of business is to define a React component, `render-blocks.tsx`, which will be responsible for rendering each block based on its type:
+
+```typescript
+import { FC } from 'react'
+import { BlockImage } from './block-image'
+import { BlockRichText } from './block-richtext'
+
+export interface RenderBlocksProps {
+  blocks: {
+    item: string | null
+    collection: string | null
+  }[]
+}
+export const RenderBlocks: FC<RenderBlocksProps> = ({ blocks }) => {
+  return (
+    <>
+      {blocks.map((block, index) => {
+        if (block.item === null || block.collection === null) {
+          return null
+        }
+
+        const { collection, item } = block
+
+        switch (collection) {
+          case 'block_image':
+            return <BlockImage item={item} key={index} />
+          // Add more cases as needed
+          case 'block_rich_text':
+            return <BlockRichText item={item} key={index} />
+          default:
+            console.error(`Block type ${block.collection} is not implemented.`)
+            return null
+        }
+      })}
+    </>
+  )
+}
+```
+
+#### 2. Implementing Block Components
+
+Next, we create separate React components for each block type:
+
+- `block-richtext.tsx`: Displays rich text content, which can encompass formatted text, hyperlinks, and other HTML elements.
+
+```typescript
+import { directus } from '@lib/directus'
+import { blockRichText as _blockRichText } from 'directus-drizzle/schema'
+import { eq } from 'drizzle-orm'
+import { notFound } from 'next/navigation'
+import { FC } from 'react'
+
+export interface BlockRichTextProps {
+  item: string
+}
+export const BlockRichText: FC<BlockRichTextProps> = async ({ item }) => {
+  const blockRichTextData = await directus
+    .select()
+    .from(_blockRichText)
+    .where(eq(_blockRichText.id, item))
+
+  if (blockRichTextData.length === 0) notFound()
+
+  const blockRichText = blockRichTextData[0]
+
+  const { richText } = blockRichText
+
+  if (!richText) {
+    throw new Error('Rich Text cannot be null')
+  }
+
+  return (
+    <>
+      {/* <pre>{JSON.stringify(blockRichText, null, 2)}</pre> */}
+      <div
+        className="prose pb-8 lg:prose-xl"
+        dangerouslySetInnerHTML={{
+          __html: richText,
+        }}
+      />
+    </>
+  )
+}
+```
+
+- `block-image.tsx` : This component fetches and displays an image from Directus.
+
+```typescript
+import { FC } from 'react'
+import { DirectusImage } from './directus-image'
+import { directus } from '@lib/directus'
+import { notFound } from 'next/navigation'
+import { directusFiles, blockImage as _blockImage } from 'directus-drizzle/schema'
+import { eq } from 'drizzle-orm'
+
+export interface BlockImageProps {
+  item: string
+}
+export const BlockImage: FC<BlockImageProps> = async ({ item }) => {
+  const directusFilesData = await directus
+    .select({
+      directusFiles,
+    })
+    .from(_blockImage)
+    .innerJoin(directusFiles, eq(_blockImage.image, directusFiles.id))
+    .where(eq(_blockImage.id, item))
+
+  if (!directusFilesData.length) notFound()
+
+  const image = directusFilesData[0].directusFiles
+
+  //   return <pre>{JSON.stringify(image, null, 2)}</pre>
+
+  return <DirectusImage fileId={image.id} />
+}
+```
+
+#### 3. Image Helper Function
+
+To streamline the process of fetching image metadata from Directus, we employ a helper function, `getDirectusImageUrl`. This function retrieves crucial data such as image URL, dimensions, and title.
+
+```typescript
+import { directus } from '@lib/directus'
+import { directusFiles } from 'directus-drizzle/schema'
+import { eq } from 'drizzle-orm'
+
+export async function getDirectusImageUrl({ fileId }: { fileId: string }): Promise<{
+  url: string
+  height: number
+  width: number
+  title: string | null
+}> {
+  const directusFilesData = await directus
+    .select()
+    .from(directusFiles)
+    .where(eq(directusFiles.id, fileId))
+
+  if (!directusFilesData.length) throw new Error('No image found')
+
+  const image = directusFilesData[0]
+
+  const { height, width, title, filenameDisk } = image
+
+  if (!filenameDisk) {
+    throw new Error('Filename Disk cannot be null')
+  }
+
+  if (typeof height !== 'number' || typeof width !== 'number') {
+    throw new Error('Height and Width must be of type string')
+  }
+
+  const s3Url = `https://directus-backlinkgpt.s3.eu-central-1.amazonaws.com/${filenameDisk}`
+
+  return {
+    url: s3Url,
+    height,
+    width,
+    title,
+  }
+}
+```
+
+With this helper, fetching image data becomes seamless, enabling us to efficiently render images using the `directus-image.tsx` component.
+
+#### 4. Directus Image Component
+
+The `diretus-image.tsx` component serves to render an image fetched from Directus, using Next.js's `Image` component for optimized image delivery:
+
+```typescript
+import Image from 'next/image'
+import { FC } from 'react'
+import { getDirectusImageUrl } from './image'
+
+export interface DirectusImageProps {
+  fileId: string
+  className?: string
+  layout?: 'intrinsic' | 'fixed' | 'responsive' | undefined
+}
+export const DirectusImage: FC<DirectusImageProps> = async ({ fileId, className, layout }) => {
+  const { height, title, url, width } = await getDirectusImageUrl({ fileId })
+
+  return (
+    <>
+      {/* <pre>{JSON.stringify(blockImage, null, 2)}</pre> */}
+      <Image
+        className={className ?? ''}
+        src={url}
+        alt={title ?? ''}
+        width={width}
+        height={height}
+        layout={layout ?? 'intrinsic'}
+      />
+    </>
+  )
+}
+```
+
+With the described setup, we've unlocked **a robust method to handle and render dynamic content blocks** with Directus and Drizzle ORM. This modular approach not only encapsulates logic for each block type but also facilitates future additions or modifications to the block types.
+
+As you expand your project, simply create new block components and integrate them into the `render-blocks.tsx` component. This system is scalable, maintainable, and harnesses the full potential of Directus as a CMS alongside Drizzle ORM's capabilities.
+
+### Empowering Development: The Synergy of Directus and Drizzle
+
+As we journeyed through the intricate world of Directus and Drizzle, it's evident that when paired together, these tools can truly elevate your TypeScript development process. By streamlining database operations and seamlessly connecting TypeScript objects with database entries, we can **craft applications that are both robust and maintainable**.
+
+The power of introspection, complemented by precise schema generation and maintenance techniques, allows for a **hassle-free and accurate reflection of our database structures in our codebase**. And although we might occasionally encounter minor roadblocks, as seen with the schema generation discrepancies, the community-driven nature of these platforms ensures there are solutions readily available.
+
+In essence, Directus and Drizzle together offer a potent combination for developers aiming to **harness the benefits of a headless CMS with the predictability and type safety of TypeScript**. As you integrate these practices into your workflow, you'll find that they not only boost productivity but also ensure a more consistent and bug-free development experience.
+
+Happy coding!
