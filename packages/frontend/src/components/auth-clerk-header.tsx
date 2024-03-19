@@ -1,13 +1,13 @@
 'use client'
 
 import { Link } from '@/app/navigation'
-import { OrganizationSwitcher, UserButton, useAuth } from '@clerk/nextjs'
+import { OrganizationSwitcher, UserButton, useUser } from '@clerk/nextjs'
 import { FC } from 'react'
 import { buttonVariants } from './ui/button'
 
 export interface AuthClerkHeaderProps {}
 export const AuthClerkHeader: FC<AuthClerkHeaderProps> = () => {
-  const { isLoaded, isSignedIn } = useAuth()
+  const { isLoaded, isSignedIn } = useUser()
 
   if (isLoaded && !isSignedIn)
     return (

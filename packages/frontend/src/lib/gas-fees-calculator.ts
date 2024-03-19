@@ -187,6 +187,7 @@ interface GasPrice {
 type TFetchGasPricesResponse = GasPrice[]
 
 const fetchGasPrices = async (): Promise<TFetchGasPricesResponse> => {
+  console.log('fetchGasPrices')
   const requests = Promise.all(
     networks.map(async ({ network }) => {
       const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`

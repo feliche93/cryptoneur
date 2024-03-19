@@ -1,8 +1,3 @@
-// import { GitcoinGrant } from '@components/gas-fees-calculator/gitcoin-grant'
-// import { Header } from '@components/gas-fees-calculator/header'
-// import { ShareButtons } from '@components/gas-fees-calculator/share-buttons'
-// import { getMetaData } from '@lib/directus'
-
 import CurrencyInput from '@/components/gas-fees-calculator/currency-input'
 import { GasPriceRadio } from '@/components/gas-fees-calculator/gas-price-radio'
 import { GitcoinGrant } from '@/components/gas-fees-calculator/gitcoin-grant'
@@ -13,68 +8,6 @@ import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/componen
 import { getCurrencies, getTransactionTypes } from '@/data/gas-fees-calculator'
 import { currencies, getNetworkPrices } from '@/lib/gas-fees-calculator'
 import Image from 'next/image'
-
-// export const dynamic = 'error'
-export const revalidate = 300
-
-// export const generateMetadata = async ({ params }: { params: { slug: string; lang: string } }) => {
-//   const { lang } = params
-
-//   const metaData = await getMetaData({ id: 1, lang })
-
-//   return metaData
-// }
-interface Translation {
-  header_title: string
-  head_subtitle: string
-  header_description: string
-  gitcoin_title: string
-  share_button_title: string
-  table_header_name: string
-  table_header_type: string
-  table_header_token: string
-  table_header_gas_used: string
-  table_header_gas_price: string
-  table_header_gas_current_cost: string
-  share_buttons_share_title: string
-  currency_input_title: string
-  currency_input_description: string
-  curreny_input_label: string
-  used_gas_input_title: string
-  gas_price_input_title: string
-  used_gas_input_description: string
-  gas_price_input_description: string
-  used_gas_input_label_txn_type: string
-  used_gas_input_label_used_gas: string
-  gas_price_input_label_standard: string
-  gas_price_input_label_fast: string
-  gas_price_input_label_instant: string
-  gas_price_input_label_transaction_speed: string
-}
-
-interface DirectusResponse {
-  translations: Translation[]
-  zapper_logo: {
-    id: string
-  }
-}
-
-export interface TxnTypes {
-  data: Datum[]
-}
-
-export interface Datum {
-  gas: number
-  translations: TranslationTxnType[]
-}
-
-export interface TranslationTxnType {
-  id: number
-  gas_fees_calculator_txn_types_id: number
-  languages_code: string
-  name: string
-  source: string
-}
 
 const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string } }) => {
   const currenciesPromise = getCurrencies()
