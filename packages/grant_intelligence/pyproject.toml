@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "grant-intelligence"
+version = "0.1.0"
+description = ""
+authors = ["feliche93 <felix.vemmer@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "packages" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+instructor = "^0.6.7"
+sqlmodel = "^0.0.16"
+tenacity = "^8.2.3"
+playwright = "^1.42.0"
+python-dotenv = "^1.0.1"
+pandas = "^2.2.1"
+html2text = "^2024.2.26"
+beautifulsoup4 = "^4.12.3"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.3.4"
+ipykernel = "^6.29.3"
+pre-commit = "^3.6.2"
+pyright = "^1.1.355"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

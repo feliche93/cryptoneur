@@ -112,3 +112,26 @@ export const transactionTypes = pgTable(
     }
   },
 )
+
+export const grants = pgTable(
+  'grants',
+  {
+    id: text('id')
+      .primaryKey()
+      .default(sql<string>`'grant_' || nanoid()`),
+    name: varchar('name', { length: 256 }).notNull(),
+    description: text('description'),
+    active: boolean('active').notNull().default(true),
+    url_application: text('url_application'),
+    url_info: text('url_info'),
+    content: text('content'),
+    slug: text('slug').notNull(),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  },
+  (table) => {
+    return {
+      nameIdx: index('grants_name_idx').on(table.name),
+    }
+  },
+)

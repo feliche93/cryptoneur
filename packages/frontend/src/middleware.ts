@@ -20,6 +20,7 @@ export default authMiddleware({
     '/:locale',
     '/:locale/sign-in',
     '/:locale/sign-up',
+    '/:locale/about',
     // blog
     '/:locale/blog/:path*',
     '/:locale/web3-grants',

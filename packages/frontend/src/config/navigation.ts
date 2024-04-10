@@ -20,6 +20,10 @@ export const navigationConfig: NavigationConfig = {
         href: '/gas-fees-calculator',
       },
       {
+        title: 'About',
+        href: '/about',
+      },
+      {
         title: 'GitHub',
         href: siteConfig.links.github,
         external: true,
