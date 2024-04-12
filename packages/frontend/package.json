@@ -3,24 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm concurrently \"contentlayer dev\" \"next dev\"",
-    "build": "pnpm contentlayer build && pnpm next build && pnpm push",
-    "preview": "pnpm next build && pnpm next start",
-    "start": "pnpm next start",
-    "lint": "prettier . --check && pnpm eslint",
+    "dev": "bun concurrently \"contentlayer dev\" \"next dev\"",
+    "build": "bun contentlayer build && bun next build",
+    "preview": "bun next build && bun next start",
+    "start": "bun next start",
+    "lint": "prettier . --check && bun eslint",
     "lint:fix": "prettier . --write && eslint --fix",
     "lint:format": "prettier . --write",
     "type-check": "tsc --pretty --noEmit",
     "generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
-    "generate-custom": "drizzle-kit generate:pg --custom --config=drizzle.config.ts",
     "update-pg": "drizzle-kit up:pg --config=drizzle.config.ts",
     "check": "drizzle-kit check:pg --config=drizzle.config.ts",
     "drop": "drizzle-kit drop --config=drizzle.config.ts",
-    "push": "tsx migrate.ts",
-    "generate-content": "pnpm contentlayer build",
+    "generate-content": "bun contentlayer build",
     "generate-posthog-sdk": "npx openapi-typescript-codegen --input ./openapi-specs/posthog.yaml --output ./src/lib/posthog-typescript-sdk --name client --useOptions --client fetch --useUnionTypes",
     "generate-papierkram-sdk": "npx openapi-typescript-codegen --input https://felixvemmer.papierkram.de/api/v1/api-docs/api/v1/swagger.json --output ./src/lib/papierkram-typescript-sdk --name client --useOptions --client fetch --useUnionTypes",
-    "clean": "rm -rf pnpm-lock.yaml node_modules .next"
+    "clean": "rm -rf bun-lock.yaml node_modules .next",
+    "studio": "drizzle-kit studio --config=drizzle.config.ts",
+    "push": "bunx tsx migrate.ts"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.3.2",
@@ -105,6 +105,7 @@
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/bun": "latest",
     "@types/lodash": "^4.17.0",
     "@types/node": "20.11.28",
     "@types/react": "18.2.67",
@@ -117,6 +118,7 @@
     "eslint-config-next": "14.1.3",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-mdx": "^3.1.5",
+    "pg": "^8.11.5",
     "postcss": "^8.4.36",
     "prettier": "^3.2.5",
     "prettier-plugin-organize-imports": "^3.2.4",
@@ -126,7 +128,9 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^3.0.1",
     "tailwindcss": "^3.4.1",
-    "tsx": "^4.7.1",
+    "tsx": "^4.7.2",
     "typescript": "5.4.2"
-  }
+  },
+  "module": "index.ts",
+  "type": "module"
 }

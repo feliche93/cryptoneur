@@ -113,19 +113,73 @@ export const transactionTypes = pgTable(
   },
 )
 
+export const blockchains = pgTable('blockchains', {
+  id: text('id')
+    .primaryKey()
+    .default(sql<string>`'bc_' || nanoid()`),
+  old_id: integer('old_id').notNull().unique(),
+  name: text('name').notNull(),
+  slug: text('slug').notNull().unique(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+export const fiat_currencies = pgTable('fiat_currencies', {
+  id: text('id')
+    .primaryKey()
+    .default(sql<string>`'fiat_' || nanoid()`),
+  old_id: integer('old_id').notNull().unique(),
+  name: text('name').notNull(),
+  symbol: text('symbol').notNull(),
+  sign: text('sign').notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+export const categories = pgTable('categories', {
+  id: text('id')
+    .primaryKey()
+    .default(sql<string>`'cat_' || nanoid()`),
+  old_id: integer('old_id').notNull().unique(),
+  name: text('name').notNull(),
+  slug: text('slug').notNull().unique(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+export const useCases = pgTable('use_cases', {
+  id: text('id')
+    .primaryKey()
+    .default(sql<string>`'uc' || nanoid()`),
+  old_id: integer('old_id').notNull().unique(),
+  name: text('name').notNull(),
+  slug: text('slug').notNull().unique(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
 export const grants = pgTable(
   'grants',
   {
     id: text('id')
       .primaryKey()
-      .default(sql<string>`'grant_' || nanoid()`),
-    name: varchar('name', { length: 256 }).notNull(),
-    description: text('description'),
+      .default(sql<string>`'gr' || nanoid()`),
+    old_id: integer('old_id').notNull().unique(),
+    name: text('name').notNull(),
+    description: text('description').notNull(),
     active: boolean('active').notNull().default(true),
-    url_application: text('url_application'),
-    url_info: text('url_info'),
+    url_application: text('url_application').notNull(),
+    url_info: text('url_info').notNull(),
     content: text('content'),
-    slug: text('slug').notNull(),
+    slug: text('slug').notNull().unique(),
+    fundingAmountMin: integer('funding_amount_min'),
+    fundingAmountMax: integer('funding_amount_max'),
+    fundingAmountCurrency: text('funding_amount_currency').references(() => fiat_currencies.id),
+    githubUrl: text('github_url'),
+    twitterUrl: text('twitter_url'),
+    discordUrl: text('discord_url'),
+    websiteUrl: text('website_url'),
+    logoUrl: text('logo_url'),
     createdAt: timestamp('created_at').notNull().defaultNow(),
     updatedAt: timestamp('updated_at').notNull().defaultNow(),
   },
