@@ -165,6 +165,7 @@ export const grants = pgTable(
       .primaryKey()
       .default(sql<string>`'gr' || nanoid()`),
     old_id: integer('old_id').notNull().unique(),
+    organizationId: text('organization_id').references(() => organizations.id),
     name: text('name').notNull(),
     description: text('description').notNull(),
     active: boolean('active').notNull().default(true),

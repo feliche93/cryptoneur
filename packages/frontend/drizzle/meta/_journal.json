@@ -141,6 +141,13 @@
       "when": 1712919751248,
       "tag": "0019_exotic_norrin_radd",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "5",
+      "when": 1712928028950,
+      "tag": "0020_robust_vision",
+      "breakpoints": true
     }
   ]
 }

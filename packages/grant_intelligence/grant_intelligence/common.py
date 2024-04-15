@@ -1,14 +1,18 @@
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import instructor
+from openai import OpenAI
 from sqlalchemy import Engine, create_engine  # type: ignore
 from nanoid import generate
 
 ENV_PATH = Path(__file__).parent.parent / ".env"
 
-load_dotenv(
-    dotenv_path=ENV_PATH,
-)
+
+def load_env():
+    load_dotenv(
+        dotenv_path=ENV_PATH,
+    )
 
 
 def create_db_engine() -> Engine:
@@ -44,3 +48,7 @@ def generate_custom_nanoid(prefix: str) -> str:
     alphabet = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     size = 21
     return f"{prefix}_{generate(alphabet, size)}"
+
+
+def get_instructor_client():
+    return instructor.from_openai(OpenAI())

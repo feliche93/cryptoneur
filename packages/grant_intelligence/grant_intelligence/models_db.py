@@ -1,5 +1,7 @@
 from datetime import datetime
 from typing import Optional
+
+from sqlalchemy import JSON, Column
 from common import generate_custom_nanoid
 from slugify import slugify
 from sqlmodel import Field, SQLModel
@@ -79,6 +81,9 @@ class Grant(SQLModel, table=True):  # type: ignore
     id: Optional[str] = Field(
         default_factory=lambda: generate_custom_nanoid("gr"), primary_key=True
     )
+    organization_id: Optional[str] = Field(
+        nullable=False, foreign_key="organizations.id"
+    )
     old_id: int = Field(nullable=False, unique=True)
     name: str = Field(nullable=False)
     description: str = Field(nullable=False)
@@ -97,3 +102,42 @@ class Grant(SQLModel, table=True):  # type: ignore
     logo_url: Optional[str] = Field(default=None)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+
+class Organization(SQLModel, table=True):  # type: ignore
+    __tablename__ = "organizations"  # type: ignore
+
+    id: str = Field(primary_key=True)
+    name: str = Field(nullable=False, max_length=256)
+    slug: str = Field(nullable=False, max_length=256, unique=True)
+    image_url: str = Field(nullable=False, max_length=256)
+    has_image: bool = Field(default=False, nullable=False)
+    created_by: Optional[str] = Field(nullable=False, foreign_key="users.id")
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+    public_metadata: Optional[dict] = Field(default=None, sa_column=Column(JSON))
+    private_metadata: Optional[dict] = Field(default=None, sa_column=Column(JSON))
+
+    max_allowed_memberships: int = Field(default=0, nullable=False)
+    admin_delete_enabled: bool = Field(default=False, nullable=False)
+    members_count: Optional[int] = Field(default=None)
+
+
+class User(SQLModel, table=True):  # type: ignore
+    __tablename__ = "users"  # type: ignore
+
+    id: str = Field(primary_key=True)
+    username: Optional[str] = Field(default=None)
+    first_name: Optional[str] = Field(default=None)
+    last_name: Optional[str] = Field(default=None)
+    image_url: str = Field(nullable=False)
+    has_image: bool = Field(default=False, nullable=False)
+    primary_email_address: Optional[str] = Field(default=None)
+    primary_phone_number: Optional[str] = Field(default=None)
+    public_metadata: Optional[dict] = Field(default=None, sa_column=Column(JSON))
+    private_metadata: Optional[dict] = Field(default=None, sa_column=Column(JSON))
+    unsafe_metadata: Optional[dict] = Field(default=None, sa_column=Column(JSON))
+    last_sign_in_at: Optional[datetime] = Field(default=None)
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
