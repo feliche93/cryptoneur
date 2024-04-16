@@ -1,0 +1,1 @@
+ALTER TABLE "blockchains" ADD COLUMN "old_id" integer;

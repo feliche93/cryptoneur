@@ -1,0 +1,1 @@
+ALTER TABLE "blockchains" ADD CONSTRAINT "blockchains_slug_unique" UNIQUE("slug");

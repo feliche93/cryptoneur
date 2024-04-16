@@ -43,6 +43,111 @@
       "when": 1710783639525,
       "tag": "0005_early_maverick",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1712873594354,
+      "tag": "0006_deep_harpoon",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1712874107979,
+      "tag": "0007_friendly_cannonball",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1712874119110,
+      "tag": "0008_first_luminals",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1712874449416,
+      "tag": "0009_clammy_jane_foster",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1712913981422,
+      "tag": "0010_absent_james_howlett",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1712915624395,
+      "tag": "0011_watery_wildside",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1712916552649,
+      "tag": "0012_fast_sir_ram",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "5",
+      "when": 1712916783221,
+      "tag": "0013_breezy_taskmaster",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "5",
+      "when": 1712917292029,
+      "tag": "0014_nebulous_klaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "5",
+      "when": 1712917445756,
+      "tag": "0015_bizarre_lord_hawal",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "5",
+      "when": 1712917635797,
+      "tag": "0016_vengeful_medusa",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "5",
+      "when": 1712918313480,
+      "tag": "0017_jittery_weapon_omega",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "5",
+      "when": 1712919471199,
+      "tag": "0018_real_magma",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "5",
+      "when": 1712919751248,
+      "tag": "0019_exotic_norrin_radd",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "5",
+      "when": 1712928028950,
+      "tag": "0020_robust_vision",
+      "breakpoints": true
     }
   ]
 }
