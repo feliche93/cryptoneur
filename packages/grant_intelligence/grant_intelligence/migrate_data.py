@@ -224,6 +224,7 @@ async def migrate_grants():
             neon_session.commit()
 
         if not existing_grant:
+            grant.organization_id = clerk_organization.id
             neon_session.add(grant)
             neon_session.commit()
         else:
@@ -235,7 +236,7 @@ async def migrate_grants():
     neon_session.commit()
 
 
-migrate_blockchains()
+# migrate_blockchains()
 # migrate_fiat_currencies()
 # migrate_categories()
 # migrate_use_cases()
