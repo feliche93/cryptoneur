@@ -235,7 +235,7 @@ async def migrate_grants():
     neon_session.commit()
 
 
-# migrate_blockchains()
+migrate_blockchains()
 # migrate_fiat_currencies()
 # migrate_categories()
 # migrate_use_cases()

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "bun concurrently \"contentlayer dev\" \"next dev\"",
-    "build": "bun contentlayer build && bun next build",
+    "build": "bun contentlayer build && bun next build && bun push",
     "preview": "bun next build && bun next start",
     "start": "bun next start",
     "lint": "prettier . --check && bun eslint",
@@ -20,7 +20,7 @@
     "generate-papierkram-sdk": "npx openapi-typescript-codegen --input https://felixvemmer.papierkram.de/api/v1/api-docs/api/v1/swagger.json --output ./src/lib/papierkram-typescript-sdk --name client --useOptions --client fetch --useUnionTypes",
     "clean": "rm -rf bun-lock.yaml node_modules .next",
     "studio": "drizzle-kit studio --config=drizzle.config.ts",
-    "push": "bunx tsx migrate.ts"
+    "push": "bun tsx migrate.ts"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.3.2",
