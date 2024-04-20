@@ -1,12 +1,19 @@
 import { db, withTableFeatures } from '@/lib/db'
 import { STableSearchParams } from '@/models/data-table'
 import { fiatCurrencies, grants, organizations } from '@/schema'
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { z } from 'zod'
 
 export const SGetGrantsParams = z
   .object({
     grantId: z.string().optional(),
+    grantName: z
+      .string()
+      .optional()
+      .transform((v) => {
+        if (!v) return undefined
+        return `%${v}%`
+      }),
     // userId: sUserId,
     // websiteUrl: z
     //   .string()
@@ -58,6 +65,9 @@ export const getGrants = async (params: TGetGrantsParams) => {
     .from(grants)
     .leftJoin(fiatCurrencies, eq(grants.fundingAmountCurrency, fiatCurrencies.id))
     .innerJoin(organizations, eq(grants.organizationId, organizations.id))
+    .where(
+      parsedParams.grantName ? sql`(${grants.name}) ILIKE ${parsedParams.grantName}` : undefined,
+    )
 
   const result = await withTableFeatures(query.$dynamic(), {
     ...parsedParams,

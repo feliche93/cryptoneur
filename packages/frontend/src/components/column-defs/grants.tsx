@@ -5,7 +5,7 @@ import { TGrant } from '@/data/grants'
 import { absoluteUrl, formatCurrency } from '@/lib/utils'
 import type { TDataTableSearchableColumn } from '@/types'
 import type { ColumnDef } from '@tanstack/react-table'
-import { ArrowRightCircle, ExternalLink, PencilLineIcon } from 'lucide-react'
+import { ExternalLink, PencilLineIcon } from 'lucide-react'
 import { DataTableRowActions, LinkRowAction } from '../data-table/data-table-row-actions'
 import { Badge } from '../ui/badge'
 
@@ -108,9 +108,9 @@ export function fetchGrantsTableColumnDef(): ColumnDef<TGrant, unknown>[] {
 
         return (
           <DataTableRowActions>
-            <LinkRowAction href={viewHref} tooltip="View Grant Details">
+            {/* <LinkRowAction href={viewHref} tooltip="View Grant Details">
               <ArrowRightCircle className="size-4 text-primary" />
-            </LinkRowAction>
+            </LinkRowAction> */}
             <LinkRowAction
               target="_blank"
               href={row.original.grantUrlApplication}
@@ -135,6 +135,6 @@ export function fetchGrantsTableColumnDef(): ColumnDef<TGrant, unknown>[] {
 export const searchableColumns: TDataTableSearchableColumn<TGrant>[] = [
   {
     id: 'grantName',
-    placeholder: 'Filter Website Url...',
+    placeholder: 'Filter Grant Name...',
   },
 ]
