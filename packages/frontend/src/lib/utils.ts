@@ -15,6 +15,18 @@ export function formatDate(input: string | number): string {
   })
 }
 
+export const formatCurrency = (
+  input: number | undefined | null,
+  currency: string | undefined | null,
+) => {
+  if (!input || !currency) return null
+
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+  }).format(input)
+}
+
 export function absoluteUrl(path: string) {
   if (!process.env.NEXT_PUBLIC_URL) throw new Error('NEXT_PUBLIC_URL is not defined')
 

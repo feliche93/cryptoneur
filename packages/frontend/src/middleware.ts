@@ -24,6 +24,7 @@ export default authMiddleware({
     // blog
     '/:locale/blog/:path*',
     '/:locale/web3-grants',
+    '/:locale/web3-grants/:path*',
     '/:locale/gas-fees-calculator',
     '/:locale/playground',
   ],

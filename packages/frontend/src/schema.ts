@@ -124,7 +124,7 @@ export const blockchains = pgTable('blockchains', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 })
 
-export const fiat_currencies = pgTable('fiat_currencies', {
+export const fiatCurrencies = pgTable('fiat_currencies', {
   id: text('id')
     .primaryKey()
     .default(sql<string>`'fiat_' || nanoid()`),
@@ -169,13 +169,13 @@ export const grants = pgTable(
     name: text('name').notNull(),
     description: text('description').notNull(),
     active: boolean('active').notNull().default(true),
-    url_application: text('url_application').notNull(),
-    url_info: text('url_info').notNull(),
+    urlApplication: text('url_application').notNull(),
+    urlInfo: text('url_info').notNull(),
     content: text('content'),
     slug: text('slug').notNull().unique(),
     fundingAmountMin: integer('funding_amount_min'),
     fundingAmountMax: integer('funding_amount_max'),
-    fundingAmountCurrency: text('funding_amount_currency').references(() => fiat_currencies.id),
+    fundingAmountCurrency: text('funding_amount_currency').references(() => fiatCurrencies.id),
     githubUrl: text('github_url'),
     twitterUrl: text('twitter_url'),
     discordUrl: text('discord_url'),
