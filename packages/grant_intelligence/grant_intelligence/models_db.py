@@ -165,3 +165,15 @@ class GrantCategory(SQLModel, table=True):  # type: ignore
     category_id: str = Field(nullable=False, foreign_key="categories.id")
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+
+class GrantUseCase(SQLModel, table=True):  # type: ignore
+    __tablename__ = "grant_use_cases"  # type: ignore
+
+    id: Optional[str] = Field(
+        default_factory=lambda: generate_custom_nanoid("guc"), primary_key=True
+    )
+    grant_id: str = Field(nullable=False, foreign_key="grants.id")
+    use_case_id: str = Field(nullable=False, foreign_key="use_cases.id")
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)

@@ -210,3 +210,13 @@ export const grantCategories = pgTable('grant_categories', {
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 })
+
+export const grantUseCases = pgTable('grant_use_cases', {
+  id: text('id')
+    .primaryKey()
+    .default(sql<string>`'guc_' || nanoid()`),
+  grantId: text('grant_id').references(() => grants.id),
+  useCaseId: text('use_case_id').references(() => useCases.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})

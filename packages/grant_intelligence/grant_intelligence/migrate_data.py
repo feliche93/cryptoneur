@@ -10,6 +10,7 @@ from models_db import (
     Grant,
     GrantBlockchain,
     GrantCategory,
+    GrantUseCase,
     UseCase,
     Organization,
 )
@@ -288,6 +289,28 @@ def migrate_grant_categories():
             )
 
         neon_session.add(GrantCategory(grant_id=grant.id, category_id=category.id))
+        neon_session.commit()
+
+
+def migrate_grant_use_cases():
+    grant_use_cases = pd.read_sql_query(
+        "SELECT grant_id, use_case_id FROM grant_use_cases", supabase_engine
+    )
+
+    for _, row in grant_use_cases.iterrows():
+        grant = neon_session.exec(
+            select(Grant).where(Grant.old_id == int(row.get("grant_id")))  # type: ignore
+        ).first()
+        use_case = neon_session.exec(
+            select(UseCase).where(UseCase.old_id == int(row.get("use_case_id")))  # type: ignore
+        ).first()
+
+        if not grant or not grant.id or not use_case or not use_case.id:
+            raise ValueError(
+                f"Grant or use case not found for {row.get('grant_id')} and {row.get('use_case_id')}"
+            )
+
+        neon_session.add(GrantUseCase(grant_id=grant.id, use_case_id=use_case.id))
         neon_session.commit()
 
 
