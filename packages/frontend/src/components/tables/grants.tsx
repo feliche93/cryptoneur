@@ -13,7 +13,9 @@ interface CampaignsTableProps {
 
 export function GrantsTable({ dataPromise }: CampaignsTableProps) {
   // Learn more about React.use here: https://react.dev/reference/react/use
-  const { data, pageCount } = React.use(dataPromise)
+  const { grants } = React.use(dataPromise)
+
+  const { data, pageCount } = grants
 
   // Memoize the columns so they don't re-render on every render
   const columns = React.useMemo<ColumnDef<TGrant, unknown>[]>(() => fetchGrantsTableColumnDef(), [])

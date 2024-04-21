@@ -1,7 +1,14 @@
-import { db, withTableFeatures } from '@/lib/db'
+import { db, withPagination } from '@/lib/db'
 import { STableSearchParams } from '@/models/data-table'
-import { fiatCurrencies, grants, organizations } from '@/schema'
-import { eq, sql } from 'drizzle-orm'
+import {
+  fiatCurrencies,
+  grantBlockchains,
+  grantCategories,
+  grantUseCases,
+  grants,
+  organizations,
+} from '@/schema'
+import { SQL, asc, desc, eq, sql } from 'drizzle-orm'
 import { z } from 'zod'
 
 export const SGetGrantsParams = z
@@ -39,10 +46,55 @@ export type TGetGrantsParams = z.infer<typeof SGetGrantsParams>
 export const getGrants = async (params: TGetGrantsParams) => {
   const parsedParams = SGetGrantsParams.parse(params)
 
+  // Split the sort parameter into column and order
   const [column, order] = parsedParams.sort?.split('.') ?? []
-  const sortOrder = order === 'desc' ? 'desc' : order === 'asc' ? 'asc' : undefined
+  const sortOrder = order === 'desc' ? desc : asc
 
-  // const grantBlockchainsSubquery = db.select().from(gra)
+  // Define a mapping for your sort columns to actual SQL expressions or column names
+  const sortMap = {
+    default: grants.name,
+    grantFundingAmountMin: grants.fundingAmountMin,
+    grantFundingAmountMax: grants.fundingAmountMax,
+    grantOrganizationName: organizations.name,
+    grantName: grants.name,
+    // websiteUrl: websites.url,
+    // campaignTypeName: campaignTypes.name,
+    // campaignCreatedAt: campaigns.createdAt,
+  }
+
+  // Determine the SQL expression or column name to use for sorting
+  const orderBySql = column
+    ? sortMap[column as keyof typeof sortMap] || sortMap.default
+    : sortMap.default
+
+  const orders: SQL<unknown>[] = [sortOrder(orderBySql).append(sql.raw(` NULLS LAST`))]
+
+  const grantBlockchainsSubquery = db
+    .select({
+      grantId: grantBlockchains.grantId,
+      blockchainIds: sql<string[]>`array_agg(${grantBlockchains.blockchainId})`,
+    })
+    .from(grantBlockchains)
+    .groupBy(grantBlockchains.grantId)
+    .as('grantBlockchainsSubquery')
+
+  const grantUseCasesSubquery = db
+    .select({
+      grantId: grantUseCases.grantId,
+      useCaseIds: sql<string[]>`array_agg(${grantUseCases.useCaseId})`,
+    })
+    .from(grantUseCases)
+    .groupBy(grantUseCases.grantId)
+    .as('grantUseCasesSubquery')
+
+  const grantCategoriesSubquery = db
+    .select({
+      grantId: grantCategories.grantId,
+      categoryIds: sql<string[]>`array_agg(${grantCategories.categoryId})`,
+    })
+    .from(grantCategories)
+    .groupBy(grantCategories.grantId)
+    .as('grantCategoriesSubquery')
 
   const query = db
     .select({
@@ -65,31 +117,33 @@ export const getGrants = async (params: TGetGrantsParams) => {
     .from(grants)
     .leftJoin(fiatCurrencies, eq(grants.fundingAmountCurrency, fiatCurrencies.id))
     .innerJoin(organizations, eq(grants.organizationId, organizations.id))
+    .innerJoin(grantBlockchainsSubquery, eq(grants.id, grantBlockchainsSubquery.grantId))
+    .innerJoin(grantUseCasesSubquery, eq(grants.id, grantUseCasesSubquery.grantId))
+    .innerJoin(grantCategoriesSubquery, eq(grants.id, grantCategoriesSubquery.grantId))
     .where(
       parsedParams.grantName ? sql`(${grants.name}) ILIKE ${parsedParams.grantName}` : undefined,
     )
 
-  const result = await withTableFeatures(query.$dynamic(), {
-    ...parsedParams,
-    order: sortOrder,
-    orderBy: column,
-    sortMap: {
-      default: grants.name,
-      grantFundingAmountMin: grants.fundingAmountMin,
-      grantFundingAmountMax: grants.fundingAmountMax,
-      grantOrganizationName: organizations.name,
-      grantName: grants.name,
-      // websiteUrl: websites.url,
-      // campaignTypeName: campaignTypes.name,
-      // campaignCreatedAt: campaigns.createdAt,
-    },
-  })
+  if (orders.length > 0) {
+    query.orderBy(...orders)
+  }
+
+  const queryWithPagination = withPagination(
+    query.$dynamic(),
+    parsedParams.page,
+    parsedParams.perPage,
+  )
+
+  const [grantsData] = await Promise.all([queryWithPagination])
+
   // console.timeEnd('getCampaigns Query Time')
-  return result
+  return {
+    grants: grantsData,
+  }
 }
 
 export type TGetGrantsResponse = Awaited<ReturnType<typeof getGrants>>
-export type TGrant = TGetGrantsResponse['data'][0]
+export type TGrant = TGetGrantsResponse['grants']['data'][0]
 
 export const getGrantsCount = async () => {
   const result = await db.select({ count: sql<number>`count(${grants.id})` }).from(grants)
