@@ -190,3 +190,23 @@ export const grants = pgTable(
     }
   },
 )
+
+export const grantBlockchains = pgTable('grant_blockchains', {
+  id: text('id')
+    .primaryKey()
+    .default(sql<string>`'gbc_' || nanoid()`),
+  grantId: text('grant_id').references(() => grants.id),
+  blockchainId: text('blockchain_id').references(() => blockchains.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+export const grantCategories = pgTable('grant_categories', {
+  id: text('id')
+    .primaryKey()
+    .default(sql<string>`'gcat_' || nanoid()`),
+  grantId: text('grant_id').references(() => grants.id),
+  categoryId: text('category_id').references(() => categories.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})

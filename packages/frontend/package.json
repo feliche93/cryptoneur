@@ -70,7 +70,7 @@
     "contentlayer": "^0.3.4",
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
-    "drizzle-kit": "^0.20.16",
+    "drizzle-kit": "^0.20.17",
     "drizzle-orm": "^0.30.8",
     "drizzle-zod": "^0.5.1",
     "framer-motion": "^11.1.7",

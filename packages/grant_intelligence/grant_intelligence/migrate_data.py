@@ -3,7 +3,16 @@ import numpy as np
 import pandas as pd
 from pydantic import BaseModel, Field
 from slugify import slugify
-from models_db import Blockchain, Category, FiatCurrency, Grant, UseCase, Organization
+from models_db import (
+    Blockchain,
+    Category,
+    FiatCurrency,
+    Grant,
+    GrantBlockchain,
+    GrantCategory,
+    UseCase,
+    Organization,
+)
 from db import DATABASE_URL, SUPABASE_CONNECTION_STRING, get_db_session, get_db_engine
 from sqlmodel import select
 from clerk import Clerk
@@ -236,8 +245,56 @@ async def migrate_grants():
     neon_session.commit()
 
 
+def migrate_grant_blockchains():
+    grant_blockchains = pd.read_sql_query(
+        "SELECT grant_id, blockchain_id FROM grant_blockchains", supabase_engine
+    )
+
+    for _, row in grant_blockchains.iterrows():
+        grant = neon_session.exec(
+            select(Grant).where(Grant.old_id == int(row.get("grant_id")))  # type: ignore
+        ).first()
+        blockchain = neon_session.exec(
+            select(Blockchain).where(Blockchain.old_id == int(row.get("blockchain_id")))  # type: ignore
+        ).first()
+
+        if not grant or not grant.id or not blockchain or not blockchain.id:
+            raise ValueError(
+                f"Grant or blockchain not found for {row.get('grant_id')} and {row.get('blockchain_id')}"
+            )
+
+        neon_session.add(
+            GrantBlockchain(grant_id=grant.id, blockchain_id=blockchain.id)
+        )
+        neon_session.commit()
+
+
+def migrate_grant_categories():
+    grant_categories = pd.read_sql_query(
+        "SELECT grant_id, category_id FROM grant_categories", supabase_engine
+    )
+
+    for _, row in grant_categories.iterrows():
+        grant = neon_session.exec(
+            select(Grant).where(Grant.old_id == int(row.get("grant_id")))  # type: ignore
+        ).first()
+        category = neon_session.exec(
+            select(Category).where(Category.old_id == int(row.get("category_id")))  # type: ignore
+        ).first()
+
+        if not grant or not grant.id or not category or not category.id:
+            raise ValueError(
+                f"Grant or category not found for {row.get('grant_id')} and {row.get('category_id')}"
+            )
+
+        neon_session.add(GrantCategory(grant_id=grant.id, category_id=category.id))
+        neon_session.commit()
+
+
 # migrate_blockchains()
 # migrate_fiat_currencies()
 # migrate_categories()
 # migrate_use_cases()
 # migrate_grants()
+# migrate_grant_blockchains()
+# migrate_grant_categories()
