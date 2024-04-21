@@ -3,6 +3,7 @@
 import { DataTable } from '@/components/data-table/data-table'
 import { TGetGrantsResponse, TGrant } from '@/data/grants'
 import { useDataTable } from '@/hooks/use-data-table'
+import { TDataTableFilterableColumn } from '@/types'
 import { type ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
 import { fetchGrantsTableColumnDef, searchableColumns } from '../column-defs/grants'
@@ -13,7 +14,7 @@ interface CampaignsTableProps {
 
 export function GrantsTable({ dataPromise }: CampaignsTableProps) {
   // Learn more about React.use here: https://react.dev/reference/react/use
-  const { grants } = React.use(dataPromise)
+  const { grants, cachedBlockchainOptions } = React.use(dataPromise)
 
   const { data, pageCount } = grants
 
@@ -27,6 +28,14 @@ export function GrantsTable({ dataPromise }: CampaignsTableProps) {
     searchableColumns,
     // filterableColumns,
   })
+
+  const filterableColumns: TDataTableFilterableColumn<TGrant>[] = [
+    {
+      id: 'grantBlockchainIds',
+      title: 'Blockchain',
+      options: cachedBlockchainOptions,
+    },
+  ]
 
   // Toggling some data-table states for demo
   const id = React.useId()
@@ -54,23 +63,26 @@ export function GrantsTable({ dataPromise }: CampaignsTableProps) {
   // })
 
   return (
-    <DataTable
-      table={table}
-      columns={columns}
-      searchableColumns={searchableColumns}
-      // filterableColumns={filterableColumns}
-      advancedFilter={false}
-      floatingBarContent={floatingBarContent}
-      // deleteRowsAction={(event) => {
-      //   event?.preventDefault()
+    <>
+      {/* <pre>{JSON.stringify(cachedBlockchainOptions, null, 2)}</pre> */}
+      <DataTable
+        table={table}
+        columns={columns}
+        searchableColumns={searchableColumns}
+        filterableColumns={filterableColumns}
+        advancedFilter={false}
+        floatingBarContent={floatingBarContent}
+        // deleteRowsAction={(event) => {
+        //   event?.preventDefault()
 
-      //   const selectedRows = table.getFilteredSelectedRowModel().rows as {
-      //     original: TGrant
-      //   }[]
+        //   const selectedRows = table.getFilteredSelectedRowModel().rows as {
+        //     original: TGrant
+        //   }[]
 
-      //   selectedRows.map((row) => executeDeleteCampaign({ campaignId: row.original.campaignId }))
-      //   table.resetRowSelection()
-      // }}
-    />
+        //   selectedRows.map((row) => executeDeleteCampaign({ campaignId: row.original.campaignId }))
+        //   table.resetRowSelection()
+        // }}
+      />
+    </>
   )
 }

@@ -10,6 +10,9 @@ import {
 } from '@/schema'
 import { SQL, asc, desc, eq, sql } from 'drizzle-orm'
 import { z } from 'zod'
+import { getCachedBlockchainOptions } from './blockchains'
+import { getCachedCategoriesOptions } from './categories'
+import { getCachedUseCasesOptions } from './use-cases'
 
 export const SGetGrantsParams = z
   .object({
@@ -72,7 +75,7 @@ export const getGrants = async (params: TGetGrantsParams) => {
   const grantBlockchainsSubquery = db
     .select({
       grantId: grantBlockchains.grantId,
-      blockchainIds: sql<string[]>`array_agg(${grantBlockchains.blockchainId})`,
+      blockchainIds: sql<string[]>`array_agg(${grantBlockchains.blockchainId})`.as('blockchainIds'),
     })
     .from(grantBlockchains)
     .groupBy(grantBlockchains.grantId)
@@ -81,7 +84,7 @@ export const getGrants = async (params: TGetGrantsParams) => {
   const grantUseCasesSubquery = db
     .select({
       grantId: grantUseCases.grantId,
-      useCaseIds: sql<string[]>`array_agg(${grantUseCases.useCaseId})`,
+      useCaseIds: sql<string[]>`array_agg(${grantUseCases.useCaseId})`.as('useCaseIds'),
     })
     .from(grantUseCases)
     .groupBy(grantUseCases.grantId)
@@ -90,7 +93,7 @@ export const getGrants = async (params: TGetGrantsParams) => {
   const grantCategoriesSubquery = db
     .select({
       grantId: grantCategories.grantId,
-      categoryIds: sql<string[]>`array_agg(${grantCategories.categoryId})`,
+      categoryIds: sql<string[]>`array_agg(${grantCategories.categoryId})`.as('categoryIds'),
     })
     .from(grantCategories)
     .groupBy(grantCategories.grantId)
@@ -113,6 +116,9 @@ export const getGrants = async (params: TGetGrantsParams) => {
       grantUrlApplication: grants.urlApplication,
       grantCreatedAt: grants.createdAt,
       grantUpdatedAt: grants.updatedAt,
+      grantBlockchainIds: grantBlockchainsSubquery.blockchainIds,
+      grantUseCaseIds: grantUseCasesSubquery.useCaseIds,
+      grantCategoryIds: grantCategoriesSubquery.categoryIds,
     })
     .from(grants)
     .leftJoin(fiatCurrencies, eq(grants.fundingAmountCurrency, fiatCurrencies.id))
@@ -134,11 +140,20 @@ export const getGrants = async (params: TGetGrantsParams) => {
     parsedParams.perPage,
   )
 
-  const [grantsData] = await Promise.all([queryWithPagination])
+  const [grantsData, cachedBlockchainOptions, cachedCategoriesOptions, cachedUseCasesOptions] =
+    await Promise.all([
+      queryWithPagination,
+      getCachedBlockchainOptions(),
+      getCachedCategoriesOptions(),
+      getCachedUseCasesOptions(),
+    ])
 
   // console.timeEnd('getCampaigns Query Time')
   return {
     grants: grantsData,
+    cachedBlockchainOptions,
+    cachedCategoriesOptions,
+    cachedUseCasesOptions,
   }
 }
 
