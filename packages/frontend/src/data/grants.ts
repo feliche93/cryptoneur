@@ -90,3 +90,8 @@ export const getGrants = async (params: TGetGrantsParams) => {
 
 export type TGetGrantsResponse = Awaited<ReturnType<typeof getGrants>>
 export type TGrant = TGetGrantsResponse['data'][0]
+
+export const getGrantsCount = async () => {
+  const result = await db.select({ count: sql<number>`count(${grants.id})` }).from(grants)
+  return result[0].count
+}
