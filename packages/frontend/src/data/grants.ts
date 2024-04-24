@@ -1,14 +1,17 @@
 import { db, withPagination } from '@/lib/db'
 import { STableSearchParams } from '@/models/data-table'
 import {
+  blockchains,
+  categories,
   fiatCurrencies,
   grantBlockchains,
   grantCategories,
   grantUseCases,
   grants,
   organizations,
+  useCases,
 } from '@/schema'
-import { SQL, asc, desc, eq, sql } from 'drizzle-orm'
+import { SQL, and, arrayOverlaps, asc, desc, eq, sql } from 'drizzle-orm'
 import { z } from 'zod'
 import { getCachedBlockchainOptions } from './blockchains'
 import { getCachedCategoriesOptions } from './categories'
@@ -17,6 +20,33 @@ import { getCachedUseCasesOptions } from './use-cases'
 export const SGetGrantsParams = z
   .object({
     grantId: z.string().optional(),
+    grantBlockchainNames: z
+      .string()
+      .or(z.array(z.string()))
+      .optional()
+      .transform((v) => {
+        if (!v) return undefined
+        if (Array.isArray(v)) return v
+        return v.split('.')
+      }),
+    grantUseCaseNames: z
+      .string()
+      .or(z.array(z.string()))
+      .optional()
+      .transform((v) => {
+        if (!v) return undefined
+        if (Array.isArray(v)) return v
+        return v.split('.')
+      }),
+    grantCategoryNames: z
+      .string()
+      .or(z.array(z.string()))
+      .optional()
+      .transform((v) => {
+        if (!v) return undefined
+        if (Array.isArray(v)) return v
+        return v.split('.')
+      }),
     grantName: z
       .string()
       .optional()
@@ -76,8 +106,10 @@ export const getGrants = async (params: TGetGrantsParams) => {
     .select({
       grantId: grantBlockchains.grantId,
       blockchainIds: sql<string[]>`array_agg(${grantBlockchains.blockchainId})`.as('blockchainIds'),
+      blockchainNames: sql<string[]>`array_agg(${blockchains.name})`.as('blockchainNames'),
     })
     .from(grantBlockchains)
+    .innerJoin(blockchains, eq(grantBlockchains.blockchainId, blockchains.id))
     .groupBy(grantBlockchains.grantId)
     .as('grantBlockchainsSubquery')
 
@@ -85,8 +117,10 @@ export const getGrants = async (params: TGetGrantsParams) => {
     .select({
       grantId: grantUseCases.grantId,
       useCaseIds: sql<string[]>`array_agg(${grantUseCases.useCaseId})`.as('useCaseIds'),
+      useCaseNames: sql<string[]>`array_agg(${useCases.name})`.as('useCaseNames'),
     })
     .from(grantUseCases)
+    .innerJoin(useCases, eq(grantUseCases.useCaseId, useCases.id))
     .groupBy(grantUseCases.grantId)
     .as('grantUseCasesSubquery')
 
@@ -94,8 +128,10 @@ export const getGrants = async (params: TGetGrantsParams) => {
     .select({
       grantId: grantCategories.grantId,
       categoryIds: sql<string[]>`array_agg(${grantCategories.categoryId})`.as('categoryIds'),
+      categoryNames: sql<string[]>`array_agg(${categories.name})`.as('categoryNames'),
     })
     .from(grantCategories)
+    .innerJoin(categories, eq(grantCategories.categoryId, categories.id))
     .groupBy(grantCategories.grantId)
     .as('grantCategoriesSubquery')
 
@@ -117,17 +153,40 @@ export const getGrants = async (params: TGetGrantsParams) => {
       grantCreatedAt: grants.createdAt,
       grantUpdatedAt: grants.updatedAt,
       grantBlockchainIds: grantBlockchainsSubquery.blockchainIds,
+      grantBlockchainNames: grantBlockchainsSubquery.blockchainNames,
       grantUseCaseIds: grantUseCasesSubquery.useCaseIds,
+      grantUseCaseNames: grantUseCasesSubquery.useCaseNames,
       grantCategoryIds: grantCategoriesSubquery.categoryIds,
+      grantCategoryNames: grantCategoriesSubquery.categoryNames,
     })
     .from(grants)
     .leftJoin(fiatCurrencies, eq(grants.fundingAmountCurrency, fiatCurrencies.id))
     .innerJoin(organizations, eq(grants.organizationId, organizations.id))
-    .innerJoin(grantBlockchainsSubquery, eq(grants.id, grantBlockchainsSubquery.grantId))
-    .innerJoin(grantUseCasesSubquery, eq(grants.id, grantUseCasesSubquery.grantId))
-    .innerJoin(grantCategoriesSubquery, eq(grants.id, grantCategoriesSubquery.grantId))
+    .leftJoin(grantBlockchainsSubquery, eq(grants.id, grantBlockchainsSubquery.grantId))
+    .leftJoin(grantUseCasesSubquery, eq(grants.id, grantUseCasesSubquery.grantId))
+    .leftJoin(grantCategoriesSubquery, eq(grants.id, grantCategoriesSubquery.grantId))
     .where(
-      parsedParams.grantName ? sql`(${grants.name}) ILIKE ${parsedParams.grantName}` : undefined,
+      and(
+        parsedParams.grantName ? sql`(${grants.name}) ILIKE ${parsedParams.grantName}` : undefined,
+        parsedParams.grantBlockchainNames && parsedParams.grantBlockchainNames.length > 0
+          ? arrayOverlaps(
+              grantBlockchainsSubquery.blockchainIds,
+              sql<string[]>`STRING_TO_ARRAY(${parsedParams.grantBlockchainNames.join(',')}, ',')`,
+            )
+          : undefined,
+        parsedParams.grantUseCaseNames && parsedParams.grantUseCaseNames.length > 0
+          ? arrayOverlaps(
+              grantUseCasesSubquery.useCaseIds,
+              sql<string[]>`STRING_TO_ARRAY(${parsedParams.grantUseCaseNames.join(',')}, ',')`,
+            )
+          : undefined,
+        parsedParams.grantCategoryNames && parsedParams.grantCategoryNames.length > 0
+          ? arrayOverlaps(
+              grantCategoriesSubquery.categoryIds,
+              sql<string[]>`STRING_TO_ARRAY(${parsedParams.grantCategoryNames.join(',')}, ',')`,
+            )
+          : undefined,
+      ),
     )
 
   if (orders.length > 0) {
@@ -137,7 +196,7 @@ export const getGrants = async (params: TGetGrantsParams) => {
   const queryWithPagination = withPagination(
     query.$dynamic(),
     parsedParams.page,
-    parsedParams.perPage,
+    parsedParams.per_page,
   )
 
   const [grantsData, cachedBlockchainOptions, cachedCategoriesOptions, cachedUseCasesOptions] =

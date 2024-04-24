@@ -6,8 +6,8 @@ export const getCachedCategoriesOptions = unstable_cache(
   async () => {
     const result = await db
       .select({
-        id: categories.id,
-        name: categories.name,
+        label: categories.name,
+        value: categories.id,
       })
       .from(categories)
 

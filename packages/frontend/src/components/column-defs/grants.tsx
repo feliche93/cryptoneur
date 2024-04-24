@@ -3,51 +3,39 @@
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
 import { TGrant } from '@/data/grants'
 import { absoluteUrl, formatCurrency } from '@/lib/utils'
-import type { TDataTableSearchableColumn } from '@/types'
 import type { ColumnDef } from '@tanstack/react-table'
 import { ExternalLink, PencilLineIcon } from 'lucide-react'
 import { DataTableRowActions, LinkRowAction } from '../data-table/data-table-row-actions'
 import { Badge } from '../ui/badge'
+import { Checkbox } from '../ui/checkbox'
 
-export function fetchGrantsTableColumnDef(): ColumnDef<TGrant, unknown>[] {
+export function getColumns(): ColumnDef<TGrant>[] {
   return [
-    // {
-    //   id: 'select',
-    //   header: ({ table }) => (
-    //     <Checkbox
-    //       checked={table.getIsAllPageRowsSelected()}
-    //       onCheckedChange={(value) => {
-    //         table.toggleAllPageRowsSelected(!!value)
-    //       }}
-    //       aria-label="Select all"
-    //       className="translate-y-[2px]"
-    //     />
-    //   ),
-    //   cell: ({ row }) => (
-    //     <Checkbox
-    //       checked={row.getIsSelected()}
-    //       onCheckedChange={(value) => {
-    //         row.toggleSelected(!!value)
-    //       }}
-    //       aria-label="Select row"
-    //       className="translate-y-[2px]"
-    //     />
-    //   ),
-    //   enableSorting: false,
-    //   enableHiding: false,
-    // },
-    // {
-    //   accessorKey: 'grants.logoUrl',
-    //   header: ({ column }) => <></>,
-    //   cell: ({ row }) => (
-    //     <Avatar className="w-8 h-8">
-    //       <AvatarImage src={row.original.gralogoUrl || ''} alt={row.original.grants.name} />
-    //       <AvatarFallback className="uppercase">
-    //         {row.original.grants.name.slice(0, 2)}
-    //       </AvatarFallback>
-    //     </Avatar>
-    //   ),
-    // },
+    {
+      id: 'select',
+      header: ({ table }) => (
+        <Checkbox
+          checked={table.getIsAllPageRowsSelected()}
+          onCheckedChange={(value) => {
+            table.toggleAllPageRowsSelected(!!value)
+          }}
+          aria-label="Select all"
+          className="translate-y-[2px]"
+        />
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => {
+            row.toggleSelected(!!value)
+          }}
+          aria-label="Select row"
+          className="translate-y-[2px]"
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
     {
       accessorKey: 'grantName',
       header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
@@ -68,6 +56,31 @@ export function fetchGrantsTableColumnDef(): ColumnDef<TGrant, unknown>[] {
       ),
     },
     {
+      accessorKey: 'grantBlockchainNames',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Blockchain" />,
+      cell: ({ row }) => <div>{row.original.grantBlockchainNames.join(', ')}</div>,
+      enableSorting: false,
+      filterFn: (row, id, value) => {
+        return Array.isArray(value) && value.includes(row.getValue(id))
+      },
+    },
+    {
+      accessorKey: 'grantUseCaseNames',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Use Case" />,
+      cell: ({ row }) => <div>{row.original.grantUseCaseNames.join(', ')}</div>,
+      filterFn: (row, id, value) => {
+        return Array.isArray(value) && value.includes(row.getValue(id))
+      },
+    },
+    {
+      accessorKey: 'grantCategoryNames',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Category" />,
+      cell: ({ row }) => <div>{row.original.grantCategoryNames.join(', ')}</div>,
+      filterFn: (row, id, value) => {
+        return Array.isArray(value) && value.includes(row.getValue(id))
+      },
+    },
+    {
       accessorKey: 'grantFundingAmountMin',
       header: ({ column }) => <DataTableColumnHeader column={column} title="Funding Amount Min" />,
       cell: ({ row }) => (
@@ -85,21 +98,6 @@ export function fetchGrantsTableColumnDef(): ColumnDef<TGrant, unknown>[] {
         </div>
       ),
     },
-    // {
-    //   accessorKey: 'campaignCreatedAt',
-    //   header: ({ column }) => <DataTableColumnHeader column={column} title="Created" />,
-    //   cell: ({ row }) => {
-    //     return (
-    //       <span>
-    //         {row.original.campaignCreatedAt
-    //           ? formatDistanceToNow(new Date(row.original.campaignCreatedAt), {
-    //               addSuffix: true,
-    //             })
-    //           : null}
-    //       </span>
-    //     )
-    //   },
-    // },
     {
       id: 'actions',
       header: ({ column }) => <DataTableColumnHeader column={column} title="Actions" />,
@@ -131,10 +129,3 @@ export function fetchGrantsTableColumnDef(): ColumnDef<TGrant, unknown>[] {
     },
   ]
 }
-
-export const searchableColumns: TDataTableSearchableColumn<TGrant>[] = [
-  {
-    id: 'grantName',
-    placeholder: 'Filter Grant Name...',
-  },
-]

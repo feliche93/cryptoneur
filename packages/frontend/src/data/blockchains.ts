@@ -6,8 +6,8 @@ export const getCachedBlockchainOptions = unstable_cache(
   async () => {
     const result = await db
       .select({
-        value: blockchains.id,
         label: blockchains.name,
+        value: blockchains.id,
       })
       .from(blockchains)
 

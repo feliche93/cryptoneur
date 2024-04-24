@@ -14,9 +14,9 @@ export const db = drizzle(pool)
 export async function withPagination<T extends PgSelect>(
   qb: T,
   page: number,
-  perPage: number = 10,
+  per_page: number = 10,
 ) {
-  const offset = (page - 1) * perPage
+  const offset = (page - 1) * per_page
 
   // First, create a subquery for counting
   const countSubQuery = qb.as('count_subquery')
@@ -28,13 +28,13 @@ export async function withPagination<T extends PgSelect>(
     })
     .from(countSubQuery)
 
-  const dataPromise = qb.limit(perPage).offset(offset)
+  const dataPromise = qb.limit(per_page).offset(offset)
 
   // Execute both queries in parallel
   const [totalRowsResult, data] = await Promise.all([totalRowsPromise, dataPromise])
 
   const totalRows = totalRowsResult[0]?.count || 0
-  const pageCount = Math.ceil(totalRows / perPage)
+  const pageCount = Math.ceil(totalRows / per_page)
 
   return {
     data,
@@ -73,14 +73,14 @@ export function withTableFeatures<T extends PgSelect>(
   qb: T,
   {
     page,
-    perPage,
+    per_page,
     order,
     sortMap,
     orderBy,
     nullsLast,
   }: {
     page: number
-    perPage: number
+    per_page: number
     order?: 'asc' | 'desc'
     orderBy?: string
     sortMap: Record<string, PgColumn | SQL | SQL.Aliased> & Record<'default', PgColumn | SQL>
@@ -94,5 +94,5 @@ export function withTableFeatures<T extends PgSelect>(
     nullsLast,
   })
 
-  return withPagination(orderedQuery, page, perPage)
+  return withPagination(orderedQuery, page, per_page)
 }

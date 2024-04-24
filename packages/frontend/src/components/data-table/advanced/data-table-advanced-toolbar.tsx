@@ -1,137 +1,160 @@
 'use client'
 
-import * as React from 'react'
-
-import { PlusIcon, SwitchIcon } from '@radix-ui/react-icons'
-import type { Table } from '@tanstack/react-table'
-
-import { DataTableAdvancedFilter } from '@/components/data-table/advanced/data-table-advanced-filter'
+import { DataTableFilterCombobox } from '@/components/data-table/advanced/data-table-filter-combobox'
 import { DataTableViewOptions } from '@/components/data-table/data-table-view-options'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-
-import {
-  TDataTableFilterOption,
-  TDataTableFilterableColumn,
-  TDataTableSearchableColumn,
-} from '@/types'
-import { DataTableAdvancedFilterItem } from './data-table-advanced-filter-item'
+import { cn } from '@/lib/utils'
+import type {
+  DataTableFilterField,
+  DataTableFilterOption,
+} from '@/types/data-table'
+import { CaretSortIcon, PlusIcon } from '@radix-ui/react-icons'
+import type { Table } from '@tanstack/react-table'
+import { useSearchParams } from 'next/navigation'
+import * as React from 'react'
+import { DataTableFilterItem } from './data-table-filter-item'
 import { DataTableMultiFilter } from './data-table-multi-filter'
 
-interface TDataTableAdvancedToolbarProps<TData> {
+interface DataTableAdvancedToolbarProps<TData>
+  extends React.HTMLAttributes<HTMLDivElement> {
   table: Table<TData>
-  searchableColumns?: TDataTableSearchableColumn<TData>[]
-  filterableColumns?: TDataTableFilterableColumn<TData>[]
+  filterFields?: DataTableFilterField<TData>[]
 }
 
 export function DataTableAdvancedToolbar<TData>({
   table,
-  filterableColumns = [],
-  searchableColumns = [],
-}: TDataTableAdvancedToolbarProps<TData>) {
-  const [selectedOptions, setSelectedOptions] = React.useState<TDataTableFilterOption<TData>[]>([])
-  const [open, setOpen] = React.useState(false)
+  filterFields = [],
+  children,
+  className,
+  ...props
+}: DataTableAdvancedToolbarProps<TData>) {
+  const searchParams = useSearchParams()
 
-  React.useEffect(() => {
-    if (selectedOptions.length > 0) {
-      setOpen(true)
-    }
-  }, [selectedOptions])
+  const options = React.useMemo<DataTableFilterOption<TData>[]>(() => {
+    return filterFields.map((field) => {
+      return {
+        id: crypto.randomUUID(),
+        label: field.label,
+        value: field.value,
+        options: field.options ?? [],
+      }
+    })
+  }, [filterFields])
 
-  const options: TDataTableFilterOption<TData>[] = React.useMemo(() => {
-    const searchableOptions = searchableColumns.map((column) => ({
-      id: crypto.randomUUID(),
-      label: String(column.id),
-      value: column.id,
-      items: [],
-    }))
-    const filterableOptions = filterableColumns.map((column) => ({
-      id: crypto.randomUUID(),
-      label: column.title,
-      value: column.id,
-      items: column.options,
-    }))
+  const initialSelectedOptions = React.useMemo(() => {
+    return options
+      .filter((option) => searchParams.has(option.value as string))
+      .map((option) => {
+        const value = searchParams.get(String(option.value)) as string
+        const [filterValue, filterOperator] =
+          value?.split('~').filter(Boolean) ?? []
 
-    return [...searchableOptions, ...filterableOptions]
-  }, [filterableColumns, searchableColumns])
+        return {
+          ...option,
+          filterValues: filterValue?.split('.') ?? [],
+          filterOperator,
+        }
+      })
+  }, [options, searchParams])
+
+  const [selectedOptions, setSelectedOptions] = React.useState<
+    DataTableFilterOption<TData>[]
+  >(initialSelectedOptions)
+  const [openFilterBuilder, setOpenFilterBuilder] = React.useState(
+    initialSelectedOptions.length > 0 || false
+  )
+  const [openCombobox, setOpenCombobox] = React.useState(false)
+
+  function onFilterComboboxItemSelect() {
+    setOpenFilterBuilder(true)
+    setOpenCombobox(true)
+  }
 
   return (
-    <div className="w-full space-y-2.5 overflow-auto p-1">
-      <div className="flex items-center justify-between space-x-2">
-        <div className="flex flex-1 items-center space-x-2">
-          {searchableColumns.length > 0 &&
-            searchableColumns.map(
-              (column) =>
-                table.getColumn(column.id ? String(column.id) : '') && (
-                  <Input
-                    key={String(column.id)}
-                    placeholder={column.placeholder}
-                    value={(table.getColumn(String(column.id))?.getFilterValue() as string) ?? ''}
-                    onChange={(event) =>
-                      table.getColumn(String(column.id))?.setFilterValue(event.target.value)
-                    }
-                    className="h-8 w-[150px] lg:w-[250px]"
-                  />
-                ),
+    <div
+      className={cn(
+        'flex w-full flex-col space-y-2.5 overflow-auto p-1',
+        className
+      )}
+      {...props}
+    >
+      <div className="ml-auto flex items-center gap-2">
+        {children}
+        {(options.length > 0 && selectedOptions.length > 0) ||
+        openFilterBuilder ? (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setOpenFilterBuilder(!openFilterBuilder)}
+          >
+            <CaretSortIcon
+              className="mr-2 size-4 shrink-0"
+              aria-hidden="true"
+            />
+            Filter
+          </Button>
+        ) : (
+          <DataTableFilterCombobox
+            options={options.filter(
+              (option) =>
+                !selectedOptions.some(
+                  (selectedOption) => selectedOption.value === option.value
+                )
             )}
-        </div>
-        <div className="flex items-center space-x-2">
-          {selectedOptions.length > 0 || open ? (
-            <Button variant="outline" size="sm" onClick={() => setOpen(!open)}>
-              Filter
-              <SwitchIcon
-                className="ml-2 size-4 transition-transform"
-                style={{
-                  transform: `rotate(${open ? 180 : 0}deg)`,
-                }}
-                aria-hidden="true"
-              />
-            </Button>
-          ) : (
-            <DataTableAdvancedFilter
-              options={options.filter(
-                (option) =>
-                  !selectedOptions.some((selectedOption) => selectedOption.value === option.value),
-              )}
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+            onSelect={onFilterComboboxItemSelect}
+          />
+        )}
+        <DataTableViewOptions table={table} />
+      </div>
+      <div
+        className={cn(
+          'flex items-center gap-2',
+          !openFilterBuilder && 'hidden'
+        )}
+      >
+        {selectedOptions
+          .filter((option) => !option.isMulti)
+          .map((selectedOption) => (
+            <DataTableFilterItem
+              key={String(selectedOption.value)}
+              table={table}
+              selectedOption={selectedOption}
               selectedOptions={selectedOptions}
               setSelectedOptions={setSelectedOptions}
+              defaultOpen={openCombobox}
             />
-          )}
-          <DataTableViewOptions table={table} />
-        </div>
-      </div>
-      {open ? (
-        <div className="flex items-center space-x-2">
-          {selectedOptions.some((option) => option.isMulti) ? (
-            <DataTableMultiFilter
-              table={table}
-              allOptions={options}
-              options={selectedOptions.filter((option) => option.isMulti)}
-              setSelectedOptions={setSelectedOptions}
-            />
-          ) : null}
-          {selectedOptions
-            .filter((option) => !option.isMulti)
-            .map((selectedOption) => (
-              <DataTableAdvancedFilterItem
-                key={String(selectedOption.value)}
-                table={table}
-                selectedOption={selectedOption}
-                setSelectedOptions={setSelectedOptions}
-              />
-            ))}
-          <DataTableAdvancedFilter
+          ))}
+        {selectedOptions.some((option) => option.isMulti) ? (
+          <DataTableMultiFilter
+            table={table}
+            allOptions={options}
+            options={selectedOptions.filter((option) => option.isMulti)}
+            setSelectedOptions={setSelectedOptions}
+            defaultOpen={openCombobox}
+          />
+        ) : null}
+        {options.length > 0 && options.length > selectedOptions.length ? (
+          <DataTableFilterCombobox
             options={options}
             selectedOptions={selectedOptions}
             setSelectedOptions={setSelectedOptions}
+            onSelect={onFilterComboboxItemSelect}
           >
-            <Button variant="outline" size="sm" role="combobox" className="rounded-full">
+            <Button
+              variant="outline"
+              size="sm"
+              role="combobox"
+              className="h-7 rounded-full"
+              onClick={() => setOpenCombobox(true)}
+            >
               <PlusIcon className="mr-2 size-4 opacity-50" aria-hidden="true" />
               Add filter
             </Button>
-          </DataTableAdvancedFilter>
-        </div>
-      ) : null}
+          </DataTableFilterCombobox>
+        ) : null}
+      </div>
     </div>
   )
 }
