@@ -22,5 +22,5 @@ export function TagListItem({
   children: React.ReactNode
   className?: string
 }) {
-  return <Badge size={'lg'}>{children}</Badge>
+  return <Badge>{children}</Badge>
 }

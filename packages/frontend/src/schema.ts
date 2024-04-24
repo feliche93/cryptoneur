@@ -190,3 +190,33 @@ export const grants = pgTable(
     }
   },
 )
+
+export const grantBlockchains = pgTable('grant_blockchains', {
+  id: text('id')
+    .primaryKey()
+    .default(sql<string>`'gbc_' || nanoid()`),
+  grantId: text('grant_id').references(() => grants.id),
+  blockchainId: text('blockchain_id').references(() => blockchains.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+export const grantCategories = pgTable('grant_categories', {
+  id: text('id')
+    .primaryKey()
+    .default(sql<string>`'gcat_' || nanoid()`),
+  grantId: text('grant_id').references(() => grants.id),
+  categoryId: text('category_id').references(() => categories.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+export const grantUseCases = pgTable('grant_use_cases', {
+  id: text('id')
+    .primaryKey()
+    .default(sql<string>`'guc_' || nanoid()`),
+  grantId: text('grant_id').references(() => grants.id),
+  useCaseId: text('use_case_id').references(() => useCases.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})

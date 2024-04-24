@@ -4,13 +4,13 @@ import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Toaster } from '@/components/ui/sonner'
+import { WrappedClerkProvider } from '@/components/wrapped-clerk-provider'
 import { siteConfig } from '@/config/site'
 import { fontSans } from '@/lib/fonts'
 import { generatePageMeta } from '@/lib/seo'
 import { StructuredData } from '@/lib/structured'
 import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
-import { ClerkProvider } from '@clerk/nextjs'
 import { Metadata, Viewport } from 'next'
 import { unstable_setRequestLocale } from 'next-intl/server'
 import dynamic from 'next/dynamic'
@@ -58,20 +58,18 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
 
   return (
     <>
-      <ClerkProvider>
-        <html lang={locale} suppressHydrationWarning>
-          <head />
-          <body
-            className={cn('bg-background min-h-screen font-sans antialiased', fontSans.variable)}
+      <html lang={locale} suppressHydrationWarning>
+        <head />
+        <body className={cn('bg-background min-h-screen font-sans antialiased', fontSans.variable)}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
           >
-            <StructuredData />
-            <PHProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-              >
+            <WrappedClerkProvider>
+              <StructuredData />
+              <PHProvider>
                 <div className="relative flex min-h-screen flex-col">
                   <PostHogPageView />
                   <SiteHeader />
@@ -79,12 +77,12 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
                   <SiteFooter />
                 </div>
                 <TailwindIndicator />
-              </ThemeProvider>
-            </PHProvider>
-            <Toaster />
-          </body>
-        </html>
-      </ClerkProvider>
+              </PHProvider>
+            </WrappedClerkProvider>
+          </ThemeProvider>
+          <Toaster />
+        </body>
+      </html>
     </>
   )
 }

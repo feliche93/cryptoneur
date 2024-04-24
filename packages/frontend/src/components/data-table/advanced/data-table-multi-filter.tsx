@@ -1,4 +1,10 @@
-import { CopyIcon, DotsHorizontalIcon, TextAlignCenterIcon, TrashIcon } from '@radix-ui/react-icons'
+import type { DataTableFilterOption } from '@/types/data-table'
+import {
+  CopyIcon,
+  DotsHorizontalIcon,
+  TextAlignCenterIcon,
+  TrashIcon,
+} from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import * as React from 'react'
@@ -11,7 +17,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 import {
   Select,
   SelectContent,
@@ -21,27 +31,18 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
+import { dataTableConfig, type DataTableConfig } from '@/config/data-table'
 import { useDebounce } from '@/hooks/use-debounce'
-
-import { TDataTableFilterOption } from '@/types'
 import { DataTableFacetedFilter } from '../data-table-faceted-filter'
-
-const operators = [
-  {
-    label: 'And',
-    value: 'and',
-  },
-  {
-    label: 'Or',
-    value: 'or',
-  },
-]
 
 interface DataTableMultiFilterProps<TData> {
   table: Table<TData>
-  allOptions: TDataTableFilterOption<TData>[]
-  options: TDataTableFilterOption<TData>[]
-  setSelectedOptions: React.Dispatch<React.SetStateAction<TDataTableFilterOption<TData>[]>>
+  allOptions: DataTableFilterOption<TData>[]
+  options: DataTableFilterOption<TData>[]
+  setSelectedOptions: React.Dispatch<
+    React.SetStateAction<DataTableFilterOption<TData>[]>
+  >
+  defaultOpen: boolean
 }
 
 export function DataTableMultiFilter<TData>({
@@ -49,14 +50,21 @@ export function DataTableMultiFilter<TData>({
   allOptions,
   options,
   setSelectedOptions,
+  defaultOpen,
 }: DataTableMultiFilterProps<TData>) {
-  const [open, setOpen] = React.useState(true)
-  const [operator, setOperator] = React.useState(operators[0])
+  const [open, setOpen] = React.useState(defaultOpen)
+  const [operator, setOperator] = React.useState(
+    dataTableConfig.logicalOperators[0]
+  )
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className="h-7 truncate rounded-full">
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-7 truncate rounded-full"
+        >
           <TextAlignCenterIcon className="mr-2 size-3" aria-hidden="true" />
           {options.length} rule
         </Button>
@@ -73,7 +81,8 @@ export function DataTableMultiFilter<TData>({
               options={options}
               setSelectedOptions={setSelectedOptions}
               operator={operator}
-              // @ts-expect-error
+              // @ts-ignore
+              // TODO: Check
               setOperator={setOperator}
             />
           ))}
@@ -97,11 +106,21 @@ export function DataTableMultiFilter<TData>({
   )
 }
 
-interface MultiFilterRowProps<TData> extends DataTableMultiFilterProps<TData> {
+interface MultiFilterRowProps<TData> {
   i: number
-  option: TDataTableFilterOption<TData>
-  operator?: (typeof operators)[number]
-  setOperator: React.Dispatch<React.SetStateAction<(typeof operators)[number] | undefined>>
+  table: Table<TData>
+  allOptions: DataTableFilterOption<TData>[]
+  option: DataTableFilterOption<TData>
+  options: DataTableFilterOption<TData>[]
+  setSelectedOptions: React.Dispatch<
+    React.SetStateAction<DataTableFilterOption<TData>[]>
+  >
+  operator?: DataTableConfig['logicalOperators'][number]
+  setOperator: React.Dispatch<
+    React.SetStateAction<
+      DataTableConfig['logicalOperators'][number] | undefined
+    >
+  >
 }
 
 export function MultiFilterRow<TData>({
@@ -121,10 +140,10 @@ export function MultiFilterRow<TData>({
   const debounceValue = useDebounce(value, 500)
 
   const [selectedOption, setSelectedOption] = React.useState<
-    TDataTableFilterOption<TData> | undefined
+    DataTableFilterOption<TData> | undefined
   >(options[0])
 
-  const filterVarieties = selectedOption?.items.length
+  const filterVarieties = selectedOption?.options.length
     ? ['is', 'is not']
     : ['contains', 'does not contain', 'is', 'is not']
 
@@ -132,10 +151,10 @@ export function MultiFilterRow<TData>({
 
   // Update filter variety
   React.useEffect(() => {
-    if (selectedOption?.items.length) {
+    if (selectedOption?.options.length) {
       setFilterVariety('is')
     }
-  }, [selectedOption?.items.length])
+  }, [selectedOption?.options.length])
 
   // Create query string
   const createQueryString = React.useCallback(
@@ -152,7 +171,7 @@ export function MultiFilterRow<TData>({
 
       return newSearchParams.toString()
     },
-    [searchParams],
+    [searchParams]
   )
 
   // Update query string
@@ -166,7 +185,7 @@ export function MultiFilterRow<TData>({
         })}`,
         {
           scroll: false,
-        },
+        }
       )
     }
 
@@ -177,7 +196,7 @@ export function MultiFilterRow<TData>({
         })}`,
         {
           scroll: false,
-        },
+        }
       )
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -192,11 +211,10 @@ export function MultiFilterRow<TData>({
         })}`,
         {
           scroll: false,
-        },
+        }
       )
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // TODO: Fix
   }, [operator?.value])
 
   return (
@@ -206,15 +224,23 @@ export function MultiFilterRow<TData>({
       ) : i === 1 ? (
         <Select
           value={operator?.value}
-          onValueChange={(value) => setOperator(operators.find((o) => o.value === value))}
+          onValueChange={(value) =>
+            setOperator(
+              dataTableConfig.logicalOperators.find((o) => o.value === value)
+            )
+          }
         >
           <SelectTrigger className="h-8 w-fit text-xs">
             <SelectValue placeholder={operator?.label} />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {operators.map((operator) => (
-                <SelectItem key={operator.value} value={operator.value} className="text-xs">
+              {dataTableConfig.logicalOperators.map((operator) => (
+                <SelectItem
+                  key={operator.value}
+                  value={operator.value}
+                  className="text-xs"
+                >
                   {operator.label}
                 </SelectItem>
               ))}
@@ -233,12 +259,11 @@ export function MultiFilterRow<TData>({
               if (item.id === option.id) {
                 return {
                   ...item,
-                  value,
+                  value: value as keyof TData,
                 }
-              } else {
-                return item
               }
-            }),
+              return item
+            })
           )
         }}
       >
@@ -259,7 +284,10 @@ export function MultiFilterRow<TData>({
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Select value={filterVariety} onValueChange={(value) => setFilterVariety(value)}>
+      <Select
+        value={filterVariety}
+        onValueChange={(value) => setFilterVariety(value)}
+      >
         <SelectTrigger className="h-8 w-full truncate px-2 py-0.5 hover:bg-muted/50">
           <SelectValue placeholder={filterVarieties[0]} />
         </SelectTrigger>
@@ -273,13 +301,15 @@ export function MultiFilterRow<TData>({
           </SelectGroup>
         </SelectContent>
       </Select>
-      {selectedOption?.items.length ? (
+      {selectedOption?.options.length ? (
         table.getColumn(selectedOption.value ? String(option.value) : '') && (
           <DataTableFacetedFilter
             key={selectedOption.id}
-            column={table.getColumn(selectedOption.value ? String(selectedOption.value) : '')}
+            column={table.getColumn(
+              selectedOption.value ? String(selectedOption.value) : ''
+            )}
             title={selectedOption.label}
-            options={selectedOption.items}
+            options={selectedOption.options}
           />
         )
       ) : (
@@ -300,7 +330,9 @@ export function MultiFilterRow<TData>({
         <DropdownMenuContent>
           <DropdownMenuItem
             onClick={() => {
-              setSelectedOptions((prev) => prev.filter((item) => item.id !== option.id))
+              setSelectedOptions((prev) =>
+                prev.filter((item) => item.id !== option.id)
+              )
             }}
           >
             <TrashIcon className="mr-2 size-4" aria-hidden="true" />
@@ -308,14 +340,16 @@ export function MultiFilterRow<TData>({
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
+              if (!selectedOption) return
+
               setSelectedOptions((prev) => [
                 ...prev,
                 {
                   id: crypto.randomUUID(),
-                  label: String(selectedOption?.label),
-                  value: String(selectedOption?.value),
+                  label: selectedOption.label,
+                  value: selectedOption.value,
+                  options: selectedOption.options ?? [],
                   isMulti: true,
-                  items: selectedOption?.items ?? [],
                 },
               ])
             }}
