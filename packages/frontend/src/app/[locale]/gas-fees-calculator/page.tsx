@@ -24,7 +24,7 @@ const GasFeesCalculator = async ({ params: { lang } }: { params: { lang: string 
 
   return (
     <>
-      <pre>{JSON.stringify(networkPrices, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(networkPrices, null, 2)}</pre> */}
       <div className="container py-12 relative">
         <PageHeader className="flex flex-col items-center">
           <h2 className="text-lg text-center sm:text-left py-2 font-bold">Gas Fees Calculator</h2>
