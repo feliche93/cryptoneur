@@ -125,6 +125,7 @@ const networks = [
     image: '/networks/celo_logo.png',
     type: 'Sidechain',
   },
+  /* Commented out due to API issues
   {
     network: 'moonriver',
     name: 'Moonriver',
@@ -134,6 +135,7 @@ const networks = [
     image: '/networks/moonriver_logo.png',
     type: 'Sidechain',
   },
+  */
   {
     network: 'fantom',
     symbol: 'FTM',
@@ -188,17 +190,24 @@ type TFetchGasPricesResponse = GasPrice[]
 
 const fetchGasPrices = async (): Promise<TFetchGasPricesResponse> => {
   console.log('fetchGasPrices')
-  const requests = Promise.all(
-    networks.map(async ({ network }) => {
-      const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`
-      const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } })
-      const data: GasPrice = await gasPriceResponse.json()
-      return data
-    }),
-  )
-
-  const data: TFetchGasPricesResponse = await requests
-  return data
+  try {
+    const data = await Promise.all(
+      networks.map(async ({ network }) => {
+        const url = `${apiUrl}/gas-prices?network=${network}&api_key=${API_KEY}`
+        const gasPriceResponse = await fetch(url, { next: { revalidate: 300 } })
+        if (!gasPriceResponse.ok) {
+          console.error(`Error fetching gas prices for ${network}:`, gasPriceResponse.statusText)
+          throw new Error(`Failed to fetch gas prices for ${network}: ${gasPriceResponse.statusText}`)
+        }
+        const data: GasPrice = await gasPriceResponse.json()
+        return data
+      }),
+    )
+    return data
+  } catch (error) {
+    console.error('Error in fetchGasPrices:', error)
+    throw error
+  }
 }
 
 export const getNetworkPrices = async () => {
