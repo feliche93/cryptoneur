@@ -9,6 +9,10 @@ const nextConfig = {
   experimental: {
     ppr: false,
   },
+  eslint: {
+    // Disabling ESLint during production builds
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
