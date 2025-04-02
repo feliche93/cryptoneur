@@ -4,6 +4,7 @@ import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Toaster } from '@/components/ui/sonner'
+import { WebsiteForSaleToast } from '@/components/website-for-sale-toast'
 import { WrappedClerkProvider } from '@/components/wrapped-clerk-provider'
 import { siteConfig } from '@/config/site'
 import { fontSans } from '@/lib/fonts'
@@ -75,12 +76,13 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
                   <SiteHeader />
                   <div className="flex-1">{children}</div>
                   <SiteFooter />
+                  <WebsiteForSaleToast />
                 </div>
                 <TailwindIndicator />
               </PHProvider>
             </WrappedClerkProvider>
           </ThemeProvider>
-          <Toaster />
+          <Toaster closeButton />
         </body>
       </html>
     </>
