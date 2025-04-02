@@ -1,6 +1,6 @@
 'use client'
 
-import { DialogProps } from '@radix-ui/react-alert-dialog'
+import { DialogProps } from '@radix-ui/react-dialog'
 import { CircleIcon, FileIcon, LaptopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from 'next-themes'
 import { useParams, useRouter } from 'next/navigation'
