@@ -28,8 +28,6 @@ export function WebsiteForSaleToast() {
         {
           duration: 15000, // 15 seconds
           position: 'bottom-left',
-          dismissible: true,
-          important: true,
           className: "max-w-md",
           style: {
             paddingBottom: '12px',
