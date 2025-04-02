@@ -10,7 +10,7 @@
     "lint": "prettier . --check && bun eslint",
     "lint:fix": "prettier . --write && eslint --fix",
     "lint:format": "prettier . --write",
-    "type-check": "tsc --pretty --noEmit",
+    "typecheck": "tsc --pretty --noEmit",
     "generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
     "update-pg": "drizzle-kit up:pg --config=drizzle.config.ts",
     "check": "drizzle-kit check:pg --config=drizzle.config.ts",
@@ -134,5 +134,6 @@
     "tailwindcss": "^3.4.3",
     "tsx": "^4.7.2",
     "typescript": "5.4.5"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
