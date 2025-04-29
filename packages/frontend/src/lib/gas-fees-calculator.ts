@@ -96,7 +96,7 @@ const networks = [
     coinGeckoId: 'avalanche-2',
     website: 'https://www.avax.network/',
     image: '/networks/avalanche_logo.png',
-    type: 'Sidechain',
+    type: 'Layer 1',
   },
   {
     network: 'polygon',
