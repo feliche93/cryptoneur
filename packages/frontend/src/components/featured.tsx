@@ -21,6 +21,11 @@ export const Featured: FC<FeaturedProps> = () => {
       src: '/personal-projects/nocode-scraper-com.png',
       href: 'https://nocodescraper.com/?ref=cryptoneur.xyz',
     },
+    {
+      alt: 'Viral.app',
+      src: 'https://viral.app/og/banner.jpg',
+      href: 'https://viral.app/?ref=cryptoneur.xyz',
+    },
   ]
 
   return (
