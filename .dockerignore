@@ -1,0 +1,56 @@
+# Dependencies
+**/node_modules
+**/.pnp
+**/.pnp.js
+
+# Testing
+**/coverage
+
+# Next.js
+**/.next/
+**/out/
+
+# Production
+**/build
+**/dist
+
+# Misc
+**/.DS_Store
+*.pem
+
+# Debug
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+# Local env files
+**/.env*.local
+**/.env.local
+**/.env.preview
+**/.env.prod
+
+# Vercel
+**/.vercel
+
+# Typescript
+**/*.tsbuildinfo
+**/next-env.d.ts
+
+# IDE
+**/.vscode
+**/.idea
+**/.cursor
+
+# Git
+**/.git
+**/.gitignore
+
+# Contentlayer
+**/.contentlayer
+
+# Drizzle
+**/drizzle
+
+# Other directories not needed in Docker
+**/migrate
+**/packages/grant_intelligence
