@@ -27,9 +27,10 @@ export const Table: FC<TableProps> = ({
 }) => {
   const searchParams = useSearchParams()
 
-  const currency = searchParams?.get('currency') ?? 'USD'
+  const currency = (searchParams?.get('currency') ?? 'USD').toUpperCase()
+  const currencyKey = currency.toLowerCase()
   const gasPrice = searchParams?.get('gasPrice') ?? 'standard'
-  const usedGas = Number(searchParams?.get('usedGas')) ?? 21000
+  const usedGas = Number(searchParams?.get('usedGas') ?? 21000)
 
   return (
     <div className="mt-8 flex flex-col">
@@ -114,8 +115,10 @@ export const Table: FC<TableProps> = ({
                           {network.symbol}
                         </div>
                         <div className="text-sm text-muted-foreground">
-                          {network.tokenPrice[currency?.toLocaleLowerCase() ?? '']}{' '}
-                          {currency ?? 'DefaultCurrency'}
+                          {network.tokenPrice?.[currencyKey] !== undefined
+                            ? network.tokenPrice?.[currencyKey]?.toFixed(2)
+                            : 'N/A'}{' '}
+                          {currency}
                         </div>
                       </td>
 
@@ -129,12 +132,14 @@ export const Table: FC<TableProps> = ({
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm font-bold text-base-content">
-                        {(
-                          (network.tokenPrice[currency.toLocaleLowerCase()] *
-                            usedGas *
-                            Number(network.gasPrice[gasPrice as keyof typeof network.gasPrice])) /
-                          10 ** 9
-                        ).toFixed(4)}{' '}
+                        {network.tokenPrice?.[currencyKey] !== undefined
+                          ? (
+                              (network.tokenPrice[currencyKey] *
+                                usedGas *
+                                Number(network.gasPrice[gasPrice as keyof typeof network.gasPrice])) /
+                              10 ** 9
+                            ).toFixed(4)
+                          : 'N/A'}{' '}
                         {currency}
                       </td>
                     </tr>
@@ -184,7 +189,10 @@ export const Table: FC<TableProps> = ({
                     <div className="px-2 text-left text-sm capitalize text-muted-foreground">
                       {network.symbol}{' '}
                       <span className="font-semibold text-foreground">
-                        {network.tokenPrice[currency.toLocaleLowerCase()].toFixed(2)} {currency}
+                        {network.tokenPrice?.[currencyKey] !== undefined
+                          ? network.tokenPrice[currencyKey].toFixed(2)
+                          : 'N/A'}{' '}
+                        {currency}
                       </span>
                     </div>
                     <div className="px-2 text-sm capitalize text-muted-foreground">
@@ -199,12 +207,14 @@ export const Table: FC<TableProps> = ({
                     <div className="max-h-fit max-w-fit rounded-full border border-primary bg-primary px-2 py-1 text-sm uppercase text-primary-foreground">
                       Cost{' '}
                       <span className="font-semibold text-primary-foreground">
-                        {(
-                          (network.tokenPrice[currency.toLocaleLowerCase()] *
-                            usedGas *
-                            Number(network.gasPrice[gasPrice as keyof typeof network.gasPrice])) /
-                          10 ** 9
-                        ).toFixed(4)}{' '}
+                        {network.tokenPrice?.[currencyKey] !== undefined
+                          ? (
+                              (network.tokenPrice[currencyKey] *
+                                usedGas *
+                                Number(network.gasPrice[gasPrice as keyof typeof network.gasPrice])) /
+                              10 ** 9
+                            ).toFixed(4)
+                          : 'N/A'}{' '}
                         {currency}
                       </span>
                     </div>
